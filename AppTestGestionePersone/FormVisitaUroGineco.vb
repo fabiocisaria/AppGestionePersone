@@ -8,14 +8,14 @@
 
     ' Controllo se la visita è prima visita o controllo
     Private Function VerificaTipoVisita(numVisita As Integer) As Integer
-        Dim checkQuery As String = "SELECT(*) FROM Visite WHERE ID = @idVisita"
+        Dim checkQuery As String = "SELECT * FROM Visite WHERE ID = @idVisita"
 
         Dim checkParam As New List(Of SqlClient.SqlParameter) From {
             New SqlClient.SqlParameter("@idVisita", numVisita)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
-        If dtCheck.Rows(0)(0) > 0 Then
+        If dtCheck.Rows.Count > 0 Then
             Dim tipoVisita As String = dtCheck.Rows(0)("TipoVisita").ToString()
             If tipoVisita = "Prima visita" Then
                 Return 0

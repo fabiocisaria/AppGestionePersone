@@ -96,9 +96,10 @@ Module Utils
     End Function
 
     '-----------------------------
-    ' Restituisce il testo del RadioButton selezionato in un contenitore (il radio button deve essere direttamente figlio del contenitore che viene passato)
+    ' Restituisce il testo del RadioButton selezionato in un contenitore (il radio button deve essere direttamente figlio del contenitore che viene passato).
+    ' Se nessun radiobutton è selezionato restituisce DBNull.Value
     '-----------------------------
-    Public Function GetSelectedRadioText(container As Control) As String
+    Public Function GetSelectedRadioText(container As Control) As Object
         For Each ctrl As Control In container.Controls
             If TypeOf ctrl Is RadioButton AndAlso DirectCast(ctrl, RadioButton).Checked Then
                 Return DirectCast(ctrl, RadioButton).Text
@@ -106,14 +107,15 @@ Module Utils
 
             ' Ricorsione sui controlli figli
             If ctrl.HasChildren Then
-                Dim result As String = GetSelectedRadioText(ctrl)
-                If Not String.IsNullOrEmpty(result) Then
+                Dim result As Object = GetSelectedRadioText(ctrl)
+                If result IsNot DBNull.Value AndAlso Not String.IsNullOrEmpty(result.ToString()) Then
                     Return result
                 End If
             End If
         Next
 
-        Return String.Empty
+        ' Nessun RadioButton selezionato → restituisco DBNull
+        Return DBNull.Value
     End Function
 
     '-----------------------------
@@ -158,18 +160,40 @@ Module Utils
     '-----------------------------
     ' Verifica se in ogni gruppo di radiobutton è stata effettuata una selezione, altrimenti aggiunge il GroupBox padre alla lista
     '-----------------------------
-    Public Function ValidateMultipleGroups(ParamArray containers() As Control) As (IsValid As Boolean, InvalidGroups As List(Of GroupBox))
-        Dim invalidList As New List(Of GroupBox)
+    'Public Function ValidateMultipleGroups(ParamArray containers() As Control) As (IsValid As Boolean, InvalidGroups As List(Of GroupBox))
+    '   Dim invalidList As New List(Of GroupBox)
+    '
+    '   For Each container In containers
+    '       If TypeOf container Is GroupBox Then
+    '           Dim group = DirectCast(container, GroupBox)
+    '
+    '          ' Lo valido solo se contiene effettivamente RadioButton
+    '           If ContainsRadioButtons(group) Then
+    '               If Not IsGroupBoxSelectionValidRecursive(group) Then
+    '                   invalidList.Add(group)
+    '               End If
+    '           End If
+    '       End If
+    '
+    '       ' Ricorsione: controllo anche i figli
+    '       If container.HasChildren Then
+    '           Dim childResult = ValidateMultipleGroups(container.Controls.Cast(Of Control).ToArray())
+    '           invalidList.AddRange(childResult.InvalidGroups)
+    '       End If
+    '   Next
+    '
+    '   Return (invalidList.Count = 0, invalidList)
+    'End Function
+
+    ' Valido solo i contenitori che hanno RadioButton DIRETTI
+    Public Function ValidateMultipleGroups(ParamArray containers() As Control) As (IsValid As Boolean, InvalidGroups As List(Of Control))
+        Dim invalidList As New List(Of Control)
 
         For Each container In containers
-            If TypeOf container Is GroupBox Then
-                Dim group = DirectCast(container, GroupBox)
-
-                ' Lo valido solo se contiene effettivamente RadioButton
-                If ContainsRadioButtons(group) Then
-                    If Not IsGroupBoxSelectionValidRecursive(group) Then
-                        invalidList.Add(group)
-                    End If
+            ' Valido solo i contenitori che hanno RadioButton DIRETTI
+            If ContainsDirectRadioButtons(container) Then
+                If Not IsGroupBoxSelectionValidRecursive(container) Then
+                    invalidList.Add(container)   ' aggiungo il contenitore diretto (può essere GroupBox o TableLayoutPanel)
                 End If
             End If
 
@@ -186,12 +210,19 @@ Module Utils
     '-----------------------------
     ' Verifica se un GroupBox ha radio button come figli diretti
     '-----------------------------
-    Private Function ContainsRadioButtons(ctrl As Control) As Boolean
+    Private Function GroupBoxContainsRadioButtons(ctrl As Control) As Boolean
         If TypeOf ctrl Is RadioButton Then Return True
         For Each child As Control In ctrl.Controls
-            If ContainsRadioButtons(child) Then Return True
+            If GroupBoxContainsRadioButtons(child) Then Return True
         Next
         Return False
+    End Function
+
+    '-----------------------------
+    ' Verifica se un Contenitore generico ha radio button come figli diretti
+    '-----------------------------
+    Private Function ContainsDirectRadioButtons(container As Control) As Boolean
+        Return container.Controls.OfType(Of RadioButton)().Any()
     End Function
 
     '-----------------------------
@@ -239,7 +270,7 @@ Module Utils
     Public Sub HighlightInvalidGroups(highlightColor As Color, ParamArray containers() As Control)
         For Each ctrl In containers
             ' Se contiene RadioButton, richiama la funzione per evidenziare il testo
-            If ContainsRadioButtons(ctrl) Then
+            If ContainsDirectRadioButtons(ctrl) Then
                 HighlightRadioText(ctrl, highlightColor)
             End If
 

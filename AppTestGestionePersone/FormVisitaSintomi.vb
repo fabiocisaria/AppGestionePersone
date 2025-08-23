@@ -52,6 +52,7 @@ Public Class FormVisitaSintomi
         ResetAndDisableControls(RadioButtonDispMarin1.Checked Or RadioButtonDispMarin2.Checked Or RadioButtonDispMarin3.Checked, GroupBoxDispLoc)
     End Sub
 
+    ' Da verificare (la quesry non si avvia se non ho selezionato tutto)
     Private Function CheckSelezione() As Boolean
         ResetRadioButtonGroupTextOnSelection(TableLayoutPanelVisitaSintomi)
 
@@ -62,9 +63,9 @@ Public Class FormVisitaSintomi
 
         ' Se "Presenza VVD = No", rimuovo i gruppi collegati dai controlli obbligatori
         If RadioButtonVVDNo.Checked Then
-            invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is GroupBoxVVDModInsorg OrElse
-                                                          gb Is GroupBoxVVDAndam OrElse
-                                                          gb Is GroupBoxVVDDistr)).ToList()
+            invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is TableLayoutPanelVVDInsorg OrElse
+                                                          gb Is TableLayoutPanelVVDAndam OrElse
+                                                          gb Is TableLayoutPanelVVDDistr)).ToList()
         End If
 
         ' Se "Disp Marinof = 0", rimuovo i gruppi collegati dai controlli obbligatori
@@ -74,10 +75,10 @@ Public Class FormVisitaSintomi
 
         ' Se "Presenza Alvo = No", rimuovo i gruppi collegati dai controlli obbligatori
         If RadioButtonAlvoNo.Checked Then
-            invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is GroupBoxAlvoStipsi OrElse
-                                                          gb Is GroupBoxAlvoColonIrr OrElse
-                                                          gb Is GroupBoxalvoAlterno OrElse
-                                                          gb Is GroupBoxAlvoDiarr)).ToList()
+            invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is TableLayoutPanelAlveoStipsi OrElse
+                                                          gb Is TableLayoutPanelAlvoColonIrr OrElse
+                                                          gb Is TableLayoutPanelAlvoAlterno OrElse
+                                                          gb Is TableLayoutPanelAlvoDiarr)).ToList()
         End If
 
         ' Evidenzio tutti i campi obbligatori non compilati corretamente
@@ -111,17 +112,14 @@ Public Class FormVisitaSintomi
             Dim dispLoc As String = GetSelectedRadioText(GroupBoxDispLoc)
 
             Dim alvoPres As Boolean = RadioButtonAlvoSi.Checked
-            Dim alvoStipsi As String = GetSelectedRadioText(GroupBoxAlvoStipsi)
-            Dim alvoColonIrr As String = GetSelectedRadioText(GroupBoxAlvoColonIrr)
-            Dim alvoAltrn As String = GetSelectedRadioText(GroupBoxalvoAlterno)
-            Dim alvoDiarr As String = GetSelectedRadioText(GroupBoxAlvoDiarr)
+            Dim alvoStipsi As String = RadioButtonAlvoStipsiSi.Checked
+            Dim alvoColonIrr As String = RadioButtonAlvoColonIrrSi.Checked
+            Dim alvoAltrn As String = RadioButtonAlvoAltrnSi.Checked
+            Dim alvoDiarr As String = RadioButtonAlvoDiarrSi.Checked
 
             Dim luts As String = GetSelectedRadioText(GroupBoxLuts)
 
             Dim dolVesc As String = GetSelectedRadioText(GroupBoxDolVes)
-
-
-
 
             Try
                 'Verifica che non esista già la descrizione dei sintomi per quella visita
@@ -144,11 +142,11 @@ Public Class FormVisitaSintomi
                                                     VulvodiniaModalita,
                                                     VulvodiniaAndamento,
                                                     VulvodiniaDistrib,
-                                                    VaginRicorr,
+                                                    VaginitiRicorr,
                                                     CistitiRicorr,
                                                     DispareuniaMarinoff,
                                                     DispareuniaLoc,
-                                                    AlvoPresente,
+                                                    AlvoPresenza,
                                                     AlvoStipsi,
                                                     AlvoColonIrr,
                                                     AlvoAlterno,
@@ -205,9 +203,7 @@ Public Class FormVisitaSintomi
     End Function
 
     Private Sub Inserici_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito As Object
-
-        esito = SalvaDati()
+        Dim esito = SalvaDati()
         If esito.Successo Then
             Dim formVisitaUroGineco As New FormVisitaUroGineco(esito.idVisita)
             formVisitaUroGineco.Show()

@@ -6,6 +6,6 @@
 
     Private Sub ButtonNuovaVisita_Click(sender As Object, e As EventArgs) Handles ButtonNuovaVisita.Click
         Dim f As New FormInserisciVisita()
-        f.ShowDialog(Me) ' Modal: blocca il menu finché la form non è chiusa
+        f.ShowDialog() ' Modal: blocca il menu finché la form non è chiusa
     End Sub
 End Class

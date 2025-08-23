@@ -72,23 +72,23 @@ Partial Class FormVisitaSintomi
         Me.GroupBoxAlvoDettagli = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBoxAlvoDiarr = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.RadioButtonAlvoDinNo = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonAlvoDinSi = New System.Windows.Forms.RadioButton()
+        Me.TableLayoutPanelAlvoDiarr = New System.Windows.Forms.TableLayoutPanel()
+        Me.RadioButtonAlvoDiarrNo = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonAlvoDiarrSi = New System.Windows.Forms.RadioButton()
         Me.GroupBoxalvoAlterno = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelAlvoAlterno = New System.Windows.Forms.TableLayoutPanel()
         Me.RadioButtonAlvoAltrnNo = New System.Windows.Forms.RadioButton()
         Me.RadioButtonAlvoAltrnSi = New System.Windows.Forms.RadioButton()
         Me.GroupBoxAlvoColonIrr = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelAlvoColonIrr = New System.Windows.Forms.TableLayoutPanel()
         Me.RadioButtonAlvoColonIrrNo = New System.Windows.Forms.RadioButton()
         Me.RadioButtonAlvoColonIrrSi = New System.Windows.Forms.RadioButton()
         Me.GroupBoxAlvoStipsi = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelAlveoStipsi = New System.Windows.Forms.TableLayoutPanel()
         Me.RadioButtonAlvoStipsiNo = New System.Windows.Forms.RadioButton()
         Me.RadioButtonAlvoStipsiSi = New System.Windows.Forms.RadioButton()
         Me.GroupBoxAlvoPRes = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelAlveoPres = New System.Windows.Forms.TableLayoutPanel()
         Me.RadioButtonAlvoNo = New System.Windows.Forms.RadioButton()
         Me.RadioButtonAlvoSi = New System.Windows.Forms.RadioButton()
         Me.GroupBoxLuts = New System.Windows.Forms.GroupBox()
@@ -135,15 +135,15 @@ Partial Class FormVisitaSintomi
         Me.GroupBoxAlvoDettagli.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.GroupBoxAlvoDiarr.SuspendLayout()
-        Me.TableLayoutPanel1.SuspendLayout()
+        Me.TableLayoutPanelAlvoDiarr.SuspendLayout()
         Me.GroupBoxalvoAlterno.SuspendLayout()
-        Me.TableLayoutPanel6.SuspendLayout()
+        Me.TableLayoutPanelAlvoAlterno.SuspendLayout()
         Me.GroupBoxAlvoColonIrr.SuspendLayout()
-        Me.TableLayoutPanel7.SuspendLayout()
+        Me.TableLayoutPanelAlvoColonIrr.SuspendLayout()
         Me.GroupBoxAlvoStipsi.SuspendLayout()
-        Me.TableLayoutPanel8.SuspendLayout()
+        Me.TableLayoutPanelAlveoStipsi.SuspendLayout()
         Me.GroupBoxAlvoPRes.SuspendLayout()
-        Me.TableLayoutPanel9.SuspendLayout()
+        Me.TableLayoutPanelAlveoPres.SuspendLayout()
         Me.GroupBoxLuts.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.TableLayoutPanelLuts.SuspendLayout()
@@ -815,7 +815,7 @@ Partial Class FormVisitaSintomi
         'GroupBoxAlvoDiarr
         '
         Me.GroupBoxAlvoDiarr.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxAlvoDiarr.Controls.Add(Me.TableLayoutPanel1)
+        Me.GroupBoxAlvoDiarr.Controls.Add(Me.TableLayoutPanelAlvoDiarr)
         Me.GroupBoxAlvoDiarr.Location = New System.Drawing.Point(3, 183)
         Me.GroupBoxAlvoDiarr.Name = "GroupBoxAlvoDiarr"
         Me.GroupBoxAlvoDiarr.Size = New System.Drawing.Size(339, 54)
@@ -823,52 +823,52 @@ Partial Class FormVisitaSintomi
         Me.GroupBoxAlvoDiarr.TabStop = False
         Me.GroupBoxAlvoDiarr.Text = "Alvo diarroico"
         '
-        'TableLayoutPanel1
+        'TableLayoutPanelAlvoDiarr
         '
-        Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.RadioButtonAlvoDinNo, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.RadioButtonAlvoDinSi, 0, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(333, 35)
-        Me.TableLayoutPanel1.TabIndex = 1
+        Me.TableLayoutPanelAlvoDiarr.ColumnCount = 2
+        Me.TableLayoutPanelAlvoDiarr.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoDiarr.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoDiarr.Controls.Add(Me.RadioButtonAlvoDiarrNo, 1, 0)
+        Me.TableLayoutPanelAlvoDiarr.Controls.Add(Me.RadioButtonAlvoDiarrSi, 0, 0)
+        Me.TableLayoutPanelAlvoDiarr.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelAlvoDiarr.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelAlvoDiarr.Name = "TableLayoutPanelAlvoDiarr"
+        Me.TableLayoutPanelAlvoDiarr.RowCount = 1
+        Me.TableLayoutPanelAlvoDiarr.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoDiarr.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoDiarr.Size = New System.Drawing.Size(333, 35)
+        Me.TableLayoutPanelAlvoDiarr.TabIndex = 1
         '
-        'RadioButtonAlvoDinNo
+        'RadioButtonAlvoDiarrNo
         '
-        Me.RadioButtonAlvoDinNo.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.RadioButtonAlvoDinNo.AutoCheck = False
-        Me.RadioButtonAlvoDinNo.AutoSize = True
-        Me.RadioButtonAlvoDinNo.Location = New System.Drawing.Point(230, 9)
-        Me.RadioButtonAlvoDinNo.Name = "RadioButtonAlvoDinNo"
-        Me.RadioButtonAlvoDinNo.Size = New System.Drawing.Size(39, 17)
-        Me.RadioButtonAlvoDinNo.TabIndex = 1
-        Me.RadioButtonAlvoDinNo.TabStop = True
-        Me.RadioButtonAlvoDinNo.Text = "No"
-        Me.RadioButtonAlvoDinNo.UseVisualStyleBackColor = True
+        Me.RadioButtonAlvoDiarrNo.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.RadioButtonAlvoDiarrNo.AutoCheck = False
+        Me.RadioButtonAlvoDiarrNo.AutoSize = True
+        Me.RadioButtonAlvoDiarrNo.Location = New System.Drawing.Point(230, 9)
+        Me.RadioButtonAlvoDiarrNo.Name = "RadioButtonAlvoDiarrNo"
+        Me.RadioButtonAlvoDiarrNo.Size = New System.Drawing.Size(39, 17)
+        Me.RadioButtonAlvoDiarrNo.TabIndex = 1
+        Me.RadioButtonAlvoDiarrNo.TabStop = True
+        Me.RadioButtonAlvoDiarrNo.Text = "No"
+        Me.RadioButtonAlvoDiarrNo.UseVisualStyleBackColor = True
         '
-        'RadioButtonAlvoDinSi
+        'RadioButtonAlvoDiarrSi
         '
-        Me.RadioButtonAlvoDinSi.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.RadioButtonAlvoDinSi.AutoCheck = False
-        Me.RadioButtonAlvoDinSi.AutoSize = True
-        Me.RadioButtonAlvoDinSi.Location = New System.Drawing.Point(66, 9)
-        Me.RadioButtonAlvoDinSi.Name = "RadioButtonAlvoDinSi"
-        Me.RadioButtonAlvoDinSi.Size = New System.Drawing.Size(34, 17)
-        Me.RadioButtonAlvoDinSi.TabIndex = 0
-        Me.RadioButtonAlvoDinSi.TabStop = True
-        Me.RadioButtonAlvoDinSi.Text = "Sì"
-        Me.RadioButtonAlvoDinSi.UseVisualStyleBackColor = True
+        Me.RadioButtonAlvoDiarrSi.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.RadioButtonAlvoDiarrSi.AutoCheck = False
+        Me.RadioButtonAlvoDiarrSi.AutoSize = True
+        Me.RadioButtonAlvoDiarrSi.Location = New System.Drawing.Point(66, 9)
+        Me.RadioButtonAlvoDiarrSi.Name = "RadioButtonAlvoDiarrSi"
+        Me.RadioButtonAlvoDiarrSi.Size = New System.Drawing.Size(34, 17)
+        Me.RadioButtonAlvoDiarrSi.TabIndex = 0
+        Me.RadioButtonAlvoDiarrSi.TabStop = True
+        Me.RadioButtonAlvoDiarrSi.Text = "Sì"
+        Me.RadioButtonAlvoDiarrSi.UseVisualStyleBackColor = True
         '
         'GroupBoxalvoAlterno
         '
         Me.GroupBoxalvoAlterno.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxalvoAlterno.Controls.Add(Me.TableLayoutPanel6)
+        Me.GroupBoxalvoAlterno.Controls.Add(Me.TableLayoutPanelAlvoAlterno)
         Me.GroupBoxalvoAlterno.Location = New System.Drawing.Point(3, 123)
         Me.GroupBoxalvoAlterno.Name = "GroupBoxalvoAlterno"
         Me.GroupBoxalvoAlterno.Size = New System.Drawing.Size(339, 54)
@@ -876,21 +876,21 @@ Partial Class FormVisitaSintomi
         Me.GroupBoxalvoAlterno.TabStop = False
         Me.GroupBoxalvoAlterno.Text = "Alvo alterno"
         '
-        'TableLayoutPanel6
+        'TableLayoutPanelAlvoAlterno
         '
-        Me.TableLayoutPanel6.ColumnCount = 2
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.Controls.Add(Me.RadioButtonAlvoAltrnNo, 1, 0)
-        Me.TableLayoutPanel6.Controls.Add(Me.RadioButtonAlvoAltrnSi, 0, 0)
-        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
-        Me.TableLayoutPanel6.RowCount = 1
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(333, 35)
-        Me.TableLayoutPanel6.TabIndex = 1
+        Me.TableLayoutPanelAlvoAlterno.ColumnCount = 2
+        Me.TableLayoutPanelAlvoAlterno.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoAlterno.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoAlterno.Controls.Add(Me.RadioButtonAlvoAltrnNo, 1, 0)
+        Me.TableLayoutPanelAlvoAlterno.Controls.Add(Me.RadioButtonAlvoAltrnSi, 0, 0)
+        Me.TableLayoutPanelAlvoAlterno.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelAlvoAlterno.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelAlvoAlterno.Name = "TableLayoutPanelAlvoAlterno"
+        Me.TableLayoutPanelAlvoAlterno.RowCount = 1
+        Me.TableLayoutPanelAlvoAlterno.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoAlterno.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoAlterno.Size = New System.Drawing.Size(333, 35)
+        Me.TableLayoutPanelAlvoAlterno.TabIndex = 1
         '
         'RadioButtonAlvoAltrnNo
         '
@@ -921,7 +921,7 @@ Partial Class FormVisitaSintomi
         'GroupBoxAlvoColonIrr
         '
         Me.GroupBoxAlvoColonIrr.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxAlvoColonIrr.Controls.Add(Me.TableLayoutPanel7)
+        Me.GroupBoxAlvoColonIrr.Controls.Add(Me.TableLayoutPanelAlvoColonIrr)
         Me.GroupBoxAlvoColonIrr.Location = New System.Drawing.Point(3, 63)
         Me.GroupBoxAlvoColonIrr.Name = "GroupBoxAlvoColonIrr"
         Me.GroupBoxAlvoColonIrr.Size = New System.Drawing.Size(339, 54)
@@ -929,21 +929,21 @@ Partial Class FormVisitaSintomi
         Me.GroupBoxAlvoColonIrr.TabStop = False
         Me.GroupBoxAlvoColonIrr.Text = "Colon irritabile"
         '
-        'TableLayoutPanel7
+        'TableLayoutPanelAlvoColonIrr
         '
-        Me.TableLayoutPanel7.ColumnCount = 2
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.Controls.Add(Me.RadioButtonAlvoColonIrrNo, 1, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.RadioButtonAlvoColonIrrSi, 0, 0)
-        Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
-        Me.TableLayoutPanel7.RowCount = 1
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(333, 35)
-        Me.TableLayoutPanel7.TabIndex = 1
+        Me.TableLayoutPanelAlvoColonIrr.ColumnCount = 2
+        Me.TableLayoutPanelAlvoColonIrr.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoColonIrr.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoColonIrr.Controls.Add(Me.RadioButtonAlvoColonIrrNo, 1, 0)
+        Me.TableLayoutPanelAlvoColonIrr.Controls.Add(Me.RadioButtonAlvoColonIrrSi, 0, 0)
+        Me.TableLayoutPanelAlvoColonIrr.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelAlvoColonIrr.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelAlvoColonIrr.Name = "TableLayoutPanelAlvoColonIrr"
+        Me.TableLayoutPanelAlvoColonIrr.RowCount = 1
+        Me.TableLayoutPanelAlvoColonIrr.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoColonIrr.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlvoColonIrr.Size = New System.Drawing.Size(333, 35)
+        Me.TableLayoutPanelAlvoColonIrr.TabIndex = 1
         '
         'RadioButtonAlvoColonIrrNo
         '
@@ -974,7 +974,7 @@ Partial Class FormVisitaSintomi
         'GroupBoxAlvoStipsi
         '
         Me.GroupBoxAlvoStipsi.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxAlvoStipsi.Controls.Add(Me.TableLayoutPanel8)
+        Me.GroupBoxAlvoStipsi.Controls.Add(Me.TableLayoutPanelAlveoStipsi)
         Me.GroupBoxAlvoStipsi.Location = New System.Drawing.Point(3, 3)
         Me.GroupBoxAlvoStipsi.Name = "GroupBoxAlvoStipsi"
         Me.GroupBoxAlvoStipsi.Size = New System.Drawing.Size(339, 54)
@@ -982,21 +982,21 @@ Partial Class FormVisitaSintomi
         Me.GroupBoxAlvoStipsi.TabStop = False
         Me.GroupBoxAlvoStipsi.Text = "Stipsi"
         '
-        'TableLayoutPanel8
+        'TableLayoutPanelAlveoStipsi
         '
-        Me.TableLayoutPanel8.ColumnCount = 2
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.Controls.Add(Me.RadioButtonAlvoStipsiNo, 1, 0)
-        Me.TableLayoutPanel8.Controls.Add(Me.RadioButtonAlvoStipsiSi, 0, 0)
-        Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
-        Me.TableLayoutPanel8.RowCount = 1
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(333, 35)
-        Me.TableLayoutPanel8.TabIndex = 0
+        Me.TableLayoutPanelAlveoStipsi.ColumnCount = 2
+        Me.TableLayoutPanelAlveoStipsi.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlveoStipsi.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlveoStipsi.Controls.Add(Me.RadioButtonAlvoStipsiNo, 1, 0)
+        Me.TableLayoutPanelAlveoStipsi.Controls.Add(Me.RadioButtonAlvoStipsiSi, 0, 0)
+        Me.TableLayoutPanelAlveoStipsi.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelAlveoStipsi.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelAlveoStipsi.Name = "TableLayoutPanelAlveoStipsi"
+        Me.TableLayoutPanelAlveoStipsi.RowCount = 1
+        Me.TableLayoutPanelAlveoStipsi.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlveoStipsi.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlveoStipsi.Size = New System.Drawing.Size(333, 35)
+        Me.TableLayoutPanelAlveoStipsi.TabIndex = 0
         '
         'RadioButtonAlvoStipsiNo
         '
@@ -1027,7 +1027,7 @@ Partial Class FormVisitaSintomi
         'GroupBoxAlvoPRes
         '
         Me.GroupBoxAlvoPRes.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxAlvoPRes.Controls.Add(Me.TableLayoutPanel9)
+        Me.GroupBoxAlvoPRes.Controls.Add(Me.TableLayoutPanelAlveoPres)
         Me.GroupBoxAlvoPRes.Location = New System.Drawing.Point(3, 3)
         Me.GroupBoxAlvoPRes.Name = "GroupBoxAlvoPRes"
         Me.GroupBoxAlvoPRes.Size = New System.Drawing.Size(351, 48)
@@ -1035,21 +1035,21 @@ Partial Class FormVisitaSintomi
         Me.GroupBoxAlvoPRes.TabStop = False
         Me.GroupBoxAlvoPRes.Text = "Presenza sintomo"
         '
-        'TableLayoutPanel9
+        'TableLayoutPanelAlveoPres
         '
-        Me.TableLayoutPanel9.ColumnCount = 2
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Controls.Add(Me.RadioButtonAlvoNo, 1, 0)
-        Me.TableLayoutPanel9.Controls.Add(Me.RadioButtonAlvoSi, 0, 0)
-        Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel9.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
-        Me.TableLayoutPanel9.RowCount = 1
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(345, 29)
-        Me.TableLayoutPanel9.TabIndex = 0
+        Me.TableLayoutPanelAlveoPres.ColumnCount = 2
+        Me.TableLayoutPanelAlveoPres.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlveoPres.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlveoPres.Controls.Add(Me.RadioButtonAlvoNo, 1, 0)
+        Me.TableLayoutPanelAlveoPres.Controls.Add(Me.RadioButtonAlvoSi, 0, 0)
+        Me.TableLayoutPanelAlveoPres.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelAlveoPres.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelAlveoPres.Name = "TableLayoutPanelAlveoPres"
+        Me.TableLayoutPanelAlveoPres.RowCount = 1
+        Me.TableLayoutPanelAlveoPres.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlveoPres.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelAlveoPres.Size = New System.Drawing.Size(345, 29)
+        Me.TableLayoutPanelAlveoPres.TabIndex = 0
         '
         'RadioButtonAlvoNo
         '
@@ -1290,20 +1290,20 @@ Partial Class FormVisitaSintomi
         Me.GroupBoxAlvoDettagli.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.GroupBoxAlvoDiarr.ResumeLayout(False)
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.TableLayoutPanel1.PerformLayout()
+        Me.TableLayoutPanelAlvoDiarr.ResumeLayout(False)
+        Me.TableLayoutPanelAlvoDiarr.PerformLayout()
         Me.GroupBoxalvoAlterno.ResumeLayout(False)
-        Me.TableLayoutPanel6.ResumeLayout(False)
-        Me.TableLayoutPanel6.PerformLayout()
+        Me.TableLayoutPanelAlvoAlterno.ResumeLayout(False)
+        Me.TableLayoutPanelAlvoAlterno.PerformLayout()
         Me.GroupBoxAlvoColonIrr.ResumeLayout(False)
-        Me.TableLayoutPanel7.ResumeLayout(False)
-        Me.TableLayoutPanel7.PerformLayout()
+        Me.TableLayoutPanelAlvoColonIrr.ResumeLayout(False)
+        Me.TableLayoutPanelAlvoColonIrr.PerformLayout()
         Me.GroupBoxAlvoStipsi.ResumeLayout(False)
-        Me.TableLayoutPanel8.ResumeLayout(False)
-        Me.TableLayoutPanel8.PerformLayout()
+        Me.TableLayoutPanelAlveoStipsi.ResumeLayout(False)
+        Me.TableLayoutPanelAlveoStipsi.PerformLayout()
         Me.GroupBoxAlvoPRes.ResumeLayout(False)
-        Me.TableLayoutPanel9.ResumeLayout(False)
-        Me.TableLayoutPanel9.PerformLayout()
+        Me.TableLayoutPanelAlveoPres.ResumeLayout(False)
+        Me.TableLayoutPanelAlveoPres.PerformLayout()
         Me.GroupBoxLuts.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.TableLayoutPanelLuts.ResumeLayout(False)
@@ -1353,25 +1353,25 @@ Partial Class FormVisitaSintomi
     Friend WithEvents GroupBoxAlvoDettagli As GroupBox
     Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
     Friend WithEvents GroupBoxalvoAlterno As GroupBox
-    Friend WithEvents TableLayoutPanel6 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelAlvoAlterno As TableLayoutPanel
     Friend WithEvents RadioButtonAlvoAltrnNo As RadioButton
     Friend WithEvents RadioButtonAlvoAltrnSi As RadioButton
     Friend WithEvents GroupBoxAlvoColonIrr As GroupBox
-    Friend WithEvents TableLayoutPanel7 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelAlvoColonIrr As TableLayoutPanel
     Friend WithEvents RadioButtonAlvoColonIrrNo As RadioButton
     Friend WithEvents RadioButtonAlvoColonIrrSi As RadioButton
     Friend WithEvents GroupBoxAlvoStipsi As GroupBox
-    Friend WithEvents TableLayoutPanel8 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelAlveoStipsi As TableLayoutPanel
     Friend WithEvents RadioButtonAlvoStipsiNo As RadioButton
     Friend WithEvents RadioButtonAlvoStipsiSi As RadioButton
     Friend WithEvents GroupBoxAlvoPRes As GroupBox
-    Friend WithEvents TableLayoutPanel9 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelAlveoPres As TableLayoutPanel
     Friend WithEvents RadioButtonAlvoNo As RadioButton
     Friend WithEvents RadioButtonAlvoSi As RadioButton
     Friend WithEvents GroupBoxAlvoDiarr As GroupBox
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents RadioButtonAlvoDinNo As RadioButton
-    Friend WithEvents RadioButtonAlvoDinSi As RadioButton
+    Friend WithEvents TableLayoutPanelAlvoDiarr As TableLayoutPanel
+    Friend WithEvents RadioButtonAlvoDiarrNo As RadioButton
+    Friend WithEvents RadioButtonAlvoDiarrSi As RadioButton
     Friend WithEvents GroupBoxDispareunia As GroupBox
     Friend WithEvents TableLayoutPanelDispenuria As TableLayoutPanel
     Friend WithEvents GroupBoxDispLoc As GroupBox
