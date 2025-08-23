@@ -251,8 +251,7 @@ Module Utils
     End Sub
 
     '-----------------------------
-    ' Colora i text ed i combo box obbligatori con colore predefinito (light yellow)
-
+    ' Colora i text ed i combo box obbligatori con colore predefinito (light yellow).
     '-----------------------------
     Public Sub HighlightControls(condition As Boolean, ParamArray controls() As Control)
         HighlightControls(condition, Color.LightYellow, controls)

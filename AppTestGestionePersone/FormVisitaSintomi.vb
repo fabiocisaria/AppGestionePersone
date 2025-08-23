@@ -90,7 +90,7 @@ Public Class FormVisitaSintomi
         End If
     End Function
 
-    Private Function SalvaDati() As Boolean
+    Private Function SalvaDati() As (Successo As Boolean, idVisita As Integer)
 
         Dim selezioneOK As Boolean = CheckSelezione()
 
@@ -134,7 +134,7 @@ Public Class FormVisitaSintomi
 
                 If dtCheck.Rows(0)(0) > 0 Then
                     MessageBox.Show("Attenzione: per questa visita sono già stati inseriti i sintomi")
-                    Return False
+                    Return (False, -1)
                 End If
 
                 'Se non esiste, esegui l'inserimento
@@ -196,15 +196,22 @@ Public Class FormVisitaSintomi
                     successo = True
                 End If
 
-                Return successo
+                Return (successo, idVisita)
             Catch ex As Exception
                 MessageBox.Show("Errore imprevisto: " & ex.Message)
-                Return False
+                Return (False, -2)
             End Try
         End If
     End Function
 
-    Private Sub Inserici_Click(sender As Object, e As EventArgs) Handles Inserici.Click
-        SalvaDati()
+    Private Sub Inserici_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim esito As Object
+
+        esito = SalvaDati()
+        If esito.Successo Then
+            Dim formVisitaUroGineco As New FormVisitaUroGineco(esito.idVisita)
+            formVisitaUroGineco.Show()
+            Me.Hide()
+        End If
     End Sub
 End Class

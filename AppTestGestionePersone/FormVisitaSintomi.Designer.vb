@@ -103,7 +103,7 @@ Partial Class FormVisitaSintomi
         Me.RadioButtonDolVescSempre = New System.Windows.Forms.RadioButton()
         Me.RadioButtonDolVescAvolte = New System.Windows.Forms.RadioButton()
         Me.RadioButtonDolVescNo = New System.Windows.Forms.RadioButton()
-        Me.Inserici = New System.Windows.Forms.Button()
+        Me.ButtonInserisci = New System.Windows.Forms.Button()
         Me.GroupBoxVVD.SuspendLayout()
         Me.TableLayoutPanelVVD.SuspendLayout()
         Me.GroupBoxVVDDettagli.SuspendLayout()
@@ -553,7 +553,7 @@ Partial Class FormVisitaSintomi
         Me.TableLayoutPanelVisitaSintomi.Controls.Add(Me.GroupBoxAlvo, 2, 0)
         Me.TableLayoutPanelVisitaSintomi.Controls.Add(Me.GroupBoxLuts, 0, 1)
         Me.TableLayoutPanelVisitaSintomi.Controls.Add(Me.GroupBoxDolVes, 1, 1)
-        Me.TableLayoutPanelVisitaSintomi.Controls.Add(Me.Inserici, 2, 1)
+        Me.TableLayoutPanelVisitaSintomi.Controls.Add(Me.ButtonInserisci, 2, 1)
         Me.TableLayoutPanelVisitaSintomi.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanelVisitaSintomi.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanelVisitaSintomi.Name = "TableLayoutPanelVisitaSintomi"
@@ -1230,15 +1230,15 @@ Partial Class FormVisitaSintomi
         Me.RadioButtonDolVescNo.Text = "No"
         Me.RadioButtonDolVescNo.UseVisualStyleBackColor = True
         '
-        'Inserici
+        'ButtonInserisci
         '
-        Me.Inserici.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Inserici.Location = New System.Drawing.Point(1266, 580)
-        Me.Inserici.Name = "Inserici"
-        Me.Inserici.Size = New System.Drawing.Size(75, 23)
-        Me.Inserici.TabIndex = 8
-        Me.Inserici.Text = "Inserisci"
-        Me.Inserici.UseVisualStyleBackColor = True
+        Me.ButtonInserisci.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(1266, 580)
+        Me.ButtonInserisci.Name = "ButtonInserisci"
+        Me.ButtonInserisci.Size = New System.Drawing.Size(75, 23)
+        Me.ButtonInserisci.TabIndex = 8
+        Me.ButtonInserisci.Text = "Inserisci"
+        Me.ButtonInserisci.UseVisualStyleBackColor = True
         '
         'FormVisitaSintomi
         '
@@ -1397,5 +1397,5 @@ Partial Class FormVisitaSintomi
     Friend WithEvents RadioButtonLutsSempre As RadioButton
     Friend WithEvents RadioButtonLutsAVolte As RadioButton
     Friend WithEvents RadioButtonLutsNo As RadioButton
-    Friend WithEvents Inserici As Button
+    Friend WithEvents ButtonInserisci As Button
 End Class
