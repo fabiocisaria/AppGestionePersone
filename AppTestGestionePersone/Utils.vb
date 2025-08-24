@@ -375,4 +375,28 @@ Module Utils
         Return (0, Nothing) ' se nessun paziente selezionato
     End Function
 
+    '-----------------------------
+    ' Ricerca paziente per user control
+    '-----------------------------
+    Public Function CercaPazienteUC(codiceID As String, cognome As String) As DataTable
+        Dim query As String
+        Dim parametri As New List(Of SqlParameter)
+
+        If Not String.IsNullOrWhiteSpace(codiceID) Then
+            query = "SELECT ID, CodiceIdentificativo, Nome, Cognome 
+                     FROM Anagrafica 
+                     WHERE CodiceIdentificativo LIKE @codice"
+            parametri.Add(New SqlParameter("@codice", "%" & codiceID.Trim() & "%"))
+        Else
+            query = "SELECT ID, CodiceIdentificativo, Nome, Cognome 
+                     FROM Anagrafica 
+                     WHERE Cognome LIKE @cognome"
+            parametri.Add(New SqlParameter("@cognome", "%" & cognome.Trim() & "%"))
+        End If
+
+        Dim risultato As DataTable = EseguiQuery(query, parametri)
+
+        Return risultato ' se nessun paziente selezionato
+    End Function
+
 End Module

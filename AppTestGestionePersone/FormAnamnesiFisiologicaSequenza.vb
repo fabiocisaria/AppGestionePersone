@@ -1,6 +1,4 @@
-﻿Imports System.Data.SqlClient
-
-Public Class FormAnamnesiFisiologicaSequenza
+﻿Public Class FormAnamnesiFisiologicaSequenza
 
     Private idPaziente As Integer
     Private _bmi As Double = 0

@@ -156,6 +156,36 @@
     <Compile Include="FormVisitaUroGineco.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UC_Anagrafica.Designer.vb">
+      <DependentUpon>UC_Anagrafica.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Anagrafica.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_AnamnesiFamiliare.Designer.vb">
+      <DependentUpon>UC_AnamnesiFamiliare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_AnamnesiFamiliare.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_AnamnesiFisiologica.Designer.vb">
+      <DependentUpon>UC_AnamnesiFisiologica.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_AnamnesiFisiologica.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_CercaPaziente.Designer.vb">
+      <DependentUpon>UC_CercaPaziente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_CercaPaziente.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Utils.vb" />
     <Compile Include="ModuleSql.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -209,6 +239,9 @@
     <EmbeddedResource Include="FormVisitaUroGineco.resx">
       <DependentUpon>FormVisitaUroGineco.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -217,6 +250,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormVisitaSintomi.resx">
       <DependentUpon>FormVisitaSintomi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Anagrafica.resx">
+      <DependentUpon>UC_Anagrafica.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_AnamnesiFamiliare.resx">
+      <DependentUpon>UC_AnamnesiFamiliare.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_AnamnesiFisiologica.resx">
+      <DependentUpon>UC_AnamnesiFisiologica.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_CercaPaziente.resx">
+      <DependentUpon>UC_CercaPaziente.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
