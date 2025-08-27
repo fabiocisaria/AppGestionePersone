@@ -45,7 +45,7 @@
     End Sub
 
     ' ====================
-    ' Evidenzia riga relativa al paziente attualmente selezionato
+    ' Evidenzia riga relativa al paziente selezionato
     ' ====================
     Private Sub EvidenziaSelezione()
         ' Recupero l'ID salvato nella MainForm
