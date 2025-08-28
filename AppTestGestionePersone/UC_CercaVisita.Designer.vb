@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class UC_CercaPaziente
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class UC_CercaVisita
     Inherits System.Windows.Forms.UserControl
 
     'UserControl esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,30 +20,41 @@ Partial Class UC_CercaPaziente
     'NOTA: la procedura che segue è richiesta da Progettazione Windows Form
     'Può essere modificata in Progettazione Windows Form.  
     'Non modificarla mediante l'editor del codice.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.dgvSelezioneVisita = New Syncfusion.WinForms.DataGrid.SfDataGrid()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.ButtonSeleziona = New Syncfusion.WinForms.Controls.SfButton()
         Me.ButtonAnnulla = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TextBoxCodiceID = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
-        Me.LabelCodiceID = New System.Windows.Forms.Label()
-        Me.LabelCognome = New System.Windows.Forms.Label()
-        Me.TextBoxCognome = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
+        Me.LabelDataVisita = New System.Windows.Forms.Label()
+        Me.LabelTipoVisita = New System.Windows.Forms.Label()
+        Me.DateTimePickerDataVisita = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.ButtonCercaPaziente = New Syncfusion.WinForms.Controls.SfButton()
-        Me.dgvSelezionePaziente = New Syncfusion.WinForms.DataGrid.SfDataGrid()
+        Me.ButtonCercaVisita = New Syncfusion.WinForms.Controls.SfButton()
+        Me.ComboBoxTipoVisita = New Syncfusion.WinForms.ListView.SfComboBox()
+        CType(Me.dgvSelezioneVisita, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
-        CType(Me.TextBoxCodiceID, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TextBoxCognome, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel4.SuspendLayout()
-        CType(Me.dgvSelezionePaziente, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ComboBoxTipoVisita, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'dgvSelezioneVisita
+        '
+        Me.dgvSelezioneVisita.AccessibleName = "Table"
+        Me.dgvSelezioneVisita.AllowEditing = False
+        Me.dgvSelezioneVisita.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill
+        Me.dgvSelezioneVisita.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvSelezioneVisita.Location = New System.Drawing.Point(3, 106)
+        Me.dgvSelezioneVisita.Name = "dgvSelezioneVisita"
+        Me.dgvSelezioneVisita.Size = New System.Drawing.Size(760, 365)
+        Me.dgvSelezioneVisita.TabIndex = 3
+        Me.dgvSelezioneVisita.Text = "SfDataGrid1"
         '
         'TableLayoutPanel1
         '
@@ -51,7 +62,7 @@ Partial Class UC_CercaPaziente
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel5, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.dgvSelezionePaziente, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.dgvSelezioneVisita, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -60,7 +71,7 @@ Partial Class UC_CercaPaziente
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanel1.TabIndex = 0
+        Me.TableLayoutPanel1.TabIndex = 1
         '
         'TableLayoutPanel5
         '
@@ -116,14 +127,14 @@ Partial Class UC_CercaPaziente
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.ColumnCount = 4
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.18037!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.13528!))
-        Me.TableLayoutPanel3.Controls.Add(Me.TextBoxCodiceID, 3, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.LabelCodiceID, 2, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.LabelCognome, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.TextBoxCognome, 1, 0)
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.LabelTipoVisita, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.ComboBoxTipoVisita, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.LabelDataVisita, 2, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.DateTimePickerDataVisita, 3, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
@@ -132,54 +143,44 @@ Partial Class UC_CercaPaziente
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(754, 52)
         Me.TableLayoutPanel3.TabIndex = 0
         '
-        'TextBoxCodiceID
+        'LabelDataVisita
         '
-        Me.TextBoxCodiceID.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TextBoxCodiceID.BeforeTouchSize = New System.Drawing.Size(264, 20)
-        Me.TextBoxCodiceID.BorderColor = System.Drawing.Color.Transparent
-        Me.TextBoxCodiceID.Location = New System.Drawing.Point(481, 16)
-        Me.TextBoxCodiceID.Name = "TextBoxCodiceID"
-        Me.TextBoxCodiceID.Size = New System.Drawing.Size(264, 20)
-        Me.TextBoxCodiceID.TabIndex = 8
-        Me.TextBoxCodiceID.Text = "Codice identificativo"
+        Me.LabelDataVisita.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.LabelDataVisita.AutoSize = True
+        Me.LabelDataVisita.Location = New System.Drawing.Point(388, 19)
+        Me.LabelDataVisita.Name = "LabelDataVisita"
+        Me.LabelDataVisita.Size = New System.Drawing.Size(57, 13)
+        Me.LabelDataVisita.TabIndex = 9
+        Me.LabelDataVisita.Text = "Data visita"
         '
-        'LabelCodiceID
+        'LabelTipoVisita
         '
-        Me.LabelCodiceID.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelCodiceID.AutoSize = True
-        Me.LabelCodiceID.Location = New System.Drawing.Point(361, 19)
-        Me.LabelCodiceID.Name = "LabelCodiceID"
-        Me.LabelCodiceID.Size = New System.Drawing.Size(102, 13)
-        Me.LabelCodiceID.TabIndex = 5
-        Me.LabelCodiceID.Text = "Codice identificativo"
+        Me.LabelTipoVisita.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.LabelTipoVisita.AutoSize = True
+        Me.LabelTipoVisita.Location = New System.Drawing.Point(12, 19)
+        Me.LabelTipoVisita.Name = "LabelTipoVisita"
+        Me.LabelTipoVisita.Size = New System.Drawing.Size(55, 13)
+        Me.LabelTipoVisita.TabIndex = 3
+        Me.LabelTipoVisita.Text = "Tipo visita"
         '
-        'LabelCognome
+        'DateTimePickerDataVisita
         '
-        Me.LabelCognome.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelCognome.AutoSize = True
-        Me.LabelCognome.Location = New System.Drawing.Point(7, 19)
-        Me.LabelCognome.Name = "LabelCognome"
-        Me.LabelCognome.Size = New System.Drawing.Size(52, 13)
-        Me.LabelCognome.TabIndex = 3
-        Me.LabelCognome.Text = "Cognome"
-        '
-        'TextBoxCognome
-        '
-        Me.TextBoxCognome.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TextBoxCognome.BeforeTouchSize = New System.Drawing.Size(264, 20)
-        Me.TextBoxCognome.BorderColor = System.Drawing.Color.Transparent
-        Me.TextBoxCognome.Location = New System.Drawing.Point(77, 16)
-        Me.TextBoxCognome.Name = "TextBoxCognome"
-        Me.TextBoxCognome.Size = New System.Drawing.Size(264, 20)
-        Me.TextBoxCognome.TabIndex = 7
-        Me.TextBoxCognome.Text = "Cognome"
+        Me.DateTimePickerDataVisita.AllowNull = True
+        Me.DateTimePickerDataVisita.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.DateTimePickerDataVisita.DateTimeIcon = Nothing
+        Me.DateTimePickerDataVisita.DateTimePattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.LongDate
+        Me.DateTimePickerDataVisita.Location = New System.Drawing.Point(460, 15)
+        Me.DateTimePickerDataVisita.Name = "DateTimePickerDataVisita"
+        Me.DateTimePickerDataVisita.Size = New System.Drawing.Size(166, 21)
+        Me.DateTimePickerDataVisita.TabIndex = 10
+        Me.DateTimePickerDataVisita.ToolTipText = ""
         '
         'TableLayoutPanel4
         '
         Me.TableLayoutPanel4.ColumnCount = 2
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.Controls.Add(Me.ButtonCercaPaziente, 1, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.ButtonCercaVisita, 1, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 61)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
@@ -189,59 +190,57 @@ Partial Class UC_CercaPaziente
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(754, 33)
         Me.TableLayoutPanel4.TabIndex = 1
         '
-        'ButtonCercaPaziente
+        'ButtonCercaVisita
         '
-        Me.ButtonCercaPaziente.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.ButtonCercaPaziente.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
-        Me.ButtonCercaPaziente.Location = New System.Drawing.Point(655, 3)
-        Me.ButtonCercaPaziente.Name = "ButtonCercaPaziente"
-        Me.ButtonCercaPaziente.Size = New System.Drawing.Size(96, 27)
-        Me.ButtonCercaPaziente.TabIndex = 0
-        Me.ButtonCercaPaziente.Text = "Cerca"
+        Me.ButtonCercaVisita.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.ButtonCercaVisita.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.ButtonCercaVisita.Location = New System.Drawing.Point(655, 3)
+        Me.ButtonCercaVisita.Name = "ButtonCercaVisita"
+        Me.ButtonCercaVisita.Size = New System.Drawing.Size(96, 27)
+        Me.ButtonCercaVisita.TabIndex = 0
+        Me.ButtonCercaVisita.Text = "Cerca"
         '
-        'dgvSelezionePaziente
+        'ComboBoxTipoVisita
         '
-        Me.dgvSelezionePaziente.AccessibleName = "Table"
-        Me.dgvSelezionePaziente.AllowEditing = False
-        Me.dgvSelezionePaziente.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill
-        Me.dgvSelezionePaziente.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvSelezionePaziente.Location = New System.Drawing.Point(3, 106)
-        Me.dgvSelezionePaziente.Name = "dgvSelezionePaziente"
-        Me.dgvSelezionePaziente.Size = New System.Drawing.Size(760, 365)
-        Me.dgvSelezionePaziente.TabIndex = 3
-        Me.dgvSelezionePaziente.Text = "SfDataGrid1"
+        Me.ComboBoxTipoVisita.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ComboBoxTipoVisita.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
+        Me.ComboBoxTipoVisita.Location = New System.Drawing.Point(83, 15)
+        Me.ComboBoxTipoVisita.Name = "ComboBoxTipoVisita"
+        Me.ComboBoxTipoVisita.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBoxTipoVisita.Style.TokenStyle.CloseButtonBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.ComboBoxTipoVisita.TabIndex = 11
+        Me.ComboBoxTipoVisita.TabStop = False
         '
-        'UC_CercaPaziente
+        'UC_CercaVisita
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Name = "UC_CercaPaziente"
+        Me.Name = "UC_CercaVisita"
         Me.Size = New System.Drawing.Size(766, 516)
+        CType(Me.dgvSelezioneVisita, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.TableLayoutPanel3.PerformLayout()
-        CType(Me.TextBoxCodiceID, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TextBoxCognome, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel4.ResumeLayout(False)
-        CType(Me.dgvSelezionePaziente, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ComboBoxTipoVisita, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
+    Friend WithEvents dgvSelezioneVisita As Syncfusion.WinForms.DataGrid.SfDataGrid
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
-    Friend WithEvents LabelCognome As Label
-    Friend WithEvents LabelCodiceID As Label
-    Friend WithEvents ButtonCercaPaziente As Syncfusion.WinForms.Controls.SfButton
-    Friend WithEvents TextBoxCognome As Syncfusion.Windows.Forms.Tools.TextBoxExt
-    Friend WithEvents TextBoxCodiceID As Syncfusion.Windows.Forms.Tools.TextBoxExt
     Friend WithEvents ButtonSeleziona As Syncfusion.WinForms.Controls.SfButton
     Friend WithEvents ButtonAnnulla As Syncfusion.WinForms.Controls.SfButton
-    Friend WithEvents dgvSelezionePaziente As Syncfusion.WinForms.DataGrid.SfDataGrid
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents LabelDataVisita As Label
+    Friend WithEvents LabelTipoVisita As Label
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
+    Friend WithEvents ButtonCercaVisita As Syncfusion.WinForms.Controls.SfButton
+    Friend WithEvents DateTimePickerDataVisita As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents ComboBoxTipoVisita As Syncfusion.WinForms.ListView.SfComboBox
 End Class

@@ -24,13 +24,13 @@ Partial Class UC_AnamnesiFamiliare
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBoxAnamnesi = New System.Windows.Forms.GroupBox()
-        Me.LabelParentela = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.ComboBoxParentela = New System.Windows.Forms.ComboBox()
         Me.LabelPatologie = New System.Windows.Forms.Label()
-        Me.ButtonSalva = New System.Windows.Forms.Button()
         Me.TextPatologie = New System.Windows.Forms.TextBox()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelParentela = New System.Windows.Forms.Label()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.ButtonSalva = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBoxAnamnesi.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -65,53 +65,6 @@ Partial Class UC_AnamnesiFamiliare
         Me.GroupBoxAnamnesi.TabStop = False
         Me.GroupBoxAnamnesi.Text = "Dati anamnesi"
         '
-        'LabelParentela
-        '
-        Me.LabelParentela.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelParentela.AutoSize = True
-        Me.LabelParentela.Location = New System.Drawing.Point(3, 35)
-        Me.LabelParentela.Name = "LabelParentela"
-        Me.LabelParentela.Size = New System.Drawing.Size(52, 13)
-        Me.LabelParentela.TabIndex = 5
-        Me.LabelParentela.Text = "Parentela"
-        '
-        'ComboBoxParentela
-        '
-        Me.ComboBoxParentela.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.ComboBoxParentela.FormattingEnabled = True
-        Me.ComboBoxParentela.Location = New System.Drawing.Point(76, 31)
-        Me.ComboBoxParentela.Name = "ComboBoxParentela"
-        Me.ComboBoxParentela.Size = New System.Drawing.Size(195, 21)
-        Me.ComboBoxParentela.TabIndex = 4
-        '
-        'LabelPatologie
-        '
-        Me.LabelPatologie.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelPatologie.AutoSize = True
-        Me.LabelPatologie.Location = New System.Drawing.Point(3, 118)
-        Me.LabelPatologie.Name = "LabelPatologie"
-        Me.LabelPatologie.Size = New System.Drawing.Size(51, 13)
-        Me.LabelPatologie.TabIndex = 2
-        Me.LabelPatologie.Text = "Patologie"
-        '
-        'ButtonSalva
-        '
-        Me.ButtonSalva.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.ButtonSalva.Location = New System.Drawing.Point(682, 6)
-        Me.ButtonSalva.Name = "ButtonSalva"
-        Me.ButtonSalva.Size = New System.Drawing.Size(75, 21)
-        Me.ButtonSalva.TabIndex = 6
-        Me.ButtonSalva.Text = "Salva"
-        Me.ButtonSalva.UseVisualStyleBackColor = True
-        '
-        'TextPatologie
-        '
-        Me.TextPatologie.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.TextPatologie.Location = New System.Drawing.Point(76, 114)
-        Me.TextPatologie.Name = "TextPatologie"
-        Me.TextPatologie.Size = New System.Drawing.Size(195, 20)
-        Me.TextPatologie.TabIndex = 5
-        '
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 2
@@ -134,6 +87,43 @@ Partial Class UC_AnamnesiFamiliare
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(313, 166)
         Me.TableLayoutPanel2.TabIndex = 5
         '
+        'ComboBoxParentela
+        '
+        Me.ComboBoxParentela.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ComboBoxParentela.FormattingEnabled = True
+        Me.ComboBoxParentela.Location = New System.Drawing.Point(76, 31)
+        Me.ComboBoxParentela.Name = "ComboBoxParentela"
+        Me.ComboBoxParentela.Size = New System.Drawing.Size(195, 21)
+        Me.ComboBoxParentela.TabIndex = 4
+        '
+        'LabelPatologie
+        '
+        Me.LabelPatologie.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelPatologie.AutoSize = True
+        Me.LabelPatologie.Location = New System.Drawing.Point(3, 118)
+        Me.LabelPatologie.Name = "LabelPatologie"
+        Me.LabelPatologie.Size = New System.Drawing.Size(51, 13)
+        Me.LabelPatologie.TabIndex = 2
+        Me.LabelPatologie.Text = "Patologie"
+        '
+        'TextPatologie
+        '
+        Me.TextPatologie.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.TextPatologie.Location = New System.Drawing.Point(76, 114)
+        Me.TextPatologie.Name = "TextPatologie"
+        Me.TextPatologie.Size = New System.Drawing.Size(195, 20)
+        Me.TextPatologie.TabIndex = 5
+        '
+        'LabelParentela
+        '
+        Me.LabelParentela.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelParentela.AutoSize = True
+        Me.LabelParentela.Location = New System.Drawing.Point(3, 35)
+        Me.LabelParentela.Name = "LabelParentela"
+        Me.LabelParentela.Size = New System.Drawing.Size(52, 13)
+        Me.LabelParentela.TabIndex = 5
+        Me.LabelParentela.Text = "Parentela"
+        '
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.ColumnCount = 2
@@ -148,6 +138,16 @@ Partial Class UC_AnamnesiFamiliare
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(760, 34)
         Me.TableLayoutPanel3.TabIndex = 7
+        '
+        'ButtonSalva
+        '
+        Me.ButtonSalva.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.ButtonSalva.Location = New System.Drawing.Point(682, 6)
+        Me.ButtonSalva.Name = "ButtonSalva"
+        Me.ButtonSalva.Size = New System.Drawing.Size(75, 21)
+        Me.ButtonSalva.TabIndex = 6
+        Me.ButtonSalva.Text = "Salva"
+        Me.ButtonSalva.UseVisualStyleBackColor = True
         '
         'UC_AnamnesiFamiliare
         '

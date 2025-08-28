@@ -383,15 +383,65 @@ Module Utils
         Dim parametri As New List(Of SqlParameter)
 
         If Not String.IsNullOrWhiteSpace(codiceID) Then
-            query = "SELECT ID, CodiceIdentificativo, Nome, Cognome 
+            query = "SELECT ID, CodiceIdentificativo, Nome, Cognome, DataNascita
                      FROM Anagrafica 
                      WHERE CodiceIdentificativo LIKE @codice"
             parametri.Add(New SqlParameter("@codice", "%" & codiceID.Trim() & "%"))
         Else
-            query = "SELECT ID, CodiceIdentificativo, Nome, Cognome 
+            query = "SELECT ID, CodiceIdentificativo, Nome, Cognome, DataNascita
                      FROM Anagrafica 
                      WHERE Cognome LIKE @cognome"
             parametri.Add(New SqlParameter("@cognome", "%" & cognome.Trim() & "%"))
+        End If
+
+        Dim risultato As DataTable = EseguiQuery(query, parametri)
+
+        Return risultato ' se nessun paziente selezionato
+    End Function
+
+    '-----------------------------
+    ' Ricerca visita per user control (paziente già selezionato)
+    '-----------------------------
+    Public Function CercaVisitaUC(idPaziente As Integer, dataVisita As Date?, Optional tipoVisita As String = Nothing) As DataTable
+        Dim query As String = ""
+        Dim parametri As New List(Of SqlParameter)
+
+        If dataVisita.HasValue Then
+            If Not String.IsNullOrEmpty(tipoVisita) Then
+                ' Cerco la visita con idPaziente, Data visita e Tipo visita
+                query = "SELECT ID, DataVisita, TipoVisita
+                         FROM Visite 
+                         WHERE ID_Anagrafica = @codice AND DataVisita = @dataVisita AND TipoVisita = @tipoVisita"
+                parametri.AddRange(New List(Of SqlClient.SqlParameter) From {
+                             New SqlClient.SqlParameter("@codice", idPaziente),
+                             New SqlClient.SqlParameter("@dataVisita", dataVisita.Value),
+                             New SqlClient.SqlParameter("@tipoVisita", tipoVisita)
+                })
+            Else
+                ' Cerco la visita con idPaziente, Data visita
+                query = "SELECT ID, DataVisita, TipoVisita
+                         FROM Visite 
+                         WHERE ID_Anagrafica = @codice AND DataVisita = @dataVisita"
+                parametri.AddRange(New List(Of SqlClient.SqlParameter) From {
+                             New SqlClient.SqlParameter("@codice", idPaziente),
+                             New SqlClient.SqlParameter("@dataVisita", dataVisita.Value)
+                             })
+            End If
+        ElseIf Not String.IsNullOrEmpty(tipoVisita) Then
+            ' Cerco la visita con idPaziente e Tipo visita
+            query = "SELECT ID, DataVisita, TipoVisita
+                     FROM Visite 
+                     WHERE ID_Anagrafica = @codice AND TipoVisita = @tipoVisita"
+            parametri.AddRange(New List(Of SqlClient.SqlParameter) From {
+                             New SqlClient.SqlParameter("@codice", idPaziente),
+                             New SqlClient.SqlParameter("@tipoVisita", tipoVisita)
+                })
+        Else
+            ' Cerco la visita con idPaziente
+            query = "SELECT ID, DataVisita, TipoVisita
+                         FROM Visite 
+                         WHERE ID_Anagrafica = @codice"
+            parametri.Add(New SqlClient.SqlParameter("@codice", idPaziente))
         End If
 
         Dim risultato As DataTable = EseguiQuery(query, parametri)

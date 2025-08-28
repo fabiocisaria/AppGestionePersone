@@ -76,10 +76,61 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Syncfusion.Core.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Core.WinForms.30.2.6\lib\net462\Syncfusion.Core.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Data.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Data.WinForms.30.2.6\lib\net462\Syncfusion.Data.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DataSource.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DataSource.WinForms.30.2.6\lib\net462\Syncfusion.DataSource.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Grid.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Grid.Base.30.2.6\lib\net462\Syncfusion.Grid.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Grid.Windows, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Grid.Windows.30.2.6\lib\net462\Syncfusion.Grid.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.GridCommon.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.GridCommon.WinForms.30.2.6\lib\net462\Syncfusion.GridCommon.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Grouping.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Grouping.Base.30.2.6\lib\net462\Syncfusion.Grouping.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.30.2.6\lib\net462\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfDataGrid.WinForms.30.2.6\lib\net462\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfInput.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfInput.WinForms.30.2.6\lib\net462\Syncfusion.SfInput.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfListView.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfListView.WinForms.30.2.6\lib\net462\Syncfusion.SfListView.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.Base.30.2.6\lib\net462\Syncfusion.Shared.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Windows, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.Windows.30.2.6\lib\net462\Syncfusion.Shared.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SpellChecker.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SpellChecker.Base.30.2.6\lib\net462\Syncfusion.SpellChecker.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Tools.Base.30.2.6\lib\net462\Syncfusion.Tools.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.Windows, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Tools.Windows.30.2.6\lib\net462\Syncfusion.Tools.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -101,6 +152,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UC_CercaVisita.Designer.vb">
+      <DependentUpon>UC_CercaVisita.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_CercaVisita.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_DatiPaziente.Designer.vb">
+      <DependentUpon>UC_DatiPaziente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_DatiPaziente.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="FormInserisciVisita.Designer.vb">
       <DependentUpon>FormInserisciVisita.vb</DependentUpon>
     </Compile>
@@ -186,6 +249,24 @@
     <Compile Include="UC_CercaPaziente.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UC_DatiVisita.Designer.vb">
+      <DependentUpon>UC_DatiVisita.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_DatiVisita.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_InserisciVisita.Designer.vb">
+      <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_InserisciVisita.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_VisitaSintomi.Designer.vb">
+      <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaSintomi.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Utils.vb" />
     <Compile Include="ModuleSql.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -263,6 +344,21 @@
     <EmbeddedResource Include="UC_CercaPaziente.resx">
       <DependentUpon>UC_CercaPaziente.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_CercaVisita.resx">
+      <DependentUpon>UC_CercaVisita.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_DatiPaziente.resx">
+      <DependentUpon>UC_DatiPaziente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_DatiVisita.resx">
+      <DependentUpon>UC_DatiVisita.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_InserisciVisita.resx">
+      <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_VisitaSintomi.resx">
+      <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="AppTestGestionePersone_TemporaryKey.pfx" />
@@ -276,6 +372,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

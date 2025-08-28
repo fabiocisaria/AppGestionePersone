@@ -49,7 +49,7 @@ Partial Class MainForm
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InserisciToolStripMenuItem, Me.CercaToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(766, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1008, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -108,31 +108,31 @@ Partial Class MainForm
         'PrimaVisitaToolStripMenuItem
         '
         Me.PrimaVisitaToolStripMenuItem.Name = "PrimaVisitaToolStripMenuItem"
-        Me.PrimaVisitaToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.PrimaVisitaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PrimaVisitaToolStripMenuItem.Text = "Prima visita"
         '
         'ControlloToolStripMenuItem
         '
         Me.ControlloToolStripMenuItem.Name = "ControlloToolStripMenuItem"
-        Me.ControlloToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.ControlloToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ControlloToolStripMenuItem.Text = "Controllo"
         '
         'SintomiToolStripMenuItem
         '
         Me.SintomiToolStripMenuItem.Name = "SintomiToolStripMenuItem"
-        Me.SintomiToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.SintomiToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SintomiToolStripMenuItem.Text = "Sintomi"
         '
         'UroGinecologicaToolStripMenuItem
         '
         Me.UroGinecologicaToolStripMenuItem.Name = "UroGinecologicaToolStripMenuItem"
-        Me.UroGinecologicaToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.UroGinecologicaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.UroGinecologicaToolStripMenuItem.Text = "Uro - ginecologica"
         '
         'TerapiaToolStripMenuItem
         '
         Me.TerapiaToolStripMenuItem.Name = "TerapiaToolStripMenuItem"
-        Me.TerapiaToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.TerapiaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TerapiaToolStripMenuItem.Text = "Terapia"
         '
         'CercaToolStripMenuItem
@@ -145,34 +145,35 @@ Partial Class MainForm
         'PazienteToolStripMenuItem
         '
         Me.PazienteToolStripMenuItem.Name = "PazienteToolStripMenuItem"
-        Me.PazienteToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.PazienteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PazienteToolStripMenuItem.Text = "Paziente"
         '
         'VisitaToolStripMenuItem1
         '
         Me.VisitaToolStripMenuItem1.Name = "VisitaToolStripMenuItem1"
-        Me.VisitaToolStripMenuItem1.Size = New System.Drawing.Size(118, 22)
+        Me.VisitaToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.VisitaToolStripMenuItem1.Text = "Visita"
         '
         'TableLayoutPanelMain
         '
         Me.TableLayoutPanelMain.ColumnCount = 1
-        Me.TableLayoutPanelMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanelMain.Location = New System.Drawing.Point(0, 24)
         Me.TableLayoutPanelMain.Name = "TableLayoutPanelMain"
-        Me.TableLayoutPanelMain.RowCount = 2
-        Me.TableLayoutPanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.98245!))
-        Me.TableLayoutPanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.017544!))
-        Me.TableLayoutPanelMain.Size = New System.Drawing.Size(766, 513)
+        Me.TableLayoutPanelMain.RowCount = 4
+        Me.TableLayoutPanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelMain.Size = New System.Drawing.Size(1008, 705)
         Me.TableLayoutPanelMain.TabIndex = 1
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(766, 537)
+        Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.Controls.Add(Me.TableLayoutPanelMain)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
