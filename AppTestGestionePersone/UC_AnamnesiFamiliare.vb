@@ -36,7 +36,7 @@
 
         If ComboBoxParentela.SelectedIndex = -1 Then
             main.MostraToast("Seleziona la parentela.")
-            HighlightControls(True, ComboBoxParentela)
+            HilightControls(True, ComboBoxParentela)
             successo = False
         ElseIf valoriConsentiti.Contains(ComboBoxParentela.Text) Then
             ' Controllo duplicato se il parente selezionato deve essere univoco (Padre, madre, etc)
@@ -52,7 +52,7 @@
                 successo = False
             End If
         Else
-            HighlightControls(False, ComboBoxParentela)
+            HilightControls(False, ComboBoxParentela)
         End If
 
         If String.IsNullOrWhiteSpace(TextPatologie.Text) Then

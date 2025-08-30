@@ -30,12 +30,12 @@
         Try
             ' Validazione semplice
             If String.IsNullOrEmpty(nome) OrElse String.IsNullOrEmpty(cognome) Then
-                HighlightControls(True, TextBoxNome)
-                HighlightControls(True, TextBoxCognome)
+                HilightControls(True, TextBoxNome)
+                HilightControls(True, TextBoxCognome)
                 Return (False, -1)
             Else
-                HighlightControls(False, TextBoxNome)
-                HighlightControls(False, TextBoxCognome)
+                HilightControls(False, TextBoxNome)
+                HilightControls(False, TextBoxCognome)
             End If
 
             ' Validazione nom ee cognome per generare codice identificativo
@@ -44,11 +44,11 @@
                 Dim parteNome As String = nome.Substring(0, 2).ToUpper()
                 Dim parteData As String = dataNascita.ToString("ddMMyyyy")
                 codiceID = parteCognome & parteNome & parteData
-                HighlightControls(False, TextBoxNome)
-                HighlightControls(False, TextBoxCognome)
+                HilightControls(False, TextBoxNome)
+                HilightControls(False, TextBoxCognome)
             Else
-                HighlightControls(True, TextBoxNome)
-                HighlightControls(True, TextBoxCognome)
+                HilightControls(True, TextBoxNome)
+                HilightControls(True, TextBoxCognome)
                 DirectCast(Me.ParentForm, MainForm).MostraToast("Nome e cognome devono avere almeno 2 caratteri.")
                 Return (False, -1)
             End If
@@ -59,7 +59,7 @@
             End If
 
             If String.IsNullOrEmpty(relazione) Then
-                HighlightControls(True, ComboBoxRelazione)
+                HilightControls(True, ComboBoxRelazione)
                 Return (False, -1)
             End If
 

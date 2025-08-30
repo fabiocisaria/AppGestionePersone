@@ -158,7 +158,7 @@ Public Class UC_CercaVisita
             tipoVisita = ComboBoxTipoVisita.SelectedItem
         End If
 
-        Dim visiteTrovate = Utils.CercaVisitaUC(idPaziente, dataVisita, tipoVisita)
+        Dim visiteTrovate = Utils.CercaVisiteUC(idPaziente, dataVisita, tipoVisita)
 
         If visiteTrovate.Rows.Count > 0 Then
             dgvSelezioneVisita.DataSource = visiteTrovate

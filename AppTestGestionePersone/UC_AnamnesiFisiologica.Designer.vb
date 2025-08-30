@@ -22,7 +22,7 @@ Partial Class UC_AnamnesiFisiologica
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelAnamnesiFisiologica = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBoxFumo = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
         Me.ComboBoxTipo = New System.Windows.Forms.ComboBox()
@@ -46,7 +46,7 @@ Partial Class UC_AnamnesiFisiologica
         Me.TextBoxPeso = New System.Windows.Forms.TextBox()
         Me.LabelBMI = New System.Windows.Forms.Label()
         Me.TextBoxBMI = New System.Windows.Forms.TextBox()
-        Me.TableLayoutPanel1.SuspendLayout()
+        Me.TableLayoutPanelAnamnesiFisiologica.SuspendLayout()
         Me.GroupBoxFumo.SuspendLayout()
         Me.TableLayoutPanel6.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
@@ -55,28 +55,28 @@ Partial Class UC_AnamnesiFisiologica
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TableLayoutPanel1
+        'TableLayoutPanelAnamnesiFisiologica
         '
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBoxFumo, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel5, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.ButtonInserisci, 0, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel4, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel3, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 6
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanel1.TabIndex = 12
+        Me.TableLayoutPanelAnamnesiFisiologica.ColumnCount = 1
+        Me.TableLayoutPanelAnamnesiFisiologica.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.GroupBoxFumo, 0, 4)
+        Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.TableLayoutPanel5, 0, 3)
+        Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.ButtonInserisci, 0, 5)
+        Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.TableLayoutPanel4, 0, 2)
+        Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.TableLayoutPanel3, 0, 1)
+        Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.TableLayoutPanel2, 0, 0)
+        Me.TableLayoutPanelAnamnesiFisiologica.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelAnamnesiFisiologica.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanelAnamnesiFisiologica.Name = "TableLayoutPanelAnamnesiFisiologica"
+        Me.TableLayoutPanelAnamnesiFisiologica.RowCount = 6
+        Me.TableLayoutPanelAnamnesiFisiologica.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
+        Me.TableLayoutPanelAnamnesiFisiologica.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
+        Me.TableLayoutPanelAnamnesiFisiologica.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
+        Me.TableLayoutPanelAnamnesiFisiologica.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
+        Me.TableLayoutPanelAnamnesiFisiologica.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
+        Me.TableLayoutPanelAnamnesiFisiologica.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanelAnamnesiFisiologica.Size = New System.Drawing.Size(766, 516)
+        Me.TableLayoutPanelAnamnesiFisiologica.TabIndex = 12
         '
         'GroupBoxFumo
         '
@@ -342,10 +342,10 @@ Partial Class UC_AnamnesiFisiologica
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.Controls.Add(Me.TableLayoutPanelAnamnesiFisiologica)
         Me.Name = "UC_AnamnesiFisiologica"
         Me.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanelAnamnesiFisiologica.ResumeLayout(False)
         Me.GroupBoxFumo.ResumeLayout(False)
         Me.TableLayoutPanel6.ResumeLayout(False)
         Me.TableLayoutPanel6.PerformLayout()
@@ -361,7 +361,7 @@ Partial Class UC_AnamnesiFisiologica
 
     End Sub
 
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelAnamnesiFisiologica As TableLayoutPanel
     Friend WithEvents GroupBoxFumo As GroupBox
     Friend WithEvents TableLayoutPanel6 As TableLayoutPanel
     Friend WithEvents ComboBoxTipo As ComboBox

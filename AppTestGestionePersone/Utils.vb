@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports Syncfusion.WinForms.Input
+Imports Syncfusion.WinForms.ListView
 
 Module Utils
 
@@ -7,6 +9,10 @@ Module Utils
     ' Pulisce i campi
     '-----------------------------
     Public Sub PulisciCampi(ParamArray controls() As Control)
+        PulisciCampi(False, controls)
+    End Sub
+
+    Public Sub PulisciCampi(pulisciLabel As Boolean, ParamArray controls() As Control)
         For Each ctrl In controls
             Select Case True
                 Case TypeOf ctrl Is TextBox
@@ -14,7 +20,9 @@ Module Utils
                 Case TypeOf ctrl Is ComboBox
                     DirectCast(ctrl, ComboBox).SelectedIndex = -1
                 Case TypeOf ctrl Is Label
-                    DirectCast(ctrl, Label).Text = ""
+                    If pulisciLabel Then
+                        DirectCast(ctrl, Label).Text = ""
+                    End If
                 Case TypeOf ctrl Is CheckBox
                     DirectCast(ctrl, CheckBox).Checked = False
                 Case TypeOf ctrl Is RadioButton
@@ -24,7 +32,7 @@ Module Utils
             End Select
 
             If ctrl.HasChildren Then
-                PulisciCampi(ctrl.Controls.Cast(Of Control).ToArray())
+                PulisciCampi(pulisciLabel, ctrl.Controls.Cast(Of Control).ToArray())
             End If
         Next
     End Sub
@@ -244,7 +252,7 @@ Module Utils
 
                     ' Resetta ricorsivamente il colore del testo di tutti i RadioButton nel GroupBox
                     If parentGroup IsNot Nothing Then
-                        HighlightRadioText(parentGroup, SystemColors.ControlText)
+                        HilightRadioText(parentGroup, SystemColors.ControlText)
                     End If
                 End If
             End Sub
@@ -260,23 +268,23 @@ Module Utils
     '-----------------------------
     '  Colora i testi dei radiobutton nei contenitori specificati di un colore di default rosso
     '-----------------------------
-    Public Sub HighlightInvalidGroups(ParamArray containers() As Control)
-        HighlightInvalidGroups(Color.Red, containers)
+    Public Sub HilightInvalidGroups(ParamArray containers() As Control)
+        HilightRadioGroups(Color.Red, containers)
     End Sub
 
     '-----------------------------
     ' Colora i testi dei radiobutton nei contenitori specificati. Colore parametrizzabile. Se non parametrizzatousa il rosso
     '-----------------------------
-    Public Sub HighlightInvalidGroups(highlightColor As Color, ParamArray containers() As Control)
+    Public Sub HilightRadioGroups(highlightColor As Color, ParamArray containers() As Control)
         For Each ctrl In containers
             ' Se contiene RadioButton, richiama la funzione per evidenziare il testo
             If ContainsDirectRadioButtons(ctrl) Then
-                HighlightRadioText(ctrl, highlightColor)
+                HilightRadioText(ctrl, highlightColor)
             End If
 
             ' Ricorsione sui figli
             If ctrl.HasChildren Then
-                HighlightInvalidGroups(highlightColor, ctrl.Controls.Cast(Of Control).ToArray())
+                HilightRadioGroups(highlightColor, ctrl.Controls.Cast(Of Control).ToArray())
             End If
         Next
     End Sub
@@ -284,14 +292,14 @@ Module Utils
     '-----------------------------
     ' Colora i text ed i combo box obbligatori con colore predefinito (light yellow).
     '-----------------------------
-    Public Sub HighlightControls(condition As Boolean, ParamArray controls() As Control)
-        HighlightControls(condition, Color.LightYellow, controls)
+    Public Sub HilightControls(condition As Boolean, ParamArray controls() As Control)
+        HilightControls(condition, Color.LightYellow, controls)
     End Sub
 
     '-----------------------------
     ' Colora i text ed i combo box obbligatori con colore personalizzato
     '-----------------------------
-    Public Sub HighlightControls(condition As Boolean, highlightColor As Color, ParamArray controls() As Control)
+    Public Sub HilightControls(condition As Boolean, highlightColor As Color, ParamArray controls() As Control)
         For Each ctrl In controls
             If TypeOf ctrl Is TextBox Then
                 Dim tb = DirectCast(ctrl, TextBox)
@@ -300,21 +308,60 @@ Module Utils
                 Else
                     tb.BackColor = SystemColors.Window
                 End If
+            ElseIf TypeOf ctrl Is Syncfusion.Windows.Forms.Tools.TextBoxExt Then
+                Dim sfTb = DirectCast(ctrl, Syncfusion.Windows.Forms.Tools.TextBoxExt)
+                If condition Then
+                    sfTb.BackColor = highlightColor
+                Else
+                    sfTb.BackColor = Color.White
+                End If
 
             ElseIf TypeOf ctrl Is ComboBox Then
-                    Dim cb = DirectCast(ctrl, ComboBox)
+                Dim cb = DirectCast(ctrl, ComboBox)
                 If condition Then
                     cb.BackColor = highlightColor
                 Else
                     cb.BackColor = SystemColors.Window
                 End If
+            ElseIf TypeOf ctrl Is Syncfusion.WinForms.ListView.SfComboBox Then
+                Dim sfCb = DirectCast(ctrl, Syncfusion.WinForms.ListView.SfComboBox)
+                If condition Then
+                    sfCb.Style.EditorStyle.BackColor = highlightColor
+                    sfCb.Style.ToolTipStyle.BackColor = highlightColor
+                Else
+                    sfCb.Style.EditorStyle.BackColor = Color.White
+                    sfCb.Style.ToolTipStyle.BackColor = Color.White
+                End If
+
             ElseIf TypeOf ctrl Is DateTimePicker Then
-                    Dim dt = DirectCast(ctrl, DateTimePicker)
+                Dim dt = DirectCast(ctrl, DateTimePicker)
                 ' Esempio: data di nascita non può essere >= oggi
-                If dt.Value.Date >= DateTime.Today Then
+                If condition Then
                     dt.ForeColor = Color.Red   ' evidenzio il testo
                 Else
                     dt.ForeColor = SystemColors.WindowText
+                End If
+            ElseIf TypeOf ctrl Is Syncfusion.WinForms.Input.SfDateTimeEdit Then
+                Dim sfDt = DirectCast(ctrl, Syncfusion.WinForms.Input.SfDateTimeEdit)
+                If condition Then
+                    sfDt.Style.ForeColor = Color.Red
+                Else
+                    sfDt.Style.ForeColor = Color.Black
+                End If
+
+            ElseIf TypeOf ctrl Is NumericUpDown Then
+                Dim nud = DirectCast(ctrl, NumericUpDown)
+                If condition Then
+                    nud.BackColor = highlightColor
+                Else
+                    nud.BackColor = SystemColors.Window
+                End If
+            ElseIf TypeOf ctrl Is Syncfusion.Windows.Forms.Tools.NumericUpDownExt Then
+                Dim sfNud = DirectCast(ctrl, Syncfusion.Windows.Forms.Tools.NumericUpDownExt)
+                If condition Then
+                    sfNud.BackColor = highlightColor
+                Else
+                    sfNud.BackColor = Color.White
                 End If
             End If
         Next
@@ -323,14 +370,14 @@ Module Utils
     '-----------------------------
     ' Colora i testi dei radiobutton di colore rosso
     '-----------------------------
-    Public Sub HighlightRadioText(container As Control)
-        HighlightRadioText(container, Color.Red)
+    Public Sub HilightRadioText(container As Control)
+        HilightRadioText(container, Color.Red)
     End Sub
 
     '-----------------------------
     ' Colora i testi dei radiobutton del colore passato come parametro
     '-----------------------------
-    Public Sub HighlightRadioText(container As Control, highlightColor As Color)
+    Public Sub HilightRadioText(container As Control, highlightColor As Color)
         For Each ctrl As Control In container.Controls
             If TypeOf ctrl Is RadioButton Then
                 Dim rb As RadioButton = DirectCast(ctrl, RadioButton)
@@ -339,7 +386,7 @@ Module Utils
 
             ' Ricorsione sui figli
             If ctrl.HasChildren Then
-                HighlightRadioText(ctrl, highlightColor)
+                HilightRadioText(ctrl, highlightColor)
             End If
         Next
     End Sub
@@ -402,7 +449,7 @@ Module Utils
     '-----------------------------
     ' Ricerca visita per user control (paziente già selezionato)
     '-----------------------------
-    Public Function CercaVisitaUC(idPaziente As Integer, dataVisita As Date?, Optional tipoVisita As String = Nothing) As DataTable
+    Public Function CercaVisiteUC(idPaziente As Integer, dataVisita As Date?, Optional tipoVisita As String = Nothing) As DataTable
         Dim query As String = ""
         Dim parametri As New List(Of SqlParameter)
 

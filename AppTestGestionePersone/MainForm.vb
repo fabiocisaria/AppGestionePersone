@@ -25,14 +25,16 @@ Public Class MainForm
     Private _ucCercaVisita As UC_CercaVisita
     Private _ucVisitaSintomi As UC_VisitaSintomi
     Private _ucDatiVisita As UC_DatiVisita
+    Private _ucVisitaUroGineco As UC_VisitaUroGineco
+    Private _ucVisitaRMN As UC_VisitaRMN
 
     ' Stato paziente selezionato
-    Public Property IDPazienteSelezionato As Integer
+    Public Property IDPazienteSelezionato As Integer = Nothing
     Public Property CodicePazienteSelezionato As String
     Public Property CognomePazienteSelezionato As String
     Public Property NomePazienteSelezionato As String
     Public Property DataNascitaPazienteSelezionato As Date
-    Public Property IDVisitaSelezionata As Integer
+    Public Property IDVisitaSelezionata As Integer = Nothing
     Public Property TipoVisitaSelezionata As String
     Public Property DataVisitaSelezionata As Date
 
@@ -107,9 +109,38 @@ Public Class MainForm
            (row = -1 OrElse TableLayoutPanelMain.GetRow(c) = row) Then
 
                 TableLayoutPanelMain.Controls.Remove(c)
-                If dispose Then c.Dispose()
+                If dispose Then
+                    c.Dispose()
+                    If c Is _ucCercaPaziente Then
+                        _ucCercaPaziente = Nothing
+                    ElseIf c Is _ucAnagrafica Then
+                        _ucAnagrafica = Nothing
+                    ElseIf c Is _ucAnamnesiFisiologica Then
+                        _ucAnamnesiFisiologica = Nothing
+                    ElseIf c Is _ucAnamnesiFamiliare Then
+                        _ucAnamnesiFamiliare = Nothing
+                    ElseIf c Is _ucDatiPaziente Then
+                        _ucDatiPaziente = Nothing
+                    ElseIf c Is _ucInserisciVisita Then
+                        _ucInserisciVisita = Nothing
+                    ElseIf c Is _ucCercaVisita Then
+                        _ucCercaVisita = Nothing
+                    ElseIf c Is _ucVisitaSintomi Then
+                        _ucVisitaSintomi = Nothing
+                    ElseIf c Is _ucDatiVisita Then
+                        _ucDatiVisita = Nothing
+                    ElseIf c Is _ucVisitaUroGineco Then
+                        _ucVisitaUroGineco = Nothing
+                    End If
+                End If
             End If
         Next
+    End Sub
+
+    Private Sub ResetVisita()
+        IDVisitaSelezionata = Nothing
+        TipoVisitaSelezionata = Nothing
+        DataVisitaSelezionata = Nothing
     End Sub
 
     ' ====================
@@ -206,18 +237,18 @@ Public Class MainForm
     ' Menu Cerca Paziente
     ' ====================
     Private Sub PazienteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PazienteToolStripMenuItem.Click
+        EliminaControllo(0, 0, True)
+        EliminaControllo(0, 1, True)
+        EliminaControllo(0, 2, True)
         If _ucCercaPaziente Is Nothing Then
             _ucCercaPaziente = New UC_CercaPaziente()
             AddHandler _ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
         End If
-        EliminaControllo(0, 0)
-        EliminaControllo(0, 1)
-        EliminaControllo(0, 2)
         CaricaControllo(_ucCercaPaziente, 0, 2)
     End Sub
 
     Private Sub FisiologicaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FisiologicaToolStripMenuItem.Click
-        If Me.IDPazienteSelezionato = 0 Then
+        If Me.IDPazienteSelezionato = Nothing Then
             MostraToast("Seleziona prima un paziente.")
             ' Carico lo UserControl di ricerca
             If _ucCercaPaziente Is Nothing Then
@@ -246,10 +277,12 @@ Public Class MainForm
         EliminaControllo(0, 2)
         CaricaControllo(_ucDatiPaziente, 0, 0)
         CaricaControllo(_ucAnamnesiFisiologica, 0, 2)
+
+        _ucAnamnesiFisiologica.AggiornaDati()
     End Sub
 
     Private Sub FamiliareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FamiliareToolStripMenuItem.Click
-        If Me.IDPazienteSelezionato = 0 Then
+        If Me.IDPazienteSelezionato = Nothing Then
             MostraToast("Seleziona prima un paziente.")
             ' Carico lo UserControl di ricerca
             If _ucCercaPaziente Is Nothing Then
@@ -282,17 +315,16 @@ Public Class MainForm
     End Sub
 
     Private Sub PrimaVisitaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrimaVisitaToolStripMenuItem.Click
-        If Me.IDPazienteSelezionato = 0 Then
+        If Me.IDPazienteSelezionato = Nothing Then
+            EliminaControllo(0, 0, True)
+            EliminaControllo(0, 1, True)
+            EliminaControllo(0, 2, True)
             MostraToast("Seleziona prima un paziente.")
             ' Carico lo UserControl di ricerca
             If _ucCercaPaziente Is Nothing Then
                 _ucCercaPaziente = New UC_CercaPaziente()
                 AddHandler _ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
             End If
-
-            EliminaControllo(0, 0)
-            EliminaControllo(0, 1)
-            EliminaControllo(0, 2)
             CaricaControllo(_ucCercaPaziente, 0, 2)
             Return
         End If
@@ -302,20 +334,24 @@ Public Class MainForm
         Else
             _ucDatiPaziente.CaricaDatiPaziente(Me)
         End If
+
+        EliminaControllo(0, 0)
+        EliminaControllo(0, 1, True)
+        EliminaControllo(0, 2)
 
         If _ucInserisciVisita Is Nothing Then
             _ucInserisciVisita = New UC_InserisciVisita("Prima visita")
         End If
 
-        EliminaControllo(0, 0)
-        EliminaControllo(0, 1)
-        EliminaControllo(0, 2)
         CaricaControllo(_ucDatiPaziente, 0, 0)
         CaricaControllo(_ucInserisciVisita, 0, 2)
     End Sub
 
     Private Sub ControlloToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ControlloToolStripMenuItem.Click
-        If Me.IDPazienteSelezionato = 0 Then
+        If Me.IDPazienteSelezionato = Nothing Then
+            EliminaControllo(0, 0, True)
+            EliminaControllo(0, 1, True)
+            EliminaControllo(0, 2, True)
             MostraToast("Seleziona prima un paziente.")
             ' Carico lo UserControl di ricerca
             If _ucCercaPaziente Is Nothing Then
@@ -323,9 +359,6 @@ Public Class MainForm
                 AddHandler _ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
             End If
 
-            EliminaControllo(0, 0)
-            EliminaControllo(0, 1)
-            EliminaControllo(0, 2)
             CaricaControllo(_ucCercaPaziente, 0, 2)
             Return
         End If
@@ -336,19 +369,20 @@ Public Class MainForm
             _ucDatiPaziente.CaricaDatiPaziente(Me)
         End If
 
+        EliminaControllo(0, 0)
+        EliminaControllo(0, 1, True)
+        EliminaControllo(0, 2)
+
         If _ucInserisciVisita Is Nothing Then
             _ucInserisciVisita = New UC_InserisciVisita("Controllo")
         End If
 
-        EliminaControllo(0, 0)
-        EliminaControllo(0, 1)
-        EliminaControllo(0, 2)
         CaricaControllo(_ucDatiPaziente, 0, 0)
         CaricaControllo(_ucInserisciVisita, 0, 2)
     End Sub
 
     Private Sub VisitaToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles VisitaToolStripMenuItem1.Click
-        If Me.IDPazienteSelezionato = 0 Then
+        If Me.IDPazienteSelezionato = Nothing Then
             MostraToast("Seleziona prima un paziente.")
             ' Carico lo UserControl di ricerca
             If _ucCercaPaziente Is Nothing Then
@@ -382,7 +416,7 @@ Public Class MainForm
     End Sub
 
     Private Sub SintomiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SintomiToolStripMenuItem.Click
-        If Me.IDPazienteSelezionato = 0 Then
+        If Me.IDPazienteSelezionato = Nothing Then
             MostraToast("Seleziona prima un paziente.")
             ' Carico lo UserControl di ricerca
             If _ucCercaPaziente Is Nothing Then
@@ -403,7 +437,7 @@ Public Class MainForm
             _ucDatiPaziente.CaricaDatiPaziente(Me)
         End If
 
-        If Me.IDVisitaSelezionata = 0 Then
+        If Me.IDVisitaSelezionata = Nothing Then
             MostraToast("Seleziona prima una visita.")
             ' Carico lo UserControl di ricerca visita
             If _ucCercaVisita Is Nothing Then
@@ -420,6 +454,7 @@ Public Class MainForm
 
         If _ucDatiVisita Is Nothing Then
             _ucDatiVisita = New UC_DatiVisita
+        Else
             _ucDatiVisita.CaricaDatiVisita(Me)
         End If
 
@@ -433,5 +468,121 @@ Public Class MainForm
         CaricaControllo(_ucDatiPaziente, 0, 0)
         CaricaControllo(_ucDatiVisita, 0, 1)
         CaricaControllo(_ucVisitaSintomi, 0, 2)
+
+        _ucVisitaSintomi.AggiornaDati()
+    End Sub
+
+    Private Sub UroGinecologicaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UroGinecologicaToolStripMenuItem.Click
+        If Me.IDPazienteSelezionato = Nothing Then
+            MostraToast("Seleziona prima un paziente.")
+            ' Carico lo UserControl di ricerca
+            If _ucCercaPaziente Is Nothing Then
+                _ucCercaPaziente = New UC_CercaPaziente()
+                AddHandler _ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
+            End If
+
+            EliminaControllo(0, 0)
+            EliminaControllo(0, 1)
+            EliminaControllo(0, 2)
+            CaricaControllo(_ucCercaPaziente, 0, 2)
+            Return
+        End If
+
+        If _ucDatiPaziente Is Nothing Then
+            _ucDatiPaziente = New UC_DatiPaziente()
+        Else
+            _ucDatiPaziente.CaricaDatiPaziente(Me)
+        End If
+
+        If Me.IDVisitaSelezionata = Nothing Then
+            MostraToast("Seleziona prima una visita.")
+            ' Carico lo UserControl di ricerca visita
+            If _ucCercaVisita Is Nothing Then
+                _ucCercaVisita = New UC_CercaVisita()
+                AddHandler _ucCercaVisita.VisitaSelezionata, AddressOf VisitaSelezionataHandler
+            End If
+
+            EliminaControllo(0, 0)
+            EliminaControllo(0, 1)
+            EliminaControllo(0, 2)
+            CaricaControllo(_ucCercaVisita, 0, 2)
+            Return
+        End If
+
+        If _ucDatiVisita Is Nothing Then
+            _ucDatiVisita = New UC_DatiVisita
+        Else
+            _ucDatiVisita.CaricaDatiVisita(Me)
+        End If
+
+        If _ucVisitaUroGineco Is Nothing Then
+            _ucVisitaUroGineco = New UC_VisitaUroGineco()
+        End If
+
+        EliminaControllo(0, 0)
+        EliminaControllo(0, 1)
+        EliminaControllo(0, 2)
+        CaricaControllo(_ucDatiPaziente, 0, 0)
+        CaricaControllo(_ucDatiVisita, 0, 1)
+        CaricaControllo(_ucVisitaUroGineco, 0, 2)
+
+        _ucVisitaUroGineco.AggiornaDati()
+    End Sub
+
+    Private Sub RMNToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RMNToolStripMenuItem.Click
+        If Me.IDPazienteSelezionato = Nothing Then
+            MostraToast("Seleziona prima un paziente.")
+            ' Carico lo UserControl di ricerca
+            If _ucCercaPaziente Is Nothing Then
+                _ucCercaPaziente = New UC_CercaPaziente()
+                AddHandler _ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
+            End If
+
+            EliminaControllo(0, 0)
+            EliminaControllo(0, 1)
+            EliminaControllo(0, 2)
+            CaricaControllo(_ucCercaPaziente, 0, 2)
+            Return
+        End If
+
+        If _ucDatiPaziente Is Nothing Then
+            _ucDatiPaziente = New UC_DatiPaziente()
+        Else
+            _ucDatiPaziente.CaricaDatiPaziente(Me)
+        End If
+
+        If Me.IDVisitaSelezionata = Nothing Then
+            MostraToast("Seleziona prima una visita.")
+            ' Carico lo UserControl di ricerca visita
+            If _ucCercaVisita Is Nothing Then
+                _ucCercaVisita = New UC_CercaVisita()
+                AddHandler _ucCercaVisita.VisitaSelezionata, AddressOf VisitaSelezionataHandler
+            End If
+
+            EliminaControllo(0, 0)
+            EliminaControllo(0, 1)
+            EliminaControllo(0, 2)
+            CaricaControllo(_ucCercaVisita, 0, 2)
+            Return
+        End If
+
+        If _ucDatiVisita Is Nothing Then
+            _ucDatiVisita = New UC_DatiVisita
+        Else
+            _ucDatiVisita.CaricaDatiVisita(Me)
+        End If
+
+        If _ucVisitaRMN Is Nothing Then
+            _ucVisitaRMN = New UC_VisitaRMN()
+        End If
+
+        EliminaControllo(0, 0)
+        EliminaControllo(0, 1)
+        EliminaControllo(0, 2)
+        CaricaControllo(_ucDatiPaziente, 0, 0)
+        CaricaControllo(_ucDatiVisita, 0, 1)
+        CaricaControllo(_ucVisitaRMN, 0, 2)
+
+        _ucVisitaRMN.AggiornaDati()
     End Sub
 End Class

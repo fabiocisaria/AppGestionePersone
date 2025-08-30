@@ -67,22 +67,22 @@
         Try
             If String.IsNullOrEmpty(LabelIDAnagrafica.Text) Then
                 'MessageBox.Show("Seleziona prima un paziente.")
-                HighlightControls(True, TextBoxCognome)
-                HighlightControls(True, TextBoxCodiceID)
+                HilightControls(True, TextBoxCognome)
+                HilightControls(True, TextBoxCodiceID)
                 Return (False, -1)
             Else
                 idPaziente = LabelIDAnagrafica.Text
-                HighlightControls(False, TextBoxCognome)
-                HighlightControls(False, TextBoxCodiceID)
+                HilightControls(False, TextBoxCognome)
+                HilightControls(False, TextBoxCodiceID)
             End If
 
             If ComboBoxTipoVisita.SelectedItem Is Nothing Then
-                HighlightControls(True, ComboBoxTipoVisita)
+                HilightControls(True, ComboBoxTipoVisita)
                 'MessageBox.Show("Seleziona un tipo di visita.")
                 Return (False, -1)
             Else
                 tipoVisita = ComboBoxTipoVisita.SelectedItem.ToString()
-                HighlightControls(False, ComboBoxTipoVisita)
+                HilightControls(False, ComboBoxTipoVisita)
             End If
 
             If tipoVisita = "Prima visita" Then

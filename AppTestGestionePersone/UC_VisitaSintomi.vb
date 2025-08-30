@@ -1,12 +1,39 @@
-﻿Public Class UC_VisitaSintomi
+﻿Imports System.Web.UI.WebControls
+Imports System.Windows.Forms.VisualStyles
+
+Public Class UC_VisitaSintomi
     Dim idVisita As Integer = -1
+    Dim tipoVisita As String = ""
+    Dim esiste As Boolean = False
+    Public Sub AggiornaDati()
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+        If main IsNot Nothing Then
+            idVisita = main.IDVisitaSelezionata
+            tipoVisita = main.TipoVisitaSelezionata
+            esiste = CercaVisita()
+            If Not esiste Then
+                PulisciCampi(TableLayoutPanelVisitaSintomi)
+            End If
+        End If
+    End Sub
 
     Private Sub FormVisitaSintomi_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
-        PulisciCampi(TableLayoutPanelVisitaSintomi)
         RadioAutoCheck(True, TableLayoutPanelVisitaSintomi)
-        ResetAndDisableControls(False, GroupBoxVVDDettagli)
-        ResetAndDisableControls(False, GroupBoxAlvoDettagli)
-        ResetAndDisableControls(False, GroupBoxDispLoc)
+
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+        If main IsNot Nothing Then
+            ' Carico i parametri della visita selezionata
+            idVisita = main.IDVisitaSelezionata
+            tipoVisita = main.TipoVisitaSelezionata
+            ' Cerco se esiste già una visita uro-ginecologica per la visita selezionata
+            esiste = CercaVisita()
+            If Not esiste Then
+                PulisciCampi(TableLayoutPanelVisitaSintomi)
+                ResetAndDisableControls(False, GroupBoxVVDDettagli)
+                ResetAndDisableControls(False, GroupBoxAlvoDettagli)
+                ResetAndDisableControls(False, GroupBoxDispLoc)
+            End If
+        End If
     End Sub
 
     Private Sub RadioButtonVVDSi_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonVVDSi.CheckedChanged
@@ -71,13 +98,163 @@
         ' Evidenzio tutti i campi obbligatori non compilati corretamente
         If invalidGroups.Any() Then
             ' Evidenzio i groupbox rimasti non validi
-            HighlightInvalidGroups(invalidGroups.ToArray())
+            HilightInvalidGroups(invalidGroups.ToArray())
             Return False
         Else
             Return True
         End If
     End Function
 
+    Private Function CercaVisita() As Boolean
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Carico i parametri della visita selezionata
+        idVisita = main.IDVisitaSelezionata
+        tipoVisita = main.TipoVisitaSelezionata
+
+        'Verifica che non esista già la parte uro - ginecologica per quella visita
+        Dim checkQuery As String = "SELECT * FROM VisitaSintomi WHERE ID_Visita = @idVisita"
+
+        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
+            New SqlClient.SqlParameter("@idVisita", idVisita)
+        }
+        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+
+        If dtCheck.Rows.Count = 1 Then
+            esiste = True ' sintomi esistenti per la visita selezionata
+
+            Dim dettagliVisita As DataRow = dtCheck.Rows(0)
+            main.MostraToast("Sintomi esistenti per la visita selezionata. Dati caricati.")
+
+            '----------------------------------
+            ' Carico i dati esistenti nei campi
+            '----------------------------------
+            ' Vulvodinia
+            If dettagliVisita("VulvodiniaPresente") Then
+                RadioButtonVVDSi.Checked = True
+            Else
+                RadioButtonVVDNo.Checked = True
+            End If
+
+            ' Modalità insorgenza
+            If dettagliVisita("VulvodiniaModalita") = "Spontanea" Then
+                RadioButtonVVDSpont.Checked = True
+            ElseIf dettagliVisita("VulvodiniaModalita") = "Provocata" Then
+                RadioButtonVVDProv.Checked = True
+            End If
+
+            ' Andamento
+            If dettagliVisita("VulvodiniaAndamento") = "Continua" Then
+                RadioButtonVVDCont.Checked = True
+            ElseIf dettagliVisita("VulvodiniaAndamento") = "Intermittente" Then
+                RadioButtonVVDInterm.Checked = True
+            End If
+
+            ' Distribuzione
+            If dettagliVisita("VulvodiniaDistrib") = "Generalizzata" Then
+                RadioButtonVVDGener.Checked = True
+            ElseIf dettagliVisita("VulvodiniaDistrib") = "Localizzata" Then
+                RadioButtonVVDLoc.Checked = True
+            End If
+
+            ' LUTS
+            If dettagliVisita("LUTS") = "No" Then
+                RadioButtonLutsNo.Checked = True
+            ElseIf dettagliVisita("LUTS") = "A volte" Then
+                RadioButtonLutsAVolte.Checked = True
+            ElseIf dettagliVisita("LUTS") = "Sempre" Then
+                RadioButtonLutsSempre.Checked = True
+            End If
+
+            ' Vaginiti ricorrenti
+            If dettagliVisita("VaginitiRicorr") Then
+                RadioButtonVaginSi.Checked = True
+            Else
+                RadioButtonVaginNo.Checked = True
+            End If
+
+            ' Cistiti ricorrenti
+            If dettagliVisita("CistitiRicorr") Then
+                RadioButtonCistSi.Checked = True
+            Else
+                RadioButtonCistNo.Checked = True
+            End If
+
+            ' Disparenuria
+            ' Marinoff
+            Select Case dettagliVisita("DispareuniaMarinoff")
+                Case 1
+                    RadioButtonDispMarin1.Checked = True
+                Case 2
+                    RadioButtonDispMarin2.Checked = True
+                Case 3
+                    RadioButtonDispMarin3.Checked = True
+            End Select
+
+            ' Localizzazione
+            If dettagliVisita("DispareuniaLoc") = "Superficiale" Then
+                RadioButtonDispLocS.Checked = True
+            ElseIf dettagliVisita("DispareuniaLoc") = "Profonda" Then
+                RadioButtonDispLocP.Checked = True
+            ElseIf dettagliVisita("DispareuniaLoc") = "Superficiale + Profonda" Then
+                RadioButtonDispLocSP.Checked = True
+            End If
+
+            ' Alvo
+            ' Presenza
+            If dettagliVisita("AlvoPresenza") Then
+                RadioButtonAlvoSi.Checked = True
+            Else
+                RadioButtonAlvoNo.Checked = True
+            End If
+
+            ' Stipsi
+            If dettagliVisita("AlvoStipsi") Then
+                RadioButtonAlvoStipsiSi.Checked = True
+            Else
+                RadioButtonAlvoStipsiNo.Checked = True
+            End If
+
+            ' Colon irritabile
+            If dettagliVisita("AlvoColonIrr") Then
+                RadioButtonAlvoColonIrrSi.Checked = True
+            Else
+                RadioButtonAlvoColonIrrNo.Checked = True
+            End If
+
+            ' Alvo alterno
+            If dettagliVisita("AlvoAlterno") Then
+                RadioButtonAlvoAltrnSi.Checked = True
+            Else
+                RadioButtonAlvoAltrnNo.Checked = True
+            End If
+
+            ' Alvo diarreico
+            If dettagliVisita("AlvoDiarroico") Then
+                RadioButtonAlvoDiarrSi.Checked = True
+            Else
+                RadioButtonAlvoDiarrNo.Checked = True
+            End If
+
+            '  Dolore vescicale
+            If dettagliVisita("DoloreVescicale") = "No" Then
+                RadioButtonDolVescNo.Checked = True
+            ElseIf dettagliVisita("DoloreVescicale") = "A volte" Then
+                RadioButtonDolVescAvolte.Checked = True
+            ElseIf dettagliVisita("DoloreVescicale") = "Sempre" Then
+                RadioButtonDolVescSempre.Checked = True
+            End If
+
+            Return esiste
+        Else
+            esiste = False
+            PulisciCampi(TableLayoutPanelVisitaSintomi)
+            Return esiste
+        End If
+    End Function
+
+
+    ' Modificare Salva Dati per poter ricaricare la cartella se già esistente
     Private Sub SalvaDati()
         Dim selezioneOK As Boolean = CheckSelezione()
 
@@ -111,21 +288,19 @@
             Dim dolVesc As String = GetSelectedRadioText(GroupBoxDolVes)
 
             Try
-                'Verifica che non esista già la descrizione dei sintomi per quella visita
-                Dim checkQuery As String = "SELECT COUNT(*) FROM VisitaSintomi WHERE ID_Visita = @idVisita"
-
-                Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@idVisita", idVisita)
-                }
-                Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
-
-                If dtCheck.Rows(0)(0) > 0 Then
-                    main.MostraToast("Attenzione: per questa visita sono già stati inseriti i sintomi")
-                    Exit Sub
-                End If
-
-                'Se non esiste, esegui l'inserimento
-                Dim querySintomi As String = "INSERT INTO VisitaSintomi (
+                Dim querySintomi As String = ""
+                If esiste Then
+                    ' Query di aggiornamento se la visita esiste già
+                    querySintomi = "UPDATE VisitaUroGineco SET 
+                                                          Stato = @vgStato,
+                                                          Lichen = @vgLichen,
+                                                          CicatriceRetraente = @vgCicRef,
+                                                          Ipercontrattilita = @ipercontrattilita,
+                                                          CitalgiaProvocata = @cistProv
+                                                          WHERE ID_Visita = @idVisita"
+                Else
+                    'Se non esiste, esegui l'inserimento
+                    querySintomi = "INSERT INTO VisitaSintomi (
                                                     ID_Visita,
                                                     VulvodiniaPresente,
                                                     VulvodiniaModalita,
@@ -159,6 +334,7 @@
                                                     @alvoDiarr,
                                                     @luts,
                                                     @dolVesc)"
+                End If
 
                 Dim parametriSintomi As New List(Of SqlClient.SqlParameter) From {
                     New SqlClient.SqlParameter("@idVisita", idVisita),
@@ -181,7 +357,16 @@
 
                 If EseguiNonQuery(querySintomi, parametriSintomi) > 0 Then
                     successo = True
-                    main.MostraToast("Sintomi inseriti correttamente.")
+                End If
+
+                If successo Then
+                    If esiste Then
+                        main.MostraToast("Sintomi aggiornati correttamente.")
+                    Else
+                        main.MostraToast("Sintomi salvati correttamente.")
+                    End If
+                Else
+                    main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")
                 End If
             Catch ex As Exception
                 MessageBox.Show("Errore imprevisto: " & ex.Message)

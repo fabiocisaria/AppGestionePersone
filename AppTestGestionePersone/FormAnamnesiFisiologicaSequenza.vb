@@ -44,25 +44,25 @@
         Double.TryParse(TextBoxPeso.Text, peso)
 
         If altezza = 0 Then
-            HighlightControls(True, TextBoxAltezza)
+            HilightControls(True, TextBoxAltezza)
             Exit Sub
         Else
-            HighlightControls(False, TextBoxAltezza)
+            HilightControls(False, TextBoxAltezza)
         End If
 
         If peso = 0 Then
-            HighlightControls(True, TextBoxPeso)
+            HilightControls(True, TextBoxPeso)
             Exit Sub
         Else
-            HighlightControls(False, TextBoxPeso)
+            HilightControls(False, TextBoxPeso)
         End If
 
         If ComboBoxIdratazione.SelectedItem Is Nothing Then
-            HighlightControls(True, ComboBoxIdratazione)
+            HilightControls(True, ComboBoxIdratazione)
             Exit Sub
         Else
             idratazione = ComboBoxIdratazione.SelectedItem.ToString()
-            HighlightControls(False, ComboBoxIdratazione)
+            HilightControls(False, ComboBoxIdratazione)
         End If
 
         If String.IsNullOrWhiteSpace(TextBoxIntolleranze.Text) Then
@@ -80,19 +80,19 @@
         End If
 
         If ComboBoxQuantita.SelectedItem Is Nothing Then
-            HighlightControls(True, ComboBoxQuantita)
+            HilightControls(True, ComboBoxQuantita)
             Exit Sub
         Else
             fumoQuantita = ComboBoxIdratazione.SelectedItem.ToString()
-            HighlightControls(False, ComboBoxQuantita)
+            HilightControls(False, ComboBoxQuantita)
         End If
 
         If ComboBoxTipo.SelectedItem Is Nothing Then
-            HighlightControls(True, ComboBoxTipo)
+            HilightControls(True, ComboBoxTipo)
             Exit Sub
         Else
             fumoTipo = ComboBoxIdratazione.SelectedItem.ToString()
-            HighlightControls(False, ComboBoxTipo)
+            HilightControls(False, ComboBoxTipo)
         End If
 
         Dim idCheck As String = "SELECT COUNT(*) FROM AnamnesiFisiologica WHERE ID_Anagrafica = @ID_Anagrafica"

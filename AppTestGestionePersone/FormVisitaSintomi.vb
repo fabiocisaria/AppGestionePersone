@@ -84,7 +84,7 @@ Public Class FormVisitaSintomi
         ' Evidenzio tutti i campi obbligatori non compilati corretamente
         If invalidGroups.Any() Then
             ' Evidenzio i groupbox rimasti non validi
-            HighlightInvalidGroups(invalidGroups.ToArray())
+            HilightInvalidGroups(invalidGroups.ToArray())
             Return False
         Else
             Return True

@@ -261,10 +261,22 @@
     <Compile Include="UC_InserisciVisita.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UC_VisitaRMN.Designer.vb">
+      <DependentUpon>UC_VisitaRMN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaRMN.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UC_VisitaSintomi.Designer.vb">
       <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
     </Compile>
     <Compile Include="UC_VisitaSintomi.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_VisitaUroGineco.Designer.vb">
+      <DependentUpon>UC_VisitaUroGineco.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaUroGineco.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Utils.vb" />
@@ -356,8 +368,14 @@
     <EmbeddedResource Include="UC_InserisciVisita.resx">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_VisitaRMN.resx">
+      <DependentUpon>UC_VisitaRMN.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_VisitaSintomi.resx">
       <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_VisitaUroGineco.resx">
+      <DependentUpon>UC_VisitaUroGineco.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
