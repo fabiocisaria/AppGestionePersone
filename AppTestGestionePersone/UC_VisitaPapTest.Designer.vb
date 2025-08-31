@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class UC_VisitaRMN
+Partial Class UC_VisitaPapTest
     Inherits System.Windows.Forms.UserControl
 
     'UserControl esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
@@ -22,30 +22,66 @@ Partial Class UC_VisitaRMN
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanelDatiRMN = New System.Windows.Forms.TableLayoutPanel()
-        Me.DateTimePickerDataEsecuzione = New Syncfusion.WinForms.Input.SfDateTimeEdit()
-        Me.LabelDettagliEndometriosi = New System.Windows.Forms.Label()
-        Me.LabelEsito = New System.Windows.Forms.Label()
-        Me.LabelDataEsecuzione = New System.Windows.Forms.Label()
         Me.TableLayoutPanelRmn = New System.Windows.Forms.TableLayoutPanel()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
-        Me.GroupBoxRMN = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxPapTest = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanelDatiRMN = New System.Windows.Forms.TableLayoutPanel()
         Me.ComboBoxEsito = New System.Windows.Forms.ComboBox()
-        Me.ComboBoxEndometriosi = New System.Windows.Forms.ComboBox()
-        Me.TableLayoutPanelDatiRMN.SuspendLayout()
+        Me.DateTimePickerDataEsecuzione = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.LabelEsito = New System.Windows.Forms.Label()
+        Me.LabelDataEsecuzione = New System.Windows.Forms.Label()
+        Me.LabelCeppo = New System.Windows.Forms.Label()
+        Me.ComboBoxCeppo = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanelRmn.SuspendLayout()
-        Me.GroupBoxRMN.SuspendLayout()
+        Me.GroupBoxPapTest.SuspendLayout()
+        Me.TableLayoutPanelDatiRMN.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'TableLayoutPanelRmn
+        '
+        Me.TableLayoutPanelRmn.ColumnCount = 1
+        Me.TableLayoutPanelRmn.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelRmn.Controls.Add(Me.ButtonInserisci, 0, 1)
+        Me.TableLayoutPanelRmn.Controls.Add(Me.GroupBoxPapTest, 0, 0)
+        Me.TableLayoutPanelRmn.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelRmn.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanelRmn.Name = "TableLayoutPanelRmn"
+        Me.TableLayoutPanelRmn.RowCount = 2
+        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelRmn.Size = New System.Drawing.Size(766, 516)
+        Me.TableLayoutPanelRmn.TabIndex = 2
+        '
+        'ButtonInserisci
+        '
+        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(667, 482)
+        Me.ButtonInserisci.Name = "ButtonInserisci"
+        Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
+        Me.ButtonInserisci.TabIndex = 2
+        Me.ButtonInserisci.Text = "Inserisci"
+        '
+        'GroupBoxPapTest
+        '
+        Me.GroupBoxPapTest.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.GroupBoxPapTest.Controls.Add(Me.TableLayoutPanelDatiRMN)
+        Me.GroupBoxPapTest.Location = New System.Drawing.Point(210, 166)
+        Me.GroupBoxPapTest.Name = "GroupBoxPapTest"
+        Me.GroupBoxPapTest.Size = New System.Drawing.Size(346, 144)
+        Me.GroupBoxPapTest.TabIndex = 1
+        Me.GroupBoxPapTest.TabStop = False
+        Me.GroupBoxPapTest.Text = "Pap test"
         '
         'TableLayoutPanelDatiRMN
         '
         Me.TableLayoutPanelDatiRMN.ColumnCount = 2
         Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
         Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxEndometriosi, 1, 2)
+        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxCeppo, 1, 2)
         Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxEsito, 1, 1)
         Me.TableLayoutPanelDatiRMN.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelDettagliEndometriosi, 0, 2)
+        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelCeppo, 0, 2)
         Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelEsito, 0, 1)
         Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
         Me.TableLayoutPanelDatiRMN.Dock = System.Windows.Forms.DockStyle.Fill
@@ -59,6 +95,16 @@ Partial Class UC_VisitaRMN
         Me.TableLayoutPanelDatiRMN.Size = New System.Drawing.Size(340, 125)
         Me.TableLayoutPanelDatiRMN.TabIndex = 0
         '
+        'ComboBoxEsito
+        '
+        Me.ComboBoxEsito.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ComboBoxEsito.FormattingEnabled = True
+        Me.ComboBoxEsito.Items.AddRange(New Object() {"Negativo", "Positivo"})
+        Me.ComboBoxEsito.Location = New System.Drawing.Point(153, 51)
+        Me.ComboBoxEsito.Name = "ComboBoxEsito"
+        Me.ComboBoxEsito.Size = New System.Drawing.Size(166, 21)
+        Me.ComboBoxEsito.TabIndex = 14
+        '
         'DateTimePickerDataEsecuzione
         '
         Me.DateTimePickerDataEsecuzione.AllowNull = True
@@ -70,16 +116,6 @@ Partial Class UC_VisitaRMN
         Me.DateTimePickerDataEsecuzione.Size = New System.Drawing.Size(166, 21)
         Me.DateTimePickerDataEsecuzione.TabIndex = 11
         Me.DateTimePickerDataEsecuzione.ToolTipText = ""
-        '
-        'LabelDettagliEndometriosi
-        '
-        Me.LabelDettagliEndometriosi.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelDettagliEndometriosi.AutoSize = True
-        Me.LabelDettagliEndometriosi.Location = New System.Drawing.Point(3, 97)
-        Me.LabelDettagliEndometriosi.Name = "LabelDettagliEndometriosi"
-        Me.LabelDettagliEndometriosi.Size = New System.Drawing.Size(105, 13)
-        Me.LabelDettagliEndometriosi.TabIndex = 8
-        Me.LabelDettagliEndometriosi.Text = "Dettagli endometriosi"
         '
         'LabelEsito
         '
@@ -101,85 +137,49 @@ Partial Class UC_VisitaRMN
         Me.LabelDataEsecuzione.TabIndex = 4
         Me.LabelDataEsecuzione.Text = "Data esecuzione"
         '
-        'TableLayoutPanelRmn
+        'LabelCeppo
         '
-        Me.TableLayoutPanelRmn.ColumnCount = 1
-        Me.TableLayoutPanelRmn.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.Controls.Add(Me.ButtonInserisci, 0, 1)
-        Me.TableLayoutPanelRmn.Controls.Add(Me.GroupBoxRMN, 0, 0)
-        Me.TableLayoutPanelRmn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelRmn.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanelRmn.Name = "TableLayoutPanelRmn"
-        Me.TableLayoutPanelRmn.RowCount = 2
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanelRmn.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.TabIndex = 1
+        Me.LabelCeppo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelCeppo.AutoSize = True
+        Me.LabelCeppo.Location = New System.Drawing.Point(3, 97)
+        Me.LabelCeppo.Name = "LabelCeppo"
+        Me.LabelCeppo.Size = New System.Drawing.Size(38, 13)
+        Me.LabelCeppo.TabIndex = 8
+        Me.LabelCeppo.Text = "Ceppo"
         '
-        'ButtonInserisci
+        'ComboBoxCeppo
         '
-        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
-        Me.ButtonInserisci.Location = New System.Drawing.Point(667, 482)
-        Me.ButtonInserisci.Name = "ButtonInserisci"
-        Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
-        Me.ButtonInserisci.TabIndex = 2
-        Me.ButtonInserisci.Text = "Inserisci"
+        Me.ComboBoxCeppo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ComboBoxCeppo.FormattingEnabled = True
+        Me.ComboBoxCeppo.Items.AddRange(New Object() {"Tradizionale", "IQOS", "Elettronica"})
+        Me.ComboBoxCeppo.Location = New System.Drawing.Point(153, 93)
+        Me.ComboBoxCeppo.Name = "ComboBoxCeppo"
+        Me.ComboBoxCeppo.Size = New System.Drawing.Size(166, 21)
+        Me.ComboBoxCeppo.TabIndex = 28
         '
-        'GroupBoxRMN
-        '
-        Me.GroupBoxRMN.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxRMN.Controls.Add(Me.TableLayoutPanelDatiRMN)
-        Me.GroupBoxRMN.Location = New System.Drawing.Point(210, 166)
-        Me.GroupBoxRMN.Name = "GroupBoxRMN"
-        Me.GroupBoxRMN.Size = New System.Drawing.Size(346, 144)
-        Me.GroupBoxRMN.TabIndex = 1
-        Me.GroupBoxRMN.TabStop = False
-        Me.GroupBoxRMN.Text = "Dettagli risonanza magnetica"
-        '
-        'ComboBoxEsito
-        '
-        Me.ComboBoxEsito.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.ComboBoxEsito.FormattingEnabled = True
-        Me.ComboBoxEsito.Items.AddRange(New Object() {"No", "< 5gg", "> 5gg"})
-        Me.ComboBoxEsito.Location = New System.Drawing.Point(153, 51)
-        Me.ComboBoxEsito.Name = "ComboBoxEsito"
-        Me.ComboBoxEsito.Size = New System.Drawing.Size(166, 21)
-        Me.ComboBoxEsito.TabIndex = 14
-        '
-        'ComboBoxEndometriosi
-        '
-        Me.ComboBoxEndometriosi.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.ComboBoxEndometriosi.FormattingEnabled = True
-        Me.ComboBoxEndometriosi.Items.AddRange(New Object() {"Tradizionale", "IQOS", "Elettronica"})
-        Me.ComboBoxEndometriosi.Location = New System.Drawing.Point(153, 93)
-        Me.ComboBoxEndometriosi.Name = "ComboBoxEndometriosi"
-        Me.ComboBoxEndometriosi.Size = New System.Drawing.Size(166, 21)
-        Me.ComboBoxEndometriosi.TabIndex = 28
-        '
-        'UC_VisitaRMN
+        'UC_VisitaPapTest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.TableLayoutPanelRmn)
-        Me.Name = "UC_VisitaRMN"
+        Me.Name = "UC_VisitaPapTest"
         Me.Size = New System.Drawing.Size(766, 516)
+        Me.TableLayoutPanelRmn.ResumeLayout(False)
+        Me.GroupBoxPapTest.ResumeLayout(False)
         Me.TableLayoutPanelDatiRMN.ResumeLayout(False)
         Me.TableLayoutPanelDatiRMN.PerformLayout()
-        Me.TableLayoutPanelRmn.ResumeLayout(False)
-        Me.GroupBoxRMN.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
+    Friend WithEvents TableLayoutPanelRmn As TableLayoutPanel
+    Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
+    Friend WithEvents GroupBoxPapTest As GroupBox
     Friend WithEvents TableLayoutPanelDatiRMN As TableLayoutPanel
-    Friend WithEvents LabelDettagliEndometriosi As Label
+    Friend WithEvents ComboBoxCeppo As ComboBox
+    Friend WithEvents ComboBoxEsito As ComboBox
+    Friend WithEvents DateTimePickerDataEsecuzione As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents LabelCeppo As Label
     Friend WithEvents LabelEsito As Label
     Friend WithEvents LabelDataEsecuzione As Label
-    Friend WithEvents TableLayoutPanelRmn As TableLayoutPanel
-    Friend WithEvents GroupBoxRMN As GroupBox
-    Friend WithEvents DateTimePickerDataEsecuzione As Syncfusion.WinForms.Input.SfDateTimeEdit
-    Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
-    Friend WithEvents ComboBoxEsito As ComboBox
-    Friend WithEvents ComboBoxEndometriosi As ComboBox
 End Class

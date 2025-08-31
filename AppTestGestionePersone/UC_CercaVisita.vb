@@ -16,7 +16,7 @@ Public Class UC_CercaVisita
     Public Property IDVisitaSelezionata As Integer
     Public Property TipoVisitaSelezionata As String
     Public Property DataVisitaSelezionata As Date?
-
+    Public Property IsHandlerAttached As Boolean = False
 
     ' Evento per comunicare alla MainForm il paziente selezionato
     Public Event VisitaSelezionata(IDVisita As Integer, TipoVisita As String, DataVisita As Date)

@@ -84,7 +84,8 @@ Public Class UC_VisitaSintomi
 
         ' Se "Disp Marinof = 0", rimuovo i gruppi collegati dai controlli obbligatori
         If RadioButtonDispMarin0.Checked Then
-            invalidGroups = invalidGroups.Where(Function(gb) gb IsNot GroupBoxDispLoc).ToList()
+            invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is GroupBoxDispLoc OrElse
+                                                                  gb Is TableLayoutPanelDispLoc)).ToList()
         End If
 
         ' Se "Presenza Alvo = No", rimuovo i gruppi collegati dai controlli obbligatori
@@ -136,25 +137,27 @@ Public Class UC_VisitaSintomi
                 RadioButtonVVDNo.Checked = True
             End If
 
-            ' Modalità insorgenza
-            If dettagliVisita("VulvodiniaModalita") = "Spontanea" Then
-                RadioButtonVVDSpont.Checked = True
-            ElseIf dettagliVisita("VulvodiniaModalita") = "Provocata" Then
-                RadioButtonVVDProv.Checked = True
-            End If
+            If RadioButtonVVDSi.Checked Then
+                ' Modalità insorgenza
+                If dettagliVisita("VulvodiniaModalita") = "Spontanea" Then
+                    RadioButtonVVDSpont.Checked = True
+                ElseIf dettagliVisita("VulvodiniaModalita") = "Provocata" Then
+                    RadioButtonVVDProv.Checked = True
+                End If
 
-            ' Andamento
-            If dettagliVisita("VulvodiniaAndamento") = "Continua" Then
-                RadioButtonVVDCont.Checked = True
-            ElseIf dettagliVisita("VulvodiniaAndamento") = "Intermittente" Then
-                RadioButtonVVDInterm.Checked = True
-            End If
+                ' Andamento
+                If dettagliVisita("VulvodiniaAndamento") = "Continua" Then
+                    RadioButtonVVDCont.Checked = True
+                ElseIf dettagliVisita("VulvodiniaAndamento") = "Intermittente" Then
+                    RadioButtonVVDInterm.Checked = True
+                End If
 
-            ' Distribuzione
-            If dettagliVisita("VulvodiniaDistrib") = "Generalizzata" Then
-                RadioButtonVVDGener.Checked = True
-            ElseIf dettagliVisita("VulvodiniaDistrib") = "Localizzata" Then
-                RadioButtonVVDLoc.Checked = True
+                ' Distribuzione
+                If dettagliVisita("VulvodiniaDistrib") = "Generalizzata" Then
+                    RadioButtonVVDGener.Checked = True
+                ElseIf dettagliVisita("VulvodiniaDistrib") = "Localizzata" Then
+                    RadioButtonVVDLoc.Checked = True
+                End If
             End If
 
             ' LUTS
@@ -183,6 +186,8 @@ Public Class UC_VisitaSintomi
             ' Disparenuria
             ' Marinoff
             Select Case dettagliVisita("DispareuniaMarinoff")
+                Case 0
+                    RadioButtonDispMarin0.Checked = True
                 Case 1
                     RadioButtonDispMarin1.Checked = True
                 Case 2
@@ -191,13 +196,15 @@ Public Class UC_VisitaSintomi
                     RadioButtonDispMarin3.Checked = True
             End Select
 
-            ' Localizzazione
-            If dettagliVisita("DispareuniaLoc") = "Superficiale" Then
-                RadioButtonDispLocS.Checked = True
-            ElseIf dettagliVisita("DispareuniaLoc") = "Profonda" Then
-                RadioButtonDispLocP.Checked = True
-            ElseIf dettagliVisita("DispareuniaLoc") = "Superficiale + Profonda" Then
-                RadioButtonDispLocSP.Checked = True
+            If Not RadioButtonDispMarin0.Checked Then
+                ' Localizzazione
+                If dettagliVisita("DispareuniaLoc") = "Superficiale" Then
+                    RadioButtonDispLocS.Checked = True
+                ElseIf dettagliVisita("DispareuniaLoc") = "Profonda" Then
+                    RadioButtonDispLocP.Checked = True
+                ElseIf dettagliVisita("DispareuniaLoc") = "Superficiale + Profonda" Then
+                    RadioButtonDispLocSP.Checked = True
+                End If
             End If
 
             ' Alvo
@@ -208,32 +215,34 @@ Public Class UC_VisitaSintomi
                 RadioButtonAlvoNo.Checked = True
             End If
 
-            ' Stipsi
-            If dettagliVisita("AlvoStipsi") Then
-                RadioButtonAlvoStipsiSi.Checked = True
-            Else
-                RadioButtonAlvoStipsiNo.Checked = True
-            End If
+            If RadioButtonAlvoSi.Checked Then
+                ' Stipsi
+                If dettagliVisita("AlvoStipsi") Then
+                    RadioButtonAlvoStipsiSi.Checked = True
+                Else
+                    RadioButtonAlvoStipsiNo.Checked = True
+                End If
 
-            ' Colon irritabile
-            If dettagliVisita("AlvoColonIrr") Then
-                RadioButtonAlvoColonIrrSi.Checked = True
-            Else
-                RadioButtonAlvoColonIrrNo.Checked = True
-            End If
+                ' Colon irritabile
+                If dettagliVisita("AlvoColonIrr") Then
+                    RadioButtonAlvoColonIrrSi.Checked = True
+                Else
+                    RadioButtonAlvoColonIrrNo.Checked = True
+                End If
 
-            ' Alvo alterno
-            If dettagliVisita("AlvoAlterno") Then
-                RadioButtonAlvoAltrnSi.Checked = True
-            Else
-                RadioButtonAlvoAltrnNo.Checked = True
-            End If
+                ' Alvo alterno
+                If dettagliVisita("AlvoAlterno") Then
+                    RadioButtonAlvoAltrnSi.Checked = True
+                Else
+                    RadioButtonAlvoAltrnNo.Checked = True
+                End If
 
-            ' Alvo diarreico
-            If dettagliVisita("AlvoDiarroico") Then
-                RadioButtonAlvoDiarrSi.Checked = True
-            Else
-                RadioButtonAlvoDiarrNo.Checked = True
+                ' Alvo diarreico
+                If dettagliVisita("AlvoDiarroico") Then
+                    RadioButtonAlvoDiarrSi.Checked = True
+                Else
+                    RadioButtonAlvoDiarrNo.Checked = True
+                End If
             End If
 
             '  Dolore vescicale
@@ -245,9 +254,9 @@ Public Class UC_VisitaSintomi
                 RadioButtonDolVescSempre.Checked = True
             End If
 
-            Return esiste
-        Else
-            esiste = False
+                Return esiste
+            Else
+                esiste = False
             PulisciCampi(TableLayoutPanelVisitaSintomi)
             Return esiste
         End If
@@ -266,22 +275,36 @@ Public Class UC_VisitaSintomi
             Dim successo As Boolean = False
 
             Dim vvdPres As Boolean = RadioButtonVVDSi.Checked
-            Dim vvdMod As String = GetSelectedRadioText(GroupBoxVVDModInsorg)
-            Dim vvdAnd As String = GetSelectedRadioText(GroupBoxVVDAndam)
-            Dim vvdDistr As String = GetSelectedRadioText(GroupBoxVVDDistr)
+
+            Dim vvdMod As Object = GetSelectedRadioText(GroupBoxVVDModInsorg)
+            Dim vvdAnd As Object = GetSelectedRadioText(GroupBoxVVDAndam)
+            Dim vvdDistr As Object = GetSelectedRadioText(GroupBoxVVDDistr)
 
             Dim vagRic As Boolean = RadioButtonVaginSi.Checked
 
             Dim CistRic As Boolean = RadioButtonCistSi.Checked
 
             Dim dispMar As Integer? = GetSelectedRadioNumber(GroupBoxDispMarinoff)
-            Dim dispLoc As String = GetSelectedRadioText(GroupBoxDispLoc)
+            Dim dispLoc As Object = GetSelectedRadioText(GroupBoxDispLoc)
 
             Dim alvoPres As Boolean = RadioButtonAlvoSi.Checked
-            Dim alvoStipsi As String = RadioButtonAlvoStipsiSi.Checked
-            Dim alvoColonIrr As String = RadioButtonAlvoColonIrrSi.Checked
-            Dim alvoAltrn As String = RadioButtonAlvoAltrnSi.Checked
-            Dim alvoDiarr As String = RadioButtonAlvoDiarrSi.Checked
+
+            Dim alvoStipsi As Object
+            Dim alvoColonIrr As Object
+            Dim alvoAltrn As Object
+            Dim alvoDiarr As Object
+
+            If Not alvoPres Then
+                alvoStipsi = DBNull.Value
+                alvoColonIrr = DBNull.Value
+                alvoAltrn = DBNull.Value
+                alvoDiarr = DBNull.Value
+            Else
+                alvoStipsi = RadioButtonAlvoStipsiSi.Checked
+                alvoColonIrr = RadioButtonAlvoColonIrrSi.Checked
+                alvoAltrn = RadioButtonAlvoAltrnSi.Checked
+                alvoDiarr = RadioButtonAlvoDiarrSi.Checked
+            End If
 
             Dim luts As String = GetSelectedRadioText(GroupBoxLuts)
 
@@ -291,13 +314,23 @@ Public Class UC_VisitaSintomi
                 Dim querySintomi As String = ""
                 If esiste Then
                     ' Query di aggiornamento se la visita esiste già
-                    querySintomi = "UPDATE VisitaUroGineco SET 
-                                                          Stato = @vgStato,
-                                                          Lichen = @vgLichen,
-                                                          CicatriceRetraente = @vgCicRef,
-                                                          Ipercontrattilita = @ipercontrattilita,
-                                                          CitalgiaProvocata = @cistProv
-                                                          WHERE ID_Visita = @idVisita"
+                    querySintomi = "UPDATE VisitaSintomi SET 
+                                                           VulvodiniaPresente = @vvdPres,
+                                                           VulvodiniaModalita = @vvdMod,
+                                                           VulvodiniaAndamento = @vvdAnd,
+                                                           VulvodiniaDistrib = @vvdDistr,
+                                                           VaginitiRicorr = @vagRic,
+                                                           CistitiRicorr = @cistRic,
+                                                           DispareuniaMarinoff = @dispMar,
+                                                           DispareuniaLoc = @dispLoc,
+                                                           AlvoPresenza = @alvoPres,
+                                                           AlvoStipsi = @alvoStipsi,
+                                                           AlvoColonIrr = @alvoColonIrr,
+                                                           AlvoAlterno = @alvoAltrn,
+                                                           AlvoDiarroico = @alvoDiarr,
+                                                           LUTS = @luts,
+                                                           DoloreVescicale = @dolVesc
+                                                           WHERE ID_Visita = @idVisita"
                 Else
                     'Se non esiste, esegui l'inserimento
                     querySintomi = "INSERT INTO VisitaSintomi (

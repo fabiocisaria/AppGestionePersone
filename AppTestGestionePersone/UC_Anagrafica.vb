@@ -1,4 +1,14 @@
 ﻿Public Class UC_Anagrafica
+    Public Property IDPaziente As Integer
+    Public Property CodiceIdentificativoSelezionato As String
+    Public Property Cognome As String
+    Public Property Nome As String
+    Public Property DataNascita As Date
+
+    Public Property IsHandlerAttached As Boolean = False
+
+    ' Evento per comunicare alla MainForm il paziente selezionato
+    Public Event NuovoPazienteInserito(ID As Integer, CodiceIdentificativo As String, Cognome As String, Nome As String, DataNascita As Date)
     Private Sub FormAnagrafica_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DateTimePickerDataNascita.Format = DateTimePickerFormat.Short
         DateTimePickerDataNascita.Value = DateTime.Now.Date
@@ -19,12 +29,13 @@
         Dim successo As Boolean = False
         Dim newID As Integer = -1
 
-        Dim nome As String = TextBoxNome.Text.Trim()
-        Dim cognome As String = TextBoxCognome.Text.Trim()
+        Nome = TextBoxNome.Text.Trim()
+        Cognome = TextBoxCognome.Text.Trim()
+        DataNascita = DateTimePickerDataNascita.Value
+
         Dim professione As String = TextBoxProfessione.Text.Trim()
         Dim sportPraticati As String = TextBoxSport.Text.Trim()
         Dim relazione As String = ComboBoxRelazione.Text.Trim()
-        Dim dataNascita As Date = DateTimePickerDataNascita.Value
         Dim codiceID As String = ""
 
         Try
@@ -89,6 +100,7 @@
             }
 
             If EseguiNonQuery(queryAnagrafica, parametriAnagrafica) > 0 Then
+                CodiceIdentificativoSelezionato = codiceID
                 Dim queryIDAnagrafica As String = "SELECT ID FROM Anagrafica WHERE CodiceIdentificativo = @CodiceID"
                 Dim parametriIDAnagrafica As New List(Of SqlClient.SqlParameter) From {
                     New SqlClient.SqlParameter("@CodiceID", codiceID)
@@ -123,7 +135,7 @@
     Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
         Dim esito = SalvaDati()
         If esito.Successo Then
-            ResetUC() ' Pulisci e resetta i campi
+            RaiseEvent NuovoPazienteInserito(esito.NewID, CodiceIdentificativoSelezionato, Cognome, Nome, DataNascita)
         End If
     End Sub
 End Class

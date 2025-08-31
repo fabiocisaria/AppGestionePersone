@@ -152,6 +152,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ToastForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UC_CercaVisita.Designer.vb">
       <DependentUpon>UC_CercaVisita.vb</DependentUpon>
     </Compile>
@@ -261,6 +264,12 @@
     <Compile Include="UC_InserisciVisita.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UC_VisitaPapTest.Designer.vb">
+      <DependentUpon>UC_VisitaPapTest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaPapTest.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UC_VisitaRMN.Designer.vb">
       <DependentUpon>UC_VisitaRMN.vb</DependentUpon>
     </Compile>
@@ -271,6 +280,18 @@
       <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
     </Compile>
     <Compile Include="UC_VisitaSintomi.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_VisitaStoriaOstetricoGinecologica.Designer.vb">
+      <DependentUpon>UC_VisitaStoriaOstetricoGinecologica.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaStoriaOstetricoGinecologica.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_VisitaTamponeVg.Designer.vb">
+      <DependentUpon>UC_VisitaTamponeVg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaTamponeVg.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UC_VisitaUroGineco.Designer.vb">
@@ -302,6 +323,12 @@
     </Compile>
     <Compile Include="FormVisitaSintomi.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UC_VisitaUrinocoltura.Designer.vb">
+      <DependentUpon>UC_VisitaUrinocoltura.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaUrinocoltura.vb">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -368,14 +395,23 @@
     <EmbeddedResource Include="UC_InserisciVisita.resx">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_VisitaPapTest.resx">
+      <DependentUpon>UC_VisitaPapTest.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_VisitaRMN.resx">
       <DependentUpon>UC_VisitaRMN.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_VisitaSintomi.resx">
       <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_VisitaTamponeVg.resx">
+      <DependentUpon>UC_VisitaTamponeVg.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_VisitaUroGineco.resx">
       <DependentUpon>UC_VisitaUroGineco.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_VisitaUrinocoltura.resx">
+      <DependentUpon>UC_VisitaUrinocoltura.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

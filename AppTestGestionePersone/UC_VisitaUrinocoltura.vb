@@ -1,12 +1,4 @@
-﻿Imports Syncfusion.WinForms.Controls
-Imports Syncfusion.WinForms.DataGrid.Enums
-Imports Syncfusion.WinForms.DataGrid.Events
-Imports Syncfusion.WinForms.DataGrid.Interactivity
-Imports Syncfusion.WinForms.Input
-Imports Syncfusion.WinForms.ListView.Styles
-Imports System.Web.UI.WebControls
-Imports System.Windows.Forms.VisualStyles
-Public Class UC_VisitaRMN
+﻿Public Class UC_VisitaUrinocoltura
     Dim idVisita As Integer = -1
     Dim esiste As Boolean = False
 
@@ -26,21 +18,7 @@ Public Class UC_VisitaRMN
         ' ====================
         With ComboBoxEsito
             ' Imposta i dati
-            .DataSource = New List(Of String) From {"Negativo", "Neuropatia pudendo", "Endometriosi"}
-            .SelectedIndex = -1
-
-            ' Stile
-            .DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList
-            .BackColor = Color.White                ' Sfondo della textbox
-            .ForeColor = Color.Black                ' Colore testo
-
-            .Font = New Font("Segoe UI", 9, FontStyle.Regular)
-            .Dock = DockStyle.Top
-        End With
-
-        With ComboBoxEndometriosi
-            ' Imposta i dati
-            .DataSource = New List(Of String) From {"LUS - Torus", "Vescicale/setto RV", "Peritoneale", "Ovarico"}
+            .DataSource = New List(Of String) From {"Negativo", "Positivo"}
             .SelectedIndex = -1
 
             ' Stile
@@ -68,13 +46,13 @@ Public Class UC_VisitaRMN
             idVisita = main.IDVisitaSelezionata
             esiste = CercaVisita()
             If Not esiste Then
-                PulisciCampi(ComboBoxEndometriosi, ComboBoxEsito)
+                PulisciCampi(ComboBoxEsito)
                 DateTimePickerDataEsecuzione.Value = Date.Now
             End If
         End If
     End Sub
 
-    Private Sub FormVisitaRMN_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FormVisitaPapTest_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             ' Carico i parametri della visita selezionata
@@ -82,22 +60,9 @@ Public Class UC_VisitaRMN
             ' Cerco se esiste già l'anamnesi fisiologica per il paziente selezionato
             esiste = CercaVisita()
             If Not esiste Then
-                PulisciCampi(ComboBoxEndometriosi, ComboBoxEsito)
+                PulisciCampi(ComboBoxEsito)
                 DateTimePickerDataEsecuzione.Value = Date.Now
             End If
-        End If
-    End Sub
-
-    Private Sub ComboBoxEsito_CheckedChanged(sender As Object, e As EventArgs) Handles ComboBoxEsito.SelectedIndexChanged
-        ' Mostra i dettagli solo se "Sì" è selezionato
-        If ComboBoxEsito.SelectedIndex = -1 Then
-            PulisciCampi(ComboBoxEndometriosi)
-            SetControlsEnabled(False, ComboBoxEndometriosi)
-        ElseIf ComboBoxEsito.SelectedItem.ToString() = "Endometriosi" Then
-            SetControlsEnabled(True, ComboBoxEndometriosi)
-        Else
-            PulisciCampi(ComboBoxEndometriosi)
-            SetControlsEnabled(False, ComboBoxEndometriosi)
         End If
     End Sub
 
@@ -105,17 +70,10 @@ Public Class UC_VisitaRMN
         Dim result = True
 
         If ComboBoxEsito.SelectedIndex = -1 Then
-            result = False
             HilightControls(True, ComboBoxEsito)
+            result = False
         Else
             HilightControls(False, ComboBoxEsito)
-        End If
-
-        If ComboBoxEsito.SelectedItem = "Endometriosi" AndAlso ComboBoxEndometriosi.SelectedIndex = -1 Then
-            result = False
-            HilightControls(True, ComboBoxEndometriosi)
-        Else
-            HilightControls(False, ComboBoxEndometriosi)
         End If
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -140,7 +98,7 @@ Public Class UC_VisitaRMN
         idVisita = main.IDVisitaSelezionata
 
         'Verifica che non esista già la parte uro - ginecologica per quella visita
-        Dim checkQuery As String = "SELECT * FROM VisitaRMN WHERE ID_Visita = @idVisita"
+        Dim checkQuery As String = "SELECT * FROM VisitaTamponeVg WHERE ID_Visita = @idVisita"
 
         Dim checkParam As New List(Of SqlClient.SqlParameter) From {
             New SqlClient.SqlParameter("@idVisita", idVisita)
@@ -151,23 +109,18 @@ Public Class UC_VisitaRMN
             esiste = True ' RMN esistente per la visita selezionata
 
             Dim dettagliVisita As DataRow = dtCheck.Rows(0)
-            main.MostraToast("RMN esistente per la visita selezionata. Dati caricati.")
+            main.MostraToast("Tampone vaginale esistente per la visita selezionata. Dati caricati.")
 
             '----------------------------------
             ' Carico i dati esistenti nei campi
             '----------------------------------
-            DateTimePickerDataEsecuzione.Value = CDate(dettagliVisita("DataRMN"))
-            ComboBoxEsito.SelectedItem = dettagliVisita("EsitoRMN")
-            If dettagliVisita("EsitoRMN") = "Endometriosi" Then
-                ComboBoxEndometriosi.SelectedItem = dettagliVisita("TipoEndometriosi")
-            Else
-                ComboBoxEndometriosi.SelectedIndex = -1
-            End If
+            DateTimePickerDataEsecuzione.Value = CDate(dettagliVisita("DataTamponeVg"))
+            ComboBoxEsito.SelectedItem = dettagliVisita("EsitoTamponeVg")
 
             Return esiste
         Else
             esiste = False
-            PulisciCampi(ComboBoxEndometriosi, ComboBoxEsito)
+            PulisciCampi(ComboBoxEsito)
             DateTimePickerDataEsecuzione.Value = Date.Now
             Return esiste
         End If
@@ -184,54 +137,49 @@ Public Class UC_VisitaRMN
             Dim successo As Boolean = False
 
             Dim dataEsecuzione As Date = DateTimePickerDataEsecuzione.Value
-            Dim esitoRMN As String = ComboBoxEsito.SelectedItem.ToString()
-            Dim dettagliEndometriosi As Object
-
-            If ComboBoxEsito.SelectedItem.ToString() <> "Endometriosi" Then
-                dettagliEndometriosi = DBNull.Value
+            Dim esitoUrinocoltura As Boolean
+            If ComboBoxEsito.SelectedItem.ToString() = "Positivo" Then
+                esitoUrinocoltura = True
             Else
-                dettagliEndometriosi = ComboBoxEndometriosi.SelectedItem.ToString()
+                esitoUrinocoltura = False
             End If
 
             Try
-                Dim queryRMN As String = ""
+                Dim queryUrinocoltura As String = ""
                 If esiste Then
                     ' Query di aggiornamento se la visita esiste già
-                    queryRMN = "UPDATE VisitaRMN SET 
-                                                          DataRMN = @dataRMN,
-                                                          EsitoRMN = @esitoRMN,
-                                                          DettagliEndometriosi = @dettagliEndometriosi
+                    queryUrinocoltura = "UPDATE VisitaTamponeVg SET 
+                                                          DataTamponeVg = @dataTamponeVg,
+                                                          EsitoTamponeVg = @esitoTamponeVg
                                                           WHERE ID_Visita = @idVisita"
                 Else
-                    'Se non esiste, esegui l'inserimento
-                    queryRMN = "INSERT INTO VisitaRMN (
+                    'Se non esiste, esegui l'VisitaUrinocoltura
+                    queryUrinocoltura = "INSERT INTO VisitaTamponeVg (
                                                     ID_Visita,
-                                                    DataRMN,
-                                                    EsitoRMN,
-                                                    DettagliEndometriosi
+                                                    DataTamponeVg,
+                                                    EsitoTamponeVg
                                                     ) VALUES (
                                                     @idVisita,
-                                                    @dataRMN,
-                                                    @esitoRMN,
-                                                    @dettagliEndometriosi)"
+                                                    @dataTamponeVg,
+                                                    @esitoTamponeVg,
+                                                    @idCeppo)"
                 End If
 
-                Dim parametriRMN As New List(Of SqlClient.SqlParameter) From {
+                Dim parametriPapTest As New List(Of SqlClient.SqlParameter) From {
                     New SqlClient.SqlParameter("@idVisita", idVisita),
-                    New SqlClient.SqlParameter("@dataRMN", dataEsecuzione),
-                    New SqlClient.SqlParameter("@esitoRMN", esitoRMN),
-                    New SqlClient.SqlParameter("@dettagliEndometriosi", dettagliEndometriosi)
+                    New SqlClient.SqlParameter("@dataTamponeVg", dataEsecuzione),
+                    New SqlClient.SqlParameter("@esitoTamponeVg", esitoUrinocoltura)
                 }
 
-                If EseguiNonQuery(queryRMN, parametriRMN) > 0 Then
+                If EseguiNonQuery(queryUrinocoltura, parametriPapTest) > 0 Then
                     successo = True
                 End If
 
                 If successo Then
                     If esiste Then
-                        main.MostraToast("RMN aggiornata correttamente.")
+                        main.MostraToast("Tampone vaginala aggiornato correttamente.")
                     Else
-                        main.MostraToast("RMN salvata correttamente.")
+                        main.MostraToast("Tampone vaginala salvato correttamente.")
                     End If
                 Else
                     main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")

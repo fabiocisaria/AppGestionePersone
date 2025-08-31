@@ -2,8 +2,15 @@
 
 Public Class UC_InserisciVisita
     Private _aggiornamentoInterno As Boolean = False
+    Public Property IDVisita As Integer
+    Public Property TipoVisita As String = ""
+    Public Property DataVisita As Date? = Nothing
+    Public Property IsHandlerAttached As Boolean = False
 
     Dim ucTipoVisita As String = ""
+
+    ' Evento per comunicare alla MainForm il paziente selezionato
+    Public Event NuovaVisitaInserita(IDVisita As Integer, TipoVisita As String, DataVisita As Date)
 
     Public Sub New(tipoVisita As String)
         InitializeComponent()
@@ -104,9 +111,9 @@ Public Class UC_InserisciVisita
             Dim dtVisita As DataTable = EseguiQuery(queryIDVisita, parametriIDVisita)
             If dtVisita.Rows.Count > 0 Then
                 idVisita = Convert.ToInt32(dtVisita.Rows(0)("ID"))
-                dataVisita = DateTimePickerDataVisita.Value.Date
-                main.IDVisitaSelezionata = idVisita
-                main.DataVisitaSelezionata = dataVisita
+                Me.IDVisita = idVisita
+                Me.DataVisita = DateTimePickerDataVisita.Value.Date
+                Me.TipoVisita = ucTipoVisita
             End If
 
             PulisciCampi(DateTimePickerDataVisita, TextBoxMotivo)
@@ -122,7 +129,9 @@ Public Class UC_InserisciVisita
         Dim esito = InserisciVisita()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
-        If Not esito.Successo Then
+        If esito.Successo Then
+            RaiseEvent NuovaVisitaInserita(IDVisita, TipoVisita, DataVisita)
+        Else
             Select Case esito.NewID
                 Case -1
                     ' Prima visita già esistente
@@ -137,12 +146,12 @@ Public Class UC_InserisciVisita
 
                 Case -2
                     ' Nessuna prima visita esistente
-                    If MessageBox.Show("Impossibile inserire una visita di controllo per il paziente selezionato.",
-                                       "Inserire prima una prima visita",
+                    If MessageBox.Show("Impossibile inserire un controllo per il paziente selezionato.",
+                                       "Inserire una prima una prima visita?",
                                        MessageBoxButtons.YesNo,
                                        MessageBoxIcon.Question) = DialogResult.Yes Then
 
-                        Me.ImpostaTipoVisita("Controllo")
+                        Me.ImpostaTipoVisita("Prima Visita")
                     End If
                 Case -3
                     ' Data controllo non valida o visita già esistente nella stessa data

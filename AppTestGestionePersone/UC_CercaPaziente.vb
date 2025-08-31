@@ -17,7 +17,7 @@ Public Class UC_CercaPaziente
     Public Property CognomeSelezionato As String
     Public Property NomeSelezionato As String
     Public Property DataNascitaSelezionato As Date
-
+    Public Property IsHandlerAttached As Boolean = False
 
     ' Evento per comunicare alla MainForm il paziente selezionato
     Public Event PazienteSelezionato(ID As Integer, CodiceIdentificativo As String, Cognome As String, Nome As String, DataNascita As Date)
