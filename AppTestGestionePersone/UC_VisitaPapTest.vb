@@ -3,13 +3,10 @@ Imports System.Diagnostics.Eventing
 
 Public Class UC_VisitaPapTest
     Dim idVisita As Integer = -1
-    Dim esiste As Boolean = False
 
-    Private dtCeppi As DataTable
-    Private dtCeppiOriginale As DataTable
-    Private isPopulating As Boolean = False
-    Private WithEvents filtroTimer As New Timer()
-    Private filtroPrecedente As String = ""
+    Dim esiste As Boolean = False
+    Dim appenaSalvati As Boolean = False
+
     Public Sub New()
         InitializeComponent()
 
@@ -38,19 +35,6 @@ Public Class UC_VisitaPapTest
             .Dock = DockStyle.Top
         End With
 
-        With ComboBoxCeppo
-            ' Popola i ceppi dal database
-            PopolaComboBoxCeppi()
-
-            ' Stile
-            .DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList
-            .BackColor = Color.White                ' Sfondo della textbox
-            .ForeColor = Color.Black                ' Colore testo
-
-            .Font = New Font("Segoe UI", 9, FontStyle.Regular)
-            .Dock = DockStyle.Top
-        End With
-
         With DateTimePickerDataEsecuzione
             .Style.BackColor = Color.White
             .Style.BorderColor = Color.FromArgb(41, 128, 185)
@@ -61,98 +45,13 @@ Public Class UC_VisitaPapTest
         DateTimePickerDataEsecuzione.Value = Date.Now
     End Sub
 
-    Private Sub PopolaComboBoxCeppi()
-        isPopulating = True ' ← Blocca TextChanged durante il popolamento
-
-        Dim query As String = "SELECT ID, Ceppo, Rischio FROM HPVCeppi ORDER BY Ceppo"
-        dtCeppiOriginale = EseguiQuery(query)
-
-        If Not dtCeppiOriginale.Columns.Contains("Descrizione") Then
-            dtCeppiOriginale.Columns.Add("Descrizione", GetType(String), "Ceppo + ' - ' + Rischio")
-        End If
-
-        ComboBoxCeppo.DataSource = dtCeppiOriginale
-        ComboBoxCeppo.DisplayMember = "Descrizione"
-        ComboBoxCeppo.ValueMember = "ID"
-        ComboBoxCeppo.DropDownStyle = ComboBoxStyle.DropDown
-        ComboBoxCeppo.SelectedIndex = -1
-
-        ' Imposta timer debounce
-        filtroTimer.Interval = 600
-
-        isPopulating = False ' ← Sblocca TextChanged dopo il popolamento
-    End Sub
-
-    ' --- Evento TextChanged con debounce ---
-    Private Sub ComboBoxCeppo_TextChanged(sender As Object, e As EventArgs) Handles ComboBoxCeppo.TextChanged
-        If isPopulating Then Return
-        filtroTimer.Stop()
-        filtroTimer.Start()
-    End Sub
-
-    ' --- Timer Tick: applica filtro quando l'utente ha smesso di digitare ---
-    Private Sub filtroTimer_Tick(sender As Object, e As EventArgs) Handles filtroTimer.Tick
-        filtroTimer.Stop()
-        ApplicaFiltro()
-    End Sub
-
-    ' --- Metodo per filtrare la ComboBox ---
-    Private Sub ApplicaFiltro()
-        If dtCeppiOriginale Is Nothing Then Return
-
-        Dim filtro As String = ComboBoxCeppo.Text.Trim().ToUpper()
-
-        ' Se il filtro non è cambiato, non fare nulla
-        If filtro = filtroPrecedente Then Return
-        filtroPrecedente = filtro
-
-        Dim dtFiltrata As DataTable = dtCeppiOriginale.Clone()
-
-        For Each row As DataRow In dtCeppiOriginale.Rows
-            If row("Descrizione").ToString().ToUpper().Contains(filtro) Then
-                dtFiltrata.ImportRow(row)
-            End If
-        Next
-
-        ' Salva testo e posizione cursore
-        Dim txt As String = ComboBoxCeppo.Text
-        Dim selStart As Integer = ComboBoxCeppo.SelectionStart
-
-        ComboBoxCeppo.BeginUpdate()
-        ComboBoxCeppo.DataSource = dtFiltrata
-        ComboBoxCeppo.DisplayMember = "Descrizione"
-        ComboBoxCeppo.ValueMember = "ID"
-        ComboBoxCeppo.EndUpdate()
-
-        ' Ripristina testo senza selezionare automaticamente il primo elemento
-        ComboBoxCeppo.SelectedIndex = -1
-        ComboBoxCeppo.Text = txt
-        ComboBoxCeppo.SelectionStart = selStart
-        ComboBoxCeppo.SelectionLength = 0
-
-        UpdateDropDownHeight()
-
-        ' Apri automaticamente il dropdown se ci sono elementi filtrati
-        'If ComboBoxCeppo.Items.Count > 0 Then
-        'ComboBoxCeppo.DroppedDown = True
-        'End If
-    End Sub
-
-    ' --- Metodo per regolare altezza tendina ---
-    Private Sub UpdateDropDownHeight()
-        Dim itemCount As Integer = ComboBoxCeppo.Items.Count
-        Dim maxVisible As Integer = 10
-        If itemCount > maxVisible Then itemCount = maxVisible
-        ComboBoxCeppo.DropDownHeight = (ComboBoxCeppo.ItemHeight * itemCount) + 2
-    End Sub
-
     Public Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             idVisita = main.IDVisitaSelezionata
             esiste = CercaVisita()
             If Not esiste Then
-                PulisciCampi(ComboBoxCeppo, ComboBoxEsito)
+                PulisciCampi(ComboBoxEsito)
                 DateTimePickerDataEsecuzione.Value = Date.Now
             End If
         End If
@@ -166,22 +65,9 @@ Public Class UC_VisitaPapTest
             ' Cerco se esiste già l'anamnesi fisiologica per il paziente selezionato
             esiste = CercaVisita()
             If Not esiste Then
-                PulisciCampi(ComboBoxCeppo, ComboBoxEsito)
+                PulisciCampi(ComboBoxEsito)
                 DateTimePickerDataEsecuzione.Value = Date.Now
             End If
-        End If
-    End Sub
-
-    Private Sub ComboBoxEsito_CheckedChanged(sender As Object, e As EventArgs) Handles ComboBoxEsito.SelectedIndexChanged
-        ' Mostra i ceppi solo se "Positivo" è selezionato
-        If ComboBoxEsito.SelectedIndex = -1 Then
-            PulisciCampi(ComboBoxCeppo)
-            SetControlsEnabled(False, ComboBoxCeppo)
-        ElseIf ComboBoxEsito.SelectedItem.ToString() = "Positivo" Then
-            SetControlsEnabled(True, ComboBoxCeppo)
-        Else
-            PulisciCampi(ComboBoxCeppo)
-            SetControlsEnabled(False, ComboBoxCeppo)
         End If
     End Sub
 
@@ -189,17 +75,10 @@ Public Class UC_VisitaPapTest
         Dim result = True
 
         If ComboBoxEsito.SelectedIndex = -1 Then
-            result = False
             HilightControls(True, ComboBoxEsito)
+            result = False
         Else
             HilightControls(False, ComboBoxEsito)
-        End If
-
-        If ComboBoxEsito.SelectedItem = "Positivo" AndAlso ComboBoxCeppo.SelectedIndex = -1 Then
-            result = False
-            HilightControls(True, ComboBoxCeppo)
-        Else
-            HilightControls(False, ComboBoxCeppo)
         End If
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -242,24 +121,20 @@ Public Class UC_VisitaPapTest
             '----------------------------------
             DateTimePickerDataEsecuzione.Value = CDate(dettagliVisita("DataPapTest"))
             ComboBoxEsito.SelectedItem = dettagliVisita("EsitoPapTest")
-            If dettagliVisita("EsitoPapTest") = True Then
-                ComboBoxCeppo.SelectedValue = dettagliVisita("ID_Ceppo")
-            Else
-                ComboBoxCeppo.SelectedIndex = -1
-            End If
 
             Return esiste
         Else
             esiste = False
-            PulisciCampi(ComboBoxCeppo, ComboBoxEsito)
+            PulisciCampi(ComboBoxEsito)
             DateTimePickerDataEsecuzione.Value = Date.Now
             Return esiste
         End If
     End Function
 
-    Private Sub SalvaDati()
+    Private Function SalvaDati() As Boolean
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         Dim selezioneOK As Boolean = CheckSelezione()
+        Dim esito As Boolean = True
 
         If selezioneOK Then
             ' Se tutte le scelte sono state effettuate procedo con l'inderimento nel DB
@@ -275,30 +150,20 @@ Public Class UC_VisitaPapTest
                 esitoPapTest = False
             End If
 
-            Dim idCeppo As Object
-
-            If ComboBoxEsito.SelectedItem.ToString() <> "Positivo" Then
-                idCeppo = DBNull.Value
-            Else
-                idCeppo = CInt(ComboBoxCeppo.SelectedValue)
-            End If
-
             Try
                 Dim queryPapTest As String = ""
                 If esiste Then
                     ' Query di aggiornamento se la visita esiste già
                     queryPapTest = "UPDATE VisitaPapTest SET 
                                                           DataPapTest = @dataPapTest,
-                                                          EsitoPapTest = @esitoPapTest,
-                                                          ID_Ceppo = @idCeppo
+                                                          EsitoPapTest = @esitoPapTest
                                                           WHERE ID_Visita = @idVisita"
                 Else
-                    'Se non esiste, esegui l'inserimento
+                    'Se non esiste, esegui l'inserimento VisitaPapTest
                     queryPapTest = "INSERT INTO VisitaPapTest (
                                                     ID_Visita,
                                                     DataPapTest,
-                                                    EsitoPapTest,
-                                                    ID_Ceppo
+                                                    EsitoPapTest
                                                     ) VALUES (
                                                     @idVisita,
                                                     @dataPapTest,
@@ -309,8 +174,7 @@ Public Class UC_VisitaPapTest
                 Dim parametriPapTest As New List(Of SqlClient.SqlParameter) From {
                     New SqlClient.SqlParameter("@idVisita", idVisita),
                     New SqlClient.SqlParameter("@dataPapTest", dataEsecuzione),
-                    New SqlClient.SqlParameter("@esitoPapTest", esitoPapTest),
-                    New SqlClient.SqlParameter("@idCeppo", idCeppo)
+                    New SqlClient.SqlParameter("@esitoPapTest", esitoPapTest)
                 }
 
                 If EseguiNonQuery(queryPapTest, parametriPapTest) > 0 Then
@@ -325,14 +189,25 @@ Public Class UC_VisitaPapTest
                     End If
                 Else
                     main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")
+                    esito = False
                 End If
             Catch ex As Exception
                 MessageBox.Show("Errore imprevisto: " & ex.Message)
+                esito = False
             End Try
+        Else
+            esito = False
         End If
-    End Sub
+
+        Return esito
+    End Function
 
     Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        SalvaDati()
+        Dim esito As Boolean = SalvaDati()
+        If esito Then
+            appenaSalvati = True
+            CercaVisita()
+        End If
     End Sub
 End Class
+

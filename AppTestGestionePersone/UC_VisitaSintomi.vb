@@ -4,7 +4,9 @@ Imports System.Windows.Forms.VisualStyles
 Public Class UC_VisitaSintomi
     Dim idVisita As Integer = -1
     Dim tipoVisita As String = ""
+
     Dim esiste As Boolean = False
+    Dim appenaSalvati As Boolean = False
     Public Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
@@ -264,8 +266,9 @@ Public Class UC_VisitaSintomi
 
 
     ' Modificare Salva Dati per poter ricaricare la cartella se già esistente
-    Private Sub SalvaDati()
+    Private Function SalvaDati() As Boolean
         Dim selezioneOK As Boolean = CheckSelezione()
+        Dim esito As Boolean = True
 
         If selezioneOK Then
             ' Se tutte le scelte sono state effettuate procedo con l'inderimento nel DB
@@ -400,14 +403,24 @@ Public Class UC_VisitaSintomi
                     End If
                 Else
                     main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")
+                    esito = False
                 End If
             Catch ex As Exception
                 MessageBox.Show("Errore imprevisto: " & ex.Message)
+                esito = False
             End Try
+        Else
+            esito = False
         End If
-    End Sub
+
+        Return esito
+    End Function
 
     Private Sub Inserici_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        SalvaDati()
+        Dim esito As Boolean = SalvaDati()
+        If esito Then
+            appenaSalvati = True
+            CercaVisita()
+        End If
     End Sub
 End Class

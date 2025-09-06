@@ -1,7 +1,9 @@
 ﻿Public Class UC_AnamnesiFisiologica
     Private _bmi As Double = 0
     Dim idPaziente As Integer = -1
+
     Dim esiste As Boolean = False
+    Dim appenaSalvati As Boolean = False
     Public Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
@@ -313,7 +315,11 @@
     Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
         Dim esito = SalvaDati()
         If esito Then
-            ResetUC() ' Pulisci e resetta i campi
+            appenaSalvati = True
+            CercaAnamnesi()
         End If
+        'If esito Then
+        'ResetUC() ' Pulisci e resetta i campi
+        'End If
     End Sub
 End Class

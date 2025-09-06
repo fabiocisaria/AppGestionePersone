@@ -1,6 +1,7 @@
 ﻿Public Class UC_VisitaUrinocoltura
     Dim idVisita As Integer = -1
     Dim esiste As Boolean = False
+    Dim appenaSalvati As Boolean = False
 
     Public Sub New()
         InitializeComponent()
@@ -52,7 +53,7 @@
         End If
     End Sub
 
-    Private Sub FormVisitaPapTest_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FormVisitaUrinocoltura_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             ' Carico i parametri della visita selezionata
@@ -98,7 +99,7 @@
         idVisita = main.IDVisitaSelezionata
 
         'Verifica che non esista già la parte uro - ginecologica per quella visita
-        Dim checkQuery As String = "SELECT * FROM VisitaTamponeVg WHERE ID_Visita = @idVisita"
+        Dim checkQuery As String = "SELECT * FROM VisitaUrinocoltura WHERE ID_Visita = @idVisita"
 
         Dim checkParam As New List(Of SqlClient.SqlParameter) From {
             New SqlClient.SqlParameter("@idVisita", idVisita)
@@ -109,13 +110,13 @@
             esiste = True ' RMN esistente per la visita selezionata
 
             Dim dettagliVisita As DataRow = dtCheck.Rows(0)
-            main.MostraToast("Tampone vaginale esistente per la visita selezionata. Dati caricati.")
+            main.MostraToast("Esame urinocoltura esistente per la visita selezionata. Dati caricati.")
 
             '----------------------------------
             ' Carico i dati esistenti nei campi
             '----------------------------------
-            DateTimePickerDataEsecuzione.Value = CDate(dettagliVisita("DataTamponeVg"))
-            ComboBoxEsito.SelectedItem = dettagliVisita("EsitoTamponeVg")
+            DateTimePickerDataEsecuzione.Value = CDate(dettagliVisita("DataUrinocoltura"))
+            ComboBoxEsito.SelectedItem = dettagliVisita("EsitoUrinocoltura")
 
             Return esiste
         Else
@@ -126,9 +127,10 @@
         End If
     End Function
 
-    Private Sub SalvaDati()
+    Private Function SalvaDati() As Boolean
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         Dim selezioneOK As Boolean = CheckSelezione()
+        Dim esito As Boolean = True
 
         If selezioneOK Then
             ' Se tutte le scelte sono state effettuate procedo con l'inderimento nel DB
@@ -148,49 +150,59 @@
                 Dim queryUrinocoltura As String = ""
                 If esiste Then
                     ' Query di aggiornamento se la visita esiste già
-                    queryUrinocoltura = "UPDATE VisitaTamponeVg SET 
-                                                          DataTamponeVg = @dataTamponeVg,
-                                                          EsitoTamponeVg = @esitoTamponeVg
+                    queryUrinocoltura = "UPDATE VisitaUrinocoltura SET 
+                                                          DataUrinocoltura = @dataUrinocoltura,
+                                                          EsitoUrinocoltura = @esitoUrinocoltura
                                                           WHERE ID_Visita = @idVisita"
                 Else
                     'Se non esiste, esegui l'VisitaUrinocoltura
-                    queryUrinocoltura = "INSERT INTO VisitaTamponeVg (
+                    queryUrinocoltura = "INSERT INTO VisitaUrinocoltura (
                                                     ID_Visita,
-                                                    DataTamponeVg,
-                                                    EsitoTamponeVg
+                                                    DataUrinocoltura,
+                                                    EsitoUrinocoltura
                                                     ) VALUES (
                                                     @idVisita,
-                                                    @dataTamponeVg,
-                                                    @esitoTamponeVg,
+                                                    @dataUrinocoltura,
+                                                    @esitoUrinocoltura,
                                                     @idCeppo)"
                 End If
 
-                Dim parametriPapTest As New List(Of SqlClient.SqlParameter) From {
+                Dim parametriUrinocoltura As New List(Of SqlClient.SqlParameter) From {
                     New SqlClient.SqlParameter("@idVisita", idVisita),
-                    New SqlClient.SqlParameter("@dataTamponeVg", dataEsecuzione),
-                    New SqlClient.SqlParameter("@esitoTamponeVg", esitoUrinocoltura)
+                    New SqlClient.SqlParameter("@dataUrinocoltura", dataEsecuzione),
+                    New SqlClient.SqlParameter("@esitoUrinocoltura", esitoUrinocoltura)
                 }
 
-                If EseguiNonQuery(queryUrinocoltura, parametriPapTest) > 0 Then
+                If EseguiNonQuery(queryUrinocoltura, parametriUrinocoltura) > 0 Then
                     successo = True
                 End If
 
                 If successo Then
                     If esiste Then
-                        main.MostraToast("Tampone vaginala aggiornato correttamente.")
+                        main.MostraToast("Esame urinocoltura aggiornato correttamente.")
                     Else
-                        main.MostraToast("Tampone vaginala salvato correttamente.")
+                        main.MostraToast("Esame urinocoltura salvato correttamente.")
                     End If
                 Else
                     main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")
+                    esito = False
                 End If
             Catch ex As Exception
                 MessageBox.Show("Errore imprevisto: " & ex.Message)
+                esito = False
             End Try
+        Else
+            esito = False
         End If
-    End Sub
+
+        Return esito
+    End Function
 
     Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        SalvaDati()
+        Dim esito As Boolean = SalvaDati()
+        If esito Then
+            appenaSalvati = True
+            CercaVisita()
+        End If
     End Sub
 End Class

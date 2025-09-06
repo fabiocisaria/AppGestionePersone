@@ -10,7 +10,7 @@ Public Class MainForm
     ' ====================
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Registra la licenza Syncfusion
-        SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JEaF1cWWhAYVJpR2Nbek50flRPal9QVBYiSV9jS3tTfkdmWHlfeXdUTmJeUU91Xw==")
+        SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JEaF5cXmRCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWXZec3RTR2VdV0FyWktWYEk=")
         'SfSkinManager.SetTheme(Me, Theme.)
         InizializzaUCRegistry()
     End Sub
@@ -110,6 +110,12 @@ Public Class MainForm
         UCRegistry("VisitaTamponeVg") = New UCInfo With {
             .Categoria = "Visita",
             .Factory = Function() New UC_VisitaTamponeVg(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("VisitaAnamnesiOstrGineco") = New UCInfo With {
+            .Categoria = "Visita",
+            .Factory = Function() New UC_VisitaAnamnesiOstrGineco(),
             .Ricreabile = True
         }
     End Sub
@@ -1011,5 +1017,66 @@ Public Class MainForm
         CaricaControllo(ucVisitaTamponeVg, 0, 2)
 
         ucVisitaTamponeVg.AggiornaDati()
+    End Sub
+
+    Private Sub StoriaOstetricoginecologicaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoriaOstetricoginecologicaToolStripMenuItem.Click
+        If Me.IDPazienteSelezionato = Nothing Then
+            MostraToast("Seleziona prima un paziente.")
+
+            ' Ottiene l'UC CercaPaziente
+            Dim ucCercaPaziente As UC_CercaPaziente = DirectCast(GetUC("CercaPaziente"), UC_CercaPaziente)
+
+            ' Aggiunge handler se non già aggiunto
+            If Not ucCercaPaziente.IsHandlerAttached Then
+                AddHandler ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
+                ucCercaPaziente.IsHandlerAttached = True
+            End If
+
+            ' Rimuove tutti gli UC Paziente tranne CercaPaziente
+            'RimuoviUC("Paziente")
+
+            ' Rimuove eventuali UC Visita
+            'RimuoviUC("Visita")
+
+            ' Carica UC di ricerca paziente
+            CaricaControllo(ucCercaPaziente, 0, 2)
+            Return
+        End If
+
+        Dim ucDatiPaziente As UC_DatiPaziente = DirectCast(GetUC("DatiPaziente"), UC_DatiPaziente)
+
+        If Me.IDVisitaSelezionata = Nothing Then
+            MostraToast("Seleziona prima una visita.")
+            ' Carico lo UserControl di ricerca visita
+            Dim ucCercaVisita As UC_CercaVisita = DirectCast(GetUC("CercaVisita"), UC_CercaVisita)
+
+            ' Aggiunge handler se non già aggiunto
+            If Not ucCercaVisita.IsHandlerAttached Then
+                AddHandler ucCercaVisita.VisitaSelezionata, AddressOf VisitaSelezionataHandler
+                ucCercaVisita.IsHandlerAttached = True
+            End If
+
+            ' Rimuove eventuali UC Visita
+            'RimuoviUC("Visita")
+
+            ' Carica UC di ricerca paziente
+            CaricaControllo(ucCercaVisita, 0, 2)
+            Return
+        End If
+
+        Dim ucDatiVisita As UC_DatiVisita = DirectCast(GetUC("DatiVisita"), UC_DatiVisita)
+
+        Dim ucVisitaAnamnesiOstrGineco As UC_VisitaAnamnesiOstrGineco = DirectCast(GetUC("VisitaAnamnesiOstrGineco"), UC_VisitaAnamnesiOstrGineco)
+
+        ' Aggiorna dati paziente
+        ucDatiPaziente.CaricaDatiPaziente(Me)
+        ucDatiVisita.CaricaDatiVisita(Me)
+
+        ' Carica UC
+        CaricaControllo(ucDatiPaziente, 0, 0)
+        CaricaControllo(ucDatiVisita, 0, 1)
+        CaricaControllo(ucVisitaAnamnesiOstrGineco, 0, 2)
+
+        ucVisitaAnamnesiOstrGineco.AggiornaDati()
     End Sub
 End Class

@@ -155,6 +155,12 @@
     <Compile Include="ToastForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UC_AnamnesiPatologicaRemota.Designer.vb">
+      <DependentUpon>UC_AnamnesiPatologicaRemota.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_AnamnesiPatologicaRemota.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UC_CercaVisita.Designer.vb">
       <DependentUpon>UC_CercaVisita.vb</DependentUpon>
     </Compile>
@@ -264,6 +270,18 @@
     <Compile Include="UC_InserisciVisita.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UC_VisitaAnamnesiOstrGineco.Designer.vb">
+      <DependentUpon>UC_VisitaAnamnesiOstrGineco.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaAnamnesiOstrGineco.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_VisitaDNATest.Designer.vb">
+      <DependentUpon>UC_VisitaDNATest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_VisitaDNATest.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UC_VisitaPapTest.Designer.vb">
       <DependentUpon>UC_VisitaPapTest.vb</DependentUpon>
     </Compile>
@@ -280,12 +298,6 @@
       <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
     </Compile>
     <Compile Include="UC_VisitaSintomi.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UC_VisitaStoriaOstetricoGinecologica.Designer.vb">
-      <DependentUpon>UC_VisitaStoriaOstetricoGinecologica.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UC_VisitaStoriaOstetricoGinecologica.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UC_VisitaTamponeVg.Designer.vb">
@@ -380,6 +392,9 @@
     <EmbeddedResource Include="UC_AnamnesiFisiologica.resx">
       <DependentUpon>UC_AnamnesiFisiologica.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_AnamnesiPatologicaRemota.resx">
+      <DependentUpon>UC_AnamnesiPatologicaRemota.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_CercaPaziente.resx">
       <DependentUpon>UC_CercaPaziente.vb</DependentUpon>
     </EmbeddedResource>
@@ -394,6 +409,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_InserisciVisita.resx">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_VisitaAnamnesiOstrGineco.resx">
+      <DependentUpon>UC_VisitaAnamnesiOstrGineco.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_VisitaDNATest.resx">
+      <DependentUpon>UC_VisitaDNATest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_VisitaPapTest.resx">
       <DependentUpon>UC_VisitaPapTest.vb</DependentUpon>

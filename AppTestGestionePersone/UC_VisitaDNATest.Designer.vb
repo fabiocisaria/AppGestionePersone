@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class UC_VisitaPapTest
+Partial Class UC_VisitaDNATest
     Inherits System.Windows.Forms.UserControl
 
     'UserControl esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
@@ -24,14 +24,16 @@ Partial Class UC_VisitaPapTest
     Private Sub InitializeComponent()
         Me.TableLayoutPanelRmn = New System.Windows.Forms.TableLayoutPanel()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
-        Me.GroupBoxPapTest = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxDNATest = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanelDatiRMN = New System.Windows.Forms.TableLayoutPanel()
+        Me.ComboBoxCeppo = New System.Windows.Forms.ComboBox()
         Me.ComboBoxEsito = New System.Windows.Forms.ComboBox()
         Me.DateTimePickerDataEsecuzione = New Syncfusion.WinForms.Input.SfDateTimeEdit()
+        Me.LabelCeppo = New System.Windows.Forms.Label()
         Me.LabelEsito = New System.Windows.Forms.Label()
         Me.LabelDataEsecuzione = New System.Windows.Forms.Label()
         Me.TableLayoutPanelRmn.SuspendLayout()
-        Me.GroupBoxPapTest.SuspendLayout()
+        Me.GroupBoxDNATest.SuspendLayout()
         Me.TableLayoutPanelDatiRMN.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -40,7 +42,7 @@ Partial Class UC_VisitaPapTest
         Me.TableLayoutPanelRmn.ColumnCount = 1
         Me.TableLayoutPanelRmn.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelRmn.Controls.Add(Me.ButtonInserisci, 0, 1)
-        Me.TableLayoutPanelRmn.Controls.Add(Me.GroupBoxPapTest, 0, 0)
+        Me.TableLayoutPanelRmn.Controls.Add(Me.GroupBoxDNATest, 0, 0)
         Me.TableLayoutPanelRmn.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanelRmn.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanelRmn.Name = "TableLayoutPanelRmn"
@@ -48,7 +50,7 @@ Partial Class UC_VisitaPapTest
         Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.TableLayoutPanelRmn.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.TabIndex = 2
+        Me.TableLayoutPanelRmn.TabIndex = 3
         '
         'ButtonInserisci
         '
@@ -60,43 +62,55 @@ Partial Class UC_VisitaPapTest
         Me.ButtonInserisci.TabIndex = 2
         Me.ButtonInserisci.Text = "Inserisci"
         '
-        'GroupBoxPapTest
+        'GroupBoxDNATest
         '
-        Me.GroupBoxPapTest.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxPapTest.Controls.Add(Me.TableLayoutPanelDatiRMN)
-        Me.GroupBoxPapTest.Location = New System.Drawing.Point(210, 182)
-        Me.GroupBoxPapTest.Name = "GroupBoxPapTest"
-        Me.GroupBoxPapTest.Size = New System.Drawing.Size(346, 112)
-        Me.GroupBoxPapTest.TabIndex = 1
-        Me.GroupBoxPapTest.TabStop = False
-        Me.GroupBoxPapTest.Text = "Pap test"
+        Me.GroupBoxDNATest.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.GroupBoxDNATest.Controls.Add(Me.TableLayoutPanelDatiRMN)
+        Me.GroupBoxDNATest.Location = New System.Drawing.Point(210, 166)
+        Me.GroupBoxDNATest.Name = "GroupBoxDNATest"
+        Me.GroupBoxDNATest.Size = New System.Drawing.Size(346, 144)
+        Me.GroupBoxDNATest.TabIndex = 1
+        Me.GroupBoxDNATest.TabStop = False
+        Me.GroupBoxDNATest.Text = "DNA Test"
         '
         'TableLayoutPanelDatiRMN
         '
         Me.TableLayoutPanelDatiRMN.ColumnCount = 2
         Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
         Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxCeppo, 1, 2)
         Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxEsito, 1, 1)
         Me.TableLayoutPanelDatiRMN.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
+        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelCeppo, 0, 2)
         Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelEsito, 0, 1)
         Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
         Me.TableLayoutPanelDatiRMN.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanelDatiRMN.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanelDatiRMN.Name = "TableLayoutPanelDatiRMN"
-        Me.TableLayoutPanelDatiRMN.RowCount = 2
+        Me.TableLayoutPanelDatiRMN.RowCount = 3
         Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanelDatiRMN.Size = New System.Drawing.Size(340, 93)
+        Me.TableLayoutPanelDatiRMN.Size = New System.Drawing.Size(340, 125)
         Me.TableLayoutPanelDatiRMN.TabIndex = 0
+        '
+        'ComboBoxCeppo
+        '
+        Me.ComboBoxCeppo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.ComboBoxCeppo.FormattingEnabled = True
+        Me.ComboBoxCeppo.Items.AddRange(New Object() {"Tradizionale", "IQOS", "Elettronica"})
+        Me.ComboBoxCeppo.Location = New System.Drawing.Point(153, 93)
+        Me.ComboBoxCeppo.Name = "ComboBoxCeppo"
+        Me.ComboBoxCeppo.Size = New System.Drawing.Size(166, 21)
+        Me.ComboBoxCeppo.TabIndex = 28
         '
         'ComboBoxEsito
         '
         Me.ComboBoxEsito.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.ComboBoxEsito.FormattingEnabled = True
         Me.ComboBoxEsito.Items.AddRange(New Object() {"Negativo", "Positivo"})
-        Me.ComboBoxEsito.Location = New System.Drawing.Point(153, 59)
+        Me.ComboBoxEsito.Location = New System.Drawing.Point(153, 51)
         Me.ComboBoxEsito.Name = "ComboBoxEsito"
         Me.ComboBoxEsito.Size = New System.Drawing.Size(166, 21)
         Me.ComboBoxEsito.TabIndex = 14
@@ -107,17 +121,27 @@ Partial Class UC_VisitaPapTest
         Me.DateTimePickerDataEsecuzione.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.DateTimePickerDataEsecuzione.DateTimeIcon = Nothing
         Me.DateTimePickerDataEsecuzione.DateTimePattern = Syncfusion.WinForms.Input.Enums.DateTimePattern.LongDate
-        Me.DateTimePickerDataEsecuzione.Location = New System.Drawing.Point(153, 12)
+        Me.DateTimePickerDataEsecuzione.Location = New System.Drawing.Point(153, 10)
         Me.DateTimePickerDataEsecuzione.Name = "DateTimePickerDataEsecuzione"
         Me.DateTimePickerDataEsecuzione.Size = New System.Drawing.Size(166, 21)
         Me.DateTimePickerDataEsecuzione.TabIndex = 11
         Me.DateTimePickerDataEsecuzione.ToolTipText = ""
         '
+        'LabelCeppo
+        '
+        Me.LabelCeppo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelCeppo.AutoSize = True
+        Me.LabelCeppo.Location = New System.Drawing.Point(3, 97)
+        Me.LabelCeppo.Name = "LabelCeppo"
+        Me.LabelCeppo.Size = New System.Drawing.Size(38, 13)
+        Me.LabelCeppo.TabIndex = 8
+        Me.LabelCeppo.Text = "Ceppo"
+        '
         'LabelEsito
         '
         Me.LabelEsito.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LabelEsito.AutoSize = True
-        Me.LabelEsito.Location = New System.Drawing.Point(3, 63)
+        Me.LabelEsito.Location = New System.Drawing.Point(3, 55)
         Me.LabelEsito.Name = "LabelEsito"
         Me.LabelEsito.Size = New System.Drawing.Size(30, 13)
         Me.LabelEsito.TabIndex = 6
@@ -127,21 +151,21 @@ Partial Class UC_VisitaPapTest
         '
         Me.LabelDataEsecuzione.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LabelDataEsecuzione.AutoSize = True
-        Me.LabelDataEsecuzione.Location = New System.Drawing.Point(3, 16)
+        Me.LabelDataEsecuzione.Location = New System.Drawing.Point(3, 14)
         Me.LabelDataEsecuzione.Name = "LabelDataEsecuzione"
         Me.LabelDataEsecuzione.Size = New System.Drawing.Size(87, 13)
         Me.LabelDataEsecuzione.TabIndex = 4
         Me.LabelDataEsecuzione.Text = "Data esecuzione"
         '
-        'UC_VisitaPapTest
+        'UC_VisitaDNATest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.TableLayoutPanelRmn)
-        Me.Name = "UC_VisitaPapTest"
+        Me.Name = "UC_VisitaDNATest"
         Me.Size = New System.Drawing.Size(766, 516)
         Me.TableLayoutPanelRmn.ResumeLayout(False)
-        Me.GroupBoxPapTest.ResumeLayout(False)
+        Me.GroupBoxDNATest.ResumeLayout(False)
         Me.TableLayoutPanelDatiRMN.ResumeLayout(False)
         Me.TableLayoutPanelDatiRMN.PerformLayout()
         Me.ResumeLayout(False)
@@ -150,10 +174,12 @@ Partial Class UC_VisitaPapTest
 
     Friend WithEvents TableLayoutPanelRmn As TableLayoutPanel
     Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
-    Friend WithEvents GroupBoxPapTest As GroupBox
+    Friend WithEvents GroupBoxDNATest As GroupBox
     Friend WithEvents TableLayoutPanelDatiRMN As TableLayoutPanel
+    Friend WithEvents ComboBoxCeppo As ComboBox
     Friend WithEvents ComboBoxEsito As ComboBox
     Friend WithEvents DateTimePickerDataEsecuzione As Syncfusion.WinForms.Input.SfDateTimeEdit
+    Friend WithEvents LabelCeppo As Label
     Friend WithEvents LabelEsito As Label
     Friend WithEvents LabelDataEsecuzione As Label
 End Class

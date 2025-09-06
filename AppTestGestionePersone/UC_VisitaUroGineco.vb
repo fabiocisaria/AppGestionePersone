@@ -1,7 +1,9 @@
 ﻿Public Class UC_VisitaUroGineco
     Dim idVisita As Integer = -1
     Dim tipoVisita As String = ""
+
     Dim esiste As Boolean = False
+    Dim appenaSalvati As Boolean = False
 
     Public Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -27,6 +29,13 @@
         NumericUpDownSubr.Maximum = 10
         NumericUpDownForc.Minimum = 0
         NumericUpDownForc.Maximum = 10
+
+        NumericUpDownClit.ResetText()
+        NumericUpDownVestDx.ResetText()
+        NumericUpDownVestSx.ResetText()
+        NumericUpDownSubr.ResetText()
+        NumericUpDownForc.ResetText()
+
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             ' Carico i parametri della visita selezionata
@@ -68,33 +77,40 @@
     End Sub
 
     Private Function CheckSelezione() As Boolean
+        Dim esito As Boolean = True
+
         ResetRadioButtonGroupTextOnSelection(TableLayoutPanelVisitaUroGineco)
-        If NumericUpDownClit.Value = Nothing Then
+        If String.IsNullOrWhiteSpace(NumericUpDownClit.Text) Then
             HilightControls(True, NumericUpDownClit)
+            esito = False
         Else
             HilightControls(False, NumericUpDownClit)
         End If
 
-        If NumericUpDownVestDx.Value = Nothing Then
+        If String.IsNullOrWhiteSpace(NumericUpDownVestDx.Text) Then
             HilightControls(True, NumericUpDownVestDx)
+            esito = False
         Else
             HilightControls(False, NumericUpDownVestDx)
         End If
 
-        If NumericUpDownVestSx.Value = Nothing Then
+        If String.IsNullOrWhiteSpace(NumericUpDownVestSx.Text) Then
             HilightControls(True, NumericUpDownVestSx)
+            esito = False
         Else
             HilightControls(False, NumericUpDownVestSx)
         End If
 
-        If NumericUpDownSubr.Value = Nothing Then
+        If String.IsNullOrWhiteSpace(NumericUpDownSubr.Text) Then
             HilightControls(True, NumericUpDownSubr)
+            esito = False
         Else
             HilightControls(False, NumericUpDownSubr)
         End If
 
-        If NumericUpDownForc.Value = Nothing Then
+        If String.IsNullOrWhiteSpace(NumericUpDownForc.Text) Then
             HilightControls(True, NumericUpDownForc)
+            esito = False
         Else
             HilightControls(False, NumericUpDownForc)
         End If
@@ -108,10 +124,10 @@
         If invalidGroups.Any() Then
             ' Evidenzio i groupbox rimasti non validi
             HilightInvalidGroups(invalidGroups.ToArray())
-            Return False
-        Else
-            Return True
+            esito = False
         End If
+
+        Return esito
     End Function
 
     Private Function CercaVisita() As Boolean
@@ -338,7 +354,10 @@
     End Function
 
     Private Sub Inserici_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito As Boolean = False
-        esito = SalvaDati()
+        Dim esito As Boolean = SalvaDati()
+        If esito Then
+            appenaSalvati = True
+            CercaVisita()
+        End If
     End Sub
 End Class

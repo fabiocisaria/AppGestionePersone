@@ -172,31 +172,31 @@ Partial Class MainForm
         'DNATestToolStripMenuItem
         '
         Me.DNATestToolStripMenuItem.Name = "DNATestToolStripMenuItem"
-        Me.DNATestToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DNATestToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.DNATestToolStripMenuItem.Text = "DNA test"
         '
         'PapTestToolStripMenuItem
         '
         Me.PapTestToolStripMenuItem.Name = "PapTestToolStripMenuItem"
-        Me.PapTestToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PapTestToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.PapTestToolStripMenuItem.Text = "Pap. test"
         '
         'RMNToolStripMenuItem1
         '
         Me.RMNToolStripMenuItem1.Name = "RMNToolStripMenuItem1"
-        Me.RMNToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.RMNToolStripMenuItem1.Size = New System.Drawing.Size(170, 22)
         Me.RMNToolStripMenuItem1.Text = "RMN"
         '
         'TamponeVaginaleToolStripMenuItem
         '
         Me.TamponeVaginaleToolStripMenuItem.Name = "TamponeVaginaleToolStripMenuItem"
-        Me.TamponeVaginaleToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TamponeVaginaleToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.TamponeVaginaleToolStripMenuItem.Text = "Tampone vaginale"
         '
         'UrinoculturaToolStripMenuItem
         '
         Me.UrinoculturaToolStripMenuItem.Name = "UrinoculturaToolStripMenuItem"
-        Me.UrinoculturaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UrinoculturaToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.UrinoculturaToolStripMenuItem.Text = "Urinocultura"
         '
         'CercaToolStripMenuItem
