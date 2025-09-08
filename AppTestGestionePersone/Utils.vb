@@ -394,33 +394,33 @@ Module Utils
     '-----------------------------
     ' Ricerca paziente
     '-----------------------------
-    Public Function CercaPaziente(codiceID As String, cognome As String) As (ID As Integer, Codice As String)
-        Dim query As String
-        Dim parametri As New List(Of SqlParameter)
-
-        If Not String.IsNullOrWhiteSpace(codiceID) Then
-            query = "SELECT ID, CodiceIdentificativo, Nome, Cognome 
-                     FROM Anagrafica 
-                     WHERE CodiceIdentificativo LIKE @codice"
-            parametri.Add(New SqlParameter("@codice", "%" & codiceID.Trim() & "%"))
-        Else
-            query = "SELECT ID, CodiceIdentificativo, Nome, Cognome 
-                     FROM Anagrafica 
-                     WHERE Cognome LIKE @cognome"
-            parametri.Add(New SqlParameter("@cognome", "%" & cognome.Trim() & "%"))
-        End If
-
-        Dim risultato As DataTable = EseguiQuery(query, parametri)
-
-        If risultato.Rows.Count > 0 Then
-            Dim f As New FormSelezionePaziente(risultato)
-            If f.ShowDialog() = DialogResult.OK Then
-                Return (f.IDSelezionato, f.CodiceIdentificativoSelezionato)
-            End If
-        End If
-
-        Return (0, Nothing) ' se nessun paziente selezionato
-    End Function
+    'Public Function CercaPaziente(codiceID As String, cognome As String) As (ID As Integer, Codice As String)
+    '   Dim query As String
+    '  Dim parametri As New List(Of SqlParameter)
+    '
+    '  If Not String.IsNullOrWhiteSpace(codiceID) Then
+    '      query = "SELECT ID, CodiceIdentificativo, Nome, Cognome 
+    '               FROM Anagrafica 
+    '               WHERE CodiceIdentificativo LIKE @codice"
+    '      parametri.Add(New SqlParameter("@codice", "%" & codiceID.Trim() & "%"))
+    '  Else
+    '      query = "SELECT ID, CodiceIdentificativo, Nome, Cognome 
+    '               FROM Anagrafica 
+    '               WHERE Cognome LIKE @cognome"
+    '      parametri.Add(New SqlParameter("@cognome", "%" & cognome.Trim() & "%"))
+    'End If
+    '
+    '    Dim risultato As DataTable = EseguiQuery(query, parametri)
+    '
+    '    If risultato.Rows.Count > 0 Then
+    '    Dim f As New FormSelezionePaziente(risultato)
+    '    If f.ShowDialog() = DialogResult.OK Then
+    '    Return (f.IDSelezionato, f.CodiceIdentificativoSelezionato)
+    '    End If
+    '    End If
+    '
+    '    Return (0, Nothing) ' se nessun paziente selezionato
+    '    End Function
 
     '-----------------------------
     ' Ricerca paziente per user control

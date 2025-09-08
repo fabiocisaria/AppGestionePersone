@@ -45,6 +45,9 @@ Partial Class UC_VisitaUroGineco
         Me.ButtonInserisci = New System.Windows.Forms.Button()
         Me.RadioButtonCitProSi = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanelVisitaUroGineco = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelCistProv = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBoxCistProv = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBoxVag = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanelVg = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanelVagCicRef = New System.Windows.Forms.TableLayoutPanel()
@@ -61,9 +64,6 @@ Partial Class UC_VisitaUroGineco
         Me.RadioButtonLicSi = New System.Windows.Forms.RadioButton()
         Me.LabelLichen = New System.Windows.Forms.Label()
         Me.TableLayoutPanelIpercontr = New System.Windows.Forms.TableLayoutPanel()
-        Me.GroupBoxCistProv = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanelCistProv = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel8.SuspendLayout()
         Me.GroupBoxSwabTest.SuspendLayout()
         Me.TableLayoutPanelSwab.SuspendLayout()
@@ -75,15 +75,15 @@ Partial Class UC_VisitaUroGineco
         CType(Me.NumericUpDownVestDx, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBoxIperContr.SuspendLayout()
         Me.TableLayoutPanelVisitaUroGineco.SuspendLayout()
+        Me.TableLayoutPanelCistProv.SuspendLayout()
+        Me.GroupBoxCistProv.SuspendLayout()
+        Me.TableLayoutPanel9.SuspendLayout()
         Me.GroupBoxVag.SuspendLayout()
         Me.TableLayoutPanelVg.SuspendLayout()
         Me.TableLayoutPanelVagCicRef.SuspendLayout()
         Me.TableLayoutPanelVagStato.SuspendLayout()
         Me.TableLayoutPanelVagLichen.SuspendLayout()
         Me.TableLayoutPanelIpercontr.SuspendLayout()
-        Me.GroupBoxCistProv.SuspendLayout()
-        Me.TableLayoutPanel9.SuspendLayout()
-        Me.TableLayoutPanelCistProv.SuspendLayout()
         Me.SuspendLayout()
         '
         'RadioButtonCitProNo
@@ -363,6 +363,49 @@ Partial Class UC_VisitaUroGineco
         Me.TableLayoutPanelVisitaUroGineco.Size = New System.Drawing.Size(766, 516)
         Me.TableLayoutPanelVisitaUroGineco.TabIndex = 1
         '
+        'TableLayoutPanelCistProv
+        '
+        Me.TableLayoutPanelCistProv.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanelCistProv.ColumnCount = 1
+        Me.TableLayoutPanelCistProv.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelCistProv.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelCistProv.Controls.Add(Me.GroupBoxCistProv, 0, 0)
+        Me.TableLayoutPanelCistProv.Location = New System.Drawing.Point(396, 294)
+        Me.TableLayoutPanelCistProv.Name = "TableLayoutPanelCistProv"
+        Me.TableLayoutPanelCistProv.RowCount = 1
+        Me.TableLayoutPanelCistProv.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelCistProv.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelCistProv.Size = New System.Drawing.Size(356, 112)
+        Me.TableLayoutPanelCistProv.TabIndex = 6
+        '
+        'GroupBoxCistProv
+        '
+        Me.GroupBoxCistProv.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.GroupBoxCistProv.Controls.Add(Me.TableLayoutPanel9)
+        Me.GroupBoxCistProv.Location = New System.Drawing.Point(3, 31)
+        Me.GroupBoxCistProv.Name = "GroupBoxCistProv"
+        Me.GroupBoxCistProv.Size = New System.Drawing.Size(350, 50)
+        Me.GroupBoxCistProv.TabIndex = 1
+        Me.GroupBoxCistProv.TabStop = False
+        Me.GroupBoxCistProv.Text = "Cistalgie provocate"
+        '
+        'TableLayoutPanel9
+        '
+        Me.TableLayoutPanel9.ColumnCount = 2
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel9.Controls.Add(Me.RadioButtonCitProNo, 1, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.RadioButtonCitProSi, 0, 0)
+        Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel9.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
+        Me.TableLayoutPanel9.RowCount = 1
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(344, 31)
+        Me.TableLayoutPanel9.TabIndex = 1
+        '
         'GroupBoxVag
         '
         Me.GroupBoxVag.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -575,53 +618,11 @@ Partial Class UC_VisitaUroGineco
         Me.TableLayoutPanelIpercontr.Size = New System.Drawing.Size(356, 112)
         Me.TableLayoutPanelIpercontr.TabIndex = 3
         '
-        'GroupBoxCistProv
-        '
-        Me.GroupBoxCistProv.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxCistProv.Controls.Add(Me.TableLayoutPanel9)
-        Me.GroupBoxCistProv.Location = New System.Drawing.Point(3, 31)
-        Me.GroupBoxCistProv.Name = "GroupBoxCistProv"
-        Me.GroupBoxCistProv.Size = New System.Drawing.Size(350, 50)
-        Me.GroupBoxCistProv.TabIndex = 1
-        Me.GroupBoxCistProv.TabStop = False
-        Me.GroupBoxCistProv.Text = "Cistalgie provocate"
-        '
-        'TableLayoutPanel9
-        '
-        Me.TableLayoutPanel9.ColumnCount = 2
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel9.Controls.Add(Me.RadioButtonCitProNo, 1, 0)
-        Me.TableLayoutPanel9.Controls.Add(Me.RadioButtonCitProSi, 0, 0)
-        Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel9.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
-        Me.TableLayoutPanel9.RowCount = 1
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(344, 31)
-        Me.TableLayoutPanel9.TabIndex = 1
-        '
-        'TableLayoutPanelCistProv
-        '
-        Me.TableLayoutPanelCistProv.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TableLayoutPanelCistProv.ColumnCount = 1
-        Me.TableLayoutPanelCistProv.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelCistProv.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelCistProv.Controls.Add(Me.GroupBoxCistProv, 0, 0)
-        Me.TableLayoutPanelCistProv.Location = New System.Drawing.Point(396, 294)
-        Me.TableLayoutPanelCistProv.Name = "TableLayoutPanelCistProv"
-        Me.TableLayoutPanelCistProv.RowCount = 1
-        Me.TableLayoutPanelCistProv.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelCistProv.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelCistProv.Size = New System.Drawing.Size(356, 112)
-        Me.TableLayoutPanelCistProv.TabIndex = 6
-        '
         'UC_VisitaUroGineco
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.TableLayoutPanelVisitaUroGineco)
         Me.Name = "UC_VisitaUroGineco"
         Me.Size = New System.Drawing.Size(766, 516)
@@ -639,6 +640,10 @@ Partial Class UC_VisitaUroGineco
         CType(Me.NumericUpDownVestDx, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBoxIperContr.ResumeLayout(False)
         Me.TableLayoutPanelVisitaUroGineco.ResumeLayout(False)
+        Me.TableLayoutPanelCistProv.ResumeLayout(False)
+        Me.GroupBoxCistProv.ResumeLayout(False)
+        Me.TableLayoutPanel9.ResumeLayout(False)
+        Me.TableLayoutPanel9.PerformLayout()
         Me.GroupBoxVag.ResumeLayout(False)
         Me.TableLayoutPanelVg.ResumeLayout(False)
         Me.TableLayoutPanelVagCicRef.ResumeLayout(False)
@@ -648,10 +653,6 @@ Partial Class UC_VisitaUroGineco
         Me.TableLayoutPanelVagLichen.ResumeLayout(False)
         Me.TableLayoutPanelVagLichen.PerformLayout()
         Me.TableLayoutPanelIpercontr.ResumeLayout(False)
-        Me.GroupBoxCistProv.ResumeLayout(False)
-        Me.TableLayoutPanel9.ResumeLayout(False)
-        Me.TableLayoutPanel9.PerformLayout()
-        Me.TableLayoutPanelCistProv.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

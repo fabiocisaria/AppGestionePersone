@@ -206,6 +206,7 @@
 
     Private Function SalvaDati() As Boolean
         Dim selezioneOK As Boolean = CheckSelezione()
+        Dim esito As Boolean = True
 
         If selezioneOK Then
             Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -240,15 +241,15 @@
             End If
 
             Double.TryParse(TextBoxAltezza.Text, altezza)
-                Double.TryParse(TextBoxPeso.Text, peso)
-                Double.TryParse(TextBoxBMI.Text, bmi)
+            Double.TryParse(TextBoxPeso.Text, peso)
+            Double.TryParse(TextBoxBMI.Text, bmi)
 
-                ' TODO
-                Try
-                    Dim queryAnamnesiFisio As String = ""
+            ' TODO
+            Try
+                Dim queryAnamnesiFisio As String = ""
 
-                    If esiste Then
-                        queryAnamnesiFisio = "UPDATE AnamnesiFisiologica SET 
+                If esiste Then
+                    queryAnamnesiFisio = "UPDATE AnamnesiFisiologica SET 
                                                           Altezza = @altezza,
                                                           Peso = @peso,
                                                           BMI = @bmi,
@@ -258,8 +259,8 @@
                                                           FumoQuantita = @fumoQuantita,
                                                           TipoSigaretta = @tipoSigaretta
                                                           WHERE ID_Anagrafica = @IDAnagrafica"
-                    Else
-                        queryAnamnesiFisio = "INSERT INTO AnamnesiFisiologica (
+                Else
+                    queryAnamnesiFisio = "INSERT INTO AnamnesiFisiologica (
                                                         ID_Anagrafica,
                                                         Altezza,
                                                         Peso,
@@ -279,37 +280,43 @@
                                                         @Allergie,
                                                         @fumoQuantita,
                                                         @tipoSigaretta)"
-                    End If
+                End If
 
-                    Dim parametriAnamnesiFisio As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@IDAnagrafica", idPaziente),
-                    New SqlClient.SqlParameter("@Altezza", altezza),
-                    New SqlClient.SqlParameter("@Peso", peso),
-                    New SqlClient.SqlParameter("@BMI", bmi),
-                    New SqlClient.SqlParameter("@Idratazione", idratazione),
-                    New SqlClient.SqlParameter("@Intolleranze", intolleranze),
-                    New SqlClient.SqlParameter("@Allergie", allergie),
-                    New SqlClient.SqlParameter("@FumoQuantita", fumoQuantita),
-                    New SqlClient.SqlParameter("@TipoSigaretta", fumoTipo)
-                }
+                Dim parametriAnamnesiFisio As New List(Of SqlClient.SqlParameter) From {
+                        New SqlClient.SqlParameter("@IDAnagrafica", idPaziente),
+                        New SqlClient.SqlParameter("@Altezza", altezza),
+                        New SqlClient.SqlParameter("@Peso", peso),
+                        New SqlClient.SqlParameter("@BMI", bmi),
+                        New SqlClient.SqlParameter("@Idratazione", idratazione),
+                        New SqlClient.SqlParameter("@Intolleranze", intolleranze),
+                        New SqlClient.SqlParameter("@Allergie", allergie),
+                        New SqlClient.SqlParameter("@FumoQuantita", fumoQuantita),
+                        New SqlClient.SqlParameter("@TipoSigaretta", fumoTipo)
+                    }
 
-                    If EseguiNonQuery(queryAnamnesiFisio, parametriAnamnesiFisio) > 0 Then
-                        successo = True
-                    End If
+                If EseguiNonQuery(queryAnamnesiFisio, parametriAnamnesiFisio) > 0 Then
+                    successo = True
+                End If
 
-                    If successo Then
-                        If esiste Then
-                            main.MostraToast("Anamnesi fisiologica aggiornati correttamente.")
-                        Else
-                            main.MostraToast("Anamnesi fisiologica salvati correttamente.")
-                        End If
+                If successo Then
+                    If esiste Then
+                        main.MostraToast("Anamnesi fisiologica aggiornata correttamente.")
                     Else
-                        main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")
+                        main.MostraToast("Anamnesi fisiologica salvata correttamente.")
                     End If
-                Catch ex As Exception
-                    MessageBox.Show("Errore imprevisto: " & ex.Message)
-                End Try
-            End If
+                Else
+                    main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")
+                    esito = False
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Errore imprevisto: " & ex.Message)
+                esito = False
+            End Try
+        Else
+            esito = False
+        End If
+
+        Return esito
     End Function
 
     Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click

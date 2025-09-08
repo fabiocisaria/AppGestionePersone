@@ -176,4 +176,115 @@
         Return esiste
     End Function
 
+    Private Function SalvaDati() As Boolean
+        Dim selezioneOK As Boolean = CheckSelezione()
+        Dim esito As Boolean = True
+
+        If selezioneOK Then
+            Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+            idPaziente = main.IDPazienteSelezionato
+
+            Dim successo As Boolean = True
+
+            Dim endometriosi As Boolean = RadioButtonEndometriosiSi.Checked
+            Dim fibromialgie As Boolean = RadioButtonFibromialgieSi.Checked
+            Dim colonIrr As Boolean = RadioButtonColonIrrSi.Checked
+            Dim vescicaIperatt As Boolean = RadioButtonVescIperattSi.Checked
+            Dim ivu As Boolean = RadioButtonIVUSi.Checked
+            Dim sindromeVescDol As Boolean = RadioButtonVescDolSi.Checked
+            Dim celiachia As Boolean = RadioButtonCeliachiaSi.Checked
+            Dim intollLattosio As Boolean = RadioButtonIntollLattSi.Checked
+            Dim dm1 As Boolean = RadioButtonDM1Si.Checked
+            Dim dm2 As Boolean = RadioButtonDM2Si.Checked
+
+            ' TODO
+            Try
+                Dim queryAnamnesiPatRem As String = ""
+
+                If esiste Then
+                    queryAnamnesiPatRem = "UPDATE AnamnesiPatologicaRemota SET 
+                                                          Endometriosi = @endometriosi,
+                                                          Fibromialgie = @fibromialgie,
+                                                          ColonIrritabile = @colonIrr,
+                                                          VescicaIperattiva = @vescicaIperatt,
+                                                          IVU = @ivu,
+                                                          SindromeVescicaDolorosa = @sindromeVescDol,
+                                                          Celiachia = @celiachia,
+                                                          IntolleranzaLattosio = @intollLattosio,
+                                                          DM1 = @dm1,
+                                                          DM2 = @dm2
+                                                          WHERE ID_Anagrafica = @IDAnagrafica"
+                Else
+                    queryAnamnesiPatRem = "INSERT INTO AnamnesiPatologicaRemota (
+                                                        ID_Anagrafica,
+                                                        Endometriosi,
+                                                        Fibromialgie,
+                                                        ColonIrritabile,
+                                                        VescicaIperattiva,
+                                                        IVU,
+                                                        SindromeVescicaDolorosa,
+                                                        Celiachia,
+                                                        IntolleranzaLattosio,
+                                                        DM1,
+                                                        DM2
+                                                        ) VALUES (
+                                                        @IDAnagrafica,
+                                                        @endometriosi,
+                                                        @fibromialgie,
+                                                        @colonIrr,
+                                                        @vescicaIperatt,
+                                                        @ivu,
+                                                        @sindromeVescDol,
+                                                        @celiachia,
+                                                        @intollLattosio,
+                                                        @dm1,
+                                                        @dm2)"
+                End If
+
+                Dim parametriAnamnesiPatRem As New List(Of SqlClient.SqlParameter) From {
+                New SqlClient.SqlParameter("@IDAnagrafica", idPaziente),
+                New SqlClient.SqlParameter("@endometriosi", endometriosi),
+                New SqlClient.SqlParameter("@fibromialgie", fibromialgie),
+                New SqlClient.SqlParameter("@colonIrr", colonIrr),
+                New SqlClient.SqlParameter("@vescicaIperatt", vescicaIperatt),
+                New SqlClient.SqlParameter("@ivu", ivu),
+                New SqlClient.SqlParameter("@sindromeVescDol", sindromeVescDol),
+                New SqlClient.SqlParameter("@celiachia", celiachia),
+                New SqlClient.SqlParameter("@intollLattosio", intollLattosio),
+                New SqlClient.SqlParameter("@dm1", dm1),
+                New SqlClient.SqlParameter("@dm2", dm2)
+            }
+
+                If EseguiNonQuery(queryAnamnesiPatRem, parametriAnamnesiPatRem) > 0 Then
+                    successo = True
+                End If
+
+                If successo Then
+                    If esiste Then
+                        main.MostraToast("Anamnesi patologica remota aggiornata correttamente.")
+                    Else
+                        main.MostraToast("Anamnesi patologica remota salvata correttamente.")
+                    End If
+                Else
+                    main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")
+                    esito = False
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Errore imprevisto: " & ex.Message)
+                esito = False
+            End Try
+        Else
+            esito = False
+        End If
+
+        Return esito
+    End Function
+
+    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim esito = SalvaDati()
+        If esito Then
+            appenaSalvati = True
+            CercaAnamnesi()
+        End If
+    End Sub
 End Class

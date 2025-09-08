@@ -32,17 +32,35 @@ Public Class UC_CercaVisita
         ' ====================
         With ButtonCercaVisita.Style
             .BackColor = Color.FromArgb(41, 128, 185)
+            .HoverBackColor = Color.FromArgb(31, 97, 144)  ' colore hover
+            .PressedBackColor = Color.FromArgb(31, 97, 144) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(31, 97, 144) ' mantiene il blu anche se focus
             .ForeColor = Color.White
-        End With
-
-        With ButtonSeleziona.Style
-            .BackColor = Color.FromArgb(39, 174, 96)
-            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
         End With
 
         With ButtonAnnulla.Style
             .BackColor = Color.FromArgb(192, 57, 43)
+            .HoverBackColor = Color.FromArgb(150, 40, 35)    ' colore hover
+            .PressedBackColor = Color.FromArgb(150, 40, 35)   ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(150, 40, 35)   ' mantiene il blu anche se focus
             .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
+
+        With ButtonSeleziona.Style
+            .BackColor = Color.FromArgb(39, 174, 96)
+            .HoverBackColor = Color.FromArgb(30, 130, 70) ' colore hover
+            .PressedBackColor = Color.FromArgb(30, 130, 70) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(30, 130, 70) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
         End With
 
         With DateTimePickerDataVisita

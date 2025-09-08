@@ -7,4 +7,12 @@
             Return True
         End Get
     End Property
+
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H8000000 ' WS_EX_NOACTIVATE
+            Return cp
+        End Get
+    End Property
 End Class

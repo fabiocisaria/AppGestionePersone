@@ -24,9 +24,16 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.NuovoToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PazienteToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VisitaToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrimaVisitaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ControlloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FarmacoToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NuovoFarmacoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NuovaClasseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TerapiaRiabilitativaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InserisciToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AnagraficaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NuovoPazienteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnamnesiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FamiliareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FisiologicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,18 +41,16 @@ Partial Class MainForm
         Me.ContraccettivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FarmacoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VisitaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrimaVisitaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ControlloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SintomiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UroGinecologicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TerapiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StoriaOstetricoginecologicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EsamiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DNATestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PapTestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RMNToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TamponeVaginaleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UrinoculturaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SintomiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StoriaOstetricoginecologicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TerapiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UroGinecologicaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CercaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PazienteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VisitaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,32 +60,76 @@ Partial Class MainForm
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InserisciToolStripMenuItem, Me.CercaToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuovoToolStripMenuItem1, Me.InserisciToolStripMenuItem, Me.CercaToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1008, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
+        'NuovoToolStripMenuItem1
+        '
+        Me.NuovoToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PazienteToolStripMenuItem1, Me.VisitaToolStripMenuItem2, Me.FarmacoToolStripMenuItem1, Me.TerapiaRiabilitativaToolStripMenuItem})
+        Me.NuovoToolStripMenuItem1.Name = "NuovoToolStripMenuItem1"
+        Me.NuovoToolStripMenuItem1.Size = New System.Drawing.Size(55, 20)
+        Me.NuovoToolStripMenuItem1.Text = "Nuovo"
+        '
+        'PazienteToolStripMenuItem1
+        '
+        Me.PazienteToolStripMenuItem1.Name = "PazienteToolStripMenuItem1"
+        Me.PazienteToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.PazienteToolStripMenuItem1.Text = "Paziente"
+        '
+        'VisitaToolStripMenuItem2
+        '
+        Me.VisitaToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrimaVisitaToolStripMenuItem, Me.ControlloToolStripMenuItem})
+        Me.VisitaToolStripMenuItem2.Name = "VisitaToolStripMenuItem2"
+        Me.VisitaToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
+        Me.VisitaToolStripMenuItem2.Text = "Visita"
+        '
+        'PrimaVisitaToolStripMenuItem
+        '
+        Me.PrimaVisitaToolStripMenuItem.Name = "PrimaVisitaToolStripMenuItem"
+        Me.PrimaVisitaToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.PrimaVisitaToolStripMenuItem.Text = "Prima visita"
+        '
+        'ControlloToolStripMenuItem
+        '
+        Me.ControlloToolStripMenuItem.Name = "ControlloToolStripMenuItem"
+        Me.ControlloToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.ControlloToolStripMenuItem.Text = "Controllo"
+        '
+        'FarmacoToolStripMenuItem1
+        '
+        Me.FarmacoToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuovoFarmacoToolStripMenuItem, Me.NuovaClasseToolStripMenuItem})
+        Me.FarmacoToolStripMenuItem1.Name = "FarmacoToolStripMenuItem1"
+        Me.FarmacoToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.FarmacoToolStripMenuItem1.Text = "Farmaco"
+        '
+        'NuovoFarmacoToolStripMenuItem
+        '
+        Me.NuovoFarmacoToolStripMenuItem.Name = "NuovoFarmacoToolStripMenuItem"
+        Me.NuovoFarmacoToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.NuovoFarmacoToolStripMenuItem.Text = "Nuovo farmaco"
+        '
+        'NuovaClasseToolStripMenuItem
+        '
+        Me.NuovaClasseToolStripMenuItem.Name = "NuovaClasseToolStripMenuItem"
+        Me.NuovaClasseToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.NuovaClasseToolStripMenuItem.Text = "Nuova classe"
+        '
+        'TerapiaRiabilitativaToolStripMenuItem
+        '
+        Me.TerapiaRiabilitativaToolStripMenuItem.Name = "TerapiaRiabilitativaToolStripMenuItem"
+        Me.TerapiaRiabilitativaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TerapiaRiabilitativaToolStripMenuItem.Text = "Terapia riabilitativa"
+        '
         'InserisciToolStripMenuItem
         '
-        Me.InserisciToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnagraficaToolStripMenuItem1, Me.AnamnesiToolStripMenuItem, Me.ContraccettivoToolStripMenuItem, Me.FarmacoToolStripMenuItem, Me.VisitaToolStripMenuItem})
+        Me.InserisciToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnamnesiToolStripMenuItem, Me.ContraccettivoToolStripMenuItem, Me.FarmacoToolStripMenuItem, Me.VisitaToolStripMenuItem})
         Me.InserisciToolStripMenuItem.Name = "InserisciToolStripMenuItem"
         Me.InserisciToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.InserisciToolStripMenuItem.Text = "Inserisci"
-        '
-        'AnagraficaToolStripMenuItem1
-        '
-        Me.AnagraficaToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuovoPazienteToolStripMenuItem})
-        Me.AnagraficaToolStripMenuItem1.Name = "AnagraficaToolStripMenuItem1"
-        Me.AnagraficaToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
-        Me.AnagraficaToolStripMenuItem1.Text = "Anagrafica"
-        '
-        'NuovoPazienteToolStripMenuItem
-        '
-        Me.NuovoPazienteToolStripMenuItem.Name = "NuovoPazienteToolStripMenuItem"
-        Me.NuovoPazienteToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.NuovoPazienteToolStripMenuItem.Text = "Nuovao paziente"
         '
         'AnamnesiToolStripMenuItem
         '
@@ -121,46 +170,10 @@ Partial Class MainForm
         '
         'VisitaToolStripMenuItem
         '
-        Me.VisitaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrimaVisitaToolStripMenuItem, Me.ControlloToolStripMenuItem, Me.SintomiToolStripMenuItem, Me.UroGinecologicaToolStripMenuItem, Me.TerapiaToolStripMenuItem, Me.StoriaOstetricoginecologicaToolStripMenuItem, Me.EsamiToolStripMenuItem})
+        Me.VisitaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EsamiToolStripMenuItem, Me.SintomiToolStripMenuItem, Me.StoriaOstetricoginecologicaToolStripMenuItem, Me.TerapiaToolStripMenuItem, Me.UroGinecologicaToolStripMenuItem})
         Me.VisitaToolStripMenuItem.Name = "VisitaToolStripMenuItem"
         Me.VisitaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.VisitaToolStripMenuItem.Text = "Visita"
-        '
-        'PrimaVisitaToolStripMenuItem
-        '
-        Me.PrimaVisitaToolStripMenuItem.Name = "PrimaVisitaToolStripMenuItem"
-        Me.PrimaVisitaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.PrimaVisitaToolStripMenuItem.Text = "Prima visita"
-        '
-        'ControlloToolStripMenuItem
-        '
-        Me.ControlloToolStripMenuItem.Name = "ControlloToolStripMenuItem"
-        Me.ControlloToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.ControlloToolStripMenuItem.Text = "Controllo"
-        '
-        'SintomiToolStripMenuItem
-        '
-        Me.SintomiToolStripMenuItem.Name = "SintomiToolStripMenuItem"
-        Me.SintomiToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.SintomiToolStripMenuItem.Text = "Sintomi"
-        '
-        'UroGinecologicaToolStripMenuItem
-        '
-        Me.UroGinecologicaToolStripMenuItem.Name = "UroGinecologicaToolStripMenuItem"
-        Me.UroGinecologicaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.UroGinecologicaToolStripMenuItem.Text = "Uro - ginecologica"
-        '
-        'TerapiaToolStripMenuItem
-        '
-        Me.TerapiaToolStripMenuItem.Name = "TerapiaToolStripMenuItem"
-        Me.TerapiaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.TerapiaToolStripMenuItem.Text = "Terapia"
-        '
-        'StoriaOstetricoginecologicaToolStripMenuItem
-        '
-        Me.StoriaOstetricoginecologicaToolStripMenuItem.Name = "StoriaOstetricoginecologicaToolStripMenuItem"
-        Me.StoriaOstetricoginecologicaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.StoriaOstetricoginecologicaToolStripMenuItem.Text = "Storia Ostetrico-ginecologica"
         '
         'EsamiToolStripMenuItem
         '
@@ -198,6 +211,30 @@ Partial Class MainForm
         Me.UrinoculturaToolStripMenuItem.Name = "UrinoculturaToolStripMenuItem"
         Me.UrinoculturaToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.UrinoculturaToolStripMenuItem.Text = "Urinocultura"
+        '
+        'SintomiToolStripMenuItem
+        '
+        Me.SintomiToolStripMenuItem.Name = "SintomiToolStripMenuItem"
+        Me.SintomiToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.SintomiToolStripMenuItem.Text = "Sintomi"
+        '
+        'StoriaOstetricoginecologicaToolStripMenuItem
+        '
+        Me.StoriaOstetricoginecologicaToolStripMenuItem.Name = "StoriaOstetricoginecologicaToolStripMenuItem"
+        Me.StoriaOstetricoginecologicaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.StoriaOstetricoginecologicaToolStripMenuItem.Text = "Storia Ostetrico-ginecologica"
+        '
+        'TerapiaToolStripMenuItem
+        '
+        Me.TerapiaToolStripMenuItem.Name = "TerapiaToolStripMenuItem"
+        Me.TerapiaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.TerapiaToolStripMenuItem.Text = "Terapia"
+        '
+        'UroGinecologicaToolStripMenuItem
+        '
+        Me.UroGinecologicaToolStripMenuItem.Name = "UroGinecologicaToolStripMenuItem"
+        Me.UroGinecologicaToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.UroGinecologicaToolStripMenuItem.Text = "Uro - ginecologica"
         '
         'CercaToolStripMenuItem
         '
@@ -255,15 +292,11 @@ Partial Class MainForm
 
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents InserisciToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AnagraficaToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents NuovoPazienteToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AnamnesiToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FamiliareToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FisiologicaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PatologicaRemotaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents VisitaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PrimaVisitaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ControlloToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SintomiToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UroGinecologicaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TerapiaToolStripMenuItem As ToolStripMenuItem
@@ -280,4 +313,13 @@ Partial Class MainForm
     Friend WithEvents PapTestToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TamponeVaginaleToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UrinoculturaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NuovoToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PazienteToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents VisitaToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents PrimaVisitaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ControlloToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FarmacoToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents NuovoFarmacoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NuovaClasseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TerapiaRiabilitativaToolStripMenuItem As ToolStripMenuItem
 End Class

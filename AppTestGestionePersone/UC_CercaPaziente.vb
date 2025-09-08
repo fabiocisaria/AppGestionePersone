@@ -33,12 +33,50 @@ Public Class UC_CercaPaziente
         TextBoxCodiceID.ForeColor = Color.Gray
         TextBoxCognome.BorderColor = Color.FromArgb(41, 128, 185)
         TextBoxCodiceID.BorderColor = Color.FromArgb(41, 128, 185)
-        ButtonCercaPaziente.Style.BackColor = Color.FromArgb(41, 128, 185)
-        ButtonCercaPaziente.Style.ForeColor = Color.White
-        ButtonAnnulla.Style.BackColor = Color.FromArgb(192, 57, 43)
-        ButtonAnnulla.Style.ForeColor = Color.White
-        ButtonSeleziona.Style.BackColor = Color.FromArgb(39, 174, 96)
-        ButtonSeleziona.Style.ForeColor = Color.White
+
+        With ButtonCercaPaziente.Style
+            .BackColor = Color.FromArgb(41, 128, 185)
+            .HoverBackColor = Color.FromArgb(31, 97, 144)  ' colore hover
+            .PressedBackColor = Color.FromArgb(31, 97, 144) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(31, 97, 144) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
+
+        With ButtonSeleziona.Style
+            .BackColor = Color.FromArgb(39, 174, 96)
+            .HoverBackColor = Color.FromArgb(30, 130, 70) ' colore hover
+            .PressedBackColor = Color.FromArgb(30, 130, 70) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(30, 130, 70) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
+
+        With ButtonAnnulla.Style
+            .BackColor = Color.FromArgb(192, 57, 43)
+            .HoverBackColor = Color.FromArgb(150, 40, 35)    ' colore hover
+            .PressedBackColor = Color.FromArgb(150, 40, 35)   ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(150, 40, 35)   ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
+
+        With ButtonSeleziona.Style
+            .BackColor = Color.FromArgb(39, 174, 96)
+            .HoverBackColor = Color.FromArgb(30, 130, 70) ' colore hover
+            .PressedBackColor = Color.FromArgb(30, 130, 70) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(30, 130, 70) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
     End Sub
 
     ' ====================

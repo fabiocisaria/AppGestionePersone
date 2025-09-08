@@ -152,6 +152,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormSelezione.Designer.vb">
+      <DependentUpon>FormSelezione.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSelezione.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ToastForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -167,66 +173,17 @@
     <Compile Include="UC_CercaVisita.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UC_ClasseFarmaco.Designer.vb">
+      <DependentUpon>UC_ClasseFarmaco.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_ClasseFarmaco.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UC_DatiPaziente.Designer.vb">
       <DependentUpon>UC_DatiPaziente.vb</DependentUpon>
     </Compile>
     <Compile Include="UC_DatiPaziente.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="FormInserisciVisita.Designer.vb">
-      <DependentUpon>FormInserisciVisita.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormInserisciVisita.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMenuVisita.Designer.vb">
-      <DependentUpon>FormMenuVisita.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormMenuVisita.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAnamnesiFisiologicaRicPaziente.Designer.vb">
-      <DependentUpon>FormAnamnesiFisiologicaRicPaziente.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormAnamnesiFisiologicaRicPaziente.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAnamnesiFisiologicaSequenza.Designer.vb">
-      <DependentUpon>FormAnamnesiFisiologicaSequenza.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormAnamnesiFisiologicaSequenza.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSelezionePaziente.Designer.vb">
-      <DependentUpon>FormSelezionePaziente.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormSelezionePaziente.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMenuPrincipale.Designer.vb">
-      <DependentUpon>FormMenuPrincipale.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormMenuPrincipale.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAnagrafica.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAnagrafica.Designer.vb">
-      <DependentUpon>FormAnagrafica.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAnamnesiFamiliare.Designer.vb">
-      <DependentUpon>FormAnamnesiFamiliare.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormAnamnesiFamiliare.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormVisitaUroGineco.Designer.vb">
-      <DependentUpon>FormVisitaUroGineco.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormVisitaUroGineco.vb">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.vb">
       <DependentUpon>MainForm.vb</DependentUpon>
@@ -264,10 +221,28 @@
     <Compile Include="UC_DatiVisita.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UC_Farmaco.Designer.vb">
+      <DependentUpon>UC_Farmaco.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Farmaco.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UC_InserisciVisita.Designer.vb">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
     </Compile>
     <Compile Include="UC_InserisciVisita.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Terapia.Designer.vb">
+      <DependentUpon>UC_Terapia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Terapia.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_TerapiaRiabilitativa.Designer.vb">
+      <DependentUpon>UC_TerapiaRiabilitativa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_TerapiaRiabilitativa.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UC_VisitaAnamnesiOstrGineco.Designer.vb">
@@ -330,12 +305,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="FormVisitaSintomi.Designer.vb">
-      <DependentUpon>FormVisitaSintomi.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormVisitaSintomi.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UC_VisitaUrinocoltura.Designer.vb">
       <DependentUpon>UC_VisitaUrinocoltura.vb</DependentUpon>
     </Compile>
@@ -344,32 +313,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormInserisciVisita.resx">
-      <DependentUpon>FormInserisciVisita.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMenuVisita.resx">
-      <DependentUpon>FormMenuVisita.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormAnamnesiFisiologicaRicPaziente.resx">
-      <DependentUpon>FormAnamnesiFisiologicaRicPaziente.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormAnamnesiFisiologicaSequenza.resx">
-      <DependentUpon>FormAnamnesiFisiologicaSequenza.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSelezionePaziente.resx">
-      <DependentUpon>FormSelezionePaziente.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormAnagrafica.resx">
-      <DependentUpon>FormAnagrafica.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormAnamnesiFamiliare.resx">
-      <DependentUpon>FormAnamnesiFamiliare.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMenuPrincipale.resx">
-      <DependentUpon>FormMenuPrincipale.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormVisitaUroGineco.resx">
-      <DependentUpon>FormVisitaUroGineco.vb</DependentUpon>
+    <EmbeddedResource Include="FormSelezione.resx">
+      <DependentUpon>FormSelezione.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
@@ -379,9 +324,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormVisitaSintomi.resx">
-      <DependentUpon>FormVisitaSintomi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Anagrafica.resx">
       <DependentUpon>UC_Anagrafica.vb</DependentUpon>
@@ -401,14 +343,26 @@
     <EmbeddedResource Include="UC_CercaVisita.resx">
       <DependentUpon>UC_CercaVisita.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_ClasseFarmaco.resx">
+      <DependentUpon>UC_ClasseFarmaco.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_DatiPaziente.resx">
       <DependentUpon>UC_DatiPaziente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_DatiVisita.resx">
       <DependentUpon>UC_DatiVisita.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_Farmaco.resx">
+      <DependentUpon>UC_Farmaco.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_InserisciVisita.resx">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Terapia.resx">
+      <DependentUpon>UC_Terapia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_TerapiaRiabilitativa.resx">
+      <DependentUpon>UC_TerapiaRiabilitativa.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_VisitaAnamnesiOstrGineco.resx">
       <DependentUpon>UC_VisitaAnamnesiOstrGineco.vb</DependentUpon>

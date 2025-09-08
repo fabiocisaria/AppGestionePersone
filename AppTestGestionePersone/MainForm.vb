@@ -15,6 +15,12 @@ Public Class MainForm
         InizializzaUCRegistry()
     End Sub
 
+    ' Dichiarazione P/Invoke per ShowWindow
+    <System.Runtime.InteropServices.DllImport("user32.dll")>
+    Private Shared Function ShowWindow(hWnd As IntPtr, nCmdShow As Integer) As Boolean
+    End Function
+
+    Private Const SW_SHOWNOACTIVATE As Integer = 4
 
     ' ====================
     ' Variabili e UC (UC gestiti dal registry)
@@ -50,6 +56,12 @@ Public Class MainForm
         UCRegistry("AnamnesiFamiliare") = New UCInfo With {
             .Categoria = "Paziente",
             .Factory = Function() New UC_AnamnesiFamiliare(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("AnamnesiPatologicaRemota") = New UCInfo With {
+            .Categoria = "Paziente",
+            .Factory = Function() New UC_AnamnesiPatologicaRemota(),
             .Ricreabile = True
         }
 
@@ -116,6 +128,30 @@ Public Class MainForm
         UCRegistry("VisitaAnamnesiOstrGineco") = New UCInfo With {
             .Categoria = "Visita",
             .Factory = Function() New UC_VisitaAnamnesiOstrGineco(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("Farmaco") = New UCInfo With {
+            .Categoria = "Farmaco",
+            .Factory = Function() New UC_Farmaco(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("ClasseFarmaco") = New UCInfo With {
+            .Categoria = "Farmaco",
+            .Factory = Function() New UC_ClasseFarmaco(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("TerapiaRiabilitativa") = New UCInfo With {
+            .Categoria = "TerapiaRiabilitativa",
+            .Factory = Function() New UC_TerapiaRiabilitativa(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("Terapia") = New UCInfo With {
+            .Categoria = "Visita",
+            .Factory = Function() New UC_Terapia(),
             .Ricreabile = True
         }
     End Sub
@@ -345,9 +381,9 @@ Public Class MainForm
             .TopMost = True,
             .ShowInTaskbar = False,
             .Location = New Point(Me.Left + Me.Width - 310, Me.Top + Me.Height - 50),
-            .Opacity = 0,
-            .Owner = Me
+            .Opacity = 0
         }
+        '.Owner = Me
 
         Dim lbl As New Label() With {
             .Text = messaggio,
@@ -359,7 +395,8 @@ Public Class MainForm
         }
 
         _toastCorrente.Controls.Add(lbl)
-        _toastCorrente.Show()
+        ShowWindow(_toastCorrente.Handle, SW_SHOWNOACTIVATE)
+        '_toastCorrente.Show()
 
         ' Fade-in
         _fadeInTimer = New Timer With {.Interval = 30}
@@ -399,7 +436,7 @@ Public Class MainForm
     ' ====================
     ' Menu Nuovo Paziente
     ' ====================
-    Private Sub NuovoPazienteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuovoPazienteToolStripMenuItem.Click
+    Private Sub NuovoPazienteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PazienteToolStripMenuItem1.Click
         ' Rimuove tutte le UC Paziente (ricreabili) tranne CercaPaziente
         'RimuoviUC("Paziente")
 
@@ -1078,5 +1115,132 @@ Public Class MainForm
         CaricaControllo(ucVisitaAnamnesiOstrGineco, 0, 2)
 
         ucVisitaAnamnesiOstrGineco.AggiornaDati()
+    End Sub
+
+    Private Sub PatologicaRemotaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatologicaRemotaToolStripMenuItem.Click
+        If Me.IDPazienteSelezionato = Nothing Then
+            MostraToast("Seleziona prima un paziente.")
+
+            ' Ottiene l'UC CercaPaziente
+            Dim ucCercaPaziente As UC_CercaPaziente = DirectCast(GetUC("CercaPaziente"), UC_CercaPaziente)
+
+            ' Aggiunge handler se non già aggiunto
+            If Not ucCercaPaziente.IsHandlerAttached Then
+                AddHandler ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
+                ucCercaPaziente.IsHandlerAttached = True
+            End If
+
+            ' Rimuove tutti gli UC Paziente tranne CercaPaziente
+            'RimuoviUC("Paziente")
+
+            ' Rimuove eventuali UC Visita
+            'RimuoviUC("Visita")
+
+            ' Carica UC di ricerca paziente
+            CaricaControllo(ucCercaPaziente, 0, 2)
+            Return
+        End If
+
+        ' Rimuove tutte le UC Paziente tranne CercaPaziente
+        'RimuoviUC("Paziente")
+
+        ' Rimuove eventuali UC Visita
+        'RimuoviUC("Visita")
+
+        ' Ottiene UC DatiPaziente e AnamnesiFisiologica dal registry
+        Dim ucDatiPaziente As UC_DatiPaziente = DirectCast(GetUC("DatiPaziente"), UC_DatiPaziente)
+        Dim ucAnamnesiPatologicaRemota As UC_AnamnesiPatologicaRemota = DirectCast(GetUC("AnamnesiPatologicaRemota"), UC_AnamnesiPatologicaRemota)
+
+        ' Aggiorna dati paziente
+        ucDatiPaziente.CaricaDatiPaziente(Me)
+
+        ' Carica UC
+        CaricaControllo(ucDatiPaziente, 0, 0)
+        CaricaControllo(ucAnamnesiPatologicaRemota, 0, 2)
+
+        ' Aggiorna dati UC AnamnesiFisiologica
+        ucAnamnesiPatologicaRemota.AggiornaDati()
+    End Sub
+
+    Private Sub NuovaClasseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuovaClasseToolStripMenuItem.Click
+        EliminaControllo(0, 0)
+        EliminaControllo(0, 1)
+        Dim ucClasseFarmaco As UC_ClasseFarmaco = DirectCast(GetUC("ClasseFarmaco"), UC_ClasseFarmaco)
+        CaricaControllo(ucClasseFarmaco, 0, 2)
+    End Sub
+
+    Private Sub NuovoFarmacoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuovoFarmacoToolStripMenuItem.Click
+        EliminaControllo(0, 0)
+        EliminaControllo(0, 1)
+        Dim ucFarmaco As UC_Farmaco = DirectCast(GetUC("Farmaco"), UC_Farmaco)
+        CaricaControllo(ucFarmaco, 0, 2)
+    End Sub
+
+    Private Sub TerapiaRiabilitativaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TerapiaRiabilitativaToolStripMenuItem.Click
+        EliminaControllo(0, 0)
+        EliminaControllo(0, 1)
+        Dim ucTerapiaRiabilitativa As UC_TerapiaRiabilitativa = DirectCast(GetUC("TerapiaRiabilitativa"), UC_TerapiaRiabilitativa)
+        CaricaControllo(ucTerapiaRiabilitativa, 0, 2)
+    End Sub
+
+    Private Sub TerapiaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TerapiaToolStripMenuItem.Click
+        If Me.IDPazienteSelezionato = Nothing Then
+            MostraToast("Seleziona prima un paziente.")
+
+            ' Ottiene l'UC CercaPaziente
+            Dim ucCercaPaziente As UC_CercaPaziente = DirectCast(GetUC("CercaPaziente"), UC_CercaPaziente)
+
+            ' Aggiunge handler se non già aggiunto
+            If Not ucCercaPaziente.IsHandlerAttached Then
+                AddHandler ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
+                ucCercaPaziente.IsHandlerAttached = True
+            End If
+
+            ' Rimuove tutti gli UC Paziente tranne CercaPaziente
+            'RimuoviUC("Paziente")
+
+            ' Rimuove eventuali UC Visita
+            'RimuoviUC("Visita")
+
+            ' Carica UC di ricerca paziente
+            CaricaControllo(ucCercaPaziente, 0, 2)
+            Return
+        End If
+
+        Dim ucDatiPaziente As UC_DatiPaziente = DirectCast(GetUC("DatiPaziente"), UC_DatiPaziente)
+
+        If Me.IDVisitaSelezionata = Nothing Then
+            MostraToast("Seleziona prima una visita.")
+            ' Carico lo UserControl di ricerca visita
+            Dim ucCercaVisita As UC_CercaVisita = DirectCast(GetUC("CercaVisita"), UC_CercaVisita)
+
+            ' Aggiunge handler se non già aggiunto
+            If Not ucCercaVisita.IsHandlerAttached Then
+                AddHandler ucCercaVisita.VisitaSelezionata, AddressOf VisitaSelezionataHandler
+                ucCercaVisita.IsHandlerAttached = True
+            End If
+
+            ' Rimuove eventuali UC Visita
+            'RimuoviUC("Visita")
+
+            ' Carica UC di ricerca paziente
+            CaricaControllo(ucCercaVisita, 0, 2)
+            Return
+        End If
+
+        Dim ucDatiVisita As UC_DatiVisita = DirectCast(GetUC("DatiVisita"), UC_DatiVisita)
+
+        Dim ucTerapia As UC_Terapia = DirectCast(GetUC("Terapia"), UC_Terapia)
+
+        ' Aggiorna dati paziente
+        ucDatiPaziente.CaricaDatiPaziente(Me)
+        ucDatiVisita.CaricaDatiVisita(Me)
+
+        ' Carica UC
+        CaricaControllo(ucDatiPaziente, 0, 0)
+        CaricaControllo(ucDatiVisita, 0, 1)
+        CaricaControllo(ucTerapia, 0, 2)
+
+        ucTerapia.AggiornaDati()
     End Sub
 End Class
