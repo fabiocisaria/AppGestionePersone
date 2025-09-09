@@ -1,5 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
-
+Imports Microsoft.Data.SqlClient
 Public Class UC_InserisciVisita
     Private _aggiornamentoInterno As Boolean = False
     Public Property IDVisita As Integer
@@ -41,8 +41,8 @@ Public Class UC_InserisciVisita
             If ucTipoVisita = "Prima visita" Then
                 LabelTipoVisita.Text = "Prima visita"
                 Dim queryPrimaVisita As String = "SELECT COUNT(*) FROM Visite WHERE ID_Anagrafica=@ID AND TipoVisita='Prima visita'"
-                Dim paramPrimaVisita As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@ID", idPaziente)
+                Dim paramPrimaVisita As New List(Of SqlParameter) From {
+                    New SqlParameter("@ID", idPaziente)
                 }
 
                 If EseguiScalar(queryPrimaVisita, paramPrimaVisita) > 0 Then
@@ -52,8 +52,8 @@ Public Class UC_InserisciVisita
             ElseIf ucTipoVisita = "Controllo" Then
                 LabelTipoVisita.Text = "Prima visita"
                 Dim queryPrimaVisita As String = "SELECT ID, DataVisita FROM Visite WHERE ID_Anagrafica=@ID AND TipoVisita='Prima visita'"
-                Dim paramControllo As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@ID", idPaziente)
+                Dim paramControllo As New List(Of SqlParameter) From {
+                    New SqlParameter("@ID", idPaziente)
                 }
                 Dim dt As DataTable = EseguiQuery(queryPrimaVisita, paramControllo)
 
@@ -71,9 +71,9 @@ Public Class UC_InserisciVisita
                     ' Verifica che non ci sia già una visita per quel paziente nella stessa data
                     Dim visitaPresente As Integer = 0
                     Dim queryVisitaPresente As String = "SELECT COUNT(*) FROM Visite WHERE ID_Anagrafica = @ID_Anagrafica AND CAST(DataVisita AS DATE) = @DataVisita"
-                    Dim parameterVisitaPresente As New List(Of SqlClient.SqlParameter) From {
-                        New SqlClient.SqlParameter("@ID_Anagrafica", idPaziente),
-                        New SqlClient.SqlParameter("@DataVisita", DateTimePickerDataVisita.Value.Date)
+                    Dim parameterVisitaPresente As New List(Of SqlParameter) From {
+                        New SqlParameter("@ID_Anagrafica", idPaziente),
+                        New SqlParameter("@DataVisita", DateTimePickerDataVisita.Value.Date)
                     }
 
                     Dim dtVisitaPresente As DataTable = EseguiQuery(queryVisitaPresente, parameterVisitaPresente)
@@ -86,11 +86,11 @@ Public Class UC_InserisciVisita
 
             ' Inserimento
             Dim query As String = "INSERT INTO Visite (ID_Anagrafica, DataVisita, TipoVisita, MotivoVisita) VALUES (@idAna, @data, @tipoVisita, @motivo)"
-            Dim parametri As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@idAna", main.IDPazienteSelezionato),
-                New SqlClient.SqlParameter("@data", DateTimePickerDataVisita.Value.Date),
-                New SqlClient.SqlParameter("@tipoVisita", ucTipoVisita),
-                New SqlClient.SqlParameter("@motivo", TextBoxMotivo.Text.Trim())
+            Dim parametri As New List(Of SqlParameter) From {
+                New SqlParameter("@idAna", main.IDPazienteSelezionato),
+                New SqlParameter("@data", DateTimePickerDataVisita.Value.Date),
+                New SqlParameter("@tipoVisita", ucTipoVisita),
+                New SqlParameter("@motivo", TextBoxMotivo.Text.Trim())
             }
 
             If EseguiNonQuery(query, parametri) > 0 Then
@@ -102,9 +102,9 @@ Public Class UC_InserisciVisita
 
             ' Devo estrarre il codice univoco della visita appena inserita
             Dim queryIDVisita As String = "SELECT ID FROM Visite WHERE ID_Anagrafica = @IDAnagrafica AND DataVisita = @DataVisita"
-            Dim parametriIDVisita As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@IDAnagrafica", main.IDPazienteSelezionato),
-                    New SqlClient.SqlParameter("@DataVisita", DateTimePickerDataVisita.Value.Date)
+            Dim parametriIDVisita As New List(Of SqlParameter) From {
+                    New SqlParameter("@IDAnagrafica", main.IDPazienteSelezionato),
+                    New SqlParameter("@DataVisita", DateTimePickerDataVisita.Value.Date)
             }
 
             ' Estraggo l'ID visita associato alla visita appena inserita

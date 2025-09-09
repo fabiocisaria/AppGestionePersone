@@ -1,5 +1,5 @@
-﻿Imports System.Data.SqlClient
-Imports System.Diagnostics.Eventing
+﻿Imports System.Diagnostics.Eventing
+Imports Microsoft.Data.SqlClient
 Public Class UC_VisitaDNATest
     Dim idVisita As Integer = -1
 
@@ -233,8 +233,8 @@ Public Class UC_VisitaDNATest
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQuery As String = "SELECT * FROM VisitaDNATest WHERE ID_Visita = @idVisita"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", idVisita)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -314,11 +314,11 @@ Public Class UC_VisitaDNATest
                                                     @idCeppo)"
                 End If
 
-                Dim parametriDNATest As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@idVisita", idVisita),
-                    New SqlClient.SqlParameter("@dataDNATest", dataEsecuzione),
-                    New SqlClient.SqlParameter("@esitoDNATest", esitoDNATest),
-                    New SqlClient.SqlParameter("@idCeppo", idCeppo)
+                Dim parametriDNATest As New List(Of SqlParameter) From {
+                    New SqlParameter("@idVisita", idVisita),
+                    New SqlParameter("@dataDNATest", dataEsecuzione),
+                    New SqlParameter("@esitoDNATest", esitoDNATest),
+                    New SqlParameter("@idCeppo", idCeppo)
                 }
 
                 If EseguiNonQuery(queryDNATest, parametriDNATest) > 0 Then

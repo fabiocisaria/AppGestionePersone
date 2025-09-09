@@ -4,6 +4,7 @@ Imports Syncfusion.WinForms.DataGrid.Enums
 Imports Syncfusion.WinForms.DataGrid.Events
 Imports Syncfusion.WinForms.DataGrid.Interactivity
 Imports Syncfusion.WinForms.Input
+Imports Microsoft.Data.SqlClient
 
 Public Class UC_CercaPaziente
     Inherits UserControl

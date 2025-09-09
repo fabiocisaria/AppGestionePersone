@@ -1,4 +1,5 @@
-﻿Public Class UC_AnamnesiPatologicaRemota
+﻿Imports Microsoft.Data.SqlClient
+Public Class UC_AnamnesiPatologicaRemota
     Dim idPaziente As Integer = -1
 
     Dim esiste As Boolean = False
@@ -85,8 +86,8 @@
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQuery As String = "SELECT * FROM AnamnesiPatologicaRemota WHERE ID_Anagrafica = @idAnagrafica"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idAnagrafica", idPaziente)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idAnagrafica", idPaziente)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -241,18 +242,18 @@
                                                         @dm2)"
                 End If
 
-                Dim parametriAnamnesiPatRem As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@IDAnagrafica", idPaziente),
-                New SqlClient.SqlParameter("@endometriosi", endometriosi),
-                New SqlClient.SqlParameter("@fibromialgie", fibromialgie),
-                New SqlClient.SqlParameter("@colonIrr", colonIrr),
-                New SqlClient.SqlParameter("@vescicaIperatt", vescicaIperatt),
-                New SqlClient.SqlParameter("@ivu", ivu),
-                New SqlClient.SqlParameter("@sindromeVescDol", sindromeVescDol),
-                New SqlClient.SqlParameter("@celiachia", celiachia),
-                New SqlClient.SqlParameter("@intollLattosio", intollLattosio),
-                New SqlClient.SqlParameter("@dm1", dm1),
-                New SqlClient.SqlParameter("@dm2", dm2)
+                Dim parametriAnamnesiPatRem As New List(Of SqlParameter) From {
+                New SqlParameter("@IDAnagrafica", idPaziente),
+                New SqlParameter("@endometriosi", endometriosi),
+                New SqlParameter("@fibromialgie", fibromialgie),
+                New SqlParameter("@colonIrr", colonIrr),
+                New SqlParameter("@vescicaIperatt", vescicaIperatt),
+                New SqlParameter("@ivu", ivu),
+                New SqlParameter("@sindromeVescDol", sindromeVescDol),
+                New SqlParameter("@celiachia", celiachia),
+                New SqlParameter("@intollLattosio", intollLattosio),
+                New SqlParameter("@dm1", dm1),
+                New SqlParameter("@dm2", dm2)
             }
 
                 If EseguiNonQuery(queryAnamnesiPatRem, parametriAnamnesiPatRem) > 0 Then

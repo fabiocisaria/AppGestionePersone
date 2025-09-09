@@ -1,4 +1,5 @@
-﻿Public Class UC_VisitaTamponeVg
+﻿Imports Microsoft.Data.SqlClient
+Public Class UC_VisitaTamponeVg
     Dim idVisita As Integer = -1
 
     Dim esiste As Boolean = False
@@ -108,8 +109,8 @@
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQuery As String = "SELECT * FROM VisitaTamponeVg WHERE ID_Visita = @idVisita"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-        New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParam As New List(Of SqlParameter) From {
+        New SqlParameter("@idVisita", idVisita)
     }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -174,10 +175,10 @@
                                                     @idCeppo)"
                 End If
 
-                Dim parametriTamponeVg As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@idVisita", idVisita),
-                New SqlClient.SqlParameter("@dataTamponeVg", dataEsecuzione),
-                New SqlClient.SqlParameter("@esitoTamponeVg", esitoTamponeVg)
+                Dim parametriTamponeVg As New List(Of SqlParameter) From {
+                New SqlParameter("@idVisita", idVisita),
+                New SqlParameter("@dataTamponeVg", dataEsecuzione),
+                New SqlParameter("@esitoTamponeVg", esitoTamponeVg)
             }
 
                 If EseguiNonQuery(queryTamponeVg, parametriTamponeVg) > 0 Then

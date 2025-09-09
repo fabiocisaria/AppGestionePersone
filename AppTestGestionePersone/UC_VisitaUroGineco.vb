@@ -1,4 +1,5 @@
-﻿Public Class UC_VisitaUroGineco
+﻿Imports Microsoft.Data.SqlClient
+Public Class UC_VisitaUroGineco
     Dim idVisita As Integer = -1
     Dim tipoVisita As String = ""
 
@@ -53,8 +54,8 @@
     Private Function VerificaTipoVisita(numVisita As Integer) As Integer
         Dim checkQuery As String = "SELECT * FROM Visite WHERE ID = @idVisita"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", numVisita)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", numVisita)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -140,15 +141,15 @@
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQuery As String = "SELECT * FROM VisitaUroGineco WHERE ID_Visita = @idVisita"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", idVisita)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
         Dim checkSwabQuery As String = "SELECT * FROM VisitaSwabTest WHERE ID_Visita = @idVisita"
 
-        Dim checkSwabParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkSwabParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", idVisita)
         }
         Dim dtSwabCheck As DataTable = EseguiQuery(checkSwabQuery, checkSwabParam)
 
@@ -305,13 +306,13 @@
                                                         )"
                 End If
 
-                Dim parametriSwabTest As New List(Of SqlClient.SqlParameter) From {
-                        New SqlClient.SqlParameter("@idVisita", idVisita),
-                        New SqlClient.SqlParameter("@swabClit", swabClit),
-                        New SqlClient.SqlParameter("@swabVestDx", swabVestDx),
-                        New SqlClient.SqlParameter("@swabVestSx", swabVestSx),
-                        New SqlClient.SqlParameter("@swabSubr", swabSubr),
-                        New SqlClient.SqlParameter("@swabForc", swabForc)
+                Dim parametriSwabTest As New List(Of SqlParameter) From {
+                        New SqlParameter("@idVisita", idVisita),
+                        New SqlParameter("@swabClit", swabClit),
+                        New SqlParameter("@swabVestDx", swabVestDx),
+                        New SqlParameter("@swabVestSx", swabVestSx),
+                        New SqlParameter("@swabSubr", swabSubr),
+                        New SqlParameter("@swabForc", swabForc)
                     }
 
                 If EseguiNonQuery(querySwabTest, parametriSwabTest) > 0 Then
@@ -320,13 +321,13 @@
 
                 If successo = True Then
 
-                    Dim parametriVisitaUroGineco As New List(Of SqlClient.SqlParameter) From {
-                        New SqlClient.SqlParameter("@idVisita", idVisita),
-                        New SqlClient.SqlParameter("@vgStato", vgStato),
-                        New SqlClient.SqlParameter("@vgLichen", vgLichen),
-                        New SqlClient.SqlParameter("@vgCicRef", vgCicRef),
-                        New SqlClient.SqlParameter("@ipercontrattilita", ipercontrattilita),
-                        New SqlClient.SqlParameter("@cistProv", cistProv)
+                    Dim parametriVisitaUroGineco As New List(Of SqlParameter) From {
+                        New SqlParameter("@idVisita", idVisita),
+                        New SqlParameter("@vgStato", vgStato),
+                        New SqlParameter("@vgLichen", vgLichen),
+                        New SqlParameter("@vgCicRef", vgCicRef),
+                        New SqlParameter("@ipercontrattilita", ipercontrattilita),
+                        New SqlParameter("@cistProv", cistProv)
                     }
 
                     If EseguiNonQuery(queryVisitaUroGineco, parametriVisitaUroGineco) > 0 Then

@@ -1,5 +1,6 @@
 ﻿Imports System.Web.UI.WebControls
 Imports System.Windows.Forms.VisualStyles
+Imports Microsoft.Data.SqlClient
 
 Public Class UC_VisitaSintomi
     Dim idVisita As Integer = -1
@@ -118,8 +119,8 @@ Public Class UC_VisitaSintomi
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQuery As String = "SELECT * FROM VisitaSintomi WHERE ID_Visita = @idVisita"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", idVisita)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -372,23 +373,23 @@ Public Class UC_VisitaSintomi
                                                     @dolVesc)"
                 End If
 
-                Dim parametriSintomi As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@idVisita", idVisita),
-                    New SqlClient.SqlParameter("@vvdPres", vvdPres),
-                    New SqlClient.SqlParameter("@vvdMod", vvdMod),
-                    New SqlClient.SqlParameter("@vvdAnd", vvdAnd),
-                    New SqlClient.SqlParameter("@vvdDistr", vvdDistr),
-                    New SqlClient.SqlParameter("@vagRic", vagRic),
-                    New SqlClient.SqlParameter("@cistRic", CistRic),
-                    New SqlClient.SqlParameter("@dispMar", dispMar),
-                    New SqlClient.SqlParameter("@dispLoc", dispLoc),
-                    New SqlClient.SqlParameter("@alvoPres", alvoPres),
-                    New SqlClient.SqlParameter("@alvoStipsi", alvoStipsi),
-                    New SqlClient.SqlParameter("@alvoColonIrr", alvoColonIrr),
-                    New SqlClient.SqlParameter("@alvoAltrn", alvoAltrn),
-                    New SqlClient.SqlParameter("@alvoDiarr", alvoDiarr),
-                    New SqlClient.SqlParameter("@luts", luts),
-                    New SqlClient.SqlParameter("@dolVesc", dolVesc)
+                Dim parametriSintomi As New List(Of SqlParameter) From {
+                    New SqlParameter("@idVisita", idVisita),
+                    New SqlParameter("@vvdPres", vvdPres),
+                    New SqlParameter("@vvdMod", vvdMod),
+                    New SqlParameter("@vvdAnd", vvdAnd),
+                    New SqlParameter("@vvdDistr", vvdDistr),
+                    New SqlParameter("@vagRic", vagRic),
+                    New SqlParameter("@cistRic", CistRic),
+                    New SqlParameter("@dispMar", dispMar),
+                    New SqlParameter("@dispLoc", dispLoc),
+                    New SqlParameter("@alvoPres", alvoPres),
+                    New SqlParameter("@alvoStipsi", alvoStipsi),
+                    New SqlParameter("@alvoColonIrr", alvoColonIrr),
+                    New SqlParameter("@alvoAltrn", alvoAltrn),
+                    New SqlParameter("@alvoDiarr", alvoDiarr),
+                    New SqlParameter("@luts", luts),
+                    New SqlParameter("@dolVesc", dolVesc)
                 }
 
                 If EseguiNonQuery(querySintomi, parametriSintomi) > 0 Then

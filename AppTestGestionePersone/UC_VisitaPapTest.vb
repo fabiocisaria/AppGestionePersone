@@ -1,4 +1,4 @@
-﻿Imports System.Data.SqlClient
+﻿Imports Microsoft.Data.SqlClient
 Imports System.Diagnostics.Eventing
 
 Public Class UC_VisitaPapTest
@@ -111,8 +111,8 @@ Public Class UC_VisitaPapTest
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQuery As String = "SELECT * FROM VisitaPapTest WHERE ID_Visita = @idVisita"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", idVisita)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -177,10 +177,10 @@ Public Class UC_VisitaPapTest
                                                     @idCeppo)"
                 End If
 
-                Dim parametriPapTest As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@idVisita", idVisita),
-                    New SqlClient.SqlParameter("@dataPapTest", dataEsecuzione),
-                    New SqlClient.SqlParameter("@esitoPapTest", esitoPapTest)
+                Dim parametriPapTest As New List(Of SqlParameter) From {
+                    New SqlParameter("@idVisita", idVisita),
+                    New SqlParameter("@dataPapTest", dataEsecuzione),
+                    New SqlParameter("@esitoPapTest", esitoPapTest)
                 }
 
                 If EseguiNonQuery(queryPapTest, parametriPapTest) > 0 Then

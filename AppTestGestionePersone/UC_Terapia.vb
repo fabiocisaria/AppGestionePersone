@@ -1,5 +1,5 @@
-﻿Imports System.Data.SqlClient
-Imports System.IO
+﻿Imports System.IO
+Imports Microsoft.Data.SqlClient
 
 Public Class UC_Terapia
     Private menuFarmaco As ContextMenuStrip
@@ -97,8 +97,8 @@ Public Class UC_Terapia
                          INNER JOIN Farmaci f ON tf.ID_Farmaco = f.ID
                          WHERE tf.ID_Terapia = @IDTerapia"
 
-        Dim param As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@IDTerapia", idVisita)
+        Dim param As New List(Of SqlParameter) From {
+            New SqlParameter("@IDTerapia", idVisita)
         }
 
         Dim dt As DataTable = EseguiQuery(sql, param)
@@ -116,8 +116,8 @@ Public Class UC_Terapia
                          INNER JOIN TerapieRiabilitative tr ON ttr.ID_TerapiaRiabilitativa = tr.ID
                          WHERE ttr.ID_Terapia = @IDTerapia"
 
-        Dim param As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@IDTerapia", idVisita)
+        Dim param As New List(Of SqlParameter) From {
+            New SqlParameter("@IDTerapia", idVisita)
         }
 
         Dim dt As DataTable = EseguiQuery(sql, param)
@@ -139,8 +139,8 @@ Public Class UC_Terapia
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQueryTerapia As String = "SELECT * FROM Terapia WHERE ID_Visita = @idVisita"
 
-        Dim checkParamTerapia As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParamTerapia As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", idVisita)
         }
         Dim dtCheckTerapia As DataTable = EseguiQuery(checkQueryTerapia, checkParamTerapia)
 
@@ -192,9 +192,9 @@ Public Class UC_Terapia
         Else
             esiste = False
             Dim insertQuery As String = "INSERT INTO Terapia (ID_Visita) VALUES (@idVisita)"
-            Dim insertParam As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@idVisita", idVisita),
-                New SqlClient.SqlParameter("Miglioramenti", DBNull.Value)
+            Dim insertParam As New List(Of SqlParameter) From {
+                New SqlParameter("@idVisita", idVisita),
+                New SqlParameter("Miglioramenti", DBNull.Value)
             }
             Dim dtInsertTerapia As DataTable = EseguiQuery(insertQuery, insertParam)
             If dtInsertTerapia.Rows.Count = 1 Then
@@ -451,9 +451,9 @@ Public Class UC_Terapia
                                                     ID_Farmaco) VALUES(
                                                     @idTerapia,
                                                     @idFarmaco)"
-        Dim insertParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idTerapia", idTerapia),
-            New SqlClient.SqlParameter("@idFarmaco", id)
+        Dim insertParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idTerapia", idTerapia),
+            New SqlParameter("@idFarmaco", id)
         }
         Dim esito As Boolean = EseguiNonQuery(insertQuery, insertParam)
 
@@ -549,9 +549,9 @@ Public Class UC_Terapia
                                                     ID_TerapiaRiabilitativa) VALUES(
                                                     @idTerapia,
                                                     @idTerapiaRiabilitativa)"
-        Dim insertParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idTerapia", idTerapia),
-            New SqlClient.SqlParameter("@idTerapiaRiabilitativa", id)
+        Dim insertParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idTerapia", idTerapia),
+            New SqlParameter("@idTerapiaRiabilitativa", id)
         }
         Dim esito As Boolean = EseguiNonQuery(insertQuery, insertParam)
 
@@ -568,9 +568,9 @@ Public Class UC_Terapia
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         Dim removeQuery As String = "DELETE FROM TerapiaFarmaci WHERE ID_Farmaco = @idFarmaco AND ID_Terapia = @idTerapia"
-        Dim removeParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idTerapia", idTerapia),
-            New SqlClient.SqlParameter("@idFarmaco", idFarmaco)
+        Dim removeParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idTerapia", idTerapia),
+            New SqlParameter("@idFarmaco", idFarmaco)
         }
         Dim esito As Boolean = EseguiNonQuery(removeQuery, removeParam)
 
@@ -583,9 +583,9 @@ Public Class UC_Terapia
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         Dim removeQuery As String = "DELETE FROM TerapiaTerapieRiabilitative WHERE ID_TerapiaRiabilitativa = @idTerapiaRiabilitativa AND ID_Terapia = @idTerapia"
-        Dim removeParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idTerapia", idTerapia),
-            New SqlClient.SqlParameter("@idTerapiaRiabilitativa", idTerapiaRiabilitativa)
+        Dim removeParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idTerapia", idTerapia),
+            New SqlParameter("@idTerapiaRiabilitativa", idTerapiaRiabilitativa)
         }
         Dim esito As Boolean = EseguiNonQuery(removeQuery, removeParam)
 
@@ -704,8 +704,8 @@ Public Class UC_Terapia
 
         ' Estraggo i farmaci già associati alla presente terapia
         Dim queryFarmaciTerapia As String = "SELECT ID_Farmaco FROM TerapiaFarmaci WHERE ID_Terapia = @idTerapia"
-        Dim paramFarmaciTerapia As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idTerapia", idTerapia)
+        Dim paramFarmaciTerapia As New List(Of SqlParameter) From {
+            New SqlParameter("@idTerapia", idTerapia)
         }
         Dim dtFarmaciTerapia As DataTable = EseguiQuery(queryFarmaciTerapia, paramFarmaciTerapia)
 
@@ -761,8 +761,8 @@ Public Class UC_Terapia
 
         ' Estraggo i farmaci già associati alla presente terapia
         Dim queryTerapiaTerapieRiabilitative As String = "SELECT ID_TerapiaRiabilitativa FROM TerapiaTerapieRiabilitative WHERE ID_Terapia = @idTerapia"
-        Dim paramTerapiaTerapieRiabilitative As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idTerapia", idTerapia)
+        Dim paramTerapiaTerapieRiabilitative As New List(Of SqlParameter) From {
+            New SqlParameter("@idTerapia", idTerapia)
         }
         Dim dtTerapiaTerapieRiabilitative As DataTable = EseguiQuery(queryTerapiaTerapieRiabilitative, paramTerapiaTerapieRiabilitative)
 
@@ -844,9 +844,9 @@ Public Class UC_Terapia
                                                                 Miglioramenti = @miglioramenti
                                                                 WHERE ID_Visita = @idVisita"
 
-                Dim paramTerapia As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@idVisita", idVisita),
-                    New SqlClient.SqlParameter("@miglioramenti", miglioramenti)
+                Dim paramTerapia As New List(Of SqlParameter) From {
+                    New SqlParameter("@idVisita", idVisita),
+                    New SqlParameter("@miglioramenti", miglioramenti)
                 }
 
                 If EseguiNonQuery(queryTerapia, paramTerapia) > 0 Then

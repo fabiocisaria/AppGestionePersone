@@ -1,4 +1,5 @@
 ﻿Imports System.Web.UI.WebControls
+Imports Microsoft.Data.SqlClient
 
 Public Class UC_ClasseFarmaco
     Public Sub New()
@@ -46,8 +47,8 @@ Public Class UC_ClasseFarmaco
 
         Dim classe As String = TextBoxNomeClasse.Text.Trim()
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@classe", classe)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@classe", classe)
         }
 
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
@@ -83,8 +84,8 @@ Public Class UC_ClasseFarmaco
                                                         ) VALUES (
                                                         @classe)"
 
-                    Dim parametriClassiFarmaci As New List(Of SqlClient.SqlParameter) From {
-                        New SqlClient.SqlParameter("@classe", classe)
+                    Dim parametriClassiFarmaci As New List(Of SqlParameter) From {
+                        New SqlParameter("@classe", classe)
                     }
 
                     If EseguiNonQuery(queryClassiFarmaci, parametriClassiFarmaci) > 0 Then

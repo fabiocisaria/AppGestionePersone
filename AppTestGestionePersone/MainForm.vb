@@ -125,6 +125,18 @@ Public Class MainForm
             .Ricreabile = True
         }
 
+        UCRegistry("VisitaDNATest") = New UCInfo With {
+            .Categoria = "Visita",
+            .Factory = Function() New UC_VisitaDNATest(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("VisitaPapTest") = New UCInfo With {
+            .Categoria = "Visita",
+            .Factory = Function() New UC_VisitaPapTest(),
+            .Ricreabile = True
+        }
+
         UCRegistry("VisitaAnamnesiOstrGineco") = New UCInfo With {
             .Categoria = "Visita",
             .Factory = Function() New UC_VisitaAnamnesiOstrGineco(),
@@ -138,7 +150,7 @@ Public Class MainForm
         }
 
         UCRegistry("ClasseFarmaco") = New UCInfo With {
-            .Categoria = "Farmaco",
+            .Categoria = "ClasseFarmaco",
             .Factory = Function() New UC_ClasseFarmaco(),
             .Ricreabile = True
         }
@@ -1056,6 +1068,67 @@ Public Class MainForm
         ucVisitaTamponeVg.AggiornaDati()
     End Sub
 
+    Private Sub DNATestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DNATestToolStripMenuItem.Click
+        If Me.IDPazienteSelezionato = Nothing Then
+            MostraToast("Seleziona prima un paziente.")
+
+            ' Ottiene l'UC CercaPaziente
+            Dim ucCercaPaziente As UC_CercaPaziente = DirectCast(GetUC("CercaPaziente"), UC_CercaPaziente)
+
+            ' Aggiunge handler se non già aggiunto
+            If Not ucCercaPaziente.IsHandlerAttached Then
+                AddHandler ucCercaPaziente.PazienteSelezionato, AddressOf PazienteSelezionatoHandler
+                ucCercaPaziente.IsHandlerAttached = True
+            End If
+
+            ' Rimuove tutti gli UC Paziente tranne CercaPaziente
+            'RimuoviUC("Paziente")
+
+            ' Rimuove eventuali UC Visita
+            'RimuoviUC("Visita")
+
+            ' Carica UC di ricerca paziente
+            CaricaControllo(ucCercaPaziente, 0, 2)
+            Return
+        End If
+
+        Dim ucDatiPaziente As UC_DatiPaziente = DirectCast(GetUC("DatiPaziente"), UC_DatiPaziente)
+
+        If Me.IDVisitaSelezionata = Nothing Then
+            MostraToast("Seleziona prima una visita.")
+            ' Carico lo UserControl di ricerca visita
+            Dim ucCercaVisita As UC_CercaVisita = DirectCast(GetUC("CercaVisita"), UC_CercaVisita)
+
+            ' Aggiunge handler se non già aggiunto
+            If Not ucCercaVisita.IsHandlerAttached Then
+                AddHandler ucCercaVisita.VisitaSelezionata, AddressOf VisitaSelezionataHandler
+                ucCercaVisita.IsHandlerAttached = True
+            End If
+
+            ' Rimuove eventuali UC Visita
+            'RimuoviUC("Visita")
+
+            ' Carica UC di ricerca paziente
+            CaricaControllo(ucCercaVisita, 0, 2)
+            Return
+        End If
+
+        Dim ucDatiVisita As UC_DatiVisita = DirectCast(GetUC("DatiVisita"), UC_DatiVisita)
+
+        Dim ucVisitaDNATest As UC_VisitaDNATest = DirectCast(GetUC("VisitaDNATest"), UC_VisitaDNATest)
+
+        ' Aggiorna dati paziente
+        ucDatiPaziente.CaricaDatiPaziente(Me)
+        ucDatiVisita.CaricaDatiVisita(Me)
+
+        ' Carica UC
+        CaricaControllo(ucDatiPaziente, 0, 0)
+        CaricaControllo(ucDatiVisita, 0, 1)
+        CaricaControllo(ucVisitaDNATest, 0, 2)
+
+        ucVisitaDNATest.AggiornaDati()
+    End Sub
+
     Private Sub StoriaOstetricoginecologicaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StoriaOstetricoginecologicaToolStripMenuItem.Click
         If Me.IDPazienteSelezionato = Nothing Then
             MostraToast("Seleziona prima un paziente.")
@@ -1165,6 +1238,7 @@ Public Class MainForm
     Private Sub NuovaClasseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuovaClasseToolStripMenuItem.Click
         EliminaControllo(0, 0)
         EliminaControllo(0, 1)
+        RimuoviUC("Farmaco")
         Dim ucClasseFarmaco As UC_ClasseFarmaco = DirectCast(GetUC("ClasseFarmaco"), UC_ClasseFarmaco)
         CaricaControllo(ucClasseFarmaco, 0, 2)
     End Sub

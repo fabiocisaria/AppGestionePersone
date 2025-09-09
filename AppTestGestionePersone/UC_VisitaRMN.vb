@@ -6,6 +6,7 @@ Imports Syncfusion.WinForms.Input
 Imports Syncfusion.WinForms.ListView.Styles
 Imports System.Web.UI.WebControls
 Imports System.Windows.Forms.VisualStyles
+Imports Microsoft.Data.SqlClient
 Public Class UC_VisitaRMN
     Dim idVisita As Integer = -1
 
@@ -150,8 +151,8 @@ Public Class UC_VisitaRMN
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQuery As String = "SELECT * FROM VisitaRMN WHERE ID_Visita = @idVisita"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", idVisita)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -225,11 +226,11 @@ Public Class UC_VisitaRMN
                                                     @dettagliEndometriosi)"
                 End If
 
-                Dim parametriRMN As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@idVisita", idVisita),
-                    New SqlClient.SqlParameter("@dataRMN", dataEsecuzione),
-                    New SqlClient.SqlParameter("@esitoRMN", esitoRMN),
-                    New SqlClient.SqlParameter("@dettagliEndometriosi", dettagliEndometriosi)
+                Dim parametriRMN As New List(Of SqlParameter) From {
+                    New SqlParameter("@idVisita", idVisita),
+                    New SqlParameter("@dataRMN", dataEsecuzione),
+                    New SqlParameter("@esitoRMN", esitoRMN),
+                    New SqlParameter("@dettagliEndometriosi", dettagliEndometriosi)
                 }
 
                 If EseguiNonQuery(queryRMN, parametriRMN) > 0 Then

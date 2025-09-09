@@ -5,6 +5,7 @@ Imports Syncfusion.WinForms.DataGrid.Events
 Imports Syncfusion.WinForms.DataGrid.Interactivity
 Imports Syncfusion.WinForms.Input
 Imports Syncfusion.WinForms.ListView.Styles
+Imports Microsoft.Data.SqlClient
 
 Public Class UC_CercaVisita
     Inherits UserControl

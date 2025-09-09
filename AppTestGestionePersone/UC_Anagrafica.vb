@@ -1,4 +1,5 @@
-﻿Public Class UC_Anagrafica
+﻿Imports Microsoft.Data.SqlClient
+Public Class UC_Anagrafica
     Public Property IDPaziente As Integer
     Public Property CodiceIdentificativoSelezionato As String
     Public Property Cognome As String
@@ -40,7 +41,7 @@
 
         Try
             ' Validazione semplice
-            If String.IsNullOrEmpty(nome) OrElse String.IsNullOrEmpty(cognome) Then
+            If String.IsNullOrEmpty(Nome) OrElse String.IsNullOrEmpty(Cognome) Then
                 HilightControls(True, TextBoxNome)
                 HilightControls(True, TextBoxCognome)
                 Return (False, -1)
@@ -50,10 +51,10 @@
             End If
 
             ' Validazione nom ee cognome per generare codice identificativo
-            If nome.Length >= 2 AndAlso cognome.Length >= 2 Then
-                Dim parteCognome As String = cognome.Substring(0, 2).ToUpper()
-                Dim parteNome As String = nome.Substring(0, 2).ToUpper()
-                Dim parteData As String = dataNascita.ToString("ddMMyyyy")
+            If Nome.Length >= 2 AndAlso Cognome.Length >= 2 Then
+                Dim parteCognome As String = Cognome.Substring(0, 2).ToUpper()
+                Dim parteNome As String = Nome.Substring(0, 2).ToUpper()
+                Dim parteData As String = DataNascita.ToString("ddMMyyyy")
                 codiceID = parteCognome & parteNome & parteData
                 HilightControls(False, TextBoxNome)
                 HilightControls(False, TextBoxCognome)
@@ -80,8 +81,8 @@
             'Verifica se il CodiceIdentificativo esiste già
             Dim checkQuery As String = "SELECT COUNT(*) FROM Anagrafica WHERE CodiceIdentificativo = @CodiceID"
 
-            Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@CodiceID", codiceID)
+            Dim checkParam As New List(Of SqlParameter) From {
+                New SqlParameter("@CodiceID", codiceID)
             }
             Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -92,18 +93,18 @@
 
             'Se non esiste, esegui l'inserimento
             Dim queryAnagrafica As String = "INSERT INTO Anagrafica (Nome, Cognome, DataNascita, CodiceIdentificativo) VALUES (@Nome, @Cognome, @DataNascita, @CodiceID)"
-            Dim parametriAnagrafica As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@Nome", nome),
-                New SqlClient.SqlParameter("@Cognome", cognome),
-                New SqlClient.SqlParameter("@DataNascita", dataNascita),
-                New SqlClient.SqlParameter("@CodiceID", codiceID)
+            Dim parametriAnagrafica As New List(Of SqlParameter) From {
+                New SqlParameter("@Nome", Nome),
+                New SqlParameter("@Cognome", Cognome),
+                New SqlParameter("@DataNascita", DataNascita),
+                New SqlParameter("@CodiceID", codiceID)
             }
 
             If EseguiNonQuery(queryAnagrafica, parametriAnagrafica) > 0 Then
                 CodiceIdentificativoSelezionato = codiceID
                 Dim queryIDAnagrafica As String = "SELECT ID FROM Anagrafica WHERE CodiceIdentificativo = @CodiceID"
-                Dim parametriIDAnagrafica As New List(Of SqlClient.SqlParameter) From {
-                    New SqlClient.SqlParameter("@CodiceID", codiceID)
+                Dim parametriIDAnagrafica As New List(Of SqlParameter) From {
+                    New SqlParameter("@CodiceID", codiceID)
                 }
 
                 'Estraggo l'ID anagrafica associato al paziente appena inserito
@@ -113,11 +114,11 @@
 
                     'Inserisco i dati dell'anamnesi sociale nella tabella AnamnesiSociale
                     Dim queryAnamnesiSociale As String = "INSERT INTO AnamnesiSociale (ID_Anagrafica, Professione, SportPraticati, Relazione) VALUES (@ID_Anagrafica, @Professione, @SportPraticati, @Relazione)"
-                    Dim ParametriAnamnesiSociale As New List(Of SqlClient.SqlParameter) From {
-                        New SqlClient.SqlParameter("@ID_Anagrafica", newID),
-                        New SqlClient.SqlParameter("@Professione", professione),
-                        New SqlClient.SqlParameter("@SportPraticati", sportPraticati),
-                        New SqlClient.SqlParameter("@Relazione", relazione)
+                    Dim ParametriAnamnesiSociale As New List(Of SqlParameter) From {
+                        New SqlParameter("@ID_Anagrafica", newID),
+                        New SqlParameter("@Professione", professione),
+                        New SqlParameter("@SportPraticati", sportPraticati),
+                        New SqlParameter("@Relazione", relazione)
                     }
                     If EseguiNonQuery(queryAnamnesiSociale, ParametriAnamnesiSociale) > 0 Then
                         DirectCast(Me.ParentForm, MainForm).MostraToast("Paziente inserito correttamente.")

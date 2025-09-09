@@ -1,4 +1,5 @@
-﻿Public Class UC_Farmaco
+﻿Imports Microsoft.Data.SqlClient
+Public Class UC_Farmaco
     ' Variabili gestione ComboBox Classi
     Private isPopulatingClassi As Boolean = False
     Private dtClassi As DataTable
@@ -266,9 +267,9 @@
         Dim principioAttivo As String = TextBoxPrincipioAttivo.Text.Trim()
         Dim idVieSomministrazione As Integer = CInt(ComboBoxViaSomministrazione.SelectedValue)
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@nomeCommerciale", nomeCommerciale),
-            New SqlClient.SqlParameter("@idVieSomministrazione", idVieSomministrazione)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@nomeCommerciale", nomeCommerciale),
+            New SqlParameter("@idVieSomministrazione", idVieSomministrazione)
         }
 
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
@@ -313,11 +314,11 @@
                                                         @idClasse,
                                                         @idVieSomministrazione)"
 
-                    Dim parametriFarmaco As New List(Of SqlClient.SqlParameter) From {
-                        New SqlClient.SqlParameter("@nomeCommerciale", nomeCommerciale),
-                        New SqlClient.SqlParameter("@principioAttivo", principioAttivo),
-                        New SqlClient.SqlParameter("@idClasse", idClasse),
-                        New SqlClient.SqlParameter("@idVieSomministrazione", idVieSomministrazione)
+                    Dim parametriFarmaco As New List(Of SqlParameter) From {
+                        New SqlParameter("@nomeCommerciale", nomeCommerciale),
+                        New SqlParameter("@principioAttivo", principioAttivo),
+                        New SqlParameter("@idClasse", idClasse),
+                        New SqlParameter("@idVieSomministrazione", idVieSomministrazione)
                     }
 
                     If EseguiNonQuery(queryFarmaco, parametriFarmaco) > 0 Then

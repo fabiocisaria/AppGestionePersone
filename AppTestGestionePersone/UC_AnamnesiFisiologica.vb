@@ -1,4 +1,5 @@
-﻿Public Class UC_AnamnesiFisiologica
+﻿Imports Microsoft.Data.SqlClient
+Public Class UC_AnamnesiFisiologica
     Private _bmi As Double = 0
     Dim idPaziente As Integer = -1
 
@@ -174,8 +175,8 @@
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQuery As String = "SELECT * FROM AnamnesiFisiologica WHERE ID_Anagrafica = @idAnagrafica"
 
-        Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idAnagrafica", idPaziente)
+        Dim checkParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idAnagrafica", idPaziente)
         }
         Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -282,16 +283,16 @@
                                                         @tipoSigaretta)"
                 End If
 
-                Dim parametriAnamnesiFisio As New List(Of SqlClient.SqlParameter) From {
-                        New SqlClient.SqlParameter("@IDAnagrafica", idPaziente),
-                        New SqlClient.SqlParameter("@Altezza", altezza),
-                        New SqlClient.SqlParameter("@Peso", peso),
-                        New SqlClient.SqlParameter("@BMI", bmi),
-                        New SqlClient.SqlParameter("@Idratazione", idratazione),
-                        New SqlClient.SqlParameter("@Intolleranze", intolleranze),
-                        New SqlClient.SqlParameter("@Allergie", allergie),
-                        New SqlClient.SqlParameter("@FumoQuantita", fumoQuantita),
-                        New SqlClient.SqlParameter("@TipoSigaretta", fumoTipo)
+                Dim parametriAnamnesiFisio As New List(Of SqlParameter) From {
+                        New SqlParameter("@IDAnagrafica", idPaziente),
+                        New SqlParameter("@Altezza", altezza),
+                        New SqlParameter("@Peso", peso),
+                        New SqlParameter("@BMI", bmi),
+                        New SqlParameter("@Idratazione", idratazione),
+                        New SqlParameter("@Intolleranze", intolleranze),
+                        New SqlParameter("@Allergie", allergie),
+                        New SqlParameter("@FumoQuantita", fumoQuantita),
+                        New SqlParameter("@TipoSigaretta", fumoTipo)
                     }
 
                 If EseguiNonQuery(queryAnamnesiFisio, parametriAnamnesiFisio) > 0 Then

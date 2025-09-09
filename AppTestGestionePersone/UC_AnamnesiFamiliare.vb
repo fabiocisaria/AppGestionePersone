@@ -1,4 +1,6 @@
-﻿Public Class UC_AnamnesiFamiliare
+﻿Imports Microsoft.Data.SqlClient
+
+Public Class UC_AnamnesiFamiliare
     Private _aggiornamentoInterno As Boolean = False
 
     Private Sub ResetUC()
@@ -41,9 +43,9 @@
         ElseIf valoriConsentiti.Contains(ComboBoxParentela.Text) Then
             ' Controllo duplicato se il parente selezionato deve essere univoco (Padre, madre, etc)
             Dim checkQuery As String = "SELECT COUNT(*) FROM AnamnesiFamiliare WHERE ID_Anagrafica = @idAna AND ID_Parente = @idParente"
-            Dim checkParam As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@idAna", idSelezionato),
-                New SqlClient.SqlParameter("@idParente", ComboBoxParentela.SelectedValue)
+            Dim checkParam As New List(Of SqlParameter) From {
+                New SqlParameter("@idAna", idSelezionato),
+                New SqlParameter("@idParente", ComboBoxParentela.SelectedValue)
             }
             Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
 
@@ -64,10 +66,10 @@
         If successo Then
             ' Inserimento
             Dim query As String = "INSERT INTO AnamnesiFamiliare (ID_Anagrafica, ID_Parente, Patologie) VALUES (@idAna, @idParente, @patologie)"
-            Dim parametri As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@idAna", idSelezionato),
-                New SqlClient.SqlParameter("@idParente", ComboBoxParentela.SelectedValue),
-                New SqlClient.SqlParameter("@patologie", patologie)
+            Dim parametri As New List(Of SqlParameter) From {
+                New SqlParameter("@idAna", idSelezionato),
+                New SqlParameter("@idParente", ComboBoxParentela.SelectedValue),
+                New SqlParameter("@patologie", patologie)
             }
 
             If EseguiNonQuery(query, parametri) > 0 Then

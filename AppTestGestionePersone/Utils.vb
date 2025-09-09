@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports System.Data.SqlClient
+Imports Microsoft.Data.SqlClient
 Imports Syncfusion.WinForms.Input
 Imports Syncfusion.WinForms.ListView
 
@@ -459,19 +459,19 @@ Module Utils
                 query = "SELECT ID, DataVisita, TipoVisita
                          FROM Visite 
                          WHERE ID_Anagrafica = @codice AND DataVisita = @dataVisita AND TipoVisita = @tipoVisita"
-                parametri.AddRange(New List(Of SqlClient.SqlParameter) From {
-                             New SqlClient.SqlParameter("@codice", idPaziente),
-                             New SqlClient.SqlParameter("@dataVisita", dataVisita.Value),
-                             New SqlClient.SqlParameter("@tipoVisita", tipoVisita)
+                parametri.AddRange(New List(Of SqlParameter) From {
+                             New SqlParameter("@codice", idPaziente),
+                             New SqlParameter("@dataVisita", dataVisita.Value),
+                             New SqlParameter("@tipoVisita", tipoVisita)
                 })
             Else
                 ' Cerco la visita con idPaziente, Data visita
                 query = "SELECT ID, DataVisita, TipoVisita
                          FROM Visite 
                          WHERE ID_Anagrafica = @codice AND DataVisita = @dataVisita"
-                parametri.AddRange(New List(Of SqlClient.SqlParameter) From {
-                             New SqlClient.SqlParameter("@codice", idPaziente),
-                             New SqlClient.SqlParameter("@dataVisita", dataVisita.Value)
+                parametri.AddRange(New List(Of SqlParameter) From {
+                             New SqlParameter("@codice", idPaziente),
+                             New SqlParameter("@dataVisita", dataVisita.Value)
                              })
             End If
         ElseIf Not String.IsNullOrEmpty(tipoVisita) Then
@@ -479,16 +479,16 @@ Module Utils
             query = "SELECT ID, DataVisita, TipoVisita
                      FROM Visite 
                      WHERE ID_Anagrafica = @codice AND TipoVisita = @tipoVisita"
-            parametri.AddRange(New List(Of SqlClient.SqlParameter) From {
-                             New SqlClient.SqlParameter("@codice", idPaziente),
-                             New SqlClient.SqlParameter("@tipoVisita", tipoVisita)
+            parametri.AddRange(New List(Of SqlParameter) From {
+                             New SqlParameter("@codice", idPaziente),
+                             New SqlParameter("@tipoVisita", tipoVisita)
                 })
         Else
             ' Cerco la visita con idPaziente
             query = "SELECT ID, DataVisita, TipoVisita
                          FROM Visite 
                          WHERE ID_Anagrafica = @codice"
-            parametri.Add(New SqlClient.SqlParameter("@codice", idPaziente))
+            parametri.Add(New SqlParameter("@codice", idPaziente))
         End If
 
         Dim risultato As DataTable = EseguiQuery(query, parametri)

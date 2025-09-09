@@ -1,5 +1,6 @@
 ﻿Imports System.Security.Authentication.ExtendedProtection
 Imports System.Web.UI.Design
+Imports Microsoft.Data.SqlClient
 
 Public Class UC_VisitaAnamnesiOstrGineco
     Dim idVisita As Integer = -1
@@ -317,14 +318,14 @@ Public Class UC_VisitaAnamnesiOstrGineco
         'Verifica che non esista già la parte uro - ginecologica per quella visita
         Dim checkQueryGineco As String = "SELECT * FROM VisitaAnamnesiGinecologica WHERE ID_Visita = @idVisita"
 
-        Dim checkParamGineco As New List(Of SqlClient.SqlParameter) From {
-            New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParamGineco As New List(Of SqlParameter) From {
+            New SqlParameter("@idVisita", idVisita)
         }
         Dim dtCheckGineco As DataTable = EseguiQuery(checkQueryGineco, checkParamGineco)
         Dim checkQueryOstetrico As String = "SELECT * FROM VisitaAnamnesiOstetrica WHERE ID_Visita = @idVisita"
 
-        Dim checkParamOstetrico As New List(Of SqlClient.SqlParameter) From {
-                New SqlClient.SqlParameter("@idVisita", idVisita)
+        Dim checkParamOstetrico As New List(Of SqlParameter) From {
+                New SqlParameter("@idVisita", idVisita)
             }
         Dim dtCheckOstetrico As DataTable = EseguiQuery(checkQueryOstetrico, checkParamOstetrico)
 
@@ -679,28 +680,28 @@ Public Class UC_VisitaAnamnesiOstrGineco
                                                     @episiotomia)"
                 End If
 
-                Dim parametriAnGineco As New List(Of SqlClient.SqlParameter) From {
-                            New SqlClient.SqlParameter("@idVisita", idVisita),
-                            New SqlClient.SqlParameter("@usoContracc", usoContracc),
-                            New SqlClient.SqlParameter("@usoDienogest", usoDienogest),
-                            New SqlClient.SqlParameter("@estrogeno", estrogeno),
-                            New SqlClient.SqlParameter("@progesterone", progesterone),
-                            New SqlClient.SqlParameter("@amenorrea", amenorrea),
-                            New SqlClient.SqlParameter("@dismenorrea", dismenorrea),
-                            New SqlClient.SqlParameter("@menopausa", menopausa),
-                            New SqlClient.SqlParameter("@tipoContraccettivo", TipoContraccettivo)
+                Dim parametriAnGineco As New List(Of SqlParameter) From {
+                            New SqlParameter("@idVisita", idVisita),
+                            New SqlParameter("@usoContracc", usoContracc),
+                            New SqlParameter("@usoDienogest", usoDienogest),
+                            New SqlParameter("@estrogeno", estrogeno),
+                            New SqlParameter("@progesterone", progesterone),
+                            New SqlParameter("@amenorrea", amenorrea),
+                            New SqlParameter("@dismenorrea", dismenorrea),
+                            New SqlParameter("@menopausa", menopausa),
+                            New SqlParameter("@tipoContraccettivo", TipoContraccettivo)
                         }
 
-                Dim parametriAnOstetrico As New List(Of SqlClient.SqlParameter) From {
-                            New SqlClient.SqlParameter("@idVisita", idVisita),
-                            New SqlClient.SqlParameter("@gravidanze", gravidanze),
-                            New SqlClient.SqlParameter("@partiNaturali", partiNaturali),
-                            New SqlClient.SqlParameter("@partiCesarei", partiCesarei),
-                            New SqlClient.SqlParameter("@partiOperativi", partiOperativi),
-                            New SqlClient.SqlParameter("@ventosaOstetrica", ventosaOstetrica),
-                            New SqlClient.SqlParameter("@kristeller", kristeller),
-                            New SqlClient.SqlParameter("@lacerazioni", lacerazioni),
-                            New SqlClient.SqlParameter("@episiotomia", episiotomia)
+                Dim parametriAnOstetrico As New List(Of SqlParameter) From {
+                            New SqlParameter("@idVisita", idVisita),
+                            New SqlParameter("@gravidanze", gravidanze),
+                            New SqlParameter("@partiNaturali", partiNaturali),
+                            New SqlParameter("@partiCesarei", partiCesarei),
+                            New SqlParameter("@partiOperativi", partiOperativi),
+                            New SqlParameter("@ventosaOstetrica", ventosaOstetrica),
+                            New SqlParameter("@kristeller", kristeller),
+                            New SqlParameter("@lacerazioni", lacerazioni),
+                            New SqlParameter("@episiotomia", episiotomia)
                         }
 
                 If EseguiNonQuery(queryAnGineco, parametriAnGineco) > 0 And EseguiNonQuery(queryAnOstetrico, parametriAnOstetrico) > 0 Then

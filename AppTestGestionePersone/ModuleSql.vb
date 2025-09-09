@@ -1,19 +1,39 @@
-﻿Imports System.Data.SqlClient
+﻿'Imports System.Data.SqlClient
+'Imports System.Data.SqlClient
+Imports Azure.Core
+Imports Azure.Identity
+Imports Microsoft.Data.SqlClient
 
 Module ConnessioneDB
     ' 🔹 Stringa di connessione centralizzata
-    Public connectionString As String = "Server=192.168.49.128,1433;Database=GestionePersone;User Id=sa;Password=Admin2025;"
+    'Public connectionString As String = "Server=192.168.49.128,1433;Database=GestionePersone;User Id=sa;Password=Admin2025;"
+    Public connectionString As String = "Server = tcp:gynarchive-svr.database.windows.net,1433;
+                                         Database = GynArchiveDB;
+                                         Authentication=Active Directory Interactive;
+                                         Encrypt = True;
+                                         TrustServerCertificate = False;"
 
-    ' 🔹 Funzione per aprire una connessione SQL
+    ' 🔹 Funzione per aprire una connessione SQL con token Azure AD
     Public Function GetConnection() As SqlConnection
         Dim conn As New SqlConnection(connectionString)
         Try
             conn.Open()
         Catch ex As Exception
-            MessageBox.Show("Errore di connessione al database: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Errore di connessione al database: " & ex.Message)
         End Try
         Return conn
     End Function
+
+    ' 🔹 Funzione per aprire una connessione SQL
+    'Public Function GetConnection() As SqlConnection
+    '   Dim conn As New SqlConnection(connectionString)
+    '   Try
+    '       conn.Open()
+    '   Catch ex As Exception
+    '       MessageBox.Show("Errore di connessione al database: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    ' End Try
+    'Return conn
+    'End Function
 
     ' 🔹 Funzione per eseguire query di tipo INSERT/UPDATE/DELETE
     Public Function EseguiNonQuery(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Integer
