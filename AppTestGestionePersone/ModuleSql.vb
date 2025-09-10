@@ -9,9 +9,17 @@ Module ConnessioneDB
     'Public connectionString As String = "Server=192.168.49.128,1433;Database=GestionePersone;User Id=sa;Password=Admin2025;"
     Public connectionString As String = "Server = tcp:gynarchive-svr.database.windows.net,1433;
                                          Database = GynArchiveDB;
-                                         Authentication=Active Directory Interactive;
+                                         Authentication = Active Directory Interactive;
                                          Encrypt = True;
+                                         Column Encryption Setting = Disabled;
                                          TrustServerCertificate = False;"
+
+    ' Dizionario che mappa le colonne crittografate
+    'Private ReadOnly EncryptedColumns As New Dictionary(Of String, (SqlDbType, Integer))(StringComparer.OrdinalIgnoreCase) From {
+    '    {"@CodiceIdentificativo", (SqlDbType.NVarChar, 20)},
+    '    {"@Nome", (SqlDbType.NVarChar, 50)},
+    '    {"@Cognome", (SqlDbType.NVarChar, 50)}
+    '}
 
     ' 🔹 Funzione per aprire una connessione SQL con token Azure AD
     Public Function GetConnection() As SqlConnection
@@ -35,12 +43,34 @@ Module ConnessioneDB
     'Return conn
     'End Function
 
+    ' Normalizzo i parametri per le colonne crittografate
+    'Private Function NormalizeParameters(parameters As List(Of SqlParameter)) As List(Of SqlParameter)
+    '    Dim normalized As New List(Of SqlParameter)
+    '
+    '        For Each p In parameters
+    '            If EncryptedColumns.ContainsKey(p.ParameterName) Then
+    '                Dim info = EncryptedColumns(p.ParameterName)
+    '                Dim fixedParam As New SqlParameter(p.ParameterName, info.Item1)
+    '                If info.Item2 > 0 Then fixedParam.Size = info.Item2
+    '                fixedParam.Value = p.Value
+    '                normalized.Add(fixedParam)
+    '            Else
+    '                normalized.Add(p)
+    '    End If
+    '    Next
+    '
+    '    Return normalized
+    '    End Function
+
     ' 🔹 Funzione per eseguire query di tipo INSERT/UPDATE/DELETE
     Public Function EseguiNonQuery(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Integer
         Dim righeAffette As Integer = 0
         Using conn As SqlConnection = GetConnection()
             Using cmd As New SqlCommand(query, conn)
                 If parameters IsNot Nothing Then
+                    ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)
+                    'Dim fixedParams = NormalizeParameters(parameters)
+                    'cmd.Parameters.AddRange(fixedParams.ToArray())
                     cmd.Parameters.AddRange(parameters.ToArray())
                 End If
                 Try
@@ -58,6 +88,9 @@ Module ConnessioneDB
         Using conn As SqlConnection = GetConnection()
             Using cmd As New SqlCommand(query, conn)
                 If parameters IsNot Nothing Then
+                    ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)
+                    'Dim fixedParams = NormalizeParameters(parameters)
+                    'cmd.Parameters.AddRange(fixedParams.ToArray())
                     cmd.Parameters.AddRange(parameters.ToArray())
                 End If
                 Try
@@ -82,6 +115,9 @@ Module ConnessioneDB
         Using conn As SqlConnection = GetConnection()
             Using cmd As New SqlCommand(query, conn)
                 If parameters IsNot Nothing Then
+                    ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)
+                    'Dim fixedParams = NormalizeParameters(parameters)
+                    'cmd.Parameters.AddRange(fixedParams.ToArray())
                     cmd.Parameters.AddRange(parameters.ToArray())
                 End If
                 Try

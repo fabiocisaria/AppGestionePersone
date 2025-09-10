@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Controllare i valori degli attributi degli assembly
 
-<Assembly: AssemblyTitle("AppTestGestionePersone")>
+<Assembly: AssemblyTitle("GynArchive")>
 <Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("Siemens AG")>
-<Assembly: AssemblyProduct("AppTestGestionePersone")>
-<Assembly: AssemblyCopyright("Copyright © Siemens AG 2025")>
+<Assembly: AssemblyCompany("Fabio Cisaria")>
+<Assembly: AssemblyProduct("GynArchive")>
+<Assembly: AssemblyCopyright("Copyright © Fabio Cisaria")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -28,5 +28,5 @@ Imports System.Runtime.InteropServices
 '      Revisione
 '
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("3.1.1.11")>
+<Assembly: AssemblyFileVersion("3.1.1.11")>
