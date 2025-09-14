@@ -17,6 +17,10 @@ Public Class UC_Farmaco
     Public Sub New()
         InitializeComponent()
 
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDatiFarmaco.BackColor = Theme.BackgroundColor
+        TableLayoutPanelFarmaco.BackColor = Theme.BackgroundColor
+
         ' ====================
         ' SfButtons
         ' ====================
@@ -33,7 +37,7 @@ Public Class UC_Farmaco
 
         With ComboBoxViaSomministrazione
             ' Imposta i dati
-            PopolaComboBoxVieSomministrazione()
+            PopolaComboBoxVieSomministrazioneAsync()
 
             ' Stile
             .DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList
@@ -46,7 +50,7 @@ Public Class UC_Farmaco
 
         With ComboBoxClasse
             ' Popola i ceppi dal database
-            PopolaComboBoxClasse()
+            PopolaComboBoxClasseAsync()
 
             ' Stile
             .DropDownStyle = Syncfusion.WinForms.ListView.Enums.DropDownStyle.DropDownList
@@ -67,11 +71,11 @@ Public Class UC_Farmaco
     End Sub
 
     'TODO
-    Private Sub PopolaComboBoxClasse()
+    Private Async Sub PopolaComboBoxClasseAsync()
         isPopulatingClassi = True ' ← Blocca TextChanged durante il popolamento
 
         Dim query As String = "SELECT ID, Classe FROM ClassiFarmaci ORDER BY Classe"
-        dtClassiOriginale = EseguiQuery(query)
+        dtClassiOriginale = Await ConnessioneDB.EseguiQueryAsync(query)
 
         ComboBoxClasse.DataSource = dtClassiOriginale
         ComboBoxClasse.DisplayMember = "Classe"
@@ -85,13 +89,13 @@ Public Class UC_Farmaco
         isPopulatingClassi = False ' ← Sblocca TextChanged dopo il popolamento
     End Sub
 
-    Private Sub PopolaComboBoxVieSomministrazione()
+    Private Async Sub PopolaComboBoxVieSomministrazioneAsync()
         isPopulatingSomministrazione = True ' ← Blocca TextChanged durante il popolamento
 
         Dim query As String = "SELECT ID, Categoria, Sottocategoria 
                                FROM FarmacoVieSomministrazione 
                                ORDER BY Categoria, Sottocategoria"
-        dtSomministrazioneOriginale = EseguiQuery(query)
+        dtSomministrazioneOriginale = Await ConnessioneDB.EseguiQueryAsync(query)
 
         If Not dtSomministrazioneOriginale.Columns.Contains("Descrizione") Then
             dtSomministrazioneOriginale.Columns.Add("Descrizione", GetType(String), "Categoria + ' - ' + Sottocategoria")
@@ -256,7 +260,7 @@ Public Class UC_Farmaco
         Return esito
     End Function
 
-    Private Function CercaFarmaco() As Boolean
+    Private Async Function CercaFarmacoAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         Dim esiste As Boolean = False
 
@@ -272,7 +276,7 @@ Public Class UC_Farmaco
             New SqlParameter("@idVieSomministrazione", idVieSomministrazione)
         }
 
-        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+        Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count <> 0 Then
             esiste = True ' Farmaco già presente
@@ -283,7 +287,7 @@ Public Class UC_Farmaco
         Return esiste
     End Function
 
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
         Dim selezioneOK As Boolean = CheckSelezione()
         Dim esito As Boolean = True
 
@@ -300,7 +304,7 @@ Public Class UC_Farmaco
             ' TODO
             Try
                 Dim queryFarmaco As String = ""
-                Dim esiste As Boolean = CercaFarmaco()
+                Dim esiste As Boolean = Await CercaFarmacoAsync()
 
                 If Not esiste Then
                     queryFarmaco = "INSERT INTO Farmaci (
@@ -321,7 +325,7 @@ Public Class UC_Farmaco
                         New SqlParameter("@idVieSomministrazione", idVieSomministrazione)
                     }
 
-                    If EseguiNonQuery(queryFarmaco, parametriFarmaco) > 0 Then
+                    If Await ConnessioneDB.EseguiNonQueryAsync(queryFarmaco, parametriFarmaco) > 0 Then
                         successo = True
                     End If
 
@@ -343,8 +347,16 @@ Public Class UC_Farmaco
         Return esito
     End Function
 
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito As Boolean = SalvaDati()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelFarmaco.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelFarmaco.Enabled = True
         If esito Then
             PulisciCampi(TextBoxNomeCommerciale, TextBoxPrincipioAttivo, ComboBoxClasse, ComboBoxViaSomministrazione)
         End If

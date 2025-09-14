@@ -33,12 +33,12 @@ Partial Class UC_Anagrafica
         Me.LabelNome = New System.Windows.Forms.Label()
         Me.LabelCognome = New System.Windows.Forms.Label()
         Me.LabelDataNascita = New System.Windows.Forms.Label()
-        Me.ButtonInserisci = New System.Windows.Forms.Button()
         Me.TextBoxNome = New System.Windows.Forms.TextBox()
         Me.TextBoxCognome = New System.Windows.Forms.TextBox()
         Me.GroupBoxAnagrafica = New System.Windows.Forms.GroupBox()
         Me.LabelCodiceID = New System.Windows.Forms.Label()
         Me.TableLayoutPanelUCAnagrafica = New System.Windows.Forms.TableLayoutPanel()
+        Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelCodiceGenerato = New System.Windows.Forms.Label()
         Me.GroupBoxAnamnesiSociale.SuspendLayout()
@@ -149,16 +149,6 @@ Partial Class UC_Anagrafica
         Me.LabelDataNascita.TabIndex = 2
         Me.LabelDataNascita.Text = "Data di nascita"
         '
-        'ButtonInserisci
-        '
-        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.ButtonInserisci.Location = New System.Drawing.Point(688, 465)
-        Me.ButtonInserisci.Name = "ButtonInserisci"
-        Me.ButtonInserisci.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonInserisci.TabIndex = 10
-        Me.ButtonInserisci.Text = "Inserisci"
-        Me.ButtonInserisci.UseVisualStyleBackColor = True
-        '
         'TextBoxNome
         '
         Me.TextBoxNome.Location = New System.Drawing.Point(63, 19)
@@ -201,11 +191,12 @@ Partial Class UC_Anagrafica
         '
         'TableLayoutPanelUCAnagrafica
         '
+        Me.TableLayoutPanelUCAnagrafica.BackColor = System.Drawing.Color.White
         Me.TableLayoutPanelUCAnagrafica.ColumnCount = 1
         Me.TableLayoutPanelUCAnagrafica.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanelUCAnagrafica.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelUCAnagrafica.Controls.Add(Me.GroupBoxAnagrafica, 0, 0)
         Me.TableLayoutPanelUCAnagrafica.Controls.Add(Me.ButtonInserisci, 0, 3)
+        Me.TableLayoutPanelUCAnagrafica.Controls.Add(Me.GroupBoxAnagrafica, 0, 0)
         Me.TableLayoutPanelUCAnagrafica.Controls.Add(Me.GroupBoxAnamnesiSociale, 0, 1)
         Me.TableLayoutPanelUCAnagrafica.Controls.Add(Me.TableLayoutPanel2, 0, 2)
         Me.TableLayoutPanelUCAnagrafica.Dock = System.Windows.Forms.DockStyle.Fill
@@ -220,12 +211,24 @@ Partial Class UC_Anagrafica
         Me.TableLayoutPanelUCAnagrafica.Size = New System.Drawing.Size(766, 516)
         Me.TableLayoutPanelUCAnagrafica.TabIndex = 13
         '
+        'ButtonInserisci
+        '
+        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(667, 463)
+        Me.ButtonInserisci.Name = "ButtonInserisci"
+        Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
+        Me.ButtonInserisci.TabIndex = 14
+        Me.ButtonInserisci.Text = "Inserisci"
+        '
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.White
         Me.TableLayoutPanel2.ColumnCount = 2
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.1453!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.8547!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.LabelCodiceGenerato, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.LabelCodiceID, 1, 0)
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 371)
@@ -274,7 +277,6 @@ Partial Class UC_Anagrafica
     Friend WithEvents LabelNome As Label
     Friend WithEvents LabelCognome As Label
     Friend WithEvents LabelDataNascita As Label
-    Friend WithEvents ButtonInserisci As Button
     Friend WithEvents TextBoxNome As TextBox
     Friend WithEvents TextBoxCognome As TextBox
     Friend WithEvents GroupBoxAnagrafica As GroupBox
@@ -282,4 +284,5 @@ Partial Class UC_Anagrafica
     Friend WithEvents TableLayoutPanelUCAnagrafica As TableLayoutPanel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents LabelCodiceGenerato As Label
+    Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
 End Class

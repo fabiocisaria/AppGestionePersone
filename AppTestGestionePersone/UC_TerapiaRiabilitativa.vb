@@ -4,6 +4,10 @@ Public Class UC_TerapiaRiabilitativa
     Public Sub New()
         InitializeComponent()
 
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanelTerapRiab.BackColor = Theme.BackgroundColor
+        TableLayoutPanelTerapiaRiabilitativa.BackColor = Theme.BackgroundColor
+
         ' ====================
         ' SfButtons
         ' ====================
@@ -37,7 +41,7 @@ Public Class UC_TerapiaRiabilitativa
         Return esito
     End Function
 
-    Private Function CercaClasse() As Boolean
+    Private Async Function CercaClasseAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         Dim esiste As Boolean = False
 
@@ -50,7 +54,7 @@ Public Class UC_TerapiaRiabilitativa
             New SqlParameter("@nomeTerapia", nomeTerapia)
         }
 
-        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+        Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count <> 0 Then
             esiste = True ' Classe di farmaco esistente
@@ -61,7 +65,7 @@ Public Class UC_TerapiaRiabilitativa
         Return esiste
     End Function
 
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
         Dim selezioneOK As Boolean = CheckSelezione()
         Dim esito As Boolean = True
 
@@ -75,7 +79,7 @@ Public Class UC_TerapiaRiabilitativa
             ' TODO
             Try
                 Dim queryClassiFarmaci As String = ""
-                Dim esiste As Boolean = CercaClasse()
+                Dim esiste As Boolean = Await CercaClasseAsync()
 
                 If Not esiste Then
                     queryClassiFarmaci = "INSERT INTO TerapieRiabilitative (
@@ -87,7 +91,7 @@ Public Class UC_TerapiaRiabilitativa
                         New SqlParameter("@nomeTerapia", nomeTerapia)
                     }
 
-                    If EseguiNonQuery(queryClassiFarmaci, parametriClassiFarmaci) > 0 Then
+                    If Await ConnessioneDB.EseguiNonQueryAsync(queryClassiFarmaci, parametriClassiFarmaci) > 0 Then
                         successo = True
                     End If
 
@@ -109,8 +113,16 @@ Public Class UC_TerapiaRiabilitativa
         Return esito
     End Function
 
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito = SalvaDati()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelTerapiaRiabilitativa.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelTerapiaRiabilitativa.Enabled = True
         If esito Then
             PulisciCampi(TextBoxNomeTerapiaRiabilitativa)
         End If

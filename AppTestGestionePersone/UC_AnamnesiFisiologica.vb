@@ -5,23 +5,61 @@ Public Class UC_AnamnesiFisiologica
 
     Dim esiste As Boolean = False
     Dim appenaSalvati As Boolean = False
-    Public Sub AggiornaDati()
+
+    Public Sub New()
+        InitializeComponent()
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+        TableLayoutPanel3.BackColor = Theme.BackgroundColor
+        TableLayoutPanel4.BackColor = Theme.BackgroundColor
+        TableLayoutPanel5.BackColor = Theme.BackgroundColor
+        TableLayoutPanel6.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAnamnesiFisiologica.BackColor = Theme.BackgroundColor
+
+        SetControlsEnabled(False, ComboBoxTipo)
+
+        ' ====================
+        ' SfButtons
+        ' ====================
+        With ButtonInserisci.Style
+            .BackColor = Color.FromArgb(41, 128, 185)
+            .HoverBackColor = Color.FromArgb(31, 97, 144)  ' colore hover
+            .PressedBackColor = Color.FromArgb(31, 97, 144) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(31, 97, 144) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
+    End Sub
+
+    Public Async Sub AggiornaDatiAsync()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             idPaziente = main.IDPazienteSelezionato
-            esiste = CercaAnamnesi()
+
+            TableLayoutPanelAnamnesiFisiologica.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaAnamnesiAsync()
+            TableLayoutPanelAnamnesiFisiologica.Enabled = True
             If Not esiste Then
                 ResetUC()
             End If
         End If
     End Sub
-    Private Sub FormAnamnesiFisiologica_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub FormAnamnesiFisiologica_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             ' Carico i parametri della visita selezionata
             idPaziente = main.IDPazienteSelezionato
-            ' Cerco se esiste già l'anamnesi fisiologica per il paziente selezionato
-            esiste = CercaAnamnesi()
+
+            TableLayoutPanelAnamnesiFisiologica.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaAnamnesiAsync()
+            TableLayoutPanelAnamnesiFisiologica.Enabled = True
+
             If Not esiste Then
                 ResetUC()
                 'PulisciCampi(TableLayoutPanelAnamnesiFisiologica)
@@ -44,11 +82,6 @@ Public Class UC_AnamnesiFisiologica
 
     Private Sub ResetUC()
         PulisciCampi(TextBoxAltezza, TextBoxPeso, TextBoxAllergie, TextBoxIntolleranze, ComboBoxIdratazione, ComboBoxQuantita, ComboBoxTipo)
-        SetControlsEnabled(False, ComboBoxTipo)
-    End Sub
-
-    Public Sub New()
-        InitializeComponent()
         SetControlsEnabled(False, ComboBoxTipo)
     End Sub
 
@@ -132,8 +165,8 @@ Public Class UC_AnamnesiFisiologica
             main.MostraToast("Compilare tutti i campi obbligatori.")
         Else
             altezza = Double.TryParse(TextBoxAltezza.Text, altezza)
-            peso = Double.TryParse(TextBoxPeso.Text, altezza)
-            bmi = Double.TryParse(TextBoxBMI.Text, altezza)
+            peso = Double.TryParse(TextBoxPeso.Text, peso)
+            bmi = Double.TryParse(TextBoxBMI.Text, bmi)
             idratazione = ComboBoxIdratazione.SelectedItem.ToString()
             intolleranze = TextBoxIntolleranze.Text
             allergie = TextBoxAllergie.Text
@@ -166,7 +199,7 @@ Public Class UC_AnamnesiFisiologica
     End Function
 
     ' TODO
-    Private Function CercaAnamnesi() As Boolean
+    Private Async Function CercaAnamnesiAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Carico i parametri della visita selezionata
@@ -178,7 +211,7 @@ Public Class UC_AnamnesiFisiologica
         Dim checkParam As New List(Of SqlParameter) From {
             New SqlParameter("@idAnagrafica", idPaziente)
         }
-        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+        Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count = 1 Then
             esiste = True ' anamnesi fisiologica esistente
@@ -205,7 +238,7 @@ Public Class UC_AnamnesiFisiologica
         Return esiste
     End Function
 
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
         Dim selezioneOK As Boolean = CheckSelezione()
         Dim esito As Boolean = True
 
@@ -295,7 +328,7 @@ Public Class UC_AnamnesiFisiologica
                         New SqlParameter("@TipoSigaretta", fumoTipo)
                     }
 
-                If EseguiNonQuery(queryAnamnesiFisio, parametriAnamnesiFisio) > 0 Then
+                If Await ConnessioneDB.EseguiNonQueryAsync(queryAnamnesiFisio, parametriAnamnesiFisio) > 0 Then
                     successo = True
                 End If
 
@@ -320,11 +353,24 @@ Public Class UC_AnamnesiFisiologica
         Return esito
     End Function
 
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito = SalvaDati()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelAnamnesiFisiologica.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelAnamnesiFisiologica.Enabled = True
         If esito Then
             appenaSalvati = True
-            CercaAnamnesi()
+            TableLayoutPanelAnamnesiFisiologica.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            Dim resultAnamnesi = Await CercaAnamnesiAsync()
+            TableLayoutPanelAnamnesiFisiologica.Enabled = True
         End If
         'If esito Then
         'ResetUC() ' Pulisci e resetta i campi

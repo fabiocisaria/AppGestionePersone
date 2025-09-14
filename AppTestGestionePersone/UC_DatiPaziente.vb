@@ -1,4 +1,17 @@
 ﻿Public Class UC_DatiPaziente
+    Public Sub New()
+
+        ' La chiamata è richiesta dalla finestra di progettazione.
+        InitializeComponent()
+
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDatiPaziente.BackColor = Theme.BackgroundColor
+
+        ' Aggiungere le eventuali istruzioni di inizializzazione dopo la chiamata a InitializeComponent().
+
+    End Sub
+
     ' ====================
     ' Configuro le textbox dei dati del paziente affinché sembrino label
     ' ====================

@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Runtime.CompilerServices
 Imports Microsoft.Data.SqlClient
 
 Public Class UC_Terapia
@@ -13,6 +14,13 @@ Public Class UC_Terapia
 
     Public Sub New()
         InitializeComponent()
+
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+        TableLayoutPanel3.BackColor = Theme.BackgroundColor
+        TableLayoutPanelMiglioramenti.BackColor = Theme.BackgroundColor
+        TableLayoutPanelTerapia.BackColor = Theme.BackgroundColor
+
         ' ====================
         ' SfButtons
         ' ====================
@@ -65,33 +73,45 @@ Public Class UC_Terapia
         ' Associa pulsanti
     End Sub
 
-    Private Sub FormTerapia_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub FormTerapia_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             ' Carico i parametri della visita selezionata
             idVisita = main.IDVisitaSelezionata
             tipoVisita = main.TipoVisitaSelezionata
             ' Cerco se esiste già una visita uro-ginecologica per la visita selezionata
-            esiste = CercaVisita()
+            TableLayoutPanelTerapia.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelTerapia.Enabled = True
+
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelMiglioramenti)
             End If
         End If
     End Sub
 
-    Public Sub AggiornaDati()
+    Public Async Sub AggiornaDatiAsync()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             idVisita = main.IDVisitaSelezionata
             tipoVisita = main.TipoVisitaSelezionata
-            esiste = CercaVisita()
+
+            TableLayoutPanelTerapia.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelTerapia.Enabled = True
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelMiglioramenti)
             End If
         End If
     End Sub
 
-    Private Function CercaFarmaci(idVisita As Integer) As List(Of (ID As Integer, Nome As String))
+    Private Async Function CercaFarmaciAsync(idVisita As Integer) As Task(Of List(Of (ID As Integer, Nome As String)))
         Dim sql As String = "SELECT f.ID, f.NomeCommerciale 
                          FROM TerapiaFarmaci tf
                          INNER JOIN Farmaci f ON tf.ID_Farmaco = f.ID
@@ -101,7 +121,7 @@ Public Class UC_Terapia
             New SqlParameter("@IDTerapia", idVisita)
         }
 
-        Dim dt As DataTable = EseguiQuery(sql, param)
+        Dim dt As DataTable = Await ConnessioneDB.EseguiQueryAsync(sql, param)
         Dim lista As New List(Of (Integer, String))
         For Each row As DataRow In dt.Rows
             lista.Add((CInt(row("ID")), row("NomeCommerciale").ToString()))
@@ -110,7 +130,7 @@ Public Class UC_Terapia
         Return lista
     End Function
 
-    Private Function CercaTerapieRiabilitative(idVisita As Integer) As List(Of (ID As Integer, Nome As String))
+    Private Async Function CercaTerapieRiabilitativeAsync(idVisita As Integer) As Task(Of List(Of (ID As Integer, Nome As String)))
         Dim sql As String = "SELECT tr.ID, tr.NomeTerapia 
                          FROM TerapiaTerapieRiabilitative ttr
                          INNER JOIN TerapieRiabilitative tr ON ttr.ID_TerapiaRiabilitativa = tr.ID
@@ -120,7 +140,7 @@ Public Class UC_Terapia
             New SqlParameter("@IDTerapia", idVisita)
         }
 
-        Dim dt As DataTable = EseguiQuery(sql, param)
+        Dim dt As DataTable = Await ConnessioneDB.EseguiQueryAsync(sql, param)
         Dim lista As New List(Of (Integer, String))
         For Each row As DataRow In dt.Rows
             lista.Add((CInt(row("ID")), row("NomeTerapia").ToString()))
@@ -129,7 +149,7 @@ Public Class UC_Terapia
         Return lista
     End Function
 
-    Private Function CercaVisita() As Boolean
+    Private Async Function CercaVisitaAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Carico i parametri della visita selezionata
@@ -142,7 +162,7 @@ Public Class UC_Terapia
         Dim checkParamTerapia As New List(Of SqlParameter) From {
             New SqlParameter("@idVisita", idVisita)
         }
-        Dim dtCheckTerapia As DataTable = EseguiQuery(checkQueryTerapia, checkParamTerapia)
+        Dim dtCheckTerapia As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQueryTerapia, checkParamTerapia)
 
         Dim dettagliTerapia As DataRow
 
@@ -176,7 +196,10 @@ Public Class UC_Terapia
             '=======
             'Farmaci
             '=======
-            Dim farmaci As List(Of (ID As Integer, Nome As String)) = CercaFarmaci(idVisita)
+            FlowLayoutPanelFarmaci.Enabled = False
+            Dim farmaci As List(Of (ID As Integer, Nome As String)) = Await CercaFarmaciAsync(idVisita)
+            FlowLayoutPanelFarmaci.Enabled = True
+
             For Each f In farmaci
                 CaricaFarmacoPanel(f.ID, f.Nome)
             Next
@@ -184,7 +207,10 @@ Public Class UC_Terapia
             '=====================
             'Terapie riabilitative
             '=====================
-            Dim terapie As List(Of (ID As Integer, Nome As String)) = CercaTerapieRiabilitative(idVisita)
+            FlowLayoutPanelTerapieRiabilitative.Enabled = False
+            Dim terapie As List(Of (ID As Integer, Nome As String)) = Await CercaTerapieRiabilitativeAsync(idVisita)
+            FlowLayoutPanelTerapieRiabilitative.Enabled = True
+
             For Each t In terapie
                 CaricaTerapiaRiabilitativaPanel(t.ID, t.Nome)
             Next
@@ -196,7 +222,7 @@ Public Class UC_Terapia
                 New SqlParameter("@idVisita", idVisita),
                 New SqlParameter("Miglioramenti", DBNull.Value)
             }
-            Dim dtInsertTerapia As DataTable = EseguiQuery(insertQuery, insertParam)
+            Dim dtInsertTerapia As DataTable = Await ConnessioneDB.EseguiQueryAsync(insertQuery, insertParam)
             If dtInsertTerapia.Rows.Count = 1 Then
                 esiste = True
                 dettagliTerapia = dtInsertTerapia.Rows(0)
@@ -260,7 +286,7 @@ Public Class UC_Terapia
                                    FlowLayoutPanelFarmaci.Controls.Remove(panel)
                                    panel.Dispose()
                                    ' Rimuovo dal DB
-                                   RimuoviFarmaco(id)
+                                   RimuoviFarmacoAsync(id)
                                End Sub
 
         ' Aggiungo i controlli al TableLayoutPanel
@@ -367,7 +393,7 @@ Public Class UC_Terapia
         FlowLayoutPanelTerapieRiabilitative.Controls.Add(panel)
     End Sub
 
-    Private Sub AggiungiFarmaco(id As Integer, nomeFarmaco As String)
+    Private Async Sub AggiungiFarmacoAsync(id As Integer, nomeFarmaco As String)
         ' Controllo duplicati
         For Each pnl As Panel In FlowLayoutPanelFarmaci.Controls
             If pnl.Tag IsNot Nothing AndAlso CInt(pnl.Tag) = id Then Return
@@ -420,7 +446,7 @@ Public Class UC_Terapia
                                    FlowLayoutPanelFarmaci.Controls.Remove(panel)
                                    panel.Dispose()
                                    ' Rimuovo dal DB
-                                   RimuoviFarmaco(id)
+                                   RimuoviFarmacoAsync(id)
                                End Sub
 
         ' Aggiungo i controlli al TableLayoutPanel
@@ -455,7 +481,7 @@ Public Class UC_Terapia
             New SqlParameter("@idTerapia", idTerapia),
             New SqlParameter("@idFarmaco", id)
         }
-        Dim esito As Boolean = EseguiNonQuery(insertQuery, insertParam)
+        Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(insertQuery, insertParam)
 
         If esito Then
             main.MostraToast("Farmaco aggiunto correttamente dalla terapia.")
@@ -465,7 +491,7 @@ Public Class UC_Terapia
         End If
     End Sub
 
-    Private Sub AggiungiTerapiaRiabilitativa(id As Integer, nomeTerapiaRiabilitativa As String)
+    Private Async Sub AggiungiTerapiaRiabilitativaAsync(id As Integer, nomeTerapiaRiabilitativa As String)
         ' Controllo duplicati
         For Each pnl As Panel In FlowLayoutPanelTerapieRiabilitative.Controls
             If pnl.Tag IsNot Nothing AndAlso CInt(pnl.Tag) = id Then Return
@@ -553,7 +579,7 @@ Public Class UC_Terapia
             New SqlParameter("@idTerapia", idTerapia),
             New SqlParameter("@idTerapiaRiabilitativa", id)
         }
-        Dim esito As Boolean = EseguiNonQuery(insertQuery, insertParam)
+        Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(insertQuery, insertParam)
 
         If esito Then
             main.MostraToast("Terapia riabilitativa aggiunta correttamente dalla terapia.")
@@ -564,7 +590,7 @@ Public Class UC_Terapia
     End Sub
 
     'Da finire
-    Private Sub RimuoviFarmaco(idFarmaco As Integer)
+    Private Async Sub RimuoviFarmacoAsync(idFarmaco As Integer)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         Dim removeQuery As String = "DELETE FROM TerapiaFarmaci WHERE ID_Farmaco = @idFarmaco AND ID_Terapia = @idTerapia"
@@ -572,14 +598,14 @@ Public Class UC_Terapia
             New SqlParameter("@idTerapia", idTerapia),
             New SqlParameter("@idFarmaco", idFarmaco)
         }
-        Dim esito As Boolean = EseguiNonQuery(removeQuery, removeParam)
+        Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(removeQuery, removeParam)
 
         If esito Then
             main.MostraToast("Farmaco rimosso correttamente dalla terapia.")
         End If
     End Sub
 
-    Private Sub RimuoviTerapiaRiabilitativa(idTerapiaRiabilitativa As Integer)
+    Private Async Sub RimuoviTerapiaRiabilitativa(idTerapiaRiabilitativa As Integer)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         Dim removeQuery As String = "DELETE FROM TerapiaTerapieRiabilitative WHERE ID_TerapiaRiabilitativa = @idTerapiaRiabilitativa AND ID_Terapia = @idTerapia"
@@ -587,7 +613,7 @@ Public Class UC_Terapia
             New SqlParameter("@idTerapia", idTerapia),
             New SqlParameter("@idTerapiaRiabilitativa", idTerapiaRiabilitativa)
         }
-        Dim esito As Boolean = EseguiNonQuery(removeQuery, removeParam)
+        Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(removeQuery, removeParam)
 
         If esito Then
             main.MostraToast("Terapia riabilitativa rimossa correttamente dalla terapia.")
@@ -663,7 +689,7 @@ Public Class UC_Terapia
                 panel.Dispose()
 
                 ' Rimuovo il farmaco dal DB
-                RimuoviFarmaco(idFarmaco)
+                RimuoviFarmacoAsync(idFarmaco)
             Catch ex As Exception
                 main.MostraToast("Errore durante la rimozione dal database: " & ex.Message)
             End Try
@@ -694,20 +720,20 @@ Public Class UC_Terapia
         End If
     End Sub
 
-    Private Sub ButtonAggiungiFarmaco_Click(sender As Object, e As EventArgs) Handles SfButtonAggiungiFarmaco.Click
+    Private Async Sub ButtonAggiungiFarmaco_Click(sender As Object, e As EventArgs) Handles SfButtonAggiungiFarmaco.Click
         ' Creo la form
         Dim frm As New FormSelezione()
 
         ' Estraggo la lista di farmaci
         Dim queryFarmaci As String = "SELECT * FROM Farmaci ORDER BY NomeCommerciale"
-        Dim dtFarmaci As DataTable = EseguiQuery(queryFarmaci)
+        Dim dtFarmaci As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryFarmaci)
 
         ' Estraggo i farmaci già associati alla presente terapia
         Dim queryFarmaciTerapia As String = "SELECT ID_Farmaco FROM TerapiaFarmaci WHERE ID_Terapia = @idTerapia"
         Dim paramFarmaciTerapia As New List(Of SqlParameter) From {
             New SqlParameter("@idTerapia", idTerapia)
         }
-        Dim dtFarmaciTerapia As DataTable = EseguiQuery(queryFarmaciTerapia, paramFarmaciTerapia)
+        Dim dtFarmaciTerapia As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryFarmaciTerapia, paramFarmaciTerapia)
 
         Dim selezionatiOld As New List(Of Integer)
 
@@ -729,7 +755,7 @@ Public Class UC_Terapia
                                                   For Each idIniziale In selezionatiOld
                                                       If Not farmaciSelezionati.Any(Function(f) f.ID = idIniziale) Then
                                                           ' Rimuovo dal DB
-                                                          RimuoviFarmaco(idIniziale)
+                                                          RimuoviFarmacoAsync(idIniziale)
                                                           ' Rimuovo dal FlowPanel
                                                           RimuoviFarmacoDalFlowPanel(idIniziale)
                                                       End If
@@ -740,7 +766,7 @@ Public Class UC_Terapia
                                                   ' -------------------------------
                                                   For Each f In farmaciSelezionati
                                                       If Not selezionatiOld.Contains(f.ID) Then
-                                                          AggiungiFarmaco(f.ID, f.Nome)
+                                                          AggiungiFarmacoAsync(f.ID, f.Nome)
                                                       End If
                                                   Next
                                               End Sub
@@ -751,20 +777,20 @@ Public Class UC_Terapia
         Me.ActiveControl = Nothing
     End Sub
 
-    Private Sub ButtonAggiungiTerapiaRiabilitativa_Click(sender As Object, e As EventArgs) Handles SfButtonAggiungiTerapiaRiabilitativa.Click
+    Private Async Sub ButtonAggiungiTerapiaRiabilitativa_Click(sender As Object, e As EventArgs) Handles SfButtonAggiungiTerapiaRiabilitativa.Click
         ' Creo la form
         Dim frm As New FormSelezione()
 
         ' Estraggo la lista di farmaci
         Dim queryTerapieRiabilitative As String = "SELECT * FROM TerapieRiabilitative ORDER BY NomeTerapia"
-        Dim dtTerapieRiabilitative As DataTable = EseguiQuery(queryTerapieRiabilitative)
+        Dim dtTerapieRiabilitative As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryTerapieRiabilitative)
 
         ' Estraggo i farmaci già associati alla presente terapia
         Dim queryTerapiaTerapieRiabilitative As String = "SELECT ID_TerapiaRiabilitativa FROM TerapiaTerapieRiabilitative WHERE ID_Terapia = @idTerapia"
         Dim paramTerapiaTerapieRiabilitative As New List(Of SqlParameter) From {
             New SqlParameter("@idTerapia", idTerapia)
         }
-        Dim dtTerapiaTerapieRiabilitative As DataTable = EseguiQuery(queryTerapiaTerapieRiabilitative, paramTerapiaTerapieRiabilitative)
+        Dim dtTerapiaTerapieRiabilitative As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryTerapiaTerapieRiabilitative, paramTerapiaTerapieRiabilitative)
 
         Dim selezionatiOld As New List(Of Integer)
 
@@ -797,7 +823,7 @@ Public Class UC_Terapia
                                                   ' -------------------------------
                                                   For Each f In terapieRiabilitativeSelezionati
                                                       If Not selezionatiOld.Contains(f.ID) Then
-                                                          AggiungiTerapiaRiabilitativa(f.ID, f.Nome)
+                                                          AggiungiTerapiaRiabilitativaAsync(f.ID, f.Nome)
                                                       End If
                                                   Next
                                               End Sub
@@ -826,7 +852,7 @@ Public Class UC_Terapia
         End If
     End Function
 
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
         Dim selezioneOK As Boolean = CheckSelezione()
         Dim esito As Boolean = True
 
@@ -849,7 +875,7 @@ Public Class UC_Terapia
                     New SqlParameter("@miglioramenti", miglioramenti)
                 }
 
-                If EseguiNonQuery(queryTerapia, paramTerapia) > 0 Then
+                If Await ConnessioneDB.EseguiNonQueryAsync(queryTerapia, paramTerapia) > 0 Then
                     successo = True
                 End If
 
@@ -872,11 +898,24 @@ Public Class UC_Terapia
         Return esito
     End Function
 
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito As Boolean = SalvaDati()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelTerapia.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelTerapia.Enabled = True
+
         If esito Then
             appenaSalvati = True
-            CercaVisita()
+            TableLayoutPanelTerapia.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            Dim result = Await CercaVisitaAsync()
+            TableLayoutPanelTerapia.Enabled = True
         End If
 
         ' Forzo il focus su un controllo neutro (può essere il form)

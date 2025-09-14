@@ -13,8 +13,27 @@ Public Class UC_InserisciVisita
     Public Event NuovaVisitaInserita(IDVisita As Integer, TipoVisita As String, DataVisita As Date)
 
     Public Sub New(tipoVisita As String)
+
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel1.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+
         InitializeComponent()
         ucTipoVisita = tipoVisita
+
+        ' ====================
+        ' SfButtons
+        ' ====================
+        With ButtonInserisci.Style
+            .BackColor = Color.FromArgb(41, 128, 185)
+            .HoverBackColor = Color.FromArgb(31, 97, 144)  ' colore hover
+            .PressedBackColor = Color.FromArgb(31, 97, 144) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(31, 97, 144) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
     End Sub
 
     Private Sub UCInserisciVisita_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -28,7 +47,7 @@ Public Class UC_InserisciVisita
         LabelTipoVisita.Text = tipo
     End Sub
 
-    Private Function InserisciVisita() As (Successo As Boolean, NewID As Integer)
+    Private Async Function InserisciVisitaAsync() As Task(Of (Successo As Boolean, NewID As Integer))
         Dim successo As Boolean = False
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -45,7 +64,7 @@ Public Class UC_InserisciVisita
                     New SqlParameter("@ID", idPaziente)
                 }
 
-                If EseguiScalar(queryPrimaVisita, paramPrimaVisita) > 0 Then
+                If Await ConnessioneDB.EseguiScalarAsync(queryPrimaVisita, paramPrimaVisita) > 0 Then
                     MessageBox.Show("Esiste già una prima visita per questo paziente!")
                     Return (False, -1)
                 End If
@@ -55,7 +74,7 @@ Public Class UC_InserisciVisita
                 Dim paramControllo As New List(Of SqlParameter) From {
                     New SqlParameter("@ID", idPaziente)
                 }
-                Dim dt As DataTable = EseguiQuery(queryPrimaVisita, paramControllo)
+                Dim dt As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryPrimaVisita, paramControllo)
 
                 If dt.Rows.Count = 0 Then
                     main.MostraToast("Impossibile inserire un controllo: non esiste ancora una prima visita per questo paziente.")
@@ -76,7 +95,7 @@ Public Class UC_InserisciVisita
                         New SqlParameter("@DataVisita", DateTimePickerDataVisita.Value.Date)
                     }
 
-                    Dim dtVisitaPresente As DataTable = EseguiQuery(queryVisitaPresente, parameterVisitaPresente)
+                    Dim dtVisitaPresente As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryVisitaPresente, parameterVisitaPresente)
                     If dtVisitaPresente.Rows(0)(0) > 0 Then
                         main.MostraToast("Esiste già una visita per questo paziente nella stessa data!")
                         Return (False, -3)
@@ -93,7 +112,7 @@ Public Class UC_InserisciVisita
                 New SqlParameter("@motivo", TextBoxMotivo.Text.Trim())
             }
 
-            If EseguiNonQuery(query, parametri) > 0 Then
+            If Await ConnessioneDB.EseguiNonQueryAsync(query, parametri) > 0 Then
                 main.MostraToast("Visita salvata con successo.")
                 successo = True
             Else
@@ -108,7 +127,7 @@ Public Class UC_InserisciVisita
             }
 
             ' Estraggo l'ID visita associato alla visita appena inserita
-            Dim dtVisita As DataTable = EseguiQuery(queryIDVisita, parametriIDVisita)
+            Dim dtVisita As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryIDVisita, parametriIDVisita)
             If dtVisita.Rows.Count > 0 Then
                 idVisita = Convert.ToInt32(dtVisita.Rows(0)("ID"))
                 Me.IDVisita = idVisita
@@ -125,9 +144,16 @@ Public Class UC_InserisciVisita
         End Try
     End Function
 
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito = InserisciVisita()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanel1.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await InserisciVisitaAsync()
+
+        TableLayoutPanel1.Enabled = True
 
         If esito.Successo Then
             RaiseEvent NuovaVisitaInserita(IDVisita, TipoVisita, DataVisita)

@@ -25,14 +25,14 @@ Partial Class UC_VisitaUrinocoltura
         Me.TableLayoutPanelUrinocoltura = New System.Windows.Forms.TableLayoutPanel()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.GroupBoxUrinocoltura = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanelDatiRMN = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelDatiUrinoco = New System.Windows.Forms.TableLayoutPanel()
         Me.ComboBoxEsito = New System.Windows.Forms.ComboBox()
         Me.DateTimePickerDataEsecuzione = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.LabelEsito = New System.Windows.Forms.Label()
         Me.LabelDataEsecuzione = New System.Windows.Forms.Label()
         Me.TableLayoutPanelUrinocoltura.SuspendLayout()
         Me.GroupBoxUrinocoltura.SuspendLayout()
-        Me.TableLayoutPanelDatiRMN.SuspendLayout()
+        Me.TableLayoutPanelDatiUrinoco.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanelUrinocoltura
@@ -63,7 +63,7 @@ Partial Class UC_VisitaUrinocoltura
         'GroupBoxUrinocoltura
         '
         Me.GroupBoxUrinocoltura.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxUrinocoltura.Controls.Add(Me.TableLayoutPanelDatiRMN)
+        Me.GroupBoxUrinocoltura.Controls.Add(Me.TableLayoutPanelDatiUrinoco)
         Me.GroupBoxUrinocoltura.Location = New System.Drawing.Point(210, 182)
         Me.GroupBoxUrinocoltura.Name = "GroupBoxUrinocoltura"
         Me.GroupBoxUrinocoltura.Size = New System.Drawing.Size(346, 112)
@@ -71,25 +71,25 @@ Partial Class UC_VisitaUrinocoltura
         Me.GroupBoxUrinocoltura.TabStop = False
         Me.GroupBoxUrinocoltura.Text = "Urinocoltura"
         '
-        'TableLayoutPanelDatiRMN
+        'TableLayoutPanelDatiUrinoco
         '
-        Me.TableLayoutPanelDatiRMN.ColumnCount = 2
-        Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
-        Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxEsito, 1, 1)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelEsito, 0, 1)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
-        Me.TableLayoutPanelDatiRMN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelDatiRMN.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanelDatiRMN.Name = "TableLayoutPanelDatiRMN"
-        Me.TableLayoutPanelDatiRMN.RowCount = 2
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanelDatiRMN.Size = New System.Drawing.Size(340, 93)
-        Me.TableLayoutPanelDatiRMN.TabIndex = 0
+        Me.TableLayoutPanelDatiUrinoco.ColumnCount = 2
+        Me.TableLayoutPanelDatiUrinoco.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
+        Me.TableLayoutPanelDatiUrinoco.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDatiUrinoco.Controls.Add(Me.ComboBoxEsito, 1, 1)
+        Me.TableLayoutPanelDatiUrinoco.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
+        Me.TableLayoutPanelDatiUrinoco.Controls.Add(Me.LabelEsito, 0, 1)
+        Me.TableLayoutPanelDatiUrinoco.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
+        Me.TableLayoutPanelDatiUrinoco.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelDatiUrinoco.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelDatiUrinoco.Name = "TableLayoutPanelDatiUrinoco"
+        Me.TableLayoutPanelDatiUrinoco.RowCount = 2
+        Me.TableLayoutPanelDatiUrinoco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiUrinoco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiUrinoco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiUrinoco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanelDatiUrinoco.Size = New System.Drawing.Size(340, 93)
+        Me.TableLayoutPanelDatiUrinoco.TabIndex = 0
         '
         'ComboBoxEsito
         '
@@ -142,8 +142,8 @@ Partial Class UC_VisitaUrinocoltura
         Me.Size = New System.Drawing.Size(766, 516)
         Me.TableLayoutPanelUrinocoltura.ResumeLayout(False)
         Me.GroupBoxUrinocoltura.ResumeLayout(False)
-        Me.TableLayoutPanelDatiRMN.ResumeLayout(False)
-        Me.TableLayoutPanelDatiRMN.PerformLayout()
+        Me.TableLayoutPanelDatiUrinoco.ResumeLayout(False)
+        Me.TableLayoutPanelDatiUrinoco.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -151,7 +151,7 @@ Partial Class UC_VisitaUrinocoltura
     Friend WithEvents TableLayoutPanelUrinocoltura As TableLayoutPanel
     Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
     Friend WithEvents GroupBoxUrinocoltura As GroupBox
-    Friend WithEvents TableLayoutPanelDatiRMN As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelDatiUrinoco As TableLayoutPanel
     Friend WithEvents ComboBoxEsito As ComboBox
     Friend WithEvents DateTimePickerDataEsecuzione As Syncfusion.WinForms.Input.SfDateTimeEdit
     Friend WithEvents LabelEsito As Label

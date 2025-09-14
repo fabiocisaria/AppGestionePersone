@@ -10,6 +10,10 @@ Public Class UC_VisitaPapTest
     Public Sub New()
         InitializeComponent()
 
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDatiPapTest.BackColor = Theme.BackgroundColor
+        TableLayoutPanelPapTest.BackColor = Theme.BackgroundColor
+
         ' ====================
         ' SfButtons
         ' ====================
@@ -51,11 +55,18 @@ Public Class UC_VisitaPapTest
         DateTimePickerDataEsecuzione.Value = Date.Now
     End Sub
 
-    Public Sub AggiornaDati()
+    Public Async Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             idVisita = main.IDVisitaSelezionata
-            esiste = CercaVisita()
+
+            ' Cerco se esiste già un paptest per la visita selezionata
+            TableLayoutPanelPapTest.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelPapTest.Enabled = True
             If Not esiste Then
                 PulisciCampi(ComboBoxEsito)
                 DateTimePickerDataEsecuzione.Value = Date.Now
@@ -63,13 +74,19 @@ Public Class UC_VisitaPapTest
         End If
     End Sub
 
-    Private Sub FormVisitaPapTest_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub FormVisitaPapTest_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             ' Carico i parametri della visita selezionata
             idVisita = main.IDPazienteSelezionato
-            ' Cerco se esiste già l'anamnesi fisiologica per il paziente selezionato
-            esiste = CercaVisita()
+
+            ' Cerco se esiste già un paptest per la visita selezionata
+            TableLayoutPanelPapTest.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelPapTest.Enabled = True
             If Not esiste Then
                 PulisciCampi(ComboBoxEsito)
                 DateTimePickerDataEsecuzione.Value = Date.Now
@@ -102,7 +119,7 @@ Public Class UC_VisitaPapTest
         Return result
     End Function
 
-    Private Function CercaVisita() As Boolean
+    Private Async Function CercaVisitaAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Carico i parametri della visita selezionata
@@ -114,7 +131,7 @@ Public Class UC_VisitaPapTest
         Dim checkParam As New List(Of SqlParameter) From {
             New SqlParameter("@idVisita", idVisita)
         }
-        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+        Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count = 1 Then
             esiste = True ' RMN esistente per la visita selezionata
@@ -137,7 +154,7 @@ Public Class UC_VisitaPapTest
         End If
     End Function
 
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         Dim selezioneOK As Boolean = CheckSelezione()
         Dim esito As Boolean = True
@@ -173,8 +190,7 @@ Public Class UC_VisitaPapTest
                                                     ) VALUES (
                                                     @idVisita,
                                                     @dataPapTest,
-                                                    @esitoPapTest,
-                                                    @idCeppo)"
+                                                    @esitoPapTest)"
                 End If
 
                 Dim parametriPapTest As New List(Of SqlParameter) From {
@@ -183,7 +199,7 @@ Public Class UC_VisitaPapTest
                     New SqlParameter("@esitoPapTest", esitoPapTest)
                 }
 
-                If EseguiNonQuery(queryPapTest, parametriPapTest) > 0 Then
+                If Await ConnessioneDB.EseguiNonQueryAsync(queryPapTest, parametriPapTest) > 0 Then
                     successo = True
                 End If
 
@@ -208,11 +224,23 @@ Public Class UC_VisitaPapTest
         Return esito
     End Function
 
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito As Boolean = SalvaDati()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelPapTest.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelPapTest.Enabled = True
         If esito Then
             appenaSalvati = True
-            CercaVisita()
+            TableLayoutPanelPapTest.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            Dim result = Await CercaVisitaAsync()
+            TableLayoutPanelPapTest.Enabled = True
         End If
     End Sub
 End Class

@@ -10,6 +10,35 @@ Public Class UC_Anagrafica
 
     ' Evento per comunicare alla MainForm il paziente selezionato
     Public Event NuovoPazienteInserito(ID As Integer, CodiceIdentificativo As String, Cognome As String, Nome As String, DataNascita As Date)
+
+    Public Sub New()
+        InitializeComponent()
+
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+        TableLayoutPanelUCAnagrafica.BackColor = Theme.BackgroundColor
+
+        ' ====================
+        ' SfButtons
+        ' ====================
+        With ButtonInserisci.Style
+            .BackColor = Color.FromArgb(41, 128, 185)
+            .HoverBackColor = Color.FromArgb(31, 97, 144)  ' colore hover
+            .PressedBackColor = Color.FromArgb(31, 97, 144) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(31, 97, 144) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
+
+        Me.SetStyle(ControlStyles.AllPaintingInWmPaint Or
+                ControlStyles.UserPaint Or
+                ControlStyles.OptimizedDoubleBuffer, True)
+        Me.UpdateStyles()
+
+    End Sub
+
     Private Sub FormAnagrafica_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DateTimePickerDataNascita.Format = DateTimePickerFormat.Short
         DateTimePickerDataNascita.Value = DateTime.Now.Date
@@ -26,7 +55,7 @@ Public Class UC_Anagrafica
         PulisciCampi(TextBoxCognome, TextBoxNome, TextBoxProfessione, TextBoxSport, ComboBoxRelazione, LabelCodiceID)
     End Sub
 
-    Private Function SalvaDati() As (Successo As Boolean, NewID As String)
+    Private Async Function SalvaDatiAsync() As Task(Of (Successo As Boolean, NewID As String))
         Dim successo As Boolean = False
         Dim newID As Integer = -1
 
@@ -84,7 +113,7 @@ Public Class UC_Anagrafica
             Dim checkParam As New List(Of SqlParameter) From {
                 New SqlParameter("@CodiceID", codiceID)
             }
-            Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+            Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
             If dtCheck.Rows(0)(0) > 0 Then
                 DirectCast(Me.ParentForm, MainForm).MostraToast("Attenzione: il Codice Identificativo esiste già!")
@@ -100,7 +129,7 @@ Public Class UC_Anagrafica
                 New SqlParameter("@CodiceID", codiceID)
             }
 
-            If EseguiNonQuery(queryAnagrafica, parametriAnagrafica) > 0 Then
+            If Await ConnessioneDB.EseguiNonQueryAsync(queryAnagrafica, parametriAnagrafica) > 0 Then
                 CodiceIdentificativoSelezionato = codiceID
                 Dim queryIDAnagrafica As String = "SELECT ID FROM Anagrafica WHERE CodiceIdentificativo = @CodiceID"
                 Dim parametriIDAnagrafica As New List(Of SqlParameter) From {
@@ -108,7 +137,7 @@ Public Class UC_Anagrafica
                 }
 
                 'Estraggo l'ID anagrafica associato al paziente appena inserito
-                Dim dtIDAnagrafica As DataTable = EseguiQuery(queryIDAnagrafica, parametriIDAnagrafica)
+                Dim dtIDAnagrafica As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryIDAnagrafica, parametriIDAnagrafica)
                 If dtIDAnagrafica.Rows.Count > 0 Then
                     newID = Convert.ToInt32(dtIDAnagrafica.Rows(0)("ID"))
 
@@ -120,7 +149,7 @@ Public Class UC_Anagrafica
                         New SqlParameter("@SportPraticati", sportPraticati),
                         New SqlParameter("@Relazione", relazione)
                     }
-                    If EseguiNonQuery(queryAnamnesiSociale, ParametriAnamnesiSociale) > 0 Then
+                    If Await ConnessioneDB.EseguiNonQueryAsync(queryAnamnesiSociale, ParametriAnamnesiSociale) > 0 Then
                         DirectCast(Me.ParentForm, MainForm).MostraToast("Paziente inserito correttamente.")
                         successo = True
                     End If
@@ -133,8 +162,15 @@ Public Class UC_Anagrafica
         End Try
     End Function
 
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito = SalvaDati()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        TableLayoutPanelUCAnagrafica.Enabled = False
+        main.MostraToast("Salvataggio in corso ...")
+
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelUCAnagrafica.Enabled = True
         If esito.Successo Then
             RaiseEvent NuovoPazienteInserito(esito.NewID, CodiceIdentificativoSelezionato, Cognome, Nome, DataNascita)
         End If

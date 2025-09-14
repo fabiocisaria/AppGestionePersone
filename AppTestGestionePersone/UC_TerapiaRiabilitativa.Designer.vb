@@ -22,30 +22,30 @@ Partial Class UC_TerapiaRiabilitativa
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanelRmn = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelTerapRiab = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanelTerapiaRiabilitativa = New System.Windows.Forms.TableLayoutPanel()
         Me.TextBoxNomeTerapiaRiabilitativa = New System.Windows.Forms.TextBox()
         Me.LabelNomeTerapiaRiabilitativa = New System.Windows.Forms.Label()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
-        Me.TableLayoutPanelRmn.SuspendLayout()
+        Me.TableLayoutPanelTerapRiab.SuspendLayout()
         Me.TableLayoutPanelTerapiaRiabilitativa.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TableLayoutPanelRmn
+        'TableLayoutPanelTerapRiab
         '
-        Me.TableLayoutPanelRmn.ColumnCount = 1
-        Me.TableLayoutPanelRmn.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.Controls.Add(Me.TableLayoutPanelTerapiaRiabilitativa, 0, 0)
-        Me.TableLayoutPanelRmn.Controls.Add(Me.ButtonInserisci, 0, 1)
-        Me.TableLayoutPanelRmn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelRmn.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanelRmn.Name = "TableLayoutPanelRmn"
-        Me.TableLayoutPanelRmn.RowCount = 2
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanelRmn.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.TabIndex = 4
+        Me.TableLayoutPanelTerapRiab.ColumnCount = 1
+        Me.TableLayoutPanelTerapRiab.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelTerapRiab.Controls.Add(Me.TableLayoutPanelTerapiaRiabilitativa, 0, 0)
+        Me.TableLayoutPanelTerapRiab.Controls.Add(Me.ButtonInserisci, 0, 1)
+        Me.TableLayoutPanelTerapRiab.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelTerapRiab.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanelTerapRiab.Name = "TableLayoutPanelTerapRiab"
+        Me.TableLayoutPanelTerapRiab.RowCount = 2
+        Me.TableLayoutPanelTerapRiab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelTerapRiab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelTerapRiab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanelTerapRiab.Size = New System.Drawing.Size(766, 516)
+        Me.TableLayoutPanelTerapRiab.TabIndex = 4
         '
         'TableLayoutPanelTerapiaRiabilitativa
         '
@@ -93,21 +93,21 @@ Partial Class UC_TerapiaRiabilitativa
         Me.ButtonInserisci.TabIndex = 2
         Me.ButtonInserisci.Text = "Inserisci"
         '
-        'UC_TerapieRiabilitative
+        'UC_TerapiaRiabilitativa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.TableLayoutPanelRmn)
-        Me.Name = "UC_TerapieRiabilitative"
+        Me.Controls.Add(Me.TableLayoutPanelTerapRiab)
+        Me.Name = "UC_TerapiaRiabilitativa"
         Me.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.ResumeLayout(False)
+        Me.TableLayoutPanelTerapRiab.ResumeLayout(False)
         Me.TableLayoutPanelTerapiaRiabilitativa.ResumeLayout(False)
         Me.TableLayoutPanelTerapiaRiabilitativa.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents TableLayoutPanelRmn As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelTerapRiab As TableLayoutPanel
     Friend WithEvents TableLayoutPanelTerapiaRiabilitativa As TableLayoutPanel
     Friend WithEvents TextBoxNomeTerapiaRiabilitativa As TextBox
     Friend WithEvents LabelNomeTerapiaRiabilitativa As Label

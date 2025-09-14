@@ -22,30 +22,30 @@ Partial Class UC_ClasseFarmaco
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanelRmn = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelClassiFarmaco = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanelDatiFarmaco = New System.Windows.Forms.TableLayoutPanel()
         Me.TextBoxNomeClasse = New System.Windows.Forms.TextBox()
         Me.LabelNomeClasse = New System.Windows.Forms.Label()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
-        Me.TableLayoutPanelRmn.SuspendLayout()
+        Me.TableLayoutPanelClassiFarmaco.SuspendLayout()
         Me.TableLayoutPanelDatiFarmaco.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TableLayoutPanelRmn
+        'TableLayoutPanelClassiFarmaco
         '
-        Me.TableLayoutPanelRmn.ColumnCount = 1
-        Me.TableLayoutPanelRmn.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.Controls.Add(Me.TableLayoutPanelDatiFarmaco, 0, 0)
-        Me.TableLayoutPanelRmn.Controls.Add(Me.ButtonInserisci, 0, 1)
-        Me.TableLayoutPanelRmn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelRmn.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanelRmn.Name = "TableLayoutPanelRmn"
-        Me.TableLayoutPanelRmn.RowCount = 2
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanelRmn.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.TabIndex = 3
+        Me.TableLayoutPanelClassiFarmaco.ColumnCount = 1
+        Me.TableLayoutPanelClassiFarmaco.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelClassiFarmaco.Controls.Add(Me.TableLayoutPanelDatiFarmaco, 0, 0)
+        Me.TableLayoutPanelClassiFarmaco.Controls.Add(Me.ButtonInserisci, 0, 1)
+        Me.TableLayoutPanelClassiFarmaco.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelClassiFarmaco.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanelClassiFarmaco.Name = "TableLayoutPanelClassiFarmaco"
+        Me.TableLayoutPanelClassiFarmaco.RowCount = 2
+        Me.TableLayoutPanelClassiFarmaco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelClassiFarmaco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelClassiFarmaco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanelClassiFarmaco.Size = New System.Drawing.Size(766, 516)
+        Me.TableLayoutPanelClassiFarmaco.TabIndex = 3
         '
         'TableLayoutPanelDatiFarmaco
         '
@@ -97,17 +97,17 @@ Partial Class UC_ClasseFarmaco
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.TableLayoutPanelRmn)
+        Me.Controls.Add(Me.TableLayoutPanelClassiFarmaco)
         Me.Name = "UC_ClasseFarmaco"
         Me.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.ResumeLayout(False)
+        Me.TableLayoutPanelClassiFarmaco.ResumeLayout(False)
         Me.TableLayoutPanelDatiFarmaco.ResumeLayout(False)
         Me.TableLayoutPanelDatiFarmaco.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents TableLayoutPanelRmn As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelClassiFarmaco As TableLayoutPanel
     Friend WithEvents TableLayoutPanelDatiFarmaco As TableLayoutPanel
     Friend WithEvents TextBoxNomeClasse As TextBox
     Friend WithEvents LabelNomeClasse As Label

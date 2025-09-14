@@ -28,6 +28,13 @@ Public Class UC_CercaVisita
     Public Sub New()
         InitializeComponent()
 
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel1.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+        TableLayoutPanel3.BackColor = Theme.BackgroundColor
+        TableLayoutPanel4.BackColor = Theme.BackgroundColor
+        TableLayoutPanel5.BackColor = Theme.BackgroundColor
+
         ' ====================
         ' SfButtons
         ' ====================
@@ -162,7 +169,7 @@ Public Class UC_CercaVisita
     ' ====================
     ' Eventi pulsanti
     ' ====================
-    Private Sub ButtonCercaVisita_Click(sender As Object, e As EventArgs) Handles ButtonCercaVisita.Click
+    Private Async Sub ButtonCercaVisita_Click(sender As Object, e As EventArgs) Handles ButtonCercaVisita.Click
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         Dim idPaziente As Integer = main.IDPazienteSelezionato
@@ -177,7 +184,12 @@ Public Class UC_CercaVisita
             tipoVisita = ComboBoxTipoVisita.SelectedItem
         End If
 
-        Dim visiteTrovate = Utils.CercaVisiteUC(idPaziente, dataVisita, tipoVisita)
+        TableLayoutPanel1.Enabled = False
+
+        main.MostraToast("Caricamento in corso ...")
+        Dim visiteTrovate = Await Utils.CercaVisiteUCAsync(idPaziente, dataVisita, tipoVisita)
+
+        TableLayoutPanel1.Enabled = True
 
         If visiteTrovate.Rows.Count > 0 Then
             dgvSelezioneVisita.DataSource = visiteTrovate

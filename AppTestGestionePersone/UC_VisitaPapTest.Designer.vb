@@ -22,33 +22,33 @@ Partial Class UC_VisitaPapTest
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanelRmn = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelPapTest = New System.Windows.Forms.TableLayoutPanel()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.GroupBoxPapTest = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanelDatiRMN = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelDatiPapTest = New System.Windows.Forms.TableLayoutPanel()
         Me.ComboBoxEsito = New System.Windows.Forms.ComboBox()
         Me.DateTimePickerDataEsecuzione = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.LabelEsito = New System.Windows.Forms.Label()
         Me.LabelDataEsecuzione = New System.Windows.Forms.Label()
-        Me.TableLayoutPanelRmn.SuspendLayout()
+        Me.TableLayoutPanelPapTest.SuspendLayout()
         Me.GroupBoxPapTest.SuspendLayout()
-        Me.TableLayoutPanelDatiRMN.SuspendLayout()
+        Me.TableLayoutPanelDatiPapTest.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TableLayoutPanelRmn
+        'TableLayoutPanelPapTest
         '
-        Me.TableLayoutPanelRmn.ColumnCount = 1
-        Me.TableLayoutPanelRmn.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.Controls.Add(Me.ButtonInserisci, 0, 1)
-        Me.TableLayoutPanelRmn.Controls.Add(Me.GroupBoxPapTest, 0, 0)
-        Me.TableLayoutPanelRmn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelRmn.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanelRmn.Name = "TableLayoutPanelRmn"
-        Me.TableLayoutPanelRmn.RowCount = 2
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanelRmn.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.TabIndex = 2
+        Me.TableLayoutPanelPapTest.ColumnCount = 1
+        Me.TableLayoutPanelPapTest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelPapTest.Controls.Add(Me.ButtonInserisci, 0, 1)
+        Me.TableLayoutPanelPapTest.Controls.Add(Me.GroupBoxPapTest, 0, 0)
+        Me.TableLayoutPanelPapTest.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelPapTest.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanelPapTest.Name = "TableLayoutPanelPapTest"
+        Me.TableLayoutPanelPapTest.RowCount = 2
+        Me.TableLayoutPanelPapTest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelPapTest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelPapTest.Size = New System.Drawing.Size(766, 516)
+        Me.TableLayoutPanelPapTest.TabIndex = 2
         '
         'ButtonInserisci
         '
@@ -63,7 +63,7 @@ Partial Class UC_VisitaPapTest
         'GroupBoxPapTest
         '
         Me.GroupBoxPapTest.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxPapTest.Controls.Add(Me.TableLayoutPanelDatiRMN)
+        Me.GroupBoxPapTest.Controls.Add(Me.TableLayoutPanelDatiPapTest)
         Me.GroupBoxPapTest.Location = New System.Drawing.Point(210, 182)
         Me.GroupBoxPapTest.Name = "GroupBoxPapTest"
         Me.GroupBoxPapTest.Size = New System.Drawing.Size(346, 112)
@@ -71,25 +71,25 @@ Partial Class UC_VisitaPapTest
         Me.GroupBoxPapTest.TabStop = False
         Me.GroupBoxPapTest.Text = "Pap test"
         '
-        'TableLayoutPanelDatiRMN
+        'TableLayoutPanelDatiPapTest
         '
-        Me.TableLayoutPanelDatiRMN.ColumnCount = 2
-        Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
-        Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxEsito, 1, 1)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelEsito, 0, 1)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
-        Me.TableLayoutPanelDatiRMN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelDatiRMN.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanelDatiRMN.Name = "TableLayoutPanelDatiRMN"
-        Me.TableLayoutPanelDatiRMN.RowCount = 2
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanelDatiRMN.Size = New System.Drawing.Size(340, 93)
-        Me.TableLayoutPanelDatiRMN.TabIndex = 0
+        Me.TableLayoutPanelDatiPapTest.ColumnCount = 2
+        Me.TableLayoutPanelDatiPapTest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
+        Me.TableLayoutPanelDatiPapTest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDatiPapTest.Controls.Add(Me.ComboBoxEsito, 1, 1)
+        Me.TableLayoutPanelDatiPapTest.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
+        Me.TableLayoutPanelDatiPapTest.Controls.Add(Me.LabelEsito, 0, 1)
+        Me.TableLayoutPanelDatiPapTest.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
+        Me.TableLayoutPanelDatiPapTest.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelDatiPapTest.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelDatiPapTest.Name = "TableLayoutPanelDatiPapTest"
+        Me.TableLayoutPanelDatiPapTest.RowCount = 2
+        Me.TableLayoutPanelDatiPapTest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiPapTest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiPapTest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiPapTest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanelDatiPapTest.Size = New System.Drawing.Size(340, 93)
+        Me.TableLayoutPanelDatiPapTest.TabIndex = 0
         '
         'ComboBoxEsito
         '
@@ -137,21 +137,21 @@ Partial Class UC_VisitaPapTest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.TableLayoutPanelRmn)
+        Me.Controls.Add(Me.TableLayoutPanelPapTest)
         Me.Name = "UC_VisitaPapTest"
         Me.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.ResumeLayout(False)
+        Me.TableLayoutPanelPapTest.ResumeLayout(False)
         Me.GroupBoxPapTest.ResumeLayout(False)
-        Me.TableLayoutPanelDatiRMN.ResumeLayout(False)
-        Me.TableLayoutPanelDatiRMN.PerformLayout()
+        Me.TableLayoutPanelDatiPapTest.ResumeLayout(False)
+        Me.TableLayoutPanelDatiPapTest.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents TableLayoutPanelRmn As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelPapTest As TableLayoutPanel
     Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
     Friend WithEvents GroupBoxPapTest As GroupBox
-    Friend WithEvents TableLayoutPanelDatiRMN As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelDatiPapTest As TableLayoutPanel
     Friend WithEvents ComboBoxEsito As ComboBox
     Friend WithEvents DateTimePickerDataEsecuzione As Syncfusion.WinForms.Input.SfDateTimeEdit
     Friend WithEvents LabelEsito As Label

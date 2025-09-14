@@ -22,31 +22,31 @@ Partial Class UC_DatiVisita
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanelDatiPaziente = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelDatiVisita = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.TextBoxTipoVisita = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
         Me.TextBoxDataVisita = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
         Me.LabelVisitaSelezionata = New Syncfusion.Windows.Forms.Tools.AutoLabel()
-        Me.TableLayoutPanelDatiPaziente.SuspendLayout()
+        Me.TableLayoutPanelDatiVisita.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         CType(Me.TextBoxTipoVisita, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TextBoxDataVisita, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'TableLayoutPanelDatiPaziente
+        'TableLayoutPanelDatiVisita
         '
-        Me.TableLayoutPanelDatiPaziente.ColumnCount = 1
-        Me.TableLayoutPanelDatiPaziente.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDatiPaziente.Controls.Add(Me.TableLayoutPanel2, 0, 1)
-        Me.TableLayoutPanelDatiPaziente.Controls.Add(Me.LabelVisitaSelezionata, 0, 0)
-        Me.TableLayoutPanelDatiPaziente.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelDatiPaziente.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanelDatiPaziente.Name = "TableLayoutPanelDatiPaziente"
-        Me.TableLayoutPanelDatiPaziente.RowCount = 2
-        Me.TableLayoutPanelDatiPaziente.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
-        Me.TableLayoutPanelDatiPaziente.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
-        Me.TableLayoutPanelDatiPaziente.Size = New System.Drawing.Size(766, 60)
-        Me.TableLayoutPanelDatiPaziente.TabIndex = 2
+        Me.TableLayoutPanelDatiVisita.ColumnCount = 1
+        Me.TableLayoutPanelDatiVisita.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDatiVisita.Controls.Add(Me.TableLayoutPanel2, 0, 1)
+        Me.TableLayoutPanelDatiVisita.Controls.Add(Me.LabelVisitaSelezionata, 0, 0)
+        Me.TableLayoutPanelDatiVisita.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelDatiVisita.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanelDatiVisita.Name = "TableLayoutPanelDatiVisita"
+        Me.TableLayoutPanelDatiVisita.RowCount = 2
+        Me.TableLayoutPanelDatiVisita.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.TableLayoutPanelDatiVisita.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
+        Me.TableLayoutPanelDatiVisita.Size = New System.Drawing.Size(766, 60)
+        Me.TableLayoutPanelDatiVisita.TabIndex = 2
         '
         'TableLayoutPanel2
         '
@@ -67,7 +67,7 @@ Partial Class UC_DatiVisita
         '
         Me.TextBoxTipoVisita.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TextBoxTipoVisita.BackColor = System.Drawing.Color.Transparent
-        Me.TextBoxTipoVisita.BeforeTouchSize = New System.Drawing.Size(94, 20)
+        Me.TextBoxTipoVisita.BeforeTouchSize = New System.Drawing.Size(206, 20)
         Me.TextBoxTipoVisita.BorderColor = System.Drawing.Color.Transparent
         Me.TextBoxTipoVisita.Location = New System.Drawing.Point(3, 5)
         Me.TextBoxTipoVisita.Name = "TextBoxTipoVisita"
@@ -79,7 +79,7 @@ Partial Class UC_DatiVisita
         '
         Me.TextBoxDataVisita.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.TextBoxDataVisita.BackColor = System.Drawing.Color.Transparent
-        Me.TextBoxDataVisita.BeforeTouchSize = New System.Drawing.Size(94, 20)
+        Me.TextBoxDataVisita.BeforeTouchSize = New System.Drawing.Size(206, 20)
         Me.TextBoxDataVisita.BorderColor = System.Drawing.Color.Transparent
         Me.TextBoxDataVisita.Location = New System.Drawing.Point(183, 5)
         Me.TextBoxDataVisita.Name = "TextBoxDataVisita"
@@ -100,11 +100,11 @@ Partial Class UC_DatiVisita
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.TableLayoutPanelDatiPaziente)
+        Me.Controls.Add(Me.TableLayoutPanelDatiVisita)
         Me.Name = "UC_DatiVisita"
         Me.Size = New System.Drawing.Size(766, 60)
-        Me.TableLayoutPanelDatiPaziente.ResumeLayout(False)
-        Me.TableLayoutPanelDatiPaziente.PerformLayout()
+        Me.TableLayoutPanelDatiVisita.ResumeLayout(False)
+        Me.TableLayoutPanelDatiVisita.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
         CType(Me.TextBoxTipoVisita, System.ComponentModel.ISupportInitialize).EndInit()
@@ -113,7 +113,7 @@ Partial Class UC_DatiVisita
 
     End Sub
 
-    Friend WithEvents TableLayoutPanelDatiPaziente As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelDatiVisita As TableLayoutPanel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents TextBoxTipoVisita As Syncfusion.Windows.Forms.Tools.TextBoxExt
     Friend WithEvents TextBoxDataVisita As Syncfusion.Windows.Forms.Tools.TextBoxExt

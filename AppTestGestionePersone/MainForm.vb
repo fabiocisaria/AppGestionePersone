@@ -1,18 +1,115 @@
-﻿Imports Microsoft.Win32
+﻿Imports System
+Imports System.Drawing.Drawing2D
+Imports Microsoft.Win32
 Imports Syncfusion.Licensing
-Imports System
 
 Public Class MainForm
     Inherits Form
 
-    ' ====================
-    ' Carico licenza Syncfusion
-    ' ====================
+    Public Sub New()
+        InitializeComponent()
+
+        TableLayoutPanelMain.BackColor = Color.Transparent
+
+        MenuStrip1.BackColor = ColorTranslator.FromHtml("#C3BDE3")
+        MenuStrip1.ForeColor = Color.Black
+
+        Me.FormBorderStyle = FormBorderStyle.None
+    End Sub
+
+    Private _loginSuccesso As Boolean = False
+    Public Property LoginSuccesso As Boolean
+        Get
+            Return _loginSuccesso
+        End Get
+        Set(value As Boolean)
+            _loginSuccesso = value
+            ' Logica automatica quando cambia lo stato
+            If _loginSuccesso Then
+                ' Mostra MainForm
+                Me.Show()
+            Else
+                ' Nascondi MainForm e mostra LoginForm
+                Me.Hide()
+                ApriLogin()
+            End If
+        End Set
+    End Property
+
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' ====================
+        ' Carico licenza Syncfusion
+        ' ====================
         ' Registra la licenza Syncfusion
         SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JEaF5cXmRCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWXZec3RTR2VdV0FyWktWYEk=")
+
         'SfSkinManager.SetTheme(Me, Theme.)
+
+        MenuStrip1.Renderer = New MenuItemColorRenderer()
+
         InizializzaUCRegistry()
+
+        Me.SetStyle(ControlStyles.AllPaintingInWmPaint Or
+            ControlStyles.UserPaint Or
+            ControlStyles.OptimizedDoubleBuffer, True)
+        Me.UpdateStyles()
+
+        Me.BackColor = Color.White
+
+        Me.Hide()
+        ApriLogin()
+    End Sub
+
+    'Protected Overrides Sub OnPaintBackground(e As PaintEventArgs)
+    ' MyBase.OnPaintBackground(e)
+    '
+    ' Colori morbidi, rilassanti ma in linea con login
+    'Dim colori() As Color = {
+    '    ColorTranslator.FromHtml("#A8C8E5"), ' azzurro pastello
+    '    ColorTranslator.FromHtml("#C3BDE3"), ' lavanda chiaro
+    '    ColorTranslator.FromHtml("#E6E0F5")  ' violetto chiarissimo
+    '}
+    '
+    'Dim posizioni() As Single = {0.0F, 0.5F, 1.0F}
+    '
+    'Dim startPoint As New Point(0, 0)
+    'Dim endPoint As New Point(Me.Width, Me.Height)
+    '
+    'Using brush As New LinearGradientBrush(startPoint, endPoint, Color.White, Color.White)
+    'Dim blend As New ColorBlend()
+    '        blend.Colors = colori
+    '        blend.Positions = posizioni
+    '        brush.InterpolationColors = blend
+    '
+    '        e.Graphics.FillRectangle(brush, 0, 0, Me.Width, Me.Height)
+    'End Using
+    'End Sub
+
+    Private Sub ApriLogin()
+        ' Crea la form di login
+        Dim loginForm As New Form()
+        loginForm.Text = "Login"
+        loginForm.FormBorderStyle = FormBorderStyle.FixedDialog
+        loginForm.StartPosition = FormStartPosition.CenterScreen
+        loginForm.Width = 400
+        loginForm.Height = 500
+        loginForm.MaximizeBox = False
+        loginForm.ShowIcon = True
+        loginForm.Icon = Me.Icon
+        loginForm.FormBorderStyle = FormBorderStyle.None
+
+        ' Aggiungi il tuo UserControl di login
+        Dim loginUC As New UC_Login()
+        loginUC.Dock = DockStyle.Fill
+        loginForm.Controls.Add(loginUC)
+
+        ' Gestisci evento login
+        AddHandler loginUC.LoginSuccess, Sub()
+                                             Me.Show()        ' Mostra MainForm
+                                             loginForm.Close() ' Chiudi LoginForm
+                                         End Sub
+
+        loginForm.ShowDialog()
     End Sub
 
     ' Dichiarazione P/Invoke per ShowWindow
@@ -529,7 +626,7 @@ Public Class MainForm
         CaricaControllo(ucAnamnesiFisiologica, 0, 2)
 
         ' Aggiorna dati UC AnamnesiFisiologica
-        ucAnamnesiFisiologica.AggiornaDati()
+        ucAnamnesiFisiologica.AggiornaDatiAsync()
     End Sub
 
     Private Sub FamiliareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FamiliareToolStripMenuItem.Click
@@ -1232,7 +1329,7 @@ Public Class MainForm
         CaricaControllo(ucAnamnesiPatologicaRemota, 0, 2)
 
         ' Aggiorna dati UC AnamnesiFisiologica
-        ucAnamnesiPatologicaRemota.AggiornaDati()
+        ucAnamnesiPatologicaRemota.AggiornaDatiAsync()
     End Sub
 
     Private Sub NuovaClasseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuovaClasseToolStripMenuItem.Click
@@ -1315,6 +1412,10 @@ Public Class MainForm
         CaricaControllo(ucDatiVisita, 0, 1)
         CaricaControllo(ucTerapia, 0, 2)
 
-        ucTerapia.AggiornaDati()
+        ucTerapia.AggiornaDatiAsync()
+    End Sub
+
+    Private Sub EsciToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EsciToolStripMenuItem.Click
+        Me.Close()
     End Sub
 End Class

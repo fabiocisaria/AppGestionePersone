@@ -29,6 +29,14 @@ Public Class UC_CercaPaziente
     Public Sub New()
         InitializeComponent()
         ConfiguraDataGrid()
+
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel1.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+        TableLayoutPanel3.BackColor = Theme.BackgroundColor
+        TableLayoutPanel4.BackColor = Theme.BackgroundColor
+        TableLayoutPanel5.BackColor = Theme.BackgroundColor
+
         ' Se vuoi puoi personalizzare subito lo stile dei Syncfusion controls
         TextBoxCognome.ForeColor = Color.Gray
         TextBoxCodiceID.ForeColor = Color.Gray
@@ -190,7 +198,9 @@ Public Class UC_CercaPaziente
     ' ====================
     ' Eventi pulsanti
     ' ====================
-    Private Sub ButtonCercaPaziente_Click(sender As Object, e As EventArgs) Handles ButtonCercaPaziente.Click
+    Private Async Sub ButtonCercaPaziente_Click(sender As Object, e As EventArgs) Handles ButtonCercaPaziente.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
         Dim cognome As String = ""
         Dim codiceID As String = ""
 
@@ -202,14 +212,20 @@ Public Class UC_CercaPaziente
             codiceID = TextBoxCodiceID.Text.Trim()
         End If
 
-        Dim pazientiTrovati = Utils.CercaPazienteUC(codiceID, cognome)
+        ' Cerco i pazienti in base ai filtri
+        TableLayoutPanel1.Enabled = False
+
+        main.MostraToast("Caricamento in corso ...")
+        Dim pazientiTrovati = Await Utils.CercaPazienteUCAsync(codiceID, cognome)
+
+        TableLayoutPanel1.Enabled = True
 
         If pazientiTrovati.Rows.Count > 0 Then
             dgvSelezionePaziente.DataSource = pazientiTrovati
-            DirectCast(Me.ParentForm, MainForm).MostraToast("Trovati " & pazientiTrovati.Rows.Count & " pazienti.")
+            main.MostraToast("Trovati " & pazientiTrovati.Rows.Count & " pazienti.")
         Else
             dgvSelezionePaziente.DataSource = Nothing
-            DirectCast(Me.ParentForm, MainForm).MostraToast("Nessun paziente trovato.")
+            main.MostraToast("Nessun paziente trovato.")
         End If
     End Sub
 

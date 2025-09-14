@@ -1,71 +1,96 @@
 ﻿'Imports System.Data.SqlClient
 'Imports System.Data.SqlClient
 Imports Azure.Core
-Imports Azure.Identity
+Imports Microsoft.Data.Common
 Imports Microsoft.Data.SqlClient
+Imports Microsoft.Identity.Client
 
 Module ConnessioneDB
-    ' 🔹 Stringa di connessione centralizzata
-    'Public connectionString As String = "Server=192.168.49.128,1433;Database=GestionePersone;User Id=sa;Password=Admin2025;"
-    Public connectionString As String = "Server = tcp:gynarchive-svr.database.windows.net,1433;
-                                         Database = GynArchiveDB;
-                                         Authentication = Active Directory Interactive;
-                                         Encrypt = True;
-                                         Column Encryption Setting = Disabled;
-                                         TrustServerCertificate = False;"
+    Private ReadOnly TenantId As String = "de9a97de-c78e-45ee-bfe4-e914651a9573"
+    Private ReadOnly ClientId As String = "68aca7a3-86df-44f4-82c5-722f6f8739f1"
+    Private ReadOnly Authority As String = $"https://login.microsoftonline.com/{TenantId}"
+    Private ReadOnly SqlScope As String() = {"https://database.windows.net//.default"}
 
-    ' Dizionario che mappa le colonne crittografate
-    'Private ReadOnly EncryptedColumns As New Dictionary(Of String, (SqlDbType, Integer))(StringComparer.OrdinalIgnoreCase) From {
-    '    {"@CodiceIdentificativo", (SqlDbType.NVarChar, 20)},
-    '    {"@Nome", (SqlDbType.NVarChar, 50)},
-    '    {"@Cognome", (SqlDbType.NVarChar, 50)}
-    '}
+    Private ReadOnly pca As IPublicClientApplication = PublicClientApplicationBuilder _
+        .Create(ClientId) _
+        .WithAuthority(Authority) _
+        .WithDefaultRedirectUri() _
+        .Build()
+
+    Private accessToken As String = Nothing
+    Private tokenExpiry As DateTimeOffset
+
+    ' 🔹 Acquisisce o rinnova il token in modo asincrono
+    Public Async Function AcquireTokenAsync() As Task(Of String)
+        Dim result As AuthenticationResult = Nothing
+
+        Try
+            Dim accounts = Await pca.GetAccountsAsync()
+            result = Await pca.AcquireTokenSilent(SqlScope, accounts.FirstOrDefault()) _
+                          .ExecuteAsync()
+        Catch ex As MsalUiRequiredException
+            ' Non faccio Await qui dentro, solo segno che serve login interattivo
+        End Try
+
+        ' Se non ho ottenuto un token → forzo login interattivo
+        If result Is Nothing Then
+            Try
+                result = Await pca.AcquireTokenInteractive(SqlScope.AsEnumerable()) _
+                              .WithPrompt(Prompt.ForceLogin) _
+                              .ExecuteAsync()
+            Catch ex As MsalClientException
+                ' Utente ha chiuso la finestra o ha negato l’accesso
+                Return "Accesso negato"
+            Catch ex As MsalServiceException
+                ' Problema lato Azure AD (es. tenant non trovato, rete, ecc.)
+                Return Nothing
+            End Try
+        End If
+
+        If result IsNot Nothing Then
+            tokenExpiry = result.ExpiresOn
+            Return result.AccessToken
+        End If
+
+        Return Nothing
+    End Function
+
+    ' 🔹 Recupera token (prima tenta silent, se non c’è fa login interattivo)
+    Private Async Function GetAccessTokenAsync() As Task(Of String)
+        If String.IsNullOrEmpty(accessToken) OrElse DateTimeOffset.UtcNow >= tokenExpiry.AddMinutes(-5) Then
+            accessToken = Await AcquireTokenAsync()
+        End If
+        Return accessToken
+    End Function
 
     ' 🔹 Funzione per aprire una connessione SQL con token Azure AD
-    Public Function GetConnection() As SqlConnection
+    Public Async Function GetConnectionAsync() As Task(Of SqlConnection)
+        Dim token As String = Await GetAccessTokenAsync()
+
+        ' Stringa di connessione base (senza user/password)
+        Dim connectionString As String = "Server = tcp:gynarchive-svr.database.windows.net,1433;" &
+                                         "Database = GynArchiveDB;" &
+                                         "Encrypt = True;" &
+                                         "Column Encryption Setting = Disabled;" &
+                                         "TrustServerCertificate = False;"
+
+        ' Costruzione della connessione con Access Token
         Dim conn As New SqlConnection(connectionString)
+        conn.AccessToken = token
+
         Try
-            conn.Open()
+            Await conn.OpenAsync()
         Catch ex As Exception
             MessageBox.Show("Errore di connessione al database: " & ex.Message)
         End Try
+
         Return conn
     End Function
 
-    ' 🔹 Funzione per aprire una connessione SQL
-    'Public Function GetConnection() As SqlConnection
-    '   Dim conn As New SqlConnection(connectionString)
-    '   Try
-    '       conn.Open()
-    '   Catch ex As Exception
-    '       MessageBox.Show("Errore di connessione al database: " & ex.Message, "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    ' End Try
-    'Return conn
-    'End Function
-
-    ' Normalizzo i parametri per le colonne crittografate
-    'Private Function NormalizeParameters(parameters As List(Of SqlParameter)) As List(Of SqlParameter)
-    '    Dim normalized As New List(Of SqlParameter)
-    '
-    '        For Each p In parameters
-    '            If EncryptedColumns.ContainsKey(p.ParameterName) Then
-    '                Dim info = EncryptedColumns(p.ParameterName)
-    '                Dim fixedParam As New SqlParameter(p.ParameterName, info.Item1)
-    '                If info.Item2 > 0 Then fixedParam.Size = info.Item2
-    '                fixedParam.Value = p.Value
-    '                normalized.Add(fixedParam)
-    '            Else
-    '                normalized.Add(p)
-    '    End If
-    '    Next
-    '
-    '    Return normalized
-    '    End Function
-
     ' 🔹 Funzione per eseguire query di tipo INSERT/UPDATE/DELETE
-    Public Function EseguiNonQuery(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Integer
+    Public Async Function EseguiNonQueryAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Task(Of Integer)
         Dim righeAffette As Integer = 0
-        Using conn As SqlConnection = GetConnection()
+        Using conn As SqlConnection = Await GetConnectionAsync()
             Using cmd As New SqlCommand(query, conn)
                 If parameters IsNot Nothing Then
                     ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)
@@ -74,7 +99,7 @@ Module ConnessioneDB
                     cmd.Parameters.AddRange(parameters.ToArray())
                 End If
                 Try
-                    righeAffette = cmd.ExecuteNonQuery()
+                    righeAffette = Await cmd.ExecuteNonQueryAsync()
                 Catch ex As Exception
                     MessageBox.Show("Errore nell'esecuzione della query: " & ex.Message, "Errore SQL", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
@@ -83,9 +108,9 @@ Module ConnessioneDB
         Return righeAffette
     End Function
 
-    Public Function EseguiScalar(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Integer
+    Public Async Function EseguiScalarAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Task(Of Integer)
         Dim result As Object = Nothing
-        Using conn As SqlConnection = GetConnection()
+        Using conn As SqlConnection = Await GetConnectionAsync()
             Using cmd As New SqlCommand(query, conn)
                 If parameters IsNot Nothing Then
                     ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)
@@ -94,7 +119,7 @@ Module ConnessioneDB
                     cmd.Parameters.AddRange(parameters.ToArray())
                 End If
                 Try
-                    result = cmd.ExecuteScalar()
+                    result = Await cmd.ExecuteScalarAsync()
                 Catch ex As Exception
                     MessageBox.Show("Errore nell'esecuzione della query: " & ex.Message, "Errore SQL", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
@@ -110,9 +135,9 @@ Module ConnessioneDB
     End Function
 
     ' 🔹 Funzione per eseguire query di tipo SELECT (ritorna DataTable)
-    Public Function EseguiQuery(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As DataTable
+    Public Async Function EseguiQueryAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Task(Of DataTable)
         Dim dt As New DataTable()
-        Using conn As SqlConnection = GetConnection()
+        Using conn As SqlConnection = Await GetConnectionAsync()
             Using cmd As New SqlCommand(query, conn)
                 If parameters IsNot Nothing Then
                     ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)

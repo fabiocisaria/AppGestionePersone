@@ -32,7 +32,6 @@ Partial Class UC_AnamnesiFisiologica
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelAllergie = New System.Windows.Forms.Label()
         Me.TextBoxAllergie = New System.Windows.Forms.TextBox()
-        Me.ButtonInserisci = New System.Windows.Forms.Button()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelIntollerazne = New System.Windows.Forms.Label()
         Me.TextBoxIntolleranze = New System.Windows.Forms.TextBox()
@@ -46,6 +45,7 @@ Partial Class UC_AnamnesiFisiologica
         Me.TextBoxPeso = New System.Windows.Forms.TextBox()
         Me.LabelBMI = New System.Windows.Forms.Label()
         Me.TextBoxBMI = New System.Windows.Forms.TextBox()
+        Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanelAnamnesiFisiologica.SuspendLayout()
         Me.GroupBoxFumo.SuspendLayout()
         Me.TableLayoutPanel6.SuspendLayout()
@@ -59,9 +59,9 @@ Partial Class UC_AnamnesiFisiologica
         '
         Me.TableLayoutPanelAnamnesiFisiologica.ColumnCount = 1
         Me.TableLayoutPanelAnamnesiFisiologica.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.ButtonInserisci, 0, 5)
         Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.GroupBoxFumo, 0, 4)
         Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.TableLayoutPanel5, 0, 3)
-        Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.ButtonInserisci, 0, 5)
         Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.TableLayoutPanel4, 0, 2)
         Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.TableLayoutPanel3, 0, 1)
         Me.TableLayoutPanelAnamnesiFisiologica.Controls.Add(Me.TableLayoutPanel2, 0, 0)
@@ -179,16 +179,6 @@ Partial Class UC_AnamnesiFisiologica
         Me.TextBoxAllergie.Name = "TextBoxAllergie"
         Me.TextBoxAllergie.Size = New System.Drawing.Size(419, 20)
         Me.TextBoxAllergie.TabIndex = 5
-        '
-        'ButtonInserisci
-        '
-        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.ButtonInserisci.Location = New System.Drawing.Point(688, 477)
-        Me.ButtonInserisci.Name = "ButtonInserisci"
-        Me.ButtonInserisci.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonInserisci.TabIndex = 6
-        Me.ButtonInserisci.Text = "Inserisci"
-        Me.ButtonInserisci.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel4
         '
@@ -338,6 +328,16 @@ Partial Class UC_AnamnesiFisiologica
         Me.TextBoxBMI.TabIndex = 0
         Me.TextBoxBMI.TabStop = False
         '
+        'ButtonInserisci
+        '
+        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(667, 475)
+        Me.ButtonInserisci.Name = "ButtonInserisci"
+        Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
+        Me.ButtonInserisci.TabIndex = 3
+        Me.ButtonInserisci.Text = "Inserisci"
+        '
         'UC_AnamnesiFisiologica
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -371,7 +371,6 @@ Partial Class UC_AnamnesiFisiologica
     Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
     Friend WithEvents LabelAllergie As Label
     Friend WithEvents TextBoxAllergie As TextBox
-    Friend WithEvents ButtonInserisci As Button
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents LabelIntollerazne As Label
     Friend WithEvents TextBoxIntolleranze As TextBox
@@ -385,4 +384,5 @@ Partial Class UC_AnamnesiFisiologica
     Friend WithEvents TextBoxPeso As TextBox
     Friend WithEvents LabelBMI As Label
     Friend WithEvents TextBoxBMI As TextBox
+    Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
 End Class

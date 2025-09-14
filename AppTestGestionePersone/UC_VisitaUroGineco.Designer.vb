@@ -42,7 +42,6 @@ Partial Class UC_VisitaUroGineco
         Me.LabelVestSx = New System.Windows.Forms.Label()
         Me.LabelVestDx = New System.Windows.Forms.Label()
         Me.GroupBoxIperContr = New System.Windows.Forms.GroupBox()
-        Me.ButtonInserisci = New System.Windows.Forms.Button()
         Me.RadioButtonCitProSi = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanelVisitaUroGineco = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanelCistProv = New System.Windows.Forms.TableLayoutPanel()
@@ -64,6 +63,7 @@ Partial Class UC_VisitaUroGineco
         Me.RadioButtonLicSi = New System.Windows.Forms.RadioButton()
         Me.LabelLichen = New System.Windows.Forms.Label()
         Me.TableLayoutPanelIpercontr = New System.Windows.Forms.TableLayoutPanel()
+        Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanel8.SuspendLayout()
         Me.GroupBoxSwabTest.SuspendLayout()
         Me.TableLayoutPanelSwab.SuspendLayout()
@@ -321,16 +321,6 @@ Partial Class UC_VisitaUroGineco
         Me.GroupBoxIperContr.TabStop = False
         Me.GroupBoxIperContr.Text = "Ipercontrattilità"
         '
-        'ButtonInserisci
-        '
-        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.ButtonInserisci.Location = New System.Drawing.Point(688, 483)
-        Me.ButtonInserisci.Name = "ButtonInserisci"
-        Me.ButtonInserisci.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonInserisci.TabIndex = 5
-        Me.ButtonInserisci.Text = "Inserisci"
-        Me.ButtonInserisci.UseVisualStyleBackColor = True
-        '
         'RadioButtonCitProSi
         '
         Me.RadioButtonCitProSi.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -348,11 +338,11 @@ Partial Class UC_VisitaUroGineco
         Me.TableLayoutPanelVisitaUroGineco.ColumnCount = 2
         Me.TableLayoutPanelVisitaUroGineco.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanelVisitaUroGineco.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelVisitaUroGineco.Controls.Add(Me.ButtonInserisci, 1, 2)
         Me.TableLayoutPanelVisitaUroGineco.Controls.Add(Me.TableLayoutPanelCistProv, 1, 1)
         Me.TableLayoutPanelVisitaUroGineco.Controls.Add(Me.GroupBoxVag, 1, 0)
         Me.TableLayoutPanelVisitaUroGineco.Controls.Add(Me.TableLayoutPanelIpercontr, 0, 1)
         Me.TableLayoutPanelVisitaUroGineco.Controls.Add(Me.GroupBoxSwabTest, 0, 0)
-        Me.TableLayoutPanelVisitaUroGineco.Controls.Add(Me.ButtonInserisci, 1, 2)
         Me.TableLayoutPanelVisitaUroGineco.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanelVisitaUroGineco.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanelVisitaUroGineco.Name = "TableLayoutPanelVisitaUroGineco"
@@ -618,6 +608,16 @@ Partial Class UC_VisitaUroGineco
         Me.TableLayoutPanelIpercontr.Size = New System.Drawing.Size(356, 112)
         Me.TableLayoutPanelIpercontr.TabIndex = 3
         '
+        'ButtonInserisci
+        '
+        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(667, 481)
+        Me.ButtonInserisci.Name = "ButtonInserisci"
+        Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
+        Me.ButtonInserisci.TabIndex = 7
+        Me.ButtonInserisci.Text = "Inserisci"
+        '
         'UC_VisitaUroGineco
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -677,7 +677,6 @@ Partial Class UC_VisitaUroGineco
     Friend WithEvents LabelVestSx As Label
     Friend WithEvents LabelVestDx As Label
     Friend WithEvents GroupBoxIperContr As GroupBox
-    Friend WithEvents ButtonInserisci As Button
     Friend WithEvents RadioButtonCitProSi As RadioButton
     Friend WithEvents TableLayoutPanelVisitaUroGineco As TableLayoutPanel
     Friend WithEvents GroupBoxVag As GroupBox
@@ -699,4 +698,5 @@ Partial Class UC_VisitaUroGineco
     Friend WithEvents GroupBoxCistProv As GroupBox
     Friend WithEvents TableLayoutPanel9 As TableLayoutPanel
     Friend WithEvents TableLayoutPanelCistProv As TableLayoutPanel
+    Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
 End Class

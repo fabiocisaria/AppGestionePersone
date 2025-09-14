@@ -56,7 +56,6 @@ Partial Class UC_VisitaSintomi
         Me.RadioButtonDispLocS = New System.Windows.Forms.RadioButton()
         Me.RadioButtonDispLocP = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanelDispLoc = New System.Windows.Forms.TableLayoutPanel()
-        Me.ButtonInserisci = New System.Windows.Forms.Button()
         Me.RadioButtonDolVescSempre = New System.Windows.Forms.RadioButton()
         Me.RadioButtonDolVescAvolte = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanelDolVesc = New System.Windows.Forms.TableLayoutPanel()
@@ -104,6 +103,7 @@ Partial Class UC_VisitaSintomi
         Me.RadioButtonCistSi = New System.Windows.Forms.RadioButton()
         Me.GroupBoxDispareunia = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanelDispenuria = New System.Windows.Forms.TableLayoutPanel()
+        Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanelAlvoColonIrr.SuspendLayout()
         Me.GroupBoxAlvoColonIrr.SuspendLayout()
         Me.TableLayoutPanelAlvoAlterno.SuspendLayout()
@@ -612,16 +612,6 @@ Partial Class UC_VisitaSintomi
         Me.TableLayoutPanelDispLoc.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanelDispLoc.Size = New System.Drawing.Size(225, 111)
         Me.TableLayoutPanelDispLoc.TabIndex = 1
-        '
-        'ButtonInserisci
-        '
-        Me.ButtonInserisci.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ButtonInserisci.Location = New System.Drawing.Point(688, 490)
-        Me.ButtonInserisci.Name = "ButtonInserisci"
-        Me.ButtonInserisci.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonInserisci.TabIndex = 8
-        Me.ButtonInserisci.Text = "Inserisci"
-        Me.ButtonInserisci.UseVisualStyleBackColor = True
         '
         'RadioButtonDolVescSempre
         '
@@ -1240,6 +1230,16 @@ Partial Class UC_VisitaSintomi
         Me.TableLayoutPanelDispenuria.Size = New System.Drawing.Size(237, 232)
         Me.TableLayoutPanelDispenuria.TabIndex = 0
         '
+        'ButtonInserisci
+        '
+        Me.ButtonInserisci.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(667, 486)
+        Me.ButtonInserisci.Name = "ButtonInserisci"
+        Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
+        Me.ButtonInserisci.TabIndex = 8
+        Me.ButtonInserisci.Text = "Inserisci"
+        '
         'UC_VisitaSintomi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1346,7 +1346,6 @@ Partial Class UC_VisitaSintomi
     Friend WithEvents RadioButtonDispLocS As RadioButton
     Friend WithEvents RadioButtonDispLocP As RadioButton
     Friend WithEvents TableLayoutPanelDispLoc As TableLayoutPanel
-    Friend WithEvents ButtonInserisci As Button
     Friend WithEvents RadioButtonDolVescSempre As RadioButton
     Friend WithEvents RadioButtonDolVescAvolte As RadioButton
     Friend WithEvents TableLayoutPanelDolVesc As TableLayoutPanel
@@ -1394,4 +1393,5 @@ Partial Class UC_VisitaSintomi
     Friend WithEvents RadioButtonCistSi As RadioButton
     Friend WithEvents GroupBoxDispareunia As GroupBox
     Friend WithEvents TableLayoutPanelDispenuria As TableLayoutPanel
+    Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
 End Class

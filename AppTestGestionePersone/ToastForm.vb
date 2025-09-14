@@ -15,4 +15,17 @@
             Return cp
         End Get
     End Property
+
+    Private Sub InitializeComponent()
+        Me.SuspendLayout()
+        '
+        'ToastForm
+        '
+        Me.AccessibleRole = System.Windows.Forms.AccessibleRole.Dialog
+        Me.AutoValidate = System.Windows.Forms.AutoValidate.Disable
+        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Name = "ToastForm"
+        Me.ResumeLayout(False)
+
+    End Sub
 End Class

@@ -8,19 +8,26 @@ Public Class UC_VisitaAnamnesiOstrGineco
     Dim esiste As Boolean = False
     Dim appenaSalvati As Boolean = False
 
-    Public Sub AggiornaDati()
+    Public Async Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             idVisita = main.IDVisitaSelezionata
             tipoVisita = main.TipoVisitaSelezionata
-            esiste = CercaVisita()
+
+            ' Cerco se esiste già un'anamnesi ostetrico - ginecologica per la visita selezionata
+            TableLayoutPanelAnOstrGineco.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelAnOstrGineco.Enabled = True
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelAnOstrGineco)
             End If
         End If
     End Sub
 
-    Private Sub FormVisitaAnamnesiOstrGineco_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub FormVisitaAnamnesiOstrGineco_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
         NumericUpDownGravidanze.Minimum = 0
         NumericUpDownGravidanze.Maximum = 20
         NumericUpDownPartiCesarei.Minimum = 0
@@ -51,8 +58,13 @@ Public Class UC_VisitaAnamnesiOstrGineco
             ResetAndDisableControls(False, TableLayoutPanelLacEpis)
             ResetAndDisableControls(False, TableLayoutPanelTipo)
 
-            ' Cerco se esiste già una visita uro-ginecologica per la visita selezionata
-            esiste = CercaVisita()
+            ' Cerco se esiste già un'anamnesi ostetrico - ginecologica per la visita selezionata
+            TableLayoutPanelAnOstrGineco.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelAnOstrGineco.Enabled = True
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelAnOstrGineco)
                 'ResetAndDisableControls(False, TableLayoutPanelTipoContracc)
@@ -71,6 +83,32 @@ Public Class UC_VisitaAnamnesiOstrGineco
 
     Public Sub New()
         InitializeComponent()
+
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+        TableLayoutPanel3.BackColor = Theme.BackgroundColor
+        TableLayoutPanel5.BackColor = Theme.BackgroundColor
+        TableLayoutPanel6.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAmenorrea.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAnOstrGineco.BackColor = Theme.BackgroundColor
+        TableLayoutPanelCiclo.BackColor = Theme.BackgroundColor
+        TableLayoutPanelContracc.BackColor = Theme.BackgroundColor
+        TableLayoutPanelContraccSiNo.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDienogestSiNo.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDierogest.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDismenorrea.BackColor = Theme.BackgroundColor
+        TableLayoutPanelEpisiotomia.BackColor = Theme.BackgroundColor
+        TableLayoutPanelEstrogeno.BackColor = Theme.BackgroundColor
+        TableLayoutPanelEstrogSiNo.BackColor = Theme.BackgroundColor
+        TableLayoutPanelLacEpis.BackColor = Theme.BackgroundColor
+        TableLayoutPanelLacerazioni.BackColor = Theme.BackgroundColor
+        TableLayoutPanelMenopausa.BackColor = Theme.BackgroundColor
+        TableLayoutPanelParti.BackColor = Theme.BackgroundColor
+        TableLayoutPanelPartiOperativi.BackColor = Theme.BackgroundColor
+        TableLayoutPanelPartiOperativiSiNo.BackColor = Theme.BackgroundColor
+        TableLayoutPanelSwab.BackColor = Theme.BackgroundColor
+        TableLayoutPanelTipo.BackColor = Theme.BackgroundColor
+        TableLayoutPanelTipoContracc.BackColor = Theme.BackgroundColor
 
         ' ====================
         ' SfButtons
@@ -166,20 +204,22 @@ Public Class UC_VisitaAnamnesiOstrGineco
         End If
     End Sub
 
-    Private Sub ComboBoxTipoContracc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxTipoContracc.SelectedIndexChanged, RadioButtonUsoDienogestNo.CheckedChanged, RadioButtonUsoDienogestSi.CheckedChanged
+    Private Sub ComboBoxTipoContracc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxTipoContracc.SelectedIndexChanged, RadioButtonUsoDienogestNo.CheckedChanged, RadioButtonUsoDienogestSi.CheckedChanged, RadioButtonUsoContraccSi.CheckedChanged, RadioButtonUsoContraccNo.CheckedChanged
+        Dim selectedTipo As String = ""
         If ComboBoxTipoContracc.SelectedItem IsNot Nothing Then
-            Dim selectedTipo As String = ComboBoxTipoContracc.SelectedItem.ToString()
-            ' Se il tipo di contraccettivo selezionato contiene "Estro", disabilito l'opzione di associare estrogeni e forzo la selezione su "Sì"
-            If selectedTipo.Contains("Estro") And RadioButtonUsoDienogestSi.Checked Then
-                RadioButtonAssocEstroSi.Checked = True
-                TableLayoutPanelEstrogeno.Enabled = False
-            ElseIf Not RadioButtonUsoDienogestSi.Checked And Not RadioButtonUsoDienogestNo.Checked Then
-                ResetAndDisableControls(False, TableLayoutPanelEstrogeno)
-            ElseIf RadioButtonUsoDienogestSi.Checked Then
-                ResetAndDisableControls(True, TableLayoutPanelEstrogeno)
-            ElseIf RadioButtonUsoDienogestNo.Checked Then
-                ResetAndDisableControls(False, TableLayoutPanelEstrogeno)
-            End If
+            selectedTipo = ComboBoxTipoContracc.SelectedItem.ToString()
+        End If
+
+        ' Se il tipo di contraccettivo selezionato contiene "Estro", disabilito l'opzione di associare estrogeni e forzo la selezione su "Sì"
+        If selectedTipo.Contains("Estro") And RadioButtonUsoDienogestSi.Checked Then
+            RadioButtonAssocEstroSi.Checked = True
+            TableLayoutPanelEstrogeno.Enabled = False
+        ElseIf Not RadioButtonUsoDienogestSi.Checked And Not RadioButtonUsoDienogestNo.Checked Then
+            ResetAndDisableControls(False, TableLayoutPanelEstrogeno)
+        ElseIf RadioButtonUsoDienogestSi.Checked Then
+            ResetAndDisableControls(True, TableLayoutPanelEstrogeno)
+        ElseIf RadioButtonUsoDienogestNo.Checked Then
+            ResetAndDisableControls(False, TableLayoutPanelEstrogeno)
         End If
     End Sub
 
@@ -308,7 +348,7 @@ Public Class UC_VisitaAnamnesiOstrGineco
         Return esito
     End Function
 
-    Private Function CercaVisita() As Boolean
+    Private Async Function CercaVisitaAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Carico i parametri della visita selezionata
@@ -321,13 +361,13 @@ Public Class UC_VisitaAnamnesiOstrGineco
         Dim checkParamGineco As New List(Of SqlParameter) From {
             New SqlParameter("@idVisita", idVisita)
         }
-        Dim dtCheckGineco As DataTable = EseguiQuery(checkQueryGineco, checkParamGineco)
+        Dim dtCheckGineco As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQueryGineco, checkParamGineco)
         Dim checkQueryOstetrico As String = "SELECT * FROM VisitaAnamnesiOstetrica WHERE ID_Visita = @idVisita"
 
         Dim checkParamOstetrico As New List(Of SqlParameter) From {
                 New SqlParameter("@idVisita", idVisita)
             }
-        Dim dtCheckOstetrico As DataTable = EseguiQuery(checkQueryOstetrico, checkParamOstetrico)
+        Dim dtCheckOstetrico As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQueryOstetrico, checkParamOstetrico)
 
         If dtCheckGineco.Rows.Count = 1 And dtCheckOstetrico.Rows.Count = 1 Then
             esiste = True ' Anamnesi ostetrico-ginecologica esistente per la visita selezionata
@@ -346,10 +386,10 @@ Public Class UC_VisitaAnamnesiOstrGineco
             '======
             ' Contraccettivi
             If dettagliVisitaGineco("Contraccettivi") Then
-                    RadioButtonUsoContraccSi.Checked = True
-                Else
-                    RadioButtonUsoContraccNo.Checked = True
-                End If
+                RadioButtonUsoContraccSi.Checked = True
+            Else
+                RadioButtonUsoContraccNo.Checked = True
+            End If
 
             If RadioButtonUsoContraccSi.Checked Then
                 ' Tipo contraccettivo
@@ -470,15 +510,15 @@ Public Class UC_VisitaAnamnesiOstrGineco
             End If
 
             Return esiste
-            Else
-                esiste = False
+        Else
+            esiste = False
             PulisciCampi(TableLayoutPanelAnOstrGineco)
             Return esiste
         End If
     End Function
 
     ' TODO
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
         Dim selezioneOK As Boolean = CheckSelezione()
         Dim esito As Boolean = True
 
@@ -525,7 +565,7 @@ Public Class UC_VisitaAnamnesiOstrGineco
 
             If usoDienogest Then
                 progesterone = True
-                If TipoContraccettivo = DBNull.Value Then
+                If IsDBNull(TipoContraccettivo) Then
                     usoEstrogeno = RadioButtonAssocEstroSi.Checked
                     If usoEstrogeno Then
                         estrogeno = True
@@ -704,7 +744,7 @@ Public Class UC_VisitaAnamnesiOstrGineco
                             New SqlParameter("@episiotomia", episiotomia)
                         }
 
-                If EseguiNonQuery(queryAnGineco, parametriAnGineco) > 0 And EseguiNonQuery(queryAnOstetrico, parametriAnOstetrico) > 0 Then
+                If Await ConnessioneDB.EseguiNonQueryAsync(queryAnGineco, parametriAnGineco) > 0 And Await ConnessioneDB.EseguiNonQueryAsync(queryAnOstetrico, parametriAnOstetrico) > 0 Then
                     successo = True
                 End If
 
@@ -727,11 +767,23 @@ Public Class UC_VisitaAnamnesiOstrGineco
         End If
         Return esito
     End Function
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito As Boolean = SalvaDati()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelAnOstrGineco.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelAnOstrGineco.Enabled = True
         If esito Then
             appenaSalvati = True
-            CercaVisita()
+            TableLayoutPanelAnOstrGineco.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            Dim result = Await CercaVisitaAsync()
+            TableLayoutPanelAnOstrGineco.Enabled = True
         End If
     End Sub
 End Class

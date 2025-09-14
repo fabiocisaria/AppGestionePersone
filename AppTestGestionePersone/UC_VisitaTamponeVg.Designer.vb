@@ -25,14 +25,14 @@ Partial Class UC_VisitaTamponeVg
         Me.TableLayoutPanelTamponeVg = New System.Windows.Forms.TableLayoutPanel()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.GroupBoxTamponeVg = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanelDatiRMN = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelDatiTammVg = New System.Windows.Forms.TableLayoutPanel()
         Me.ComboBoxEsito = New System.Windows.Forms.ComboBox()
         Me.DateTimePickerDataEsecuzione = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.LabelEsito = New System.Windows.Forms.Label()
         Me.LabelDataEsecuzione = New System.Windows.Forms.Label()
         Me.TableLayoutPanelTamponeVg.SuspendLayout()
         Me.GroupBoxTamponeVg.SuspendLayout()
-        Me.TableLayoutPanelDatiRMN.SuspendLayout()
+        Me.TableLayoutPanelDatiTammVg.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanelTamponeVg
@@ -63,7 +63,7 @@ Partial Class UC_VisitaTamponeVg
         'GroupBoxTamponeVg
         '
         Me.GroupBoxTamponeVg.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxTamponeVg.Controls.Add(Me.TableLayoutPanelDatiRMN)
+        Me.GroupBoxTamponeVg.Controls.Add(Me.TableLayoutPanelDatiTammVg)
         Me.GroupBoxTamponeVg.Location = New System.Drawing.Point(210, 182)
         Me.GroupBoxTamponeVg.Name = "GroupBoxTamponeVg"
         Me.GroupBoxTamponeVg.Size = New System.Drawing.Size(346, 112)
@@ -71,25 +71,25 @@ Partial Class UC_VisitaTamponeVg
         Me.GroupBoxTamponeVg.TabStop = False
         Me.GroupBoxTamponeVg.Text = "Tampone vaginale"
         '
-        'TableLayoutPanelDatiRMN
+        'TableLayoutPanelDatiTammVg
         '
-        Me.TableLayoutPanelDatiRMN.ColumnCount = 2
-        Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
-        Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxEsito, 1, 1)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelEsito, 0, 1)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
-        Me.TableLayoutPanelDatiRMN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelDatiRMN.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanelDatiRMN.Name = "TableLayoutPanelDatiRMN"
-        Me.TableLayoutPanelDatiRMN.RowCount = 2
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanelDatiRMN.Size = New System.Drawing.Size(340, 93)
-        Me.TableLayoutPanelDatiRMN.TabIndex = 0
+        Me.TableLayoutPanelDatiTammVg.ColumnCount = 2
+        Me.TableLayoutPanelDatiTammVg.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
+        Me.TableLayoutPanelDatiTammVg.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDatiTammVg.Controls.Add(Me.ComboBoxEsito, 1, 1)
+        Me.TableLayoutPanelDatiTammVg.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
+        Me.TableLayoutPanelDatiTammVg.Controls.Add(Me.LabelEsito, 0, 1)
+        Me.TableLayoutPanelDatiTammVg.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
+        Me.TableLayoutPanelDatiTammVg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelDatiTammVg.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelDatiTammVg.Name = "TableLayoutPanelDatiTammVg"
+        Me.TableLayoutPanelDatiTammVg.RowCount = 2
+        Me.TableLayoutPanelDatiTammVg.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiTammVg.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiTammVg.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiTammVg.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanelDatiTammVg.Size = New System.Drawing.Size(340, 93)
+        Me.TableLayoutPanelDatiTammVg.TabIndex = 0
         '
         'ComboBoxEsito
         '
@@ -142,8 +142,8 @@ Partial Class UC_VisitaTamponeVg
         Me.Size = New System.Drawing.Size(766, 516)
         Me.TableLayoutPanelTamponeVg.ResumeLayout(False)
         Me.GroupBoxTamponeVg.ResumeLayout(False)
-        Me.TableLayoutPanelDatiRMN.ResumeLayout(False)
-        Me.TableLayoutPanelDatiRMN.PerformLayout()
+        Me.TableLayoutPanelDatiTammVg.ResumeLayout(False)
+        Me.TableLayoutPanelDatiTammVg.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -151,7 +151,7 @@ Partial Class UC_VisitaTamponeVg
     Friend WithEvents TableLayoutPanelTamponeVg As TableLayoutPanel
     Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
     Friend WithEvents GroupBoxTamponeVg As GroupBox
-    Friend WithEvents TableLayoutPanelDatiRMN As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelDatiTammVg As TableLayoutPanel
     Friend WithEvents ComboBoxEsito As ComboBox
     Friend WithEvents DateTimePickerDataEsecuzione As Syncfusion.WinForms.Input.SfDateTimeEdit
     Friend WithEvents LabelEsito As Label

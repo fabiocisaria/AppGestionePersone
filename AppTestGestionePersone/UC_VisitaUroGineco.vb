@@ -6,19 +6,58 @@ Public Class UC_VisitaUroGineco
     Dim esiste As Boolean = False
     Dim appenaSalvati As Boolean = False
 
-    Public Sub AggiornaDati()
+    Public Sub New()
+        InitializeComponent()
+
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel3.BackColor = Theme.BackgroundColor
+        TableLayoutPanel8.BackColor = Theme.BackgroundColor
+        TableLayoutPanel9.BackColor = Theme.BackgroundColor
+        TableLayoutPanelCistProv.BackColor = Theme.BackgroundColor
+        TableLayoutPanelIpercontr.BackColor = Theme.BackgroundColor
+        TableLayoutPanelSwab.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVagCicRef.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVagLichen.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVagStato.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVg.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVisitaUroGineco.BackColor = Theme.BackgroundColor
+
+        ' ====================
+        ' SfButtons
+        ' ====================
+        With ButtonInserisci.Style
+            .BackColor = Color.FromArgb(41, 128, 185)
+            .HoverBackColor = Color.FromArgb(31, 97, 144)  ' colore hover
+            .PressedBackColor = Color.FromArgb(31, 97, 144) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(31, 97, 144) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
+    End Sub
+
+    Public Async Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             idVisita = main.IDVisitaSelezionata
             tipoVisita = main.TipoVisitaSelezionata
-            esiste = CercaVisita()
+
+            ' Cerco se esiste già una visita uro-ginecologica per la visita selezionata
+            TableLayoutPanelVisitaUroGineco.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelVisitaUroGineco.Enabled = True
+
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelVisitaUroGineco)
             End If
         End If
     End Sub
 
-    Private Sub UC_VisitaUroGineco_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub UC_VisitaUroGineco_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Imposto i valori minimi e massimi per gli NumericUpDown dello Swab Test
         NumericUpDownClit.Minimum = 0
         NumericUpDownClit.Maximum = 10
@@ -42,8 +81,15 @@ Public Class UC_VisitaUroGineco
             ' Carico i parametri della visita selezionata
             idVisita = main.IDVisitaSelezionata
             tipoVisita = main.TipoVisitaSelezionata
+
             ' Cerco se esiste già una visita uro-ginecologica per la visita selezionata
-            esiste = CercaVisita()
+            TableLayoutPanelVisitaUroGineco.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelVisitaUroGineco.Enabled = True
+
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelVisitaUroGineco)
             End If
@@ -51,13 +97,13 @@ Public Class UC_VisitaUroGineco
     End Sub
 
     ' Controllo se la visita è prima visita o controllo (non usato perché il tipo visita è salvato nel MainForm)
-    Private Function VerificaTipoVisita(numVisita As Integer) As Integer
+    Private Async Function VerificaTipoVisitaAsync(numVisita As Integer) As Task(Of Integer)
         Dim checkQuery As String = "SELECT * FROM Visite WHERE ID = @idVisita"
 
         Dim checkParam As New List(Of SqlParameter) From {
             New SqlParameter("@idVisita", numVisita)
         }
-        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+        Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count > 0 Then
             Dim tipoVisita As String = dtCheck.Rows(0)("TipoVisita").ToString()
@@ -131,7 +177,7 @@ Public Class UC_VisitaUroGineco
         Return esito
     End Function
 
-    Private Function CercaVisita() As Boolean
+    Private Async Function CercaVisitaAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Carico i parametri della visita selezionata
@@ -144,14 +190,14 @@ Public Class UC_VisitaUroGineco
         Dim checkParam As New List(Of SqlParameter) From {
             New SqlParameter("@idVisita", idVisita)
         }
-        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+        Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         Dim checkSwabQuery As String = "SELECT * FROM VisitaSwabTest WHERE ID_Visita = @idVisita"
 
         Dim checkSwabParam As New List(Of SqlParameter) From {
             New SqlParameter("@idVisita", idVisita)
         }
-        Dim dtSwabCheck As DataTable = EseguiQuery(checkSwabQuery, checkSwabParam)
+        Dim dtSwabCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkSwabQuery, checkSwabParam)
 
         If dtCheck.Rows.Count = 1 And dtSwabCheck.Rows.Count = 1 Then
             esiste = True ' visita uro - ginecologica esistente
@@ -220,7 +266,7 @@ Public Class UC_VisitaUroGineco
         End If
     End Function
 
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         ' Carico i parametri della visita selezionata
@@ -315,7 +361,7 @@ Public Class UC_VisitaUroGineco
                         New SqlParameter("@swabForc", swabForc)
                     }
 
-                If EseguiNonQuery(querySwabTest, parametriSwabTest) > 0 Then
+                If Await ConnessioneDB.EseguiNonQueryAsync(querySwabTest, parametriSwabTest) > 0 Then
                     successo = True
                 End If
 
@@ -330,7 +376,7 @@ Public Class UC_VisitaUroGineco
                         New SqlParameter("@cistProv", cistProv)
                     }
 
-                    If EseguiNonQuery(queryVisitaUroGineco, parametriVisitaUroGineco) > 0 Then
+                    If Await ConnessioneDB.EseguiNonQueryAsync(queryVisitaUroGineco, parametriVisitaUroGineco) > 0 Then
                         successo = True
                     Else
                         successo = False
@@ -354,11 +400,23 @@ Public Class UC_VisitaUroGineco
         End If
     End Function
 
-    Private Sub Inserici_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito As Boolean = SalvaDati()
+    Private Async Sub Inserici_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelVisitaUroGineco.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelVisitaUroGineco.Enabled = True
         If esito Then
             appenaSalvati = True
-            CercaVisita()
+            TableLayoutPanelVisitaUroGineco.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            Dim result = Await CercaVisitaAsync()
+            TableLayoutPanelVisitaUroGineco.Enabled = True
         End If
     End Sub
 End Class

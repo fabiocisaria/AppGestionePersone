@@ -22,35 +22,35 @@ Partial Class UC_VisitaDNATest
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanelRmn = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelDNA = New System.Windows.Forms.TableLayoutPanel()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.GroupBoxDNATest = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanelDatiRMN = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelDatiDNA = New System.Windows.Forms.TableLayoutPanel()
         Me.ComboBoxCeppo = New System.Windows.Forms.ComboBox()
         Me.ComboBoxEsito = New System.Windows.Forms.ComboBox()
         Me.DateTimePickerDataEsecuzione = New Syncfusion.WinForms.Input.SfDateTimeEdit()
         Me.LabelCeppo = New System.Windows.Forms.Label()
         Me.LabelEsito = New System.Windows.Forms.Label()
         Me.LabelDataEsecuzione = New System.Windows.Forms.Label()
-        Me.TableLayoutPanelRmn.SuspendLayout()
+        Me.TableLayoutPanelDNA.SuspendLayout()
         Me.GroupBoxDNATest.SuspendLayout()
-        Me.TableLayoutPanelDatiRMN.SuspendLayout()
+        Me.TableLayoutPanelDatiDNA.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TableLayoutPanelRmn
+        'TableLayoutPanelDNA
         '
-        Me.TableLayoutPanelRmn.ColumnCount = 1
-        Me.TableLayoutPanelRmn.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.Controls.Add(Me.ButtonInserisci, 0, 1)
-        Me.TableLayoutPanelRmn.Controls.Add(Me.GroupBoxDNATest, 0, 0)
-        Me.TableLayoutPanelRmn.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelRmn.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanelRmn.Name = "TableLayoutPanelRmn"
-        Me.TableLayoutPanelRmn.RowCount = 2
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelRmn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanelRmn.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.TabIndex = 3
+        Me.TableLayoutPanelDNA.ColumnCount = 1
+        Me.TableLayoutPanelDNA.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDNA.Controls.Add(Me.ButtonInserisci, 0, 1)
+        Me.TableLayoutPanelDNA.Controls.Add(Me.GroupBoxDNATest, 0, 0)
+        Me.TableLayoutPanelDNA.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelDNA.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanelDNA.Name = "TableLayoutPanelDNA"
+        Me.TableLayoutPanelDNA.RowCount = 2
+        Me.TableLayoutPanelDNA.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDNA.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelDNA.Size = New System.Drawing.Size(766, 516)
+        Me.TableLayoutPanelDNA.TabIndex = 3
         '
         'ButtonInserisci
         '
@@ -65,7 +65,7 @@ Partial Class UC_VisitaDNATest
         'GroupBoxDNATest
         '
         Me.GroupBoxDNATest.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.GroupBoxDNATest.Controls.Add(Me.TableLayoutPanelDatiRMN)
+        Me.GroupBoxDNATest.Controls.Add(Me.TableLayoutPanelDatiDNA)
         Me.GroupBoxDNATest.Location = New System.Drawing.Point(210, 166)
         Me.GroupBoxDNATest.Name = "GroupBoxDNATest"
         Me.GroupBoxDNATest.Size = New System.Drawing.Size(346, 144)
@@ -73,27 +73,27 @@ Partial Class UC_VisitaDNATest
         Me.GroupBoxDNATest.TabStop = False
         Me.GroupBoxDNATest.Text = "DNA Test"
         '
-        'TableLayoutPanelDatiRMN
+        'TableLayoutPanelDatiDNA
         '
-        Me.TableLayoutPanelDatiRMN.ColumnCount = 2
-        Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
-        Me.TableLayoutPanelDatiRMN.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxCeppo, 1, 2)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.ComboBoxEsito, 1, 1)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelCeppo, 0, 2)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelEsito, 0, 1)
-        Me.TableLayoutPanelDatiRMN.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
-        Me.TableLayoutPanelDatiRMN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelDatiRMN.Location = New System.Drawing.Point(3, 16)
-        Me.TableLayoutPanelDatiRMN.Name = "TableLayoutPanelDatiRMN"
-        Me.TableLayoutPanelDatiRMN.RowCount = 3
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelDatiRMN.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanelDatiRMN.Size = New System.Drawing.Size(340, 125)
-        Me.TableLayoutPanelDatiRMN.TabIndex = 0
+        Me.TableLayoutPanelDatiDNA.ColumnCount = 2
+        Me.TableLayoutPanelDatiDNA.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
+        Me.TableLayoutPanelDatiDNA.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDatiDNA.Controls.Add(Me.ComboBoxCeppo, 1, 2)
+        Me.TableLayoutPanelDatiDNA.Controls.Add(Me.ComboBoxEsito, 1, 1)
+        Me.TableLayoutPanelDatiDNA.Controls.Add(Me.DateTimePickerDataEsecuzione, 1, 0)
+        Me.TableLayoutPanelDatiDNA.Controls.Add(Me.LabelCeppo, 0, 2)
+        Me.TableLayoutPanelDatiDNA.Controls.Add(Me.LabelEsito, 0, 1)
+        Me.TableLayoutPanelDatiDNA.Controls.Add(Me.LabelDataEsecuzione, 0, 0)
+        Me.TableLayoutPanelDatiDNA.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelDatiDNA.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanelDatiDNA.Name = "TableLayoutPanelDatiDNA"
+        Me.TableLayoutPanelDatiDNA.RowCount = 3
+        Me.TableLayoutPanelDatiDNA.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiDNA.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiDNA.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelDatiDNA.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanelDatiDNA.Size = New System.Drawing.Size(340, 125)
+        Me.TableLayoutPanelDatiDNA.TabIndex = 0
         '
         'ComboBoxCeppo
         '
@@ -161,21 +161,21 @@ Partial Class UC_VisitaDNATest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.TableLayoutPanelRmn)
+        Me.Controls.Add(Me.TableLayoutPanelDNA)
         Me.Name = "UC_VisitaDNATest"
         Me.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelRmn.ResumeLayout(False)
+        Me.TableLayoutPanelDNA.ResumeLayout(False)
         Me.GroupBoxDNATest.ResumeLayout(False)
-        Me.TableLayoutPanelDatiRMN.ResumeLayout(False)
-        Me.TableLayoutPanelDatiRMN.PerformLayout()
+        Me.TableLayoutPanelDatiDNA.ResumeLayout(False)
+        Me.TableLayoutPanelDatiDNA.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents TableLayoutPanelRmn As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelDNA As TableLayoutPanel
     Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
     Friend WithEvents GroupBoxDNATest As GroupBox
-    Friend WithEvents TableLayoutPanelDatiRMN As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelDatiDNA As TableLayoutPanel
     Friend WithEvents ComboBoxCeppo As ComboBox
     Friend WithEvents ComboBoxEsito As ComboBox
     Friend WithEvents DateTimePickerDataEsecuzione As Syncfusion.WinForms.Input.SfDateTimeEdit

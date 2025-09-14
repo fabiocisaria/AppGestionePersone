@@ -122,14 +122,14 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Identity.Client, Version=4.73.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Identity.Client.4.73.1\lib\net472\Microsoft.Identity.Client.dll</HintPath>
+    <Reference Include="Microsoft.Identity.Client, Version=4.77.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.77.0\lib\net472\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=4.73.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Identity.Client.Extensions.Msal.4.73.1\lib\netstandard2.0\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=7.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.7.7.1\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.8.14.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=7.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.7.7.1\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
@@ -282,12 +282,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomColorTableMenu.vb" />
     <Compile Include="FormSelezione.Designer.vb">
       <DependentUpon>FormSelezione.vb</DependentUpon>
     </Compile>
     <Compile Include="FormSelezione.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GradientMenuStrip.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MenuItemColorRenderer.vb" />
+    <Compile Include="Theme.vb" />
     <Compile Include="ToastForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -361,6 +367,12 @@
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
     </Compile>
     <Compile Include="UC_InserisciVisita.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Login.Designer.vb">
+      <DependentUpon>UC_Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Login.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UC_Terapia.Designer.vb">
@@ -455,6 +467,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToastForm.resx">
+      <DependentUpon>ToastForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_Anagrafica.resx">
       <DependentUpon>UC_Anagrafica.vb</DependentUpon>
     </EmbeddedResource>
@@ -487,6 +502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_InserisciVisita.resx">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Login.resx">
+      <DependentUpon>UC_Login.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Terapia.resx">
       <DependentUpon>UC_Terapia.vb</DependentUpon>

@@ -5,19 +5,24 @@ Public Class UC_AnamnesiPatologicaRemota
     Dim esiste As Boolean = False
     Dim appenaSalvati As Boolean = False
 
-    Public Sub AggiornaDati()
+    Public Async Sub AggiornaDatiAsync()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             idPaziente = main.IDPazienteSelezionato
 
-            esiste = CercaAnamnesi()
+            TableLayoutPanelAnPatRem.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaAnamnesiAsync()
+
+            TableLayoutPanelAnPatRem.Enabled = True
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelAnPatRem)
             End If
         End If
     End Sub
 
-    Private Sub FormAnamnesiPatologicaRemota_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub FormAnamnesiPatologicaRemota_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
 
         RadioAutoCheck(True, TableLayoutPanelAnPatRem)
 
@@ -26,7 +31,13 @@ Public Class UC_AnamnesiPatologicaRemota
             ' Carico i parametri della visita selezionata
             idPaziente = main.IDPazienteSelezionato
 
-            esiste = CercaAnamnesi()
+            TableLayoutPanelAnPatRem.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaAnamnesiAsync()
+
+            TableLayoutPanelAnPatRem.Enabled = True
+
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelAnPatRem)
             End If
@@ -36,12 +47,33 @@ Public Class UC_AnamnesiPatologicaRemota
     Public Sub New()
         InitializeComponent()
 
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel1.BackColor = Theme.BackgroundColor
+        TableLayoutPanel2.BackColor = Theme.BackgroundColor
+        TableLayoutPanel3.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAnPatRem.BackColor = Theme.BackgroundColor
+        TableLayoutPanelCeliachia.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDM1.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDM2.BackColor = Theme.BackgroundColor
+        TableLayoutPanelEndometriosi.BackColor = Theme.BackgroundColor
+        TableLayoutPanelFibromialgie.BackColor = Theme.BackgroundColor
+        TableLayoutPanelIntollLatt.BackColor = Theme.BackgroundColor
+        TableLayoutPanelIVU.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVescDol.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVescIperatt.BackColor = Theme.BackgroundColor
+
         ' ====================
         ' SfButtons
         ' ====================
         With ButtonInserisci.Style
             .BackColor = Color.FromArgb(41, 128, 185)
+            .HoverBackColor = Color.FromArgb(31, 97, 144)  ' colore hover
+            .PressedBackColor = Color.FromArgb(31, 97, 144) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(31, 97, 144) ' mantiene il blu anche se focus
             .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
         End With
     End Sub
 
@@ -77,7 +109,7 @@ Public Class UC_AnamnesiPatologicaRemota
         Return esito
     End Function
 
-    Private Function CercaAnamnesi() As Boolean
+    Private Async Function CercaAnamnesiAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Carico i parametri della visita selezionata
@@ -89,7 +121,7 @@ Public Class UC_AnamnesiPatologicaRemota
         Dim checkParam As New List(Of SqlParameter) From {
             New SqlParameter("@idAnagrafica", idPaziente)
         }
-        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+        Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count = 1 Then
             esiste = True ' anamnesi patologica remota esistente
@@ -129,7 +161,7 @@ Public Class UC_AnamnesiPatologicaRemota
             End If
 
             'Vescica dolorosa
-            If dettagliAnamnesi("VescicaDolorosaa") Then
+            If dettagliAnamnesi("SindromeVescicaDolorosa") Then
                 RadioButtonVescDolSi.Checked = True
             Else
                 RadioButtonVescDolNo.Checked = True
@@ -177,7 +209,7 @@ Public Class UC_AnamnesiPatologicaRemota
         Return esiste
     End Function
 
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
         Dim selezioneOK As Boolean = CheckSelezione()
         Dim esito As Boolean = True
 
@@ -256,7 +288,7 @@ Public Class UC_AnamnesiPatologicaRemota
                 New SqlParameter("@dm2", dm2)
             }
 
-                If EseguiNonQuery(queryAnamnesiPatRem, parametriAnamnesiPatRem) > 0 Then
+                If Await ConnessioneDB.EseguiNonQueryAsync(queryAnamnesiPatRem, parametriAnamnesiPatRem) > 0 Then
                     successo = True
                 End If
 
@@ -281,11 +313,25 @@ Public Class UC_AnamnesiPatologicaRemota
         Return esito
     End Function
 
-    Private Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito = SalvaDati()
+    Private Async Sub ButtonInserisci_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelAnPatRem.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelAnPatRem.Enabled = True
         If esito Then
             appenaSalvati = True
-            CercaAnamnesi()
+
+            TableLayoutPanelAnPatRem.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            Dim result = Await CercaAnamnesiAsync()
+
+            TableLayoutPanelAnPatRem.Enabled = True
         End If
     End Sub
 End Class

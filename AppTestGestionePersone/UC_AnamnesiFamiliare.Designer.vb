@@ -30,7 +30,7 @@ Partial Class UC_AnamnesiFamiliare
         Me.TextPatologie = New System.Windows.Forms.TextBox()
         Me.LabelParentela = New System.Windows.Forms.Label()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.ButtonSalva = New System.Windows.Forms.Button()
+        Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBoxAnamnesi.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -127,7 +127,7 @@ Partial Class UC_AnamnesiFamiliare
         Me.TableLayoutPanel3.ColumnCount = 2
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.ButtonSalva, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.ButtonInserisci, 1, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 479)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
@@ -137,15 +137,15 @@ Partial Class UC_AnamnesiFamiliare
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(760, 34)
         Me.TableLayoutPanel3.TabIndex = 7
         '
-        'ButtonSalva
+        'ButtonInserisci
         '
-        Me.ButtonSalva.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.ButtonSalva.Location = New System.Drawing.Point(682, 6)
-        Me.ButtonSalva.Name = "ButtonSalva"
-        Me.ButtonSalva.Size = New System.Drawing.Size(75, 21)
-        Me.ButtonSalva.TabIndex = 6
-        Me.ButtonSalva.Text = "Salva"
-        Me.ButtonSalva.UseVisualStyleBackColor = True
+        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(661, 3)
+        Me.ButtonInserisci.Name = "ButtonInserisci"
+        Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
+        Me.ButtonInserisci.TabIndex = 15
+        Me.ButtonInserisci.Text = "Inserisci"
         '
         'UC_AnamnesiFamiliare
         '
@@ -166,10 +166,10 @@ Partial Class UC_AnamnesiFamiliare
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents GroupBoxAnamnesi As GroupBox
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
-    Friend WithEvents ButtonSalva As Button
     Friend WithEvents ComboBoxParentela As ComboBox
     Friend WithEvents LabelParentela As Label
     Friend WithEvents LabelPatologie As Label
     Friend WithEvents TextPatologie As TextBox
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
 End Class

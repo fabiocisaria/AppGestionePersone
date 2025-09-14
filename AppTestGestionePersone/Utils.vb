@@ -425,23 +425,23 @@ Module Utils
     '-----------------------------
     ' Ricerca paziente per user control
     '-----------------------------
-    Public Function CercaPazienteUC(codiceID As String, cognome As String) As DataTable
+    Public Async Function CercaPazienteUCAsync(codiceID As String, cognome As String) As Task(Of DataTable)
         Dim query As String
         Dim parametri As New List(Of SqlParameter)
 
         If Not String.IsNullOrWhiteSpace(codiceID) Then
             query = "SELECT ID, CodiceIdentificativo, Nome, Cognome, DataNascita
                      FROM Anagrafica 
-                     WHERE CodiceIdentificativo LIKE @codice"
+                     WHERE CodiceIdentificativo COLLATE Latin1_General_CI_AI LIKE @codice"
             parametri.Add(New SqlParameter("@codice", "%" & codiceID.Trim() & "%"))
         Else
             query = "SELECT ID, CodiceIdentificativo, Nome, Cognome, DataNascita
                      FROM Anagrafica 
-                     WHERE Cognome LIKE @cognome"
+                     WHERE Cognome COLLATE Latin1_General_CI_AI LIKE @cognome"
             parametri.Add(New SqlParameter("@cognome", "%" & cognome.Trim() & "%"))
         End If
 
-        Dim risultato As DataTable = EseguiQuery(query, parametri)
+        Dim risultato As DataTable = Await ConnessioneDB.EseguiQueryAsync(query, parametri)
 
         Return risultato ' se nessun paziente selezionato
     End Function
@@ -449,7 +449,7 @@ Module Utils
     '-----------------------------
     ' Ricerca visita per user control (paziente già selezionato)
     '-----------------------------
-    Public Function CercaVisiteUC(idPaziente As Integer, dataVisita As Date?, Optional tipoVisita As String = Nothing) As DataTable
+    Public Async Function CercaVisiteUCAsync(idPaziente As Integer, dataVisita As Date?, Optional tipoVisita As String = Nothing) As Task(Of DataTable)
         Dim query As String = ""
         Dim parametri As New List(Of SqlParameter)
 
@@ -491,7 +491,7 @@ Module Utils
             parametri.Add(New SqlParameter("@codice", idPaziente))
         End If
 
-        Dim risultato As DataTable = EseguiQuery(query, parametri)
+        Dim risultato As DataTable = Await ConnessioneDB.EseguiQueryAsync(query, parametri)
 
         Return risultato ' se nessun paziente selezionato
     End Function

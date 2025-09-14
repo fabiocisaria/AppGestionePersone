@@ -25,12 +25,12 @@ Partial Class UC_InserisciVisita
         Me.LabelTipoVisita = New System.Windows.Forms.Label()
         Me.DateTimePickerDataVisita = New System.Windows.Forms.DateTimePicker()
         Me.LabelData = New System.Windows.Forms.Label()
-        Me.ButtonInserisci = New System.Windows.Forms.Button()
         Me.TextBoxMotivo = New System.Windows.Forms.TextBox()
         Me.LabelMotivoVisita = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelTipoVisitaTx = New System.Windows.Forms.Label()
+        Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
@@ -64,16 +64,6 @@ Partial Class UC_InserisciVisita
         Me.LabelData.Size = New System.Drawing.Size(30, 13)
         Me.LabelData.TabIndex = 8
         Me.LabelData.Text = "Data"
-        '
-        'ButtonInserisci
-        '
-        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.ButtonInserisci.Location = New System.Drawing.Point(688, 484)
-        Me.ButtonInserisci.Name = "ButtonInserisci"
-        Me.ButtonInserisci.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonInserisci.TabIndex = 6
-        Me.ButtonInserisci.Text = "Inserisci"
-        Me.ButtonInserisci.UseVisualStyleBackColor = True
         '
         'TextBoxMotivo
         '
@@ -126,6 +116,7 @@ Partial Class UC_InserisciVisita
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(329, 100)
         Me.TableLayoutPanel2.TabIndex = 0
         '
@@ -138,6 +129,16 @@ Partial Class UC_InserisciVisita
         Me.LabelTipoVisitaTx.Size = New System.Drawing.Size(55, 13)
         Me.LabelTipoVisitaTx.TabIndex = 11
         Me.LabelTipoVisitaTx.Text = "Tipo visita"
+        '
+        'ButtonInserisci
+        '
+        Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(667, 482)
+        Me.ButtonInserisci.Name = "ButtonInserisci"
+        Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
+        Me.ButtonInserisci.TabIndex = 3
+        Me.ButtonInserisci.Text = "Inserisci"
         '
         'UC_InserisciVisita
         '
@@ -154,11 +155,11 @@ Partial Class UC_InserisciVisita
     End Sub
     Friend WithEvents DateTimePickerDataVisita As DateTimePicker
     Friend WithEvents LabelData As Label
-    Friend WithEvents ButtonInserisci As Button
     Friend WithEvents TextBoxMotivo As TextBox
     Friend WithEvents LabelMotivoVisita As Label
     Friend WithEvents LabelTipoVisita As Label
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents LabelTipoVisitaTx As Label
+    Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
 End Class

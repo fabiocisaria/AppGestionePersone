@@ -8,19 +8,70 @@ Public Class UC_VisitaSintomi
 
     Dim esiste As Boolean = False
     Dim appenaSalvati As Boolean = False
-    Public Sub AggiornaDati()
+
+    Public Sub New()
+        InitializeComponent()
+
+        Me.BackColor = Theme.BackgroundColor
+        TableLayoutPanel5.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAlveoPres.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAlveoStipsi.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAlvo.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAlvoAlterno.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAlvoColonIrr.BackColor = Theme.BackgroundColor
+        TableLayoutPanelAlvoDiarr.BackColor = Theme.BackgroundColor
+        TableLayoutPanelCist.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDispenuria.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDispLoc.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDispMarin.BackColor = Theme.BackgroundColor
+        TableLayoutPanelDolVesc.BackColor = Theme.BackgroundColor
+        TableLayoutPanelGrp.BackColor = Theme.BackgroundColor
+        TableLayoutPanelLuts.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVagin.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVisitaSintomi.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVVD.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVVDAndam.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVVDDettagli.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVVDDistr.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVVDInsorg.BackColor = Theme.BackgroundColor
+        TableLayoutPanelVVDPresSint.BackColor = Theme.BackgroundColor
+
+        ' ====================
+        ' SfButtons
+        ' ====================
+        With ButtonInserisci.Style
+            .BackColor = Color.FromArgb(41, 128, 185)
+            .HoverBackColor = Color.FromArgb(31, 97, 144)  ' colore hover
+            .PressedBackColor = Color.FromArgb(31, 97, 144) ' colore quando premuto
+            .FocusedBackColor = Color.FromArgb(31, 97, 144) ' mantiene il blu anche se focus
+            .ForeColor = Color.White
+            .HoverForeColor = Color.White
+            .PressedForeColor = Color.White
+            .FocusedForeColor = Color.White
+        End With
+    End Sub
+
+    Public Async Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             idVisita = main.IDVisitaSelezionata
             tipoVisita = main.TipoVisitaSelezionata
-            esiste = CercaVisita()
+
+            ' Cerco se esistono già sintomi per la visita selezionata
+            TableLayoutPanelVisitaSintomi.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelVisitaSintomi.Enabled = True
+
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelVisitaSintomi)
             End If
         End If
     End Sub
 
-    Private Sub FormVisitaSintomi_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub FormVisitaSintomi_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
         RadioAutoCheck(True, TableLayoutPanelVisitaSintomi)
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -28,8 +79,15 @@ Public Class UC_VisitaSintomi
             ' Carico i parametri della visita selezionata
             idVisita = main.IDVisitaSelezionata
             tipoVisita = main.TipoVisitaSelezionata
-            ' Cerco se esiste già una visita uro-ginecologica per la visita selezionata
-            esiste = CercaVisita()
+
+            ' Cerco se esistono già sintomi per la visita selezionata
+            TableLayoutPanelVisitaSintomi.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelVisitaSintomi.Enabled = True
+
             If Not esiste Then
                 PulisciCampi(TableLayoutPanelVisitaSintomi)
                 ResetAndDisableControls(False, GroupBoxVVDDettagli)
@@ -109,7 +167,7 @@ Public Class UC_VisitaSintomi
         End If
     End Function
 
-    Private Function CercaVisita() As Boolean
+    Private Async Function CercaVisitaAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Carico i parametri della visita selezionata
@@ -122,7 +180,7 @@ Public Class UC_VisitaSintomi
         Dim checkParam As New List(Of SqlParameter) From {
             New SqlParameter("@idVisita", idVisita)
         }
-        Dim dtCheck As DataTable = EseguiQuery(checkQuery, checkParam)
+        Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count = 1 Then
             esiste = True ' sintomi esistenti per la visita selezionata
@@ -257,9 +315,9 @@ Public Class UC_VisitaSintomi
                 RadioButtonDolVescSempre.Checked = True
             End If
 
-                Return esiste
-            Else
-                esiste = False
+            Return esiste
+        Else
+            esiste = False
             PulisciCampi(TableLayoutPanelVisitaSintomi)
             Return esiste
         End If
@@ -267,7 +325,7 @@ Public Class UC_VisitaSintomi
 
 
     ' Modificare Salva Dati per poter ricaricare la cartella se già esistente
-    Private Function SalvaDati() As Boolean
+    Private Async Function SalvaDatiAsync() As Task(Of Boolean)
         Dim selezioneOK As Boolean = CheckSelezione()
         Dim esito As Boolean = True
 
@@ -392,7 +450,7 @@ Public Class UC_VisitaSintomi
                     New SqlParameter("@dolVesc", dolVesc)
                 }
 
-                If EseguiNonQuery(querySintomi, parametriSintomi) > 0 Then
+                If Await ConnessioneDB.EseguiNonQueryAsync(querySintomi, parametriSintomi) > 0 Then
                     successo = True
                 End If
 
@@ -417,11 +475,23 @@ Public Class UC_VisitaSintomi
         Return esito
     End Function
 
-    Private Sub Inserici_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
-        Dim esito As Boolean = SalvaDati()
+    Private Async Sub Inserici_Click(sender As Object, e As EventArgs) Handles ButtonInserisci.Click
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        ' Disabilito tutti i controlli
+        TableLayoutPanelVisitaSintomi.Enabled = False
+
+        main.MostraToast("Salvataggio in corso ...")
+        Dim esito = Await SalvaDatiAsync()
+
+        TableLayoutPanelVisitaSintomi.Enabled = True
         If esito Then
             appenaSalvati = True
-            CercaVisita()
+            TableLayoutPanelVisitaSintomi.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            Dim result = Await CercaVisitaAsync()
+            TableLayoutPanelVisitaSintomi.Enabled = True
         End If
     End Sub
 End Class
