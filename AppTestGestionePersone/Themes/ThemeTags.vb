@@ -1,0 +1,17 @@
+﻿Public NotInheritable Class ThemeTags
+    Public Const PrimaryPanel As String = "PrimaryPanel"
+    Public Const SecondaryPanel As String = "SecondaryPanel"
+    Public Const DatiPaziente As String = "DatiPaziente"
+    Public Const DatiVisita As String = "DatiVisita"
+    Public Const TitlePaziente As String = "TitlePaziente"
+    Public Const TitleVisita As String = "TitleVisita"
+    Public Const PrimaryTitle As String = "PrimaryTitle"
+    Public Const SecondaryTitle As String = "SecondaryTitle"
+    Public Const ThirdTitle As String = "ThirdTitle"
+    Public Const Code As String = "Code"
+    Public Const Find As String = "Find"
+    Public Const OkButton As String = "OkButton"
+    Public Const SelectButton As String = "SelectButton"
+    Public Const CancelButton As String = "CancelButton"
+    Public Const AddButton As String = "AddButton"
+End Class

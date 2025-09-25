@@ -88,115 +88,133 @@
     <AssemblyOriginatorKeyFile>FabioCisaria.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Azure.Core, Version=1.47.3.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>..\packages\Azure.Core.1.47.3\lib\net472\Azure.Core.dll</HintPath>
+    <Reference Include="Azure.Core, Version=1.48.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.48.0\lib\net472\Azure.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Azure.Identity, Version=1.15.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>..\packages\Azure.Identity.1.15.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    <Reference Include="Azure.Identity, Version=1.16.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Identity.1.16.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.Cryptography, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Cryptography.8.0.0\lib\net462\Microsoft.Bcl.Cryptography.dll</HintPath>
+    <Reference Include="MetroFramework.Design, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroFramework.Design.1.2.0.3\lib\net40\MetroFramework.Design.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroFramework.Fonts.1.2.0.3\lib\net40\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.9\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.Cryptography, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Cryptography.9.0.9\lib\net462\Microsoft.Bcl.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.TimeProvider, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.TimeProvider.9.0.9\lib\net462\Microsoft.Bcl.TimeProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.SqlClient, Version=6.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.SqlClient.6.1.1\lib\net462\Microsoft.Data.SqlClient.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=9.0.0.9, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.9.0.9\lib\net462\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.8.0.1\lib\net462\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=9.0.0.9, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.9.0.9\lib\net462\Microsoft.Extensions.Caching.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.9, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.9\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.3\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.9, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.9.0.9\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.8.0.2\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Options, Version=9.0.0.9, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.9.0.9\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.9, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.9.0.9\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Identity.Client, Version=4.77.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Identity.Client.4.77.0\lib\net472\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=4.73.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Identity.Client.Extensions.Msal.4.73.1\lib\netstandard2.0\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=4.77.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.Extensions.Msal.4.77.0\lib\netstandard2.0\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Abstractions, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.8.14.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=7.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.7.7.1\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.8.14.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=7.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Logging.7.7.1\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.8.14.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Protocols, Version=7.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.7.7.1\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.8.14.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=7.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.7.7.1\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.8.14.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens, Version=7.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.7.7.1\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.8.14.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Core.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Core.WinForms.30.2.6\lib\net462\Syncfusion.Core.WinForms.dll</HintPath>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Syncfusion.Core.WinForms, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Core.WinForms.31.1.19\lib\net462\Syncfusion.Core.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Data.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Data.WinForms.30.2.6\lib\net462\Syncfusion.Data.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.Data.WinForms, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Data.WinForms.31.1.19\lib\net462\Syncfusion.Data.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.DataSource.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.DataSource.WinForms.30.2.6\lib\net462\Syncfusion.DataSource.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.DataSource.WinForms, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DataSource.WinForms.31.1.19\lib\net462\Syncfusion.DataSource.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Grid.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Grid.Base.30.2.6\lib\net462\Syncfusion.Grid.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Grid.Base, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Grid.Base.31.1.19\lib\net462\Syncfusion.Grid.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Grid.Windows, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Grid.Windows.30.2.6\lib\net462\Syncfusion.Grid.Windows.dll</HintPath>
+    <Reference Include="Syncfusion.Grid.Windows, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Grid.Windows.31.1.19\lib\net462\Syncfusion.Grid.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.GridCommon.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.GridCommon.WinForms.30.2.6\lib\net462\Syncfusion.GridCommon.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.GridCommon.WinForms, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.GridCommon.WinForms.31.1.19\lib\net462\Syncfusion.GridCommon.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Grouping.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Grouping.Base.30.2.6\lib\net462\Syncfusion.Grouping.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Grouping.Base, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Grouping.Base.31.1.19\lib\net462\Syncfusion.Grouping.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.30.2.6\lib\net462\Syncfusion.Licensing.dll</HintPath>
+    <Reference Include="Syncfusion.Licensing, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.31.1.19\lib\net462\Syncfusion.Licensing.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfDataGrid.WinForms.30.2.6\lib\net462\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.Linq.Base, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Linq.Base.31.1.19\lib\net462\Syncfusion.Linq.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfInput.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfInput.WinForms.30.2.6\lib\net462\Syncfusion.SfInput.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfDataGrid.WinForms.31.1.19\lib\net462\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfListView.WinForms, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfListView.WinForms.30.2.6\lib\net462\Syncfusion.SfListView.WinForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfInput.WinForms, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfInput.WinForms.31.1.19\lib\net462\Syncfusion.SfInput.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Shared.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Shared.Base.30.2.6\lib\net462\Syncfusion.Shared.Base.dll</HintPath>
+    <Reference Include="Syncfusion.SfListView.WinForms, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfListView.WinForms.31.1.19\lib\net462\Syncfusion.SfListView.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Shared.Windows, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Shared.Windows.30.2.6\lib\net462\Syncfusion.Shared.Windows.dll</HintPath>
+    <Reference Include="Syncfusion.Shared.Base, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.Base.31.1.19\lib\net462\Syncfusion.Shared.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SpellChecker.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SpellChecker.Base.30.2.6\lib\net462\Syncfusion.SpellChecker.Base.dll</HintPath>
+    <Reference Include="Syncfusion.Shared.Windows, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.Windows.31.1.19\lib\net462\Syncfusion.Shared.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Tools.Base, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Tools.Base.30.2.6\lib\net462\Syncfusion.Tools.Base.dll</HintPath>
+    <Reference Include="Syncfusion.SpellChecker.Base, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SpellChecker.Base.31.1.19\lib\net462\Syncfusion.SpellChecker.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Tools.Windows, Version=30.2462.6.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Tools.Windows.30.2.6\lib\net462\Syncfusion.Tools.Windows.dll</HintPath>
+    <Reference Include="Syncfusion.Tools.Base, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Tools.Base.31.1.19\lib\net462\Syncfusion.Tools.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.Windows, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Tools.Windows.31.1.19\lib\net462\Syncfusion.Tools.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ClientModel, Version=1.6.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ClientModel.1.6.1\lib\netstandard2.0\System.ClientModel.dll</HintPath>
@@ -210,63 +228,68 @@
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.9.0.9\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Formats.Asn1, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Asn1.9.0.9\lib\net462\System.Formats.Asn1.dll</HintPath>
+    </Reference>
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=7.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.7.7.1\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.8.14.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.FileSystem.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
     </Reference>
-    <Reference Include="System.Management" />
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.IO.Pipelines, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.9.0.9\lib\net462\System.IO.Pipelines.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory.Data, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.Data.8.0.1\lib\net462\System.Memory.Data.dll</HintPath>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.Data.9.0.9\lib\net462\System.Memory.Data.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
-    <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.1\lib\net461\System.Security.AccessControl.dll</HintPath>
     </Reference>
-    <Reference Include="System.Security.Cryptography.Pkcs, Version=8.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Pkcs.8.0.1\lib\net462\System.Security.Cryptography.Pkcs.dll</HintPath>
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=9.0.0.9, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Pkcs.9.0.9\lib\net462\System.Security.Cryptography.Pkcs.dll</HintPath>
     </Reference>
-    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.ProtectedData.4.5.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=9.0.0.9, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.ProtectedData.9.0.9\lib\net462\System.Security.Cryptography.ProtectedData.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.9.0.9\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=8.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.8.0.6\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=9.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.9.0.9\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -282,155 +305,183 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Themes\ComboBoxThemer.vb" />
+    <Compile Include="Utils\ImportUtils.vb" />
+    <Compile Include="Themes\SfComboBoxThemer.vb" />
+    <Compile Include="Themes\DateTimePickerThemer.vb" />
+    <Compile Include="Themes\GradientBackgroundThemer.vb" />
+    <Compile Include="Themes\BorderThemer.vb" />
+    <Compile Include="Themes\Rounder.vb" />
+    <Compile Include="Themes\ThemeManager.vb" />
+    <Compile Include="Themes\BaseThemer.vb" />
+    <Compile Include="Themes\ButtonThemer.vb" />
+    <Compile Include="CloseButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomColorTableMenu.vb" />
-    <Compile Include="FormSelezione.Designer.vb">
+    <Compile Include="Forms\FormSelezione.Designer.vb">
       <DependentUpon>FormSelezione.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormSelezione.vb">
+    <Compile Include="Forms\FormSelezione.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GradientMenuStrip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GradientMenuStripRenderer.vb" />
+    <Compile Include="Themes\GradientPanelThemer.vb" />
+    <Compile Include="GradientUserControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Themes\GroupBoxThemer.vb" />
+    <Compile Include="Themes\LabelThemer.vb" />
     <Compile Include="MenuItemColorRenderer.vb" />
-    <Compile Include="Theme.vb" />
-    <Compile Include="ToastForm.vb">
+    <Compile Include="Themes\NumericUpDownThemer.vb" />
+    <Compile Include="Themes\PanelThemer.vb" />
+    <Compile Include="Themes\RadioButtonThemer.vb" />
+    <Compile Include="Themes\TableLayoutPanelThemer.vb" />
+    <Compile Include="Themes\TextBoxThemer.vb" />
+    <Compile Include="Themes\Theme.vb" />
+    <Compile Include="Themes\ThemeManager_old.vb" />
+    <Compile Include="Themes\ThemeTags.vb" />
+    <Compile Include="Forms\ToastForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UC_AnamnesiPatologicaRemota.Designer.vb">
+    <Compile Include="UC\UC_AnamnesiPatologicaRemota.Designer.vb">
       <DependentUpon>UC_AnamnesiPatologicaRemota.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_AnamnesiPatologicaRemota.vb">
+    <Compile Include="UC\UC_AnamnesiPatologicaRemota.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_CercaVisita.Designer.vb">
+    <Compile Include="UC\UC_CercaVisita.Designer.vb">
       <DependentUpon>UC_CercaVisita.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_CercaVisita.vb">
+    <Compile Include="UC\UC_CercaVisita.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_ClasseFarmaco.Designer.vb">
+    <Compile Include="UC\UC_ClasseFarmaco.Designer.vb">
       <DependentUpon>UC_ClasseFarmaco.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_ClasseFarmaco.vb">
+    <Compile Include="UC\UC_ClasseFarmaco.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_DatiPaziente.Designer.vb">
+    <Compile Include="UC\UC_DatiPaziente.Designer.vb">
       <DependentUpon>UC_DatiPaziente.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_DatiPaziente.vb">
+    <Compile Include="UC\UC_DatiPaziente.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.vb">
+    <Compile Include="Forms\MainForm.Designer.vb">
       <DependentUpon>MainForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.vb">
+    <Compile Include="Forms\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UC_Anagrafica.Designer.vb">
+    <Compile Include="UC\UC_Anagrafica.Designer.vb">
       <DependentUpon>UC_Anagrafica.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_Anagrafica.vb">
+    <Compile Include="UC\UC_Anagrafica.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_AnamnesiFamiliare.Designer.vb">
+    <Compile Include="UC\UC_AnamnesiFamiliare.Designer.vb">
       <DependentUpon>UC_AnamnesiFamiliare.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_AnamnesiFamiliare.vb">
+    <Compile Include="UC\UC_AnamnesiFamiliare.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_AnamnesiFisiologica.Designer.vb">
+    <Compile Include="UC\UC_AnamnesiFisiologica.Designer.vb">
       <DependentUpon>UC_AnamnesiFisiologica.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_AnamnesiFisiologica.vb">
+    <Compile Include="UC\UC_AnamnesiFisiologica.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_CercaPaziente.Designer.vb">
+    <Compile Include="UC\UC_CercaPaziente.Designer.vb">
       <DependentUpon>UC_CercaPaziente.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_CercaPaziente.vb">
+    <Compile Include="UC\UC_CercaPaziente.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_DatiVisita.Designer.vb">
+    <Compile Include="UC\UC_DatiVisita.Designer.vb">
       <DependentUpon>UC_DatiVisita.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_DatiVisita.vb">
+    <Compile Include="UC\UC_DatiVisita.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_Farmaco.Designer.vb">
+    <Compile Include="UC\UC_Farmaco.Designer.vb">
       <DependentUpon>UC_Farmaco.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_Farmaco.vb">
+    <Compile Include="UC\UC_Farmaco.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_InserisciVisita.Designer.vb">
+    <Compile Include="UC\UC_InserisciVisita.Designer.vb">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_InserisciVisita.vb">
+    <Compile Include="UC\UC_InserisciVisita.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_Login.Designer.vb">
+    <Compile Include="UC\UC_Login.Designer.vb">
       <DependentUpon>UC_Login.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_Login.vb">
+    <Compile Include="UC\UC_Login.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_Terapia.Designer.vb">
+    <Compile Include="UC\UC_Terapia.Designer.vb">
       <DependentUpon>UC_Terapia.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_Terapia.vb">
+    <Compile Include="UC\UC_Terapia.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_TerapiaRiabilitativa.Designer.vb">
+    <Compile Include="UC\UC_TerapiaRiabilitativa.Designer.vb">
       <DependentUpon>UC_TerapiaRiabilitativa.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_TerapiaRiabilitativa.vb">
+    <Compile Include="UC\UC_TerapiaRiabilitativa.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_VisitaAnamnesiOstrGineco.Designer.vb">
+    <Compile Include="UC\UC_VisitaAnamnesiOstrGineco.Designer.vb">
       <DependentUpon>UC_VisitaAnamnesiOstrGineco.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_VisitaAnamnesiOstrGineco.vb">
+    <Compile Include="UC\UC_VisitaAnamnesiOstrGineco.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_VisitaDNATest.Designer.vb">
+    <Compile Include="UC\UC_VisitaDNATest.Designer.vb">
       <DependentUpon>UC_VisitaDNATest.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_VisitaDNATest.vb">
+    <Compile Include="UC\UC_VisitaDNATest.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_VisitaPapTest.Designer.vb">
+    <Compile Include="UC\UC_VisitaPapTest.Designer.vb">
       <DependentUpon>UC_VisitaPapTest.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_VisitaPapTest.vb">
+    <Compile Include="UC\UC_VisitaPapTest.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_VisitaRMN.Designer.vb">
+    <Compile Include="UC\UC_VisitaRMN.Designer.vb">
       <DependentUpon>UC_VisitaRMN.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_VisitaRMN.vb">
+    <Compile Include="UC\UC_VisitaRMN.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_VisitaSintomi.Designer.vb">
+    <Compile Include="UC\UC_VisitaSintomi.Designer.vb">
       <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_VisitaSintomi.vb">
+    <Compile Include="UC\UC_VisitaSintomi.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_VisitaTamponeVg.Designer.vb">
+    <Compile Include="UC\UC_VisitaTamponeVg.Designer.vb">
       <DependentUpon>UC_VisitaTamponeVg.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_VisitaTamponeVg.vb">
+    <Compile Include="UC\UC_VisitaTamponeVg.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_VisitaUroGineco.Designer.vb">
+    <Compile Include="UC\UC_VisitaUroGineco.Designer.vb">
       <DependentUpon>UC_VisitaUroGineco.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_VisitaUroGineco.vb">
+    <Compile Include="UC\UC_VisitaUroGineco.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Utils.vb" />
-    <Compile Include="ModuleSql.vb" />
+    <Compile Include="Themes\UserControlThemer.vb" />
+    <Compile Include="Utils\Utils.vb" />
+    <Compile Include="Utils\ModuleSql.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -447,18 +498,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UC_VisitaUrinocoltura.Designer.vb">
+    <Compile Include="UC\UC_VisitaUrinocoltura.Designer.vb">
       <DependentUpon>UC_VisitaUrinocoltura.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_VisitaUrinocoltura.vb">
+    <Compile Include="UC\UC_VisitaUrinocoltura.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\VisitaSintomiNew.Designer.vb">
+      <DependentUpon>VisitaSintomiNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC\VisitaSintomiNew.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormSelezione.resx">
+    <EmbeddedResource Include="Forms\FormSelezione.resx">
       <DependentUpon>FormSelezione.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -467,74 +524,77 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToastForm.resx">
+    <EmbeddedResource Include="Forms\ToastForm.resx">
       <DependentUpon>ToastForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_Anagrafica.resx">
+    <EmbeddedResource Include="UC\UC_Anagrafica.resx">
       <DependentUpon>UC_Anagrafica.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_AnamnesiFamiliare.resx">
+    <EmbeddedResource Include="UC\UC_AnamnesiFamiliare.resx">
       <DependentUpon>UC_AnamnesiFamiliare.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_AnamnesiFisiologica.resx">
+    <EmbeddedResource Include="UC\UC_AnamnesiFisiologica.resx">
       <DependentUpon>UC_AnamnesiFisiologica.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_AnamnesiPatologicaRemota.resx">
+    <EmbeddedResource Include="UC\UC_AnamnesiPatologicaRemota.resx">
       <DependentUpon>UC_AnamnesiPatologicaRemota.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_CercaPaziente.resx">
+    <EmbeddedResource Include="UC\UC_CercaPaziente.resx">
       <DependentUpon>UC_CercaPaziente.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_CercaVisita.resx">
+    <EmbeddedResource Include="UC\UC_CercaVisita.resx">
       <DependentUpon>UC_CercaVisita.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_ClasseFarmaco.resx">
+    <EmbeddedResource Include="UC\UC_ClasseFarmaco.resx">
       <DependentUpon>UC_ClasseFarmaco.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_DatiPaziente.resx">
+    <EmbeddedResource Include="UC\UC_DatiPaziente.resx">
       <DependentUpon>UC_DatiPaziente.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_DatiVisita.resx">
+    <EmbeddedResource Include="UC\UC_DatiVisita.resx">
       <DependentUpon>UC_DatiVisita.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_Farmaco.resx">
+    <EmbeddedResource Include="UC\UC_Farmaco.resx">
       <DependentUpon>UC_Farmaco.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_InserisciVisita.resx">
+    <EmbeddedResource Include="UC\UC_InserisciVisita.resx">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_Login.resx">
+    <EmbeddedResource Include="UC\UC_Login.resx">
       <DependentUpon>UC_Login.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_Terapia.resx">
+    <EmbeddedResource Include="UC\UC_Terapia.resx">
       <DependentUpon>UC_Terapia.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_TerapiaRiabilitativa.resx">
+    <EmbeddedResource Include="UC\UC_TerapiaRiabilitativa.resx">
       <DependentUpon>UC_TerapiaRiabilitativa.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_VisitaAnamnesiOstrGineco.resx">
+    <EmbeddedResource Include="UC\UC_VisitaAnamnesiOstrGineco.resx">
       <DependentUpon>UC_VisitaAnamnesiOstrGineco.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_VisitaDNATest.resx">
+    <EmbeddedResource Include="UC\UC_VisitaDNATest.resx">
       <DependentUpon>UC_VisitaDNATest.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_VisitaPapTest.resx">
+    <EmbeddedResource Include="UC\UC_VisitaPapTest.resx">
       <DependentUpon>UC_VisitaPapTest.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_VisitaRMN.resx">
+    <EmbeddedResource Include="UC\UC_VisitaRMN.resx">
       <DependentUpon>UC_VisitaRMN.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_VisitaSintomi.resx">
+    <EmbeddedResource Include="UC\UC_VisitaSintomi.resx">
       <DependentUpon>UC_VisitaSintomi.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_VisitaTamponeVg.resx">
+    <EmbeddedResource Include="UC\UC_VisitaTamponeVg.resx">
       <DependentUpon>UC_VisitaTamponeVg.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_VisitaUroGineco.resx">
+    <EmbeddedResource Include="UC\UC_VisitaUroGineco.resx">
       <DependentUpon>UC_VisitaUroGineco.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_VisitaUrinocoltura.resx">
+    <EmbeddedResource Include="UC\UC_VisitaUrinocoltura.resx">
       <DependentUpon>UC_VisitaUrinocoltura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\VisitaSintomiNew.resx">
+      <DependentUpon>VisitaSintomiNew.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -566,6 +626,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="MetroFramework.txt" />
+    <None Include="Resources\GynArchivePng_custom_inactive.png" />
+    <None Include="Resources\GynArchivePng_custom.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -573,5 +638,7 @@
       <ErrorText>Questo progetto fa riferimento a uno o più pacchetti NuGet che non sono presenti in questo computer. Usare lo strumento di ripristino dei pacchetti NuGet per scaricarli. Per altre informazioni, vedere http://go.microsoft.com/fwlink/?LinkID=322105. Il file mancante è {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets'))" />
+    <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
   </Target>
+  <Import Project="..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
 </Project>

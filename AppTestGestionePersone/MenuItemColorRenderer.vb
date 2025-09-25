@@ -1,63 +1,86 @@
 ﻿Public Class MenuItemColorRenderer
     Inherits ToolStripProfessionalRenderer
 
-    ' Colori per gli item
-    Private itemHoverBackColor As Color = ColorTranslator.FromHtml("#C7E5FF")    ' Hover
-    Private itemSelectedBackColor As Color = ColorTranslator.FromHtml("#FFFFF") ' Selezionato
-
-    ' Colore di sfondo per le tendine
-    Private dropDownBackColor As Color = Color.Transparent
-
-    Private itemTextColor As Color = ColorTranslator.FromHtml("#413F45")                              ' Testo
+    Protected Overrides Sub OnRenderToolStripBackground(e As ToolStripRenderEventArgs)
+        ' Sfondo della barra principale e dei dropdown
+        If TypeOf e.ToolStrip Is MenuStrip Then
+            ' Barra principale
+            Using brush As New SolidBrush(Theme.StripMenuPrimaryColor)
+                e.Graphics.FillRectangle(brush, e.AffectedBounds)
+            End Using
+        ElseIf TypeOf e.ToolStrip Is ToolStripDropDownMenu Then
+            ' Dropdown
+            Using brush As New SolidBrush(Theme.StripMenuPrimaryColor)
+                e.Graphics.FillRectangle(brush, e.AffectedBounds)
+            End Using
+        End If
+    End Sub
 
     ' Sfondo dei singoli item
     Protected Overrides Sub OnRenderMenuItemBackground(e As ToolStripItemRenderEventArgs)
-        Dim rc As New Rectangle(Point.Empty, e.Item.Size)
+        Dim g As Graphics = e.Graphics
+        Dim rc As Rectangle = New Rectangle(0, 0, e.Item.Width, e.Item.Height)
+
+        Dim item As ToolStripMenuItem = TryCast(e.Item, ToolStripMenuItem)
+        Dim isActive As Boolean = (item IsNot Nothing AndAlso item.DropDown.Visible)
+        Dim isHovered As Boolean = e.Item.Selected
+
+        ' Sfondo generale (copre tutto)
+        Using brush As New SolidBrush(Theme.StripMenuPrimaryColor)
+            g.FillRectangle(brush, rc)
+        End Using
 
         ' Mantieni trasparente lo sfondo del MenuStrip (così si vede il gradiente)
-        If e.Item.Selected Then
-            Using brush As New SolidBrush(itemHoverBackColor)
-                e.Graphics.FillRectangle(brush, rc)
+        If isActive Then
+            ' Menu aperto → colore più scuro
+            Using brush As New SolidBrush(Theme.StripMenuActiveColor)
+                g.FillRectangle(brush, rc)
             End Using
-        ElseIf e.Item.Pressed Then
-            Using brush As New SolidBrush(itemSelectedBackColor)
-                e.Graphics.FillRectangle(brush, rc)
+
+            Using pen As New Pen(Theme.StripMenuBorderActiveColor, 1)
+                g.DrawLine(pen, rc.Left, rc.Top, rc.Right - 1, rc.Top)
+                g.DrawLine(pen, rc.Left, rc.Top, rc.Left, rc.Bottom - 1)
+                g.DrawLine(pen, rc.Right - 1, rc.Top, rc.Right - 1, rc.Bottom - 1)
             End Using
-        Else
+        ElseIf isHovered Then
+            ' Colore interno (hover)
+            Using brush As New SolidBrush(Theme.StripMenuHoveredColor)
+                g.FillRectangle(brush, rc)
+            End Using
+
+            ' Bordo chiaro
+            Using pen As New Pen(Theme.StripMenuBorderHoveredColor, 0.5)
+                g.DrawRectangle(pen, rc.X, rc.Y, rc.Width - 1, rc.Height - 1)
+            End Using
+
+            'Else
             ' Lascia trasparente → si vede il gradiente della barra
-            Using brush As New SolidBrush(Color.Transparent)
-                e.Graphics.FillRectangle(brush, rc)
-            End Using
+            '    Using brush As New SolidBrush(Color.Transparent)
+            '    e.Graphics.FillRectangle(brush, rc)
+            '    End Using
         End If
     End Sub
 
     ' Colore del testo
     Protected Overrides Sub OnRenderItemText(e As ToolStripItemTextRenderEventArgs)
-        e.TextColor = itemTextColor
-        MyBase.OnRenderItemText(e)
-    End Sub
 
-    ' Sfondo generale dei ToolStrip (MenuStrip o DropDown)
-    Protected Overrides Sub OnRenderToolStripBackground(e As ToolStripRenderEventArgs)
-        If TypeOf e.ToolStrip Is MenuStrip Then
+        ' Se è un dropdown, forzo comunque bianco
+        Dim textColor As Color = Theme.StripMenuTextPrimaryColor
 
-        ElseIf TypeOf e.ToolStrip Is ToolStripDropDownMenu Then
-            ' Sfondo dropdown intero
-            Using brush As New SolidBrush(dropDownBackColor)
-                e.Graphics.FillRectangle(brush, e.ToolStrip.ClientRectangle)
-            End Using
+        ' Se è disabilitato → grigio
+        If Not e.Item.Enabled Then
+            textColor = Color.Gray
         End If
-    End Sub
 
-    Protected Overrides Sub OnRenderToolStripBorder(e As ToolStripRenderEventArgs)
-        ' Disabilita il bordo del dropdown
-        ' oppure puoi colorarlo dello stesso colore dello sfondo
-        If TypeOf e.ToolStrip Is ToolStripDropDownMenu Then
-            Using brush As New SolidBrush(dropDownBackColor)
-                e.Graphics.FillRectangle(brush, e.ToolStrip.ClientRectangle)
-            End Using
-        Else
-            MyBase.OnRenderToolStripBorder(e)
-        End If
+        ' Disegna il testo manualmente
+        TextRenderer.DrawText(
+            e.Graphics,
+            e.Text,
+            e.TextFont,
+            e.TextRectangle,
+            textColor,
+            TextFormatFlags.VerticalCenter Or TextFormatFlags.Left
+        )
+        'MyBase.OnRenderItemText(e)
     End Sub
 End Class
