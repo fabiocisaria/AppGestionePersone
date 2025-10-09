@@ -181,10 +181,16 @@ Public Class Theme
     '==============
     ' Panel terapie
     '==============
-    Public Shared ReadOnly TerapiePanelBackColor As Color = Color.FromArgb(31, 97, 141)
-    Public Shared ReadOnly TerapiePanelHoveredBackColor As Color = Color.FromArgb(21, 67, 96)
+    'Public Shared ReadOnly TerapiePanelBackColor As Color = Color.FromArgb(31, 97, 141)
+    'Public Shared ReadOnly TerapiePanelHoveredBackColor As Color = Color.FromArgb(21, 67, 96)
+    'Public Shared ReadOnly TerapiePanelForeColor As Color = Color.WhiteSmoke
+    'Public Shared ReadOnly TerapiePanelHoveredForeColor As Color = Color.FromArgb(173, 216, 230)
+    'Public Shared ReadOnly TerapiePanelDeleteForeColor As Color = Color.FromArgb(192, 57, 43)
+
+    Public Shared ReadOnly TerapiePanelBackColor As Color = Color.FromArgb(142, 68, 173)
+    Public Shared ReadOnly TerapiePanelHoveredBackColor As Color = Color.FromArgb(108, 52, 131)
     Public Shared ReadOnly TerapiePanelForeColor As Color = Color.WhiteSmoke
-    Public Shared ReadOnly TerapiePanelHoveredForeColor As Color = Color.FromArgb(173, 216, 230)
+    Public Shared ReadOnly TerapiePanelHoveredForeColor As Color = Color.FromArgb(220, 198, 255)
     Public Shared ReadOnly TerapiePanelDeleteForeColor As Color = Color.FromArgb(192, 57, 43)
 
     '==============
@@ -195,4 +201,22 @@ Public Class Theme
     Public Shared ReadOnly FarmaciPanelForeColor As Color = Color.WhiteSmoke
     Public Shared ReadOnly FarmaciPanelHoveredForeColor As Color = Color.FromArgb(173, 216, 230)
     Public Shared ReadOnly FarmaciPanelDeleteForeColor As Color = Color.FromArgb(192, 57, 43)
+
+    '==============
+    ' Panel Integratori
+    '==============
+    Public Shared ReadOnly IntegratoriPanelBackColor As Color = Color.FromArgb(26, 188, 156)
+    Public Shared ReadOnly IntegratoriPanelHoveredBackColor As Color = Color.FromArgb(20, 143, 119)
+    Public Shared ReadOnly IntegratoriPanelForeColor As Color = Color.WhiteSmoke
+    Public Shared ReadOnly IntegratoriPanelHoveredForeColor As Color = Color.FromArgb(200, 250, 240)
+    Public Shared ReadOnly IntegratoriPanelDeleteForeColor As Color = Color.FromArgb(192, 57, 43)
+
+    '==========================
+    ' Panel Malattie autoimmuni
+    '==========================
+    Public Shared ReadOnly MalattieAutoimmPanelBackColor As Color = Color.FromArgb(52, 152, 219)
+    Public Shared ReadOnly MalattieAutoimmPanelHoveredBackColor As Color = Color.FromArgb(52, 152, 219)
+    Public Shared ReadOnly MalattieAutoimmPanelForeColor As Color = Color.WhiteSmoke
+    Public Shared ReadOnly MalattieAutoimmPanelHoveredForeColor As Color = Color.FromArgb(173, 216, 230)
+    Public Shared ReadOnly MalattieAutoimmPanelDeleteForeColor As Color = Color.FromArgb(192, 57, 43)
 End Class

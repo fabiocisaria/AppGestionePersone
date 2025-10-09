@@ -1,12 +1,4 @@
-﻿Imports Syncfusion.WinForms.Controls
-Imports Syncfusion.WinForms.DataGrid.Enums
-Imports Syncfusion.WinForms.DataGrid.Events
-Imports Syncfusion.WinForms.DataGrid.Interactivity
-Imports Syncfusion.WinForms.Input
-Imports Syncfusion.WinForms.ListView.Styles
-Imports System.Web.UI.WebControls
-Imports System.Windows.Forms.VisualStyles
-Imports Microsoft.Data.SqlClient
+﻿Imports Microsoft.Data.SqlClient
 Public Class UC_VisitaRMN
     Dim idVisita As Integer = -1
 
@@ -21,13 +13,7 @@ Public Class UC_VisitaRMN
         ' ========
         With ComboBoxEsito
             ' Imposta i dati
-            .DataSource = New List(Of String) From {"Negativo", "Neuropatia pudendo", "Endometriosi"}
-            .SelectedIndex = -1
-        End With
-
-        With ComboBoxEndometriosi
-            ' Imposta i dati
-            .DataSource = New List(Of String) From {"LUS - Torus", "Vescicale/setto RV", "Peritoneale", "Ovarico"}
+            .DataSource = New List(Of String) From {"Negativo", "Positivo"}
             .SelectedIndex = -1
         End With
 
@@ -43,6 +29,7 @@ Public Class UC_VisitaRMN
     End Sub
 
     Private Async Sub FormVisitaRMN_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
             ' Carico i parametri della visita selezionata
@@ -55,11 +42,20 @@ Public Class UC_VisitaRMN
             esiste = Await CercaVisitaAsync()
 
             TableLayoutPanelRmn.Enabled = True
-            If Not esiste Then
-                PulisciCampi(ComboBoxEndometriosi, ComboBoxEsito)
-                ResetAndDisableControls(False, ComboBoxEndometriosi)
-                DateTimePickerDataEsecuzione.Value = Date.Now
-            End If
+
+            PulisciCampi(TableLayoutPanelNuovaRMN, ComboBoxEsito)
+
+            ResetAndDisableControls(False, TableLayoutPanelDettEsito)
+            ResetAndDisableControls(False, TableLayoutPanelEndom)
+            ResetAndDisableControls(False, TableLayoutPanelEndomLoc)
+
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelDettEsito, False)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelEndom, False)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelEndomLoc, False)
+
+            DateTimePickerDataEsecuzione.Value = Date.Now
+
+
         End If
     End Sub
 
@@ -71,12 +67,16 @@ Public Class UC_VisitaRMN
             ' Cerco se esiste già una RMN per la visita selezionata
             TableLayoutPanelRmn.Enabled = False
 
-            main.MostraToast("Caricamento in corso ...")
+            If Not appenaSalvati Then
+                main.MostraToast("Caricamento in corso ...")
+            End If
+
             esiste = Await CercaVisitaAsync()
 
             TableLayoutPanelRmn.Enabled = True
+
             If Not esiste Then
-                PulisciCampi(ComboBoxEndometriosi, ComboBoxEsito)
+                PulisciCampi(TableLayoutPanelNuovaRMN, ComboBoxEsito)
                 DateTimePickerDataEsecuzione.Value = Date.Now
             End If
         End If
@@ -84,16 +84,34 @@ Public Class UC_VisitaRMN
 
     Private Sub ComboBoxEsito_CheckedChanged(sender As Object, e As EventArgs) Handles ComboBoxEsito.SelectedIndexChanged
         ' Mostra i dettagli solo se "Sì" è selezionato
-        If ComboBoxEsito.SelectedIndex = -1 OrElse Not Utils.IsValidSelection(ComboBoxEsito) Then
-            PulisciCampi(ComboBoxEndometriosi)
-            SetControlsEnabled(False, ComboBoxEndometriosi)
-        ElseIf ComboBoxEsito.SelectedItem.ToString() = "Endometriosi" Then
-            SetControlsEnabled(True, ComboBoxEndometriosi)
-        Else
-            PulisciCampi(ComboBoxEndometriosi)
-            SetControlsEnabled(False, ComboBoxEndometriosi)
+        If ComboBoxEsito.SelectedIndex = -1 OrElse Not Utils.IsValidSelection(ComboBoxEsito) OrElse ComboBoxEsito.SelectedItem.ToString() = "Negativo" Then
+            PulisciCampi(TableLayoutPanelDettEsito)
+            SetControlsEnabled(False, TableLayoutPanelDettEsito)
+            SetControlsEnabled(False, TableLayoutPanelEndom)
+            SetControlsEnabled(False, TableLayoutPanelEndomLoc)
+
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelDettEsito, False)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelEndom, False)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelEndomLoc, False)
+
+        ElseIf ComboBoxEsito.SelectedItem.ToString() = "Positivo" Then
+            SetControlsEnabled(True, TableLayoutPanelDettEsito)
+            SetControlsEnabled(True, TableLayoutPanelEndom)
+            SetControlsEnabled(False, TableLayoutPanelEndomLoc)
+
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelDettEsito, True)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelEndom, True)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelEndomLoc, False)
         End If
     End Sub
+
+    Private Sub MetroToggleEndomSiNo_CheckedChanged(sender As Object, e As EventArgs) Handles MetroToggleEndomSiNo.CheckedChanged
+        SetControlsEnabled(MetroToggleEndomSiNo.Checked, TableLayoutPanelEndomLoc)
+
+        ThemeManager.SetSecondaryPanelState(TableLayoutPanelEndomLoc, MetroToggleEndomSiNo.Checked)
+    End Sub
+
+
 
     Private Function CheckSelezione() As Boolean
         Dim result = True
@@ -103,13 +121,6 @@ Public Class UC_VisitaRMN
             HilightControls(True, ComboBoxEsito)
         Else
             HilightControls(False, ComboBoxEsito)
-        End If
-
-        If ComboBoxEsito.SelectedItem = "Endometriosi" AndAlso (ComboBoxEndometriosi.SelectedIndex = -1 OrElse Not Utils.IsValidSelection(ComboBoxEndometriosi)) Then
-            result = False
-            HilightControls(True, ComboBoxEndometriosi)
-        Else
-            HilightControls(False, ComboBoxEndometriosi)
         End If
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -154,17 +165,28 @@ Public Class UC_VisitaRMN
             ' Carico i dati esistenti nei campi
             '----------------------------------
             DateTimePickerDataEsecuzione.Value = CDate(dettagliVisita("DataRMN"))
-            ComboBoxEsito.SelectedItem = dettagliVisita("EsitoRMN")
-            If dettagliVisita("EsitoRMN") = "Endometriosi" Then
-                ComboBoxEndometriosi.SelectedItem = dettagliVisita("DettagliEndometriosi")
+
+            If dettagliVisita("EsitoRMN") Then
+                ComboBoxEsito.SelectedItem = "Positivo"
+
+                MetroToggleNevPudSiNo.Checked = dettagliVisita("NevralgiaPudendo")
+                MetroToggleEndomSiNo.Checked = dettagliVisita("Endometriosi")
+
+                If MetroToggleEndomSiNo.Checked Then
+                    MetroToggleLusTorusSiNo.Checked = dettagliVisita("EndomLusTorus")
+                    MetroToggleVescicSiNo.Checked = dettagliVisita("EndomVescicale")
+                    MetroToggleRettoVagSiNo.Checked = dettagliVisita("EndomRettoVaginale")
+                    MetroTogglePeritSiNo.Checked = dettagliVisita("EndomPeritoneale")
+                    MetroToggleOvarSiNo.Checked = dettagliVisita("EndomOvarico")
+                End If
             Else
-                ComboBoxEndometriosi.SelectedIndex = -1
+                ComboBoxEsito.SelectedItem = "Negativo"
             End If
 
             Return esiste
         Else
             esiste = False
-            PulisciCampi(ComboBoxEndometriosi, ComboBoxEsito)
+            PulisciCampi(TableLayoutPanelNuovaRMN, ComboBoxEsito)
             DateTimePickerDataEsecuzione.Value = Date.Now
             Return esiste
         End If
@@ -182,13 +204,40 @@ Public Class UC_VisitaRMN
             Dim successo As Boolean = False
 
             Dim dataEsecuzione As Date = DateTimePickerDataEsecuzione.Value
-            Dim esitoRMN As String = ComboBoxEsito.SelectedItem.ToString()
-            Dim dettagliEndometriosi As Object
+            Dim esitoRMN As Boolean = ComboBoxEsito.SelectedItem.ToString() = "Positivo"
+            Dim endometriosi As Object
+            Dim nevralgiaPudendo As Object
+            Dim endomLusTorus As Object
+            Dim endomVescicale As Object
+            Dim endomRettoVag As Object
+            Dim endomPeritoneale As Object
+            Dim endomOvarico As Object
 
-            If ComboBoxEsito.SelectedItem.ToString() <> "Endometriosi" Then
-                dettagliEndometriosi = DBNull.Value
+            If ComboBoxEsito.SelectedItem.ToString() <> "Positivo" Then
+                endometriosi = DBNull.Value
+                nevralgiaPudendo = DBNull.Value
+                endomLusTorus = DBNull.Value
+                endomVescicale = DBNull.Value
+                endomRettoVag = DBNull.Value
+                endomPeritoneale = DBNull.Value
+                endomOvarico = DBNull.Value
             Else
-                dettagliEndometriosi = ComboBoxEndometriosi.SelectedItem.ToString()
+                endometriosi = MetroToggleEndomSiNo.Checked
+                nevralgiaPudendo = MetroToggleNevPudSiNo.Checked
+
+                If endometriosi Then
+                    endomLusTorus = MetroToggleLusTorusSiNo.Checked
+                    endomVescicale = MetroToggleVescicSiNo.Checked
+                    endomRettoVag = MetroToggleRettoVagSiNo.Checked
+                    endomPeritoneale = MetroTogglePeritSiNo.Checked
+                    endomOvarico = MetroToggleOvarSiNo.Checked
+                Else
+                    endomLusTorus = DBNull.Value
+                    endomVescicale = DBNull.Value
+                    endomRettoVag = DBNull.Value
+                    endomPeritoneale = DBNull.Value
+                    endomOvarico = DBNull.Value
+                End If
             End If
 
             Try
@@ -198,7 +247,13 @@ Public Class UC_VisitaRMN
                     queryRMN = "UPDATE VisitaRMN SET 
                                                           DataRMN = @dataRMN,
                                                           EsitoRMN = @esitoRMN,
-                                                          DettagliEndometriosi = @dettagliEndometriosi
+                                                          NevralgiaPudendo = @nevralgiaPudendo,
+                                                          Endometriosi = @endometriosi,
+                                                          EndomLusTorus = @endomLusTorus,
+                                                          EndomVescicale = @endomVescicale,
+                                                          EndomRettoVaginale = @endomRettoVag,
+                                                          EndomPeritoneale = @endomPeritoneale,
+                                                          EndomOvarico = @endomOvarico
                                                           WHERE ID_Visita = @idVisita"
                 Else
                     'Se non esiste, esegui l'inserimento
@@ -206,19 +261,37 @@ Public Class UC_VisitaRMN
                                                     ID_Visita,
                                                     DataRMN,
                                                     EsitoRMN,
-                                                    DettagliEndometriosi
+                                                    NevralgiaPudendo,
+                                                    Endometriosi,
+                                                    EndomLusTorus,
+                                                    EndomVescicale,
+                                                    EndomRettoVaginale,
+                                                    EndomPeritoneale,
+                                                    EndomOvarico
                                                     ) VALUES (
                                                     @idVisita,
                                                     @dataRMN,
                                                     @esitoRMN,
-                                                    @dettagliEndometriosi)"
+                                                    @nevralgiaPudendo,
+                                                    @endometriosi,
+                                                    @endomLusTorus,
+                                                    @endomVescicale,
+                                                    @endomRettoVag,
+                                                    @endomPeritoneale,
+                                                    @endomOvarico)"
                 End If
 
                 Dim parametriRMN As New List(Of SqlParameter) From {
                     New SqlParameter("@idVisita", idVisita),
                     New SqlParameter("@dataRMN", dataEsecuzione),
                     New SqlParameter("@esitoRMN", esitoRMN),
-                    New SqlParameter("@dettagliEndometriosi", dettagliEndometriosi)
+                    New SqlParameter("@nevralgiaPudendo", nevralgiaPudendo),
+                    New SqlParameter("@endometriosi", endometriosi),
+                    New SqlParameter("@endomLusTorus", endomLusTorus),
+                    New SqlParameter("@endomVescicale", endomVescicale),
+                    New SqlParameter("@endomRettoVag", endomRettoVag),
+                    New SqlParameter("@endomPeritoneale", endomPeritoneale),
+                    New SqlParameter("@endomOvarico", endomOvarico)
                 }
 
                 If Await ConnessioneDB.EseguiNonQueryAsync(queryRMN, parametriRMN) > 0 Then
@@ -260,7 +333,7 @@ Public Class UC_VisitaRMN
             appenaSalvati = True
             TableLayoutPanelRmn.Enabled = False
 
-            main.MostraToast("Caricamento in corso ...")
+            'main.MostraToast("Caricamento in corso ...")
             Dim result = Await CercaVisitaAsync()
             TableLayoutPanelRmn.Enabled = True
         End If

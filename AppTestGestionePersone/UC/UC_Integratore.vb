@@ -1,6 +1,6 @@
 ﻿Imports System.Web.UI.WebControls
 Imports Microsoft.Data.SqlClient
-Public Class UC_TerapiaRiabilitativa
+Public Class UC_Integratore
 
     Private Shared ReadOnly ControlText As New Dictionary(Of Control, String)
 
@@ -17,7 +17,7 @@ Public Class UC_TerapiaRiabilitativa
     End Sub
 
     Private Sub FormClasseFarmaco_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ControlText(TextBoxNomeIntegratore) = "Nome terapia"
+        ControlText(TextBoxNomeIntegratore) = "Nome integratore"
         TextBoxNomeIntegratore.Text = ControlText(TextBoxNomeIntegratore)
         HilightControls(False, TextBoxNomeIntegratore)
     End Sub
@@ -62,18 +62,18 @@ Public Class UC_TerapiaRiabilitativa
         Dim esiste As Boolean = False
 
         'Verifica che la classe inserita non esistà già
-        Dim checkQuery As String = "SELECT * FROM TerapieRiabilitative WHERE NomeTerapia = @nomeTerapia"
+        Dim checkQuery As String = "SELECT * FROM Integratori WHERE NomeIntegratore = @nomeIntegratore"
 
-        Dim nomeTerapia As String = TextBoxNomeIntegratore.Text.Trim()
+        Dim nomeIntegratore As String = TextBoxNomeIntegratore.Text.Trim()
 
         Dim checkParam As New List(Of SqlParameter) From {
-            New SqlParameter("@nomeTerapia", nomeTerapia)
+            New SqlParameter("@nomeIntegratore", nomeIntegratore)
         }
 
         Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count <> 0 Then
-            esiste = True ' Classe di farmaco esistente
+            esiste = True ' Integratore esistente
         Else
             esiste = False
         End If
@@ -90,7 +90,7 @@ Public Class UC_TerapiaRiabilitativa
 
             Dim successo As Boolean = True
 
-            Dim nomeTerapia As String = TextBoxNomeIntegratore.Text.Trim()
+            Dim nomeIntegratore As String = TextBoxNomeIntegratore.Text.Trim()
 
             ' TODO
             Try
@@ -98,13 +98,13 @@ Public Class UC_TerapiaRiabilitativa
                 Dim esiste As Boolean = Await CercaClasseAsync()
 
                 If Not esiste Then
-                    queryClassiFarmaci = "INSERT INTO TerapieRiabilitative (
-                                                        nomeTerapia
+                    queryClassiFarmaci = "INSERT INTO Integratori (
+                                                        nomeIntegratore
                                                         ) VALUES (
-                                                        @nomeTerapia)"
+                                                        @nomeIntegratore)"
 
                     Dim parametriClassiFarmaci As New List(Of SqlParameter) From {
-                        New SqlParameter("@nomeTerapia", nomeTerapia)
+                        New SqlParameter("@nomeIntegratore", nomeIntegratore)
                     }
 
                     If Await ConnessioneDB.EseguiNonQueryAsync(queryClassiFarmaci, parametriClassiFarmaci) > 0 Then
@@ -112,10 +112,10 @@ Public Class UC_TerapiaRiabilitativa
                     End If
 
                     If successo Then
-                        main.MostraToast("Terapia aggiunta correttamente.")
+                        main.MostraToast("Integratore aggiunto correttamente.")
                     End If
                 Else
-                    main.MostraToast("Terapia già esistente.")
+                    main.MostraToast("Integratore già esistente.")
                     esito = False
                 End If
             Catch ex As Exception

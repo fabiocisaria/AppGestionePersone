@@ -89,10 +89,10 @@ Partial Class UC_VisitaDNATest
         Me.LabelTitolo.AutoSize = True
         Me.LabelTitolo.Location = New System.Drawing.Point(3, 8)
         Me.LabelTitolo.Name = "LabelTitolo"
-        Me.LabelTitolo.Size = New System.Drawing.Size(54, 13)
+        Me.LabelTitolo.Size = New System.Drawing.Size(85, 13)
         Me.LabelTitolo.TabIndex = 16
         Me.LabelTitolo.Tag = "PrimaryTitle"
-        Me.LabelTitolo.Text = "DNA Test"
+        Me.LabelTitolo.Text = "HPV - DNA Test"
         '
         'TableLayoutPanelDatiDNA
         '

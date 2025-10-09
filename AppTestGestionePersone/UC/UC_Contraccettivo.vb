@@ -1,6 +1,7 @@
 ﻿Imports System.Web.UI.WebControls
 Imports Microsoft.Data.SqlClient
-Public Class UC_TerapiaRiabilitativa
+
+Public Class UC_Contraccettivo
 
     Private Shared ReadOnly ControlText As New Dictionary(Of Control, String)
 
@@ -17,15 +18,13 @@ Public Class UC_TerapiaRiabilitativa
     End Sub
 
     Private Sub FormClasseFarmaco_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ControlText(TextBoxNomeIntegratore) = "Nome terapia"
-        TextBoxNomeIntegratore.Text = ControlText(TextBoxNomeIntegratore)
-        HilightControls(False, TextBoxNomeIntegratore)
+        PulisciCampi(TextBoxNomeContraccettivo)
+        HilightControls(False, TextBoxNomeContraccettivo)
+        ControlText(TextBoxNomeContraccettivo) = "Contraccettivo"
+        TextBoxNomeContraccettivo.Text = ControlText(TextBoxNomeContraccettivo)
     End Sub
 
-    ' ====================
-    ' Placeholder per TextBox
-    ' ====================
-    Private Sub TextBox_Enter(sender As Object, e As EventArgs) Handles TextBoxNomeIntegratore.Enter
+    Private Sub TextBox_Enter(sender As Object, e As EventArgs) Handles TextBoxNomeContraccettivo.Enter
         Dim ctrl As Control = DirectCast(sender, Control)
         If ctrl.Text = ControlText(ctrl) Then
             ctrl.Text = ""
@@ -34,7 +33,7 @@ Public Class UC_TerapiaRiabilitativa
         End If
     End Sub
 
-    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles TextBoxNomeIntegratore.Leave
+    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles TextBoxNomeContraccettivo.Leave
         Dim ctrl As Control = DirectCast(sender, Control)
         If String.IsNullOrWhiteSpace(ctrl.Text) Then
             ctrl.Text = ControlText(ctrl)
@@ -47,11 +46,14 @@ Public Class UC_TerapiaRiabilitativa
         Dim esito As Boolean = True
 
         ' Verifico se il campo Nome classe è stato compilato
-        If String.IsNullOrWhiteSpace(TextBoxNomeIntegratore.Text.Trim()) OrElse TextBoxNomeIntegratore.Text.Trim() = ControlText(TextBoxNomeIntegratore) Then
+        If String.IsNullOrWhiteSpace(TextBoxNomeContraccettivo.Text.Trim()) OrElse TextBoxNomeContraccettivo.Text.Trim() = ControlText(TextBoxNomeContraccettivo) Then
             esito = False
-            HilightControls(True, TextBoxNomeIntegratore)
+            HilightControls(True, TextBoxNomeContraccettivo)
+            If String.IsNullOrWhiteSpace(TextBoxNomeContraccettivo.Text.Trim()) Then
+                TextBoxNomeContraccettivo.Text = ControlText(TextBoxNomeContraccettivo)
+            End If
         Else
-            HilightControls(False, TextBoxNomeIntegratore)
+            HilightControls(False, TextBoxNomeContraccettivo)
         End If
 
         Return esito
@@ -62,18 +64,18 @@ Public Class UC_TerapiaRiabilitativa
         Dim esiste As Boolean = False
 
         'Verifica che la classe inserita non esistà già
-        Dim checkQuery As String = "SELECT * FROM TerapieRiabilitative WHERE NomeTerapia = @nomeTerapia"
+        Dim checkQuery As String = "SELECT * FROM TipiContraccettivo WHERE Tipo = @tipo"
 
-        Dim nomeTerapia As String = TextBoxNomeIntegratore.Text.Trim()
+        Dim tipo As String = TextBoxNomeContraccettivo.Text.Trim()
 
         Dim checkParam As New List(Of SqlParameter) From {
-            New SqlParameter("@nomeTerapia", nomeTerapia)
-        }
+        New SqlParameter("@tipo", tipo)
+    }
 
         Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count <> 0 Then
-            esiste = True ' Classe di farmaco esistente
+            esiste = True ' Contraccettivo già esistente
         Else
             esiste = False
         End If
@@ -90,32 +92,33 @@ Public Class UC_TerapiaRiabilitativa
 
             Dim successo As Boolean = True
 
-            Dim nomeTerapia As String = TextBoxNomeIntegratore.Text.Trim()
+            Dim tipo As String = TextBoxNomeContraccettivo.Text.Trim()
 
             ' TODO
             Try
                 Dim queryClassiFarmaci As String = ""
+
                 Dim esiste As Boolean = Await CercaClasseAsync()
 
                 If Not esiste Then
-                    queryClassiFarmaci = "INSERT INTO TerapieRiabilitative (
-                                                        nomeTerapia
+                    queryClassiFarmaci = "INSERT INTO TipiContraccettivo (
+                                                        Tipo
                                                         ) VALUES (
-                                                        @nomeTerapia)"
+                                                        @tipo)"
 
                     Dim parametriClassiFarmaci As New List(Of SqlParameter) From {
-                        New SqlParameter("@nomeTerapia", nomeTerapia)
-                    }
+                    New SqlParameter("@tipo", tipo)
+                }
 
                     If Await ConnessioneDB.EseguiNonQueryAsync(queryClassiFarmaci, parametriClassiFarmaci) > 0 Then
                         successo = True
                     End If
 
                     If successo Then
-                        main.MostraToast("Terapia aggiunta correttamente.")
+                        main.MostraToast("Contraccettivo aggiunto correttamente.")
                     End If
                 Else
-                    main.MostraToast("Terapia già esistente.")
+                    main.MostraToast("Contraccettivo già esistente.")
                     esito = False
                 End If
             Catch ex As Exception
@@ -133,14 +136,14 @@ Public Class UC_TerapiaRiabilitativa
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Disabilito tutti i controlli
-        TableLayoutPanelIntegratore.Enabled = False
+        TableLayoutPanelClassiFarmaco.Enabled = False
 
         main.MostraToast("Salvataggio in corso ...")
         Dim esito = Await SalvaDatiAsync()
 
-        TableLayoutPanelIntegratore.Enabled = True
+        TableLayoutPanelClassiFarmaco.Enabled = True
         If esito Then
-            PulisciCampi(TextBoxNomeIntegratore)
+            PulisciCampi(TextBoxNomeContraccettivo)
         End If
     End Sub
 End Class

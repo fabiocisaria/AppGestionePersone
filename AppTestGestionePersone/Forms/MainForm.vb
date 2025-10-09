@@ -2,6 +2,7 @@
 Imports System.Runtime.InteropServices
 Imports Microsoft.Win32
 Imports Syncfusion.Licensing
+Imports OfficeOpenXml
 
 Public Class MainForm
     Inherits Form
@@ -12,6 +13,7 @@ Public Class MainForm
         RichiestaLogin = 2      ' Token scaduto / disconnessione, MainForm visibile ma bloccata
         Logout = 3
         Close = 4
+        AttesaDB = 5            ' Attesa DB (dopo login, prima di mostrare MainForm)
     End Enum
 
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
@@ -70,6 +72,9 @@ Public Class MainForm
                 Case StatoLogin.LoginIniziale
                     Me.Hide()
                     ApriLogin()   ' Mostra solo login
+                Case StatoLogin.AttesaDB
+                    Me.Enabled = False
+                    Me.Hide()
                 Case StatoLogin.LoginRiuscito
                     Me.Enabled = True
                     Me.Show()
@@ -98,6 +103,9 @@ Public Class MainForm
         ' ====================
         ' Registra la licenza Syncfusion
         SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JFaF5cXGRCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdmWXZfdXZVQmleVU11WUFWYEg=")
+
+        ' Imposto la licenza una volta sola per tutta l'app
+        OfficeOpenXml.ExcelPackage.License.SetNonCommercialPersonal("Fabio Cisaria")
 
         'SfSkinManager.SetTheme(Me, Theme.)
 
@@ -151,9 +159,28 @@ Public Class MainForm
                       loginForm.Controls.Add(loginUC)
 
                       ' Gestisci evento login
-                      AddHandler loginUC.LoginSuccess, Sub()
-                                                           loginForm.Close()
-                                                           StatoLoginCorrente = StatoLogin.LoginRiuscito
+                      AddHandler loginUC.LoginSuccess, Async Sub()
+                                                           Try
+                                                               ' Disabilita UI o mostra un cursore di attesa
+                                                               Cursor.Current = Cursors.WaitCursor
+
+                                                               ' Risveglia il DB
+                                                               Await ConnessioneDB.WakeUpQuery(Sub(tentativo)
+                                                                                                   loginUC.TentativoWakeup = tentativo
+                                                                                               End Sub)
+
+                                                               ' Chiudi il form di login
+                                                               loginForm.Close()
+
+                                                               ' Aggiorna stato login
+                                                               StatoLoginCorrente = StatoLogin.LoginRiuscito
+
+                                                           Catch ex As Exception
+                                                               loginUC.MessaggioStatoLogin = "Connessione al database non riuscita. Riprovare più tardi"
+                                                           Finally
+                                                               ' Ripristina cursore
+                                                               Cursor.Current = Cursors.Default
+                                                           End Try
                                                        End Sub
 
                       loginForm.ShowDialog()
@@ -309,6 +336,30 @@ Public Class MainForm
         UCRegistry("Terapia") = New UCInfo With {
             .Categoria = "Visita",
             .Factory = Function() New UC_Terapia(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("Contraccettivo") = New UCInfo With {
+            .Categoria = "Contraccettivo",
+            .Factory = Function() New UC_Contraccettivo(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("Integratore") = New UCInfo With {
+            .Categoria = "Integratore",
+            .Factory = Function() New UC_Integratore(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("MalattiaAutoimmune") = New UCInfo With {
+            .Categoria = "MalattiaAutoimmune",
+            .Factory = Function() New UC_MalattiaAutoimmune(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("Importazione") = New UCInfo With {
+            .Categoria = "Importazione",
+            .Factory = Function() New UC_FileImportazione(),
             .Ricreabile = True
         }
     End Sub
@@ -1632,11 +1683,41 @@ Public Class MainForm
         ucTerapia.AggiornaDatiAsync()
     End Sub
 
+    Private Sub ContraccettivoToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ContraccettivoToolStripMenuItem1.Click
+        EliminaControllo()
+
+        Dim ucContraccettivo As UC_Contraccettivo = DirectCast(GetUC("Contraccettivo"), UC_Contraccettivo)
+        CaricaControllo(ucContraccettivo, 0, 2)
+    End Sub
+
+    Private Sub IntegratoreToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IntegratoreToolStripMenuItem.Click
+        EliminaControllo()
+
+        Dim ucIntegratore As UC_Integratore = DirectCast(GetUC("Integratore"), UC_Integratore)
+        CaricaControllo(ucIntegratore, 0, 2)
+    End Sub
+
+    Private Sub MalattiaAutoimmuneToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MalattiaAutoimmuneToolStripMenuItem.Click
+        EliminaControllo()
+
+        Dim ucMalattiaAutoimmune As UC_MalattiaAutoimmune = DirectCast(GetUC("MalattiaAutoimmune"), UC_MalattiaAutoimmune)
+        CaricaControllo(ucMalattiaAutoimmune, 0, 2)
+    End Sub
+
     Private Sub EsciToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EsciToolStripMenuItem.Click
         StatoLoginCorrente = StatoLogin.Close
     End Sub
 
     Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
         StatoLoginCorrente = StatoLogin.Logout
+    End Sub
+
+    Private Sub FileToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem1.Click
+        EliminaControllo()
+
+        RimuoviUC("Importazione")
+
+        Dim ucImportaFile As UC_FileImportazione = DirectCast(GetUC("Importazione"), UC_FileImportazione)
+        CaricaControllo(ucImportaFile, 0, 2)
     End Sub
 End Class

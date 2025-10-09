@@ -14,4 +14,5 @@
     Public Const SelectButton As String = "SelectButton"
     Public Const CancelButton As String = "CancelButton"
     Public Const AddButton As String = "AddButton"
+    Public Const Selection As String = "Selection"
 End Class

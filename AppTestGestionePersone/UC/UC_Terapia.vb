@@ -5,6 +5,7 @@ Imports Microsoft.Data.SqlClient
 Public Class UC_Terapia
     Private menuFarmaco As ContextMenuStrip
     Private menuTerapiaRiabilitativa As ContextMenuStrip
+    Private menuIntegratore As ContextMenuStrip
 
     Dim idVisita As Integer = -1
     Dim tipoVisita As String = ""
@@ -53,11 +54,16 @@ Public Class UC_Terapia
         FlowLayoutPanelTerapieRiabilitative.BorderStyle = BorderStyle.FixedSingle
         FlowLayoutPanelTerapieRiabilitative.Padding = New Padding(5)
 
+        FlowLayoutPanelIntegratori.BackColor = Color.White
+        FlowLayoutPanelIntegratori.BorderStyle = BorderStyle.FixedSingle
+        FlowLayoutPanelIntegratori.Padding = New Padding(5)
+
         TableLayoutPanel2.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
 
         ' Inizializza context menu
         InizializzaContextMenuFarmaco()
         InizializzaContextMenuTerapiaRiabilitativa()
+        InizializzaContextMenuIntegratore()
         ' Associa pulsanti
     End Sub
 
@@ -80,8 +86,6 @@ Public Class UC_Terapia
                 PulisciCampi(TableLayoutPanelMiglioramenti)
             End If
         End If
-
-        AddHandler Me.Resize, Sub() Utils.RoundControl(Me, 5)
     End Sub
 
     Public Async Sub AggiornaDatiAsync()
@@ -135,6 +139,25 @@ Public Class UC_Terapia
         Dim lista As New List(Of (Integer, String))
         For Each row As DataRow In dt.Rows
             lista.Add((CInt(row("ID")), row("NomeTerapia").ToString()))
+        Next
+
+        Return lista
+    End Function
+
+    Private Async Function CercaIntegratoriAsync(idTerapia As Integer) As Task(Of List(Of (ID As Integer, Nome As String)))
+        Dim sql As String = "SELECT i.ID, i.NomeIntegratore
+                     FROM TerapiaIntegratori ti
+                     INNER JOIN Integratori i ON ti.ID_Integratore = i.ID
+                     WHERE ti.ID_Terapia = @IDTerapia"
+
+        Dim param As New List(Of SqlParameter) From {
+        New SqlParameter("@IDTerapia", idTerapia)
+    }
+
+        Dim dt As DataTable = Await ConnessioneDB.EseguiQueryAsync(sql, param)
+        Dim lista As New List(Of (Integer, String))
+        For Each row As DataRow In dt.Rows
+            lista.Add((CInt(row("ID")), row("NomeIntegratore").ToString()))
         Next
 
         Return lista
@@ -205,13 +228,24 @@ Public Class UC_Terapia
             For Each t In terapie
                 CaricaTerapiaRiabilitativaPanel(t.ID, t.Nome)
             Next
+
+            '=====================
+            'Integratori
+            '=====================
+            FlowLayoutPanelTerapieRiabilitative.Enabled = False
+            Dim integratori As List(Of (ID As Integer, Nome As String)) = Await CercaIntegratoriAsync(idTerapia)
+            FlowLayoutPanelTerapieRiabilitative.Enabled = True
+
+            For Each t In integratori
+                CaricaIntegratorePanel(t.ID, t.Nome)
+            Next
             ' Se non esiste già una terapia la creo
         Else
             esiste = False
-            Dim insertQuery As String = "INSERT INTO Terapia (ID_Visita) VALUES (@idVisita)"
+            Dim insertQuery As String = "INSERT INTO Terapia (ID_Visita, Miglioramenti) VALUES (@idVisita, @miglioramenti)"
             Dim insertParam As New List(Of SqlParameter) From {
                 New SqlParameter("@idVisita", idVisita),
-                New SqlParameter("Miglioramenti", DBNull.Value)
+                New SqlParameter("@miglioramenti", DBNull.Value)
             }
             Dim dtInsertTerapia As DataTable = Await ConnessioneDB.EseguiQueryAsync(insertQuery, insertParam)
             If dtInsertTerapia.Rows.Count = 1 Then
@@ -242,7 +276,7 @@ Public Class UC_Terapia
         }
 
         Dim panel As New Panel With {
-            .Size = New Size(180, 50),
+            .Size = New Size(195, 50),
             .Tag = id,
             .Margin = New Padding(3),
             .BackColor = Theme.FarmaciPanelBackColor,
@@ -329,45 +363,45 @@ Public Class UC_Terapia
         Next
 
         Dim lbl As New Label With {
-    .Text = nomeTerapiaRiabilitativa, ' Mostro solo il nome della terapia
-    .ForeColor = Color.White,
-    .Font = New Font("Segoe UI", 9, FontStyle.Bold),
-    .AutoSize = True,
-    .Dock = DockStyle.Fill,
-    .TextAlign = ContentAlignment.MiddleCenter,
-    .Size = New Size(155, 45),
-    .Anchor = AnchorStyles.None
-}
+            .Text = nomeTerapiaRiabilitativa, ' Mostro solo il nome della terapia
+            .ForeColor = Color.White,
+            .Font = New Font("Segoe UI", 9, FontStyle.Bold),
+            .AutoSize = True,
+            .Dock = DockStyle.Fill,
+            .TextAlign = ContentAlignment.MiddleCenter,
+            .Size = New Size(155, 45),
+            .Anchor = AnchorStyles.None
+        }
 
         Dim panel As New Panel With {
-    .Size = New Size(180, 50),
-    .Tag = id,
-    .Margin = New Padding(3),
-    .BackColor = Theme.TerapiePanelBackColor, ' verde chiaro
-    .Cursor = Cursors.Hand,
-    .BorderStyle = BorderStyle.FixedSingle,
-    .Padding = New Padding(5)
-}
+            .Size = New Size(195, 50),
+            .Tag = id,
+            .Margin = New Padding(3),
+            .BackColor = Theme.TerapiePanelBackColor, ' verde chiaro
+            .Cursor = Cursors.Hand,
+            .BorderStyle = BorderStyle.FixedSingle,
+            .Padding = New Padding(5)
+        }
 
         ' Creo il TableLayoutPanel
         Dim tlp As New TableLayoutPanel With {
-    .Dock = DockStyle.Fill,
-    .ColumnCount = 2,
-    .RowCount = 1
-}
+            .Dock = DockStyle.Fill,
+            .ColumnCount = 2,
+            .RowCount = 1
+        }
         tlp.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100))  ' Label occupa tutto lo spazio
         tlp.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 25))  ' Pulsante fisso 25px
         tlp.RowStyles.Add(New RowStyle(SizeType.Percent, 100))
 
         Dim btnX As New Button() With {
-    .Text = "X",
-    .Font = New Font("Segoe UI", 8, FontStyle.Bold),
-    .Size = New Size(25, 25),
-    .ForeColor = Theme.TerapiePanelForeColor,
-    .BackColor = Theme.TerapiePanelBackColor,
-    .FlatStyle = FlatStyle.Flat,
-    .Anchor = AnchorStyles.None
-}
+            .Text = "X",
+            .Font = New Font("Segoe UI", 8, FontStyle.Bold),
+            .Size = New Size(25, 25),
+            .ForeColor = Theme.TerapiePanelForeColor,
+            .BackColor = Theme.TerapiePanelBackColor,
+            .FlatStyle = FlatStyle.Flat,
+            .Anchor = AnchorStyles.None
+        }
         '.BackColor = Color.FromArgb(192, 57, 43),
         btnX.FlatAppearance.BorderSize = 0
         btnX.FlatAppearance.MouseOverBackColor = Color.Transparent
@@ -422,6 +456,106 @@ Public Class UC_Terapia
         FlowLayoutPanelTerapieRiabilitative.Controls.Add(panel)
     End Sub
 
+    Private Sub CaricaIntegratorePanel(id As Integer, nomeIntegratore As String)
+        ' Controllo duplicati
+        For Each pnl As Panel In FlowLayoutPanelIntegratori.Controls
+            If pnl.Tag IsNot Nothing AndAlso CInt(pnl.Tag) = id Then Return
+        Next
+
+        Dim lbl As New Label With {
+            .Text = nomeIntegratore, ' Mostro solo il nome dell'integratore
+            .ForeColor = Color.White,
+            .Font = New Font("Segoe UI", 9, FontStyle.Bold),
+            .AutoSize = True,
+            .Dock = DockStyle.Fill,
+            .TextAlign = ContentAlignment.MiddleCenter,
+            .Size = New Size(155, 45),
+            .Anchor = AnchorStyles.None
+        }
+
+        Dim panel As New Panel With {
+            .Size = New Size(195, 50),
+            .Tag = id,
+            .Margin = New Padding(3),
+            .BackColor = Theme.IntegratoriPanelBackColor, ' verde chiaro
+            .Cursor = Cursors.Hand,
+            .BorderStyle = BorderStyle.FixedSingle,
+            .Padding = New Padding(5)
+        }
+
+        ' Creo il TableLayoutPanel
+        Dim tlp As New TableLayoutPanel With {
+            .Dock = DockStyle.Fill,
+            .ColumnCount = 2,
+            .RowCount = 1
+        }
+        tlp.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100))  ' Label occupa tutto lo spazio
+        tlp.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 25))  ' Pulsante fisso 25px
+        tlp.RowStyles.Add(New RowStyle(SizeType.Percent, 100))
+
+        Dim btnX As New Button() With {
+            .Text = "X",
+            .Font = New Font("Segoe UI", 8, FontStyle.Bold),
+            .Size = New Size(25, 25),
+            .ForeColor = Theme.IntegratoriPanelForeColor,
+            .BackColor = Theme.IntegratoriPanelBackColor,
+            .FlatStyle = FlatStyle.Flat,
+            .Anchor = AnchorStyles.None
+        }
+        '.BackColor = Color.FromArgb(192, 57, 43),
+        btnX.FlatAppearance.BorderSize = 0
+        btnX.FlatAppearance.MouseOverBackColor = Color.Transparent
+        btnX.FlatAppearance.MouseDownBackColor = Color.Transparent
+
+        AddHandler btnX.Click, Sub(s, e)
+                                   ' Rimuovo dalla UI
+                                   FlowLayoutPanelIntegratori.Controls.Remove(panel)
+                                   panel.Dispose()
+                                   ' Rimuovo dal DB
+                                   RimuoviIntegratore(id)
+                               End Sub
+
+        ' Aggiungo i controlli al TableLayoutPanel
+        tlp.Controls.Add(lbl, 0, 0)
+        tlp.Controls.Add(btnX, 1, 0)
+
+        'panel.Controls.Add(btnX)
+        'panel.Controls.Add(lbl)
+        panel.Controls.Add(tlp)
+
+        'lbl.AutoSize = False
+        'lbl.Dock = DockStyle.Fill
+
+        ' Effetto hover
+        AddHandler tlp.MouseEnter, Sub()
+                                       lbl.ForeColor = Theme.IntegratoriPanelHoveredForeColor
+                                   End Sub
+        AddHandler tlp.MouseLeave, Sub()
+                                       lbl.ForeColor = Theme.IntegratoriPanelForeColor
+                                   End Sub
+        AddHandler btnX.MouseEnter, Sub()
+                                        lbl.ForeColor = Theme.IntegratoriPanelHoveredForeColor
+                                        btnX.ForeColor = Theme.IntegratoriPanelDeleteForeColor
+
+                                    End Sub
+        AddHandler btnX.MouseLeave, Sub()
+                                        lbl.ForeColor = Theme.IntegratoriPanelForeColor
+                                        btnX.ForeColor = Theme.IntegratoriPanelForeColor
+                                    End Sub
+        AddHandler lbl.MouseEnter, Sub()
+                                       lbl.ForeColor = Theme.IntegratoriPanelHoveredForeColor
+                                   End Sub
+        AddHandler lbl.MouseLeave, Sub()
+                                       lbl.ForeColor = Theme.IntegratoriPanelForeColor
+                                   End Sub
+
+        'Click con il destro
+        AddHandler tlp.MouseDown, AddressOf Integratore_RightClick
+        AddHandler lbl.MouseDown, Sub(s, e) Integratore_RightClick(panel, e)
+
+        FlowLayoutPanelIntegratori.Controls.Add(panel)
+    End Sub
+
     Private Async Sub AggiungiFarmacoAsync(id As Integer, nomeFarmaco As String)
         ' Controllo duplicati
         For Each pnl As Panel In FlowLayoutPanelFarmaci.Controls
@@ -440,7 +574,7 @@ Public Class UC_Terapia
         }
 
         Dim panel As New Panel With {
-            .Size = New Size(180, 50),
+            .Size = New Size(195, 50),
             .Tag = id,
             .Margin = New Padding(3),
             .BackColor = Theme.FarmaciPanelBackColor,
@@ -531,7 +665,7 @@ Public Class UC_Terapia
         Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(insertQuery, insertParam)
 
         If esito Then
-            main.MostraToast("Farmaco aggiunto correttamente dalla terapia.")
+            main.MostraToast("Farmaco aggiunto correttamente alla terapia.")
             FlowLayoutPanelFarmaci.Controls.Add(panel)
         Else
             main.MostraToast("Errore nell'aggiunta del farmaco.")
@@ -545,18 +679,18 @@ Public Class UC_Terapia
         Next
 
         Dim lbl As New Label With {
-    .Text = nomeTerapiaRiabilitativa, ' Mostro solo il nome della terapia
-    .ForeColor = Color.White,
-    .Font = New Font("Segoe UI", 9, FontStyle.Bold),
-    .AutoSize = True,
-    .Dock = DockStyle.Fill,
-    .TextAlign = ContentAlignment.MiddleCenter,
-    .Size = New Size(155, 45),
-    .Anchor = AnchorStyles.None
-}
+            .Text = nomeTerapiaRiabilitativa, ' Mostro solo il nome della terapia
+            .ForeColor = Color.White,
+            .Font = New Font("Segoe UI", 9, FontStyle.Bold),
+            .AutoSize = True,
+            .Dock = DockStyle.Fill,
+            .TextAlign = ContentAlignment.MiddleCenter,
+            .Size = New Size(155, 45),
+            .Anchor = AnchorStyles.None
+        }
 
         Dim panel As New Panel With {
-            .Size = New Size(180, 50),
+            .Size = New Size(195, 50),
             .Tag = id,
             .Margin = New Padding(3),
             .BackColor = Theme.TerapiePanelBackColor, ' verde chiaro
@@ -649,8 +783,126 @@ Public Class UC_Terapia
         Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(insertQuery, insertParam)
 
         If esito Then
-            main.MostraToast("Terapia riabilitativa aggiunta correttamente dalla terapia.")
+            main.MostraToast("Terapia riabilitativa aggiunta correttamente alla terapia.")
             FlowLayoutPanelTerapieRiabilitative.Controls.Add(panel)
+        Else
+            main.MostraToast("Errore nell'aggiunta della terapia riabilitativa.")
+        End If
+    End Sub
+
+    Private Async Sub AggiungiIntegratoreAsync(id As Integer, nomeIntegratore As String)
+        ' Controllo duplicati
+        For Each pnl As Panel In FlowLayoutPanelIntegratori.Controls
+            If pnl.Tag IsNot Nothing AndAlso CInt(pnl.Tag) = id Then Return
+        Next
+
+        Dim lbl As New Label With {
+            .Text = nomeIntegratore, ' Mostro solo il nome della terapia
+            .ForeColor = Color.White,
+            .Font = New Font("Segoe UI", 9, FontStyle.Bold),
+            .AutoSize = True,
+            .Dock = DockStyle.Fill,
+            .TextAlign = ContentAlignment.MiddleCenter,
+            .Size = New Size(155, 45),
+            .Anchor = AnchorStyles.None
+        }
+
+        Dim panel As New Panel With {
+            .Size = New Size(195, 50),
+            .Tag = id,
+            .Margin = New Padding(3),
+            .BackColor = Theme.IntegratoriPanelBackColor, ' verde chiaro
+            .Cursor = Cursors.Hand,
+            .BorderStyle = BorderStyle.FixedSingle,
+            .Padding = New Padding(5)
+        }
+
+        ' Creo il TableLayoutPanel
+        Dim tlp As New TableLayoutPanel With {
+            .Dock = DockStyle.Fill,
+            .ColumnCount = 2,
+            .RowCount = 1
+        }
+        tlp.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100))  ' Label occupa tutto lo spazio
+        tlp.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 25))  ' Pulsante fisso 25px
+        tlp.RowStyles.Add(New RowStyle(SizeType.Percent, 100))
+
+        Dim btnX As New Button() With {
+            .Text = "X",
+            .Font = New Font("Segoe UI", 8, FontStyle.Bold),
+            .Size = New Size(25, 25),
+            .ForeColor = Theme.IntegratoriPanelForeColor,
+            .BackColor = Theme.IntegratoriPanelBackColor,
+            .FlatStyle = FlatStyle.Flat,
+            .Anchor = AnchorStyles.None
+        }
+        '.BackColor = Color.FromArgb(192, 57, 43),
+        btnX.FlatAppearance.BorderSize = 0
+        btnX.FlatAppearance.MouseOverBackColor = Color.Transparent
+        btnX.FlatAppearance.MouseDownBackColor = Color.Transparent
+
+        AddHandler btnX.Click, Sub(s, e)
+                                   ' Rimuovo dalla UI
+                                   FlowLayoutPanelIntegratori.Controls.Remove(panel)
+                                   panel.Dispose()
+                                   ' Rimuovo dal DB
+                                   RimuoviIntegratore(id)
+                               End Sub
+
+        ' Aggiungo i controlli al TableLayoutPanel
+        tlp.Controls.Add(lbl, 0, 0)
+        tlp.Controls.Add(btnX, 1, 0)
+
+        'panel.Controls.Add(btnX)
+        'panel.Controls.Add(lbl)
+        panel.Controls.Add(tlp)
+
+        'lbl.AutoSize = False
+        'lbl.Dock = DockStyle.Fill
+
+        ' Effetto hover
+        AddHandler tlp.MouseEnter, Sub()
+                                       lbl.ForeColor = Theme.IntegratoriPanelHoveredForeColor
+                                   End Sub
+        AddHandler tlp.MouseLeave, Sub()
+                                       lbl.ForeColor = Theme.IntegratoriPanelForeColor
+                                   End Sub
+        AddHandler btnX.MouseEnter, Sub()
+                                        lbl.ForeColor = Theme.IntegratoriPanelHoveredForeColor
+                                        btnX.ForeColor = Theme.IntegratoriPanelDeleteForeColor
+
+                                    End Sub
+        AddHandler btnX.MouseLeave, Sub()
+                                        lbl.ForeColor = Theme.IntegratoriPanelForeColor
+                                        btnX.ForeColor = Theme.IntegratoriPanelForeColor
+                                    End Sub
+        AddHandler lbl.MouseEnter, Sub()
+                                       lbl.ForeColor = Theme.IntegratoriPanelHoveredForeColor
+                                   End Sub
+        AddHandler lbl.MouseLeave, Sub()
+                                       lbl.ForeColor = Theme.IntegratoriPanelForeColor
+                                   End Sub
+
+        'Click con il destro
+        AddHandler tlp.MouseDown, AddressOf Integratore_RightClick
+        AddHandler lbl.MouseDown, Sub(s, e) Integratore_RightClick(panel, e)
+
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        Dim insertQuery As String = "INSERT INTO TerapiaIntegratori (
+                                                    ID_Terapia,
+                                                    ID_Integratore) VALUES(
+                                                    @idTerapia,
+                                                    @idIntegratore)"
+        Dim insertParam As New List(Of SqlParameter) From {
+            New SqlParameter("@idTerapia", idTerapia),
+            New SqlParameter("@idIntegratore", id)
+        }
+        Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(insertQuery, insertParam)
+
+        If esito Then
+            main.MostraToast("Terapia riabilitativa aggiunta correttamente alla terapia.")
+            FlowLayoutPanelIntegratori.Controls.Add(panel)
         Else
             main.MostraToast("Errore nell'aggiunta della terapia riabilitativa.")
         End If
@@ -687,6 +939,21 @@ Public Class UC_Terapia
         End If
     End Sub
 
+    Private Async Sub RimuoviIntegratore(idIntegratore As Integer)
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        Dim removeQuery As String = "DELETE FROM TerapiaIntegratori WHERE ID_Integratore = @idIntegratore AND ID_Terapia = @idTerapia"
+        Dim removeParam As New List(Of SqlParameter) From {
+        New SqlParameter("@idTerapia", idTerapia),
+        New SqlParameter("@idIntegratore", idIntegratore)
+    }
+        Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(removeQuery, removeParam)
+
+        If esito Then
+            main.MostraToast("Terapia riabilitativa rimossa correttamente dalla terapia.")
+        End If
+    End Sub
+
     Private Sub RimuoviFarmacoDalFlowPanel(id As Integer)
         For Each pnl As Panel In FlowLayoutPanelFarmaci.Controls
             If pnl.Tag IsNot Nothing AndAlso CInt(pnl.Tag) = id Then
@@ -707,6 +974,16 @@ Public Class UC_Terapia
         Next
     End Sub
 
+    Private Sub RimuoviIntegratoreDalFlowPanel(id As Integer)
+        For Each pnl As Panel In FlowLayoutPanelIntegratori.Controls
+            If pnl.Tag IsNot Nothing AndAlso CInt(pnl.Tag) = id Then
+                FlowLayoutPanelIntegratori.Controls.Remove(pnl)
+                pnl.Dispose()
+                Exit For
+            End If
+        Next
+    End Sub
+
     Private Sub InizializzaContextMenuFarmaco()
         menuFarmaco = New ContextMenuStrip()
         Dim itemRimuovi As New ToolStripMenuItem("Rimuovi")
@@ -719,6 +996,13 @@ Public Class UC_Terapia
         Dim itemRimuovi As New ToolStripMenuItem("Rimuovi")
         AddHandler itemRimuovi.Click, AddressOf RimuoviTerapiaRiabilitativa_Click
         menuTerapiaRiabilitativa.Items.Add(itemRimuovi)
+    End Sub
+
+    Private Sub InizializzaContextMenuIntegratore()
+        menuIntegratore = New ContextMenuStrip()
+        Dim itemRimuovi As New ToolStripMenuItem("Rimuovi")
+        AddHandler itemRimuovi.Click, AddressOf RimuoviIntegratore_Click
+        menuIntegratore.Items.Add(itemRimuovi)
     End Sub
 
     Private Sub Farmaco_RightClick(sender As Object, e As MouseEventArgs)
@@ -736,6 +1020,15 @@ Public Class UC_Terapia
             ' Mostra il menu contestuale
             menuTerapiaRiabilitativa.Tag = panel ' memorizzo il pannello da rimuovere
             menuTerapiaRiabilitativa.Show(panel, e.Location)
+        End If
+    End Sub
+
+    Private Sub Integratore_RightClick(sender As Object, e As MouseEventArgs)
+        If e.Button = MouseButtons.Right Or e.Button = MouseButtons.Left Then
+            Dim panel As Panel = CType(sender, Panel)
+            ' Mostra il menu contestuale
+            menuIntegratore.Tag = panel ' memorizzo il pannello da rimuovere
+            menuIntegratore.Show(panel, e.Location)
         End If
     End Sub
 
@@ -776,11 +1069,35 @@ Public Class UC_Terapia
         Else
             Try
                 ' Rimuovo la terapia riabilitativa dalla UI
-                FlowLayoutPanelFarmaci.Controls.Remove(panel)
+                FlowLayoutPanelTerapieRiabilitative.Controls.Remove(panel)
                 panel.Dispose()
 
                 ' Rimuovo la terapia riabilitativa dal DB
                 RimuoviTerapiaRiabilitativa(idTerapiaRiabilitativa)
+            Catch ex As Exception
+                main.MostraToast("Errore durante la rimozione dal database: " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub RimuoviIntegratore_Click(sender As Object, e As EventArgs)
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+        Dim menu As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
+        Dim menuStrip As ContextMenuStrip = CType(menu.Owner, ContextMenuStrip)
+        Dim panel As Panel = CType(menuStrip.Tag, Panel)
+
+        Dim idIntegratore As Integer = CInt(panel.Tag)
+
+        If panel.Tag Is Nothing Then
+            main.MostraToast("Errore durante la rimozione della terapia riabilitativa.")
+        Else
+            Try
+                ' Rimuovo la terapia riabilitativa dalla UI
+                FlowLayoutPanelIntegratori.Controls.Remove(panel)
+                panel.Dispose()
+
+                ' Rimuovo la terapia riabilitativa dal DB
+                RimuoviIntegratore(idIntegratore)
             Catch ex As Exception
                 main.MostraToast("Errore durante la rimozione dal database: " & ex.Message)
             End Try
@@ -896,6 +1213,65 @@ Public Class UC_Terapia
                                                   For Each f In terapieRiabilitativeSelezionati
                                                       If Not selezionatiOld.Contains(f.ID) Then
                                                           AggiungiTerapiaRiabilitativaAsync(f.ID, f.Nome)
+                                                      End If
+                                                  Next
+                                              End Sub
+        ' Mostro la form come dialog
+        frm.ShowDialog()
+
+        ' Forzo il focus su un controllo neutro (può essere il form)
+        Me.ActiveControl = Nothing
+    End Sub
+
+    Private Async Sub ButtonAggiungiIntegratore_Click(sender As Object, e As EventArgs) Handles SfButtonAggiungiIntegratore.Click
+        ' Creo la form
+        Dim frm As New FormSelezione()
+
+        frm.Visible = False
+
+        ' Estraggo la lista di farmaci
+        Dim queryIntegratori As String = "SELECT * FROM Integratori ORDER BY NomeIntegratore"
+        Dim dtIntegratori As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryIntegratori)
+
+        ' Estraggo i farmaci già associati alla presente terapia
+        Dim queryTerapiaIntegratori As String = "SELECT ID_Integratore FROM TerapiaIntegratori WHERE ID_Terapia = @idTerapia"
+        Dim paramTerapiaIntegratori As New List(Of SqlParameter) From {
+        New SqlParameter("@idTerapia", idTerapia)
+    }
+        Dim dtTerapiaIntegratori As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryTerapiaIntegratori, paramTerapiaIntegratori)
+
+        Dim selezionatiOld As New List(Of Integer)
+
+        For Each row As DataRow In dtTerapiaIntegratori.Rows
+            If row("ID_Integratore") IsNot DBNull.Value Then
+                selezionatiOld.Add(Convert.ToInt32(row("ID_Integratore")))
+            End If
+        Next
+
+
+        ' Recupero farmaci dal DB
+        frm.PopolaGriglia(dtIntegratori, New List(Of String) From {"NomeIntegratore"}, selezionatiOld)
+
+        ' Gestisco la selezione confermata
+        AddHandler frm.OnSelezioneConfermata, Sub(IntegratoriSelezionati)
+                                                  ' -------------------------------
+                                                  ' Rimuovo quelle che erano presenti ma ora deselezionate
+                                                  ' -------------------------------
+                                                  For Each idIniziale In selezionatiOld
+                                                      If Not IntegratoriSelezionati.Any(Function(f) f.ID = idIniziale) Then
+                                                          ' Rimuovo dal DB
+                                                          RimuoviIntegratore(idIniziale)
+                                                          ' Rimuovo dal FlowPanel
+                                                          RimuoviIntegratoreDalFlowPanel(idIniziale)
+                                                      End If
+                                                  Next
+
+                                                  ' -------------------------------
+                                                  ' Aggiungo quelle nuove
+                                                  ' -------------------------------
+                                                  For Each f In IntegratoriSelezionati
+                                                      If Not selezionatiOld.Contains(f.ID) Then
+                                                          AggiungiIntegratoreAsync(f.ID, f.Nome)
                                                       End If
                                                   Next
                                               End Sub

@@ -20,6 +20,52 @@ Public Class VisitaSintomiNew
         Me.Refresh() ' forza un unico ridisegno completo
     End Sub
 
+    Private Async Sub FormVisitaSintomi_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
+        RadioAutoCheck(True, TableLayoutPanelVisitaSintomi)
+
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+        If main IsNot Nothing Then
+            ' Carico i parametri della visita selezionata
+            idVisita = main.IDVisitaSelezionata
+            tipoVisita = main.TipoVisitaSelezionata
+
+            ' Cerco se esistono già sintomi per la visita selezionata
+            TableLayoutPanelVisitaSintomi.Enabled = False
+
+            main.MostraToast("Caricamento in corso ...")
+            esiste = Await CercaVisitaAsync()
+
+            TableLayoutPanelVisitaSintomi.Enabled = True
+
+            'If Not esiste Then
+            PulisciCampi(TableLayoutPanelVisitaSintomi)
+            ResetAndDisableControls(False, TableLayoutPanelVVDModInsor)
+            ResetAndDisableControls(False, TableLayoutPanelVVDAndam)
+            ResetAndDisableControls(False, TableLayoutPanelVVDDistrib)
+
+            ResetAndDisableControls(False, TableLayoutPanelAlvoStipsi)
+            ResetAndDisableControls(False, TableLayoutPnlAlvoDiarr)
+            ResetAndDisableControls(False, TableLayoutPanelAlvoAltrn)
+
+            ResetAndDisableControls(False, TableLayoutPanelDispLoc)
+
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelVVDModInsor, False)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelVVDAndam, False)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelVVDDistrib, False)
+
+            'PanelModInsorg.Invalidate()
+            'PanelVVDAndam.Invalidate()
+            'PanelVVDDistr.Invalidate()
+
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelAlvoStipsi, False)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelAlvoAltrn, False)
+            ThemeManager.SetSecondaryPanelState(TableLayoutPnlAlvoDiarr, False)
+
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelDisp, False)
+            'End If
+        End If
+    End Sub
+
     Public Async Sub AggiornaDati()
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         If main IsNot Nothing Then
@@ -43,56 +89,6 @@ Public Class VisitaSintomiNew
         End If
     End Sub
 
-    Private Async Sub FormVisitaSintomi_Shown(sender As Object, e As EventArgs) Handles MyBase.Load
-        RadioAutoCheck(True, TableLayoutPanelVisitaSintomi)
-
-        'AddHandler Me.Resize, Sub() Utils.RoundControl(Me, 5)
-
-        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
-        If main IsNot Nothing Then
-            ' Carico i parametri della visita selezionata
-            idVisita = main.IDVisitaSelezionata
-            tipoVisita = main.TipoVisitaSelezionata
-
-            ' Cerco se esistono già sintomi per la visita selezionata
-            TableLayoutPanelVisitaSintomi.Enabled = False
-
-            main.MostraToast("Caricamento in corso ...")
-            esiste = Await CercaVisitaAsync()
-
-            TableLayoutPanelVisitaSintomi.Enabled = True
-
-            'If Not esiste Then
-            PulisciCampi(TableLayoutPanelVisitaSintomi)
-            ResetAndDisableControls(False, TableLayoutPanelVVDModInsor)
-            ResetAndDisableControls(False, TableLayoutPanelVVDAndam)
-            ResetAndDisableControls(False, TableLayoutPanelVVDDistrib)
-
-            ResetAndDisableControls(False, TableLayoutPanelAlvoStipsi)
-            ResetAndDisableControls(False, TableLayoutPanelColonIrr)
-            ResetAndDisableControls(False, TableLayoutPnlAlvoDiarr)
-            ResetAndDisableControls(False, TableLayoutPanelAlvoAltrn)
-
-            ResetAndDisableControls(False, TableLayoutPanelDispLoc)
-
-            ThemeManager.SetSecondaryPanelState(TableLayoutPanelVVDModInsor, False)
-            ThemeManager.SetSecondaryPanelState(TableLayoutPanelVVDAndam, False)
-            ThemeManager.SetSecondaryPanelState(TableLayoutPanelVVDDistrib, False)
-
-            'PanelModInsorg.Invalidate()
-            'PanelVVDAndam.Invalidate()
-            'PanelVVDDistr.Invalidate()
-
-            ThemeManager.SetSecondaryPanelState(TableLayoutPanelAlvoStipsi, False)
-            ThemeManager.SetSecondaryPanelState(TableLayoutPanelColonIrr, False)
-            ThemeManager.SetSecondaryPanelState(TableLayoutPanelAlvoAltrn, False)
-            ThemeManager.SetSecondaryPanelState(TableLayoutPnlAlvoDiarr, False)
-
-            ThemeManager.SetSecondaryPanelState(TableLayoutPanelDispLoc, False)
-            'End If
-        End If
-    End Sub
-
     Private Sub RadioButtonVVDSi_CheckedChanged(sender As Object, e As EventArgs) Handles MetroToggleVVDSiNo.CheckedChanged
         ' Mostra i dettagli solo se "Sì" è selezionato
         ResetAndDisableControls(MetroToggleVVDSiNo.Checked, TableLayoutPanelVVDModInsor)
@@ -107,14 +103,22 @@ Public Class VisitaSintomiNew
     Private Sub RadioButtonAlvoSi_CheckedChanged(sender As Object, e As EventArgs) Handles MetroToggleAlvoSiNo.CheckedChanged
         ' Mostra i dettagli solo se "Sì" è selezionato
         ResetAndDisableControls(MetroToggleAlvoSiNo.Checked, TableLayoutPanelAlvoStipsi)
-        ResetAndDisableControls(MetroToggleAlvoSiNo.Checked, TableLayoutPanelColonIrr)
         ResetAndDisableControls(MetroToggleAlvoSiNo.Checked, TableLayoutPnlAlvoDiarr)
         ResetAndDisableControls(MetroToggleAlvoSiNo.Checked, TableLayoutPanelAlvoAltrn)
 
         ThemeManager.SetSecondaryPanelState(TableLayoutPanelAlvoStipsi, MetroToggleAlvoSiNo.Checked)
-        ThemeManager.SetSecondaryPanelState(TableLayoutPanelColonIrr, MetroToggleAlvoSiNo.Checked)
         ThemeManager.SetSecondaryPanelState(TableLayoutPnlAlvoDiarr, MetroToggleAlvoSiNo.Checked)
         ThemeManager.SetSecondaryPanelState(TableLayoutPanelAlvoAltrn, MetroToggleAlvoSiNo.Checked)
+    End Sub
+
+    Private Sub MetroToggleAttSess_CheckedChanged(sender As Object, e As EventArgs) Handles MetroToggleAttSess.CheckedChanged
+        ResetAndDisableControls(MetroToggleAttSess.Checked, TableLayoutPanelDisp)
+        ThemeManager.SetSecondaryPanelState(TableLayoutPanelDisp, MetroToggleAttSess.Checked)
+        ThemeManager.SetSecondaryPanelState(TableLayoutPanelDispMarinoff, MetroToggleAttSess.Checked)
+
+        ' Lascio disattiva la selezione della localizzazione perché non è ancora stato selezionato Marinoff
+        ResetAndDisableControls(False, TableLayoutPanelDispLoc)
+        ThemeManager.SetSecondaryPanelState(TableLayoutPanelDispLoc, False)
     End Sub
 
     Private Sub RadioButtonDispMarin0_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonDispMarin0.CheckedChanged
@@ -148,17 +152,22 @@ Public Class VisitaSintomiNew
                                                             gb Is TableLayoutPanelVVDDistr)).ToList()
         End If
 
-        ' Se "Disp Marinof = 0", rimuovo i gruppi collegati dai controlli obbligatori
-        If RadioButtonDispMarin0.Checked Then
+        If Not MetroToggleAttSess.Checked Then
+            invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is TableLayoutPanelDisp OrElse
+                                                            gb Is TableLayoutPanelDispMarinoff OrElse
+                                                            gb Is TableLayoutPanelDispMarin OrElse
+                                                            gb Is TableLayoutPanelDispLoc)).ToList()
+        ElseIf RadioButtonDispMarin0.Checked Then
+            ' Se "Disp Marinof = 0", rimuovo i gruppi collegati dai controlli obbligatori
             invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is TableLayoutPanelDispLoc)).ToList()
         End If
+
+
 
         ' Se "Presenza Alvo = No", rimuovo i gruppi collegati dai controlli obbligatori
         If Not MetroToggleAlvoSiNo.Checked Then
             invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is TableLayoutPanelAlvoStipsi OrElse
                                                             gb Is TableLayoutPanelAlveoStipsi OrElse
-                                                            gb Is TableLayoutPanelColonIrr OrElse
-                                                            gb Is TableLayoutPanelAlvoColonIrr OrElse
                                                             gb Is TableLayoutPanelAlvoAltrn OrElse
                                                             gb Is TableLayoutPanelAlvoAlterno OrElse
                                                             gb Is TableLayoutPnlAlvoDiarr OrElse
@@ -254,80 +263,82 @@ Public Class VisitaSintomiNew
                 MetroToggleCistRic.Checked = False
             End If
 
-            ' Disparenuria
-            ' Marinoff
-            Select Case dettagliVisita("DispareuniaMarinoff")
-                Case 0
-                    RadioButtonDispMarin0.Checked = True
-                Case 1
-                    RadioButtonDispMarin1.Checked = True
-                Case 2
-                    RadioButtonDispMarin2.Checked = True
-                Case 3
-                    RadioButtonDispMarin3.Checked = True
-            End Select
+            ' Attività sessuale
+            If dettagliVisita("SessualmenteAttiva") Then
+                MetroToggleAttSess.Checked = True
+            Else
+                MetroToggleAttSess.Checked = False
+            End If
 
-            If Not RadioButtonDispMarin0.Checked Then
-                ' Localizzazione
-                If dettagliVisita("DispareuniaLoc") = "Superficiale" Then
-                    RadioButtonDispLocS.Checked = True
-                ElseIf dettagliVisita("DispareuniaLoc") = "Profonda" Then
-                    RadioButtonDispLocP.Checked = True
-                ElseIf dettagliVisita("DispareuniaLoc") = "Superficiale + Profonda" Then
-                    RadioButtonDispLocSP.Checked = True
+            If MetroToggleAttSess.Checked Then
+                ' Disparenuria
+                ' Marinoff
+                Select Case dettagliVisita("DispareuniaMarinoff")
+                    Case 0
+                        RadioButtonDispMarin0.Checked = True
+                    Case 1
+                        RadioButtonDispMarin1.Checked = True
+                    Case 2
+                        RadioButtonDispMarin2.Checked = True
+                    Case 3
+                        RadioButtonDispMarin3.Checked = True
+                End Select
+
+                If Not RadioButtonDispMarin0.Checked Then
+                    ' Localizzazione
+                    If dettagliVisita("DispareuniaLoc") = "Superficiale" Then
+                        RadioButtonDispLocS.Checked = True
+                    ElseIf dettagliVisita("DispareuniaLoc") = "Profonda" Then
+                        RadioButtonDispLocP.Checked = True
+                    ElseIf dettagliVisita("DispareuniaLoc") = "Superficiale + Profonda" Then
+                        RadioButtonDispLocSP.Checked = True
+                    End If
                 End If
             End If
 
             ' Alvo
             ' Presenza
             If dettagliVisita("AlvoPresenza") Then
-                MetroToggleAlvoSiNo.Checked = True
+                    MetroToggleAlvoSiNo.Checked = True
+                Else
+                    MetroToggleAlvoSiNo.Checked = False
+                End If
+
+                If MetroToggleAlvoSiNo.Checked Then
+                    ' Stipsi
+                    If dettagliVisita("AlvoStipsi") Then
+                        RadioButtonAlvoStipsiSi.Checked = True
+                    Else
+                        RadioButtonAlvoStipsiNo.Checked = True
+                    End If
+
+                    ' Alvo alterno
+                    If dettagliVisita("AlvoAlterno") Then
+                        RadioButtonAlvoAltrnSi.Checked = True
+                    Else
+                        RadioButtonAlvoAltrnNo.Checked = True
+                    End If
+
+                    ' Alvo diarreico
+                    If dettagliVisita("AlvoDiarroico") Then
+                        RadioButtonAlvoDiarrSi.Checked = True
+                    Else
+                        RadioButtonAlvoDiarrNo.Checked = True
+                    End If
+                End If
+
+                '  Dolore vescicale
+                If dettagliVisita("DoloreVescicale") = "No" Then
+                    RadioButtonDolVescNo.Checked = True
+                ElseIf dettagliVisita("DoloreVescicale") = "A volte" Then
+                    RadioButtonDolVescAvolte.Checked = True
+                ElseIf dettagliVisita("DoloreVescicale") = "Sempre" Then
+                    RadioButtonDolVescSempre.Checked = True
+                End If
+
+                Return esiste
             Else
-                MetroToggleAlvoSiNo.Checked = False
-            End If
-
-            If MetroToggleAlvoSiNo.Checked Then
-                ' Stipsi
-                If dettagliVisita("AlvoStipsi") Then
-                    RadioButtonAlvoStipsiSi.Checked = True
-                Else
-                    RadioButtonAlvoStipsiNo.Checked = True
-                End If
-
-                ' Colon irritabile
-                If dettagliVisita("AlvoColonIrr") Then
-                    RadioButtonAlvoColonIrrSi.Checked = True
-                Else
-                    RadioButtonAlvoColonIrrNo.Checked = True
-                End If
-
-                ' Alvo alterno
-                If dettagliVisita("AlvoAlterno") Then
-                    RadioButtonAlvoAltrnSi.Checked = True
-                Else
-                    RadioButtonAlvoAltrnNo.Checked = True
-                End If
-
-                ' Alvo diarreico
-                If dettagliVisita("AlvoDiarroico") Then
-                    RadioButtonAlvoDiarrSi.Checked = True
-                Else
-                    RadioButtonAlvoDiarrNo.Checked = True
-                End If
-            End If
-
-            '  Dolore vescicale
-            If dettagliVisita("DoloreVescicale") = "No" Then
-                RadioButtonDolVescNo.Checked = True
-            ElseIf dettagliVisita("DoloreVescicale") = "A volte" Then
-                RadioButtonDolVescAvolte.Checked = True
-            ElseIf dettagliVisita("DoloreVescicale") = "Sempre" Then
-                RadioButtonDolVescSempre.Checked = True
-            End If
-
-            Return esiste
-        Else
-            esiste = False
+                esiste = False
             PulisciCampi(TableLayoutPanelVisitaSintomi)
             Return esiste
         End If
@@ -356,24 +367,32 @@ Public Class VisitaSintomiNew
 
             Dim CistRic As Boolean = MetroToggleCistRic.Checked
 
-            Dim dispMar As Integer? = GetSelectedRadioNumber(TableLayoutPanelDispMarin)
-            Dim dispLoc As Object = GetSelectedRadioText(TableLayoutPanelDispLoc)
+            Dim sessAtt As Boolean = MetroToggleAttSess.Checked
+
+            Dim dispMar As Object
+            Dim dispLoc As Object
+
+            If Not sessAtt Then
+                ' Se non è sessualmente attiva, assegno DBNull ai campi relativi alla dispareunia
+                dispMar = DBNull.Value
+                dispLoc = DBNull.Value
+            Else
+                dispMar = GetSelectedRadioNumber(TableLayoutPanelDispMarin)
+                dispLoc = GetSelectedRadioText(TableLayoutPanelDispLoc)
+            End If
 
             Dim alvoPres As Boolean = MetroToggleAlvoSiNo.Checked
 
             Dim alvoStipsi As Object
-            Dim alvoColonIrr As Object
             Dim alvoAltrn As Object
             Dim alvoDiarr As Object
 
             If Not alvoPres Then
                 alvoStipsi = DBNull.Value
-                alvoColonIrr = DBNull.Value
                 alvoAltrn = DBNull.Value
                 alvoDiarr = DBNull.Value
             Else
                 alvoStipsi = RadioButtonAlvoStipsiSi.Checked
-                alvoColonIrr = RadioButtonAlvoColonIrrSi.Checked
                 alvoAltrn = RadioButtonAlvoAltrnSi.Checked
                 alvoDiarr = RadioButtonAlvoDiarrSi.Checked
             End If
@@ -393,11 +412,11 @@ Public Class VisitaSintomiNew
                                                            VulvodiniaDistrib = @vvdDistr,
                                                            VaginitiRicorr = @vagRic,
                                                            CistitiRicorr = @cistRic,
+                                                           SessualmenteAttiva = @sessAtt,
                                                            DispareuniaMarinoff = @dispMar,
                                                            DispareuniaLoc = @dispLoc,
                                                            AlvoPresenza = @alvoPres,
                                                            AlvoStipsi = @alvoStipsi,
-                                                           AlvoColonIrr = @alvoColonIrr,
                                                            AlvoAlterno = @alvoAltrn,
                                                            AlvoDiarroico = @alvoDiarr,
                                                            LUTS = @luts,
@@ -413,11 +432,11 @@ Public Class VisitaSintomiNew
                                                     VulvodiniaDistrib,
                                                     VaginitiRicorr,
                                                     CistitiRicorr,
+                                                    SessualmenteAttiva,
                                                     DispareuniaMarinoff,
                                                     DispareuniaLoc,
                                                     AlvoPresenza,
                                                     AlvoStipsi,
-                                                    AlvoColonIrr,
                                                     AlvoAlterno,
                                                     AlvoDiarroico,
                                                     LUTS,
@@ -430,11 +449,11 @@ Public Class VisitaSintomiNew
                                                     @vvdDistr,
                                                     @vagRic,
                                                     @cistRic,
+                                                    @sessAtt,
                                                     @dispMar,
                                                     @dispLoc,
                                                     @alvoPres,
                                                     @alvoStipsi,
-                                                    @alvoColonIrr,
                                                     @alvoAltrn,
                                                     @alvoDiarr,
                                                     @luts,
@@ -449,11 +468,11 @@ Public Class VisitaSintomiNew
                     New SqlParameter("@vvdDistr", vvdDistr),
                     New SqlParameter("@vagRic", vagRic),
                     New SqlParameter("@cistRic", CistRic),
+                    New SqlParameter("@sessAtt", sessAtt),
                     New SqlParameter("@dispMar", dispMar),
                     New SqlParameter("@dispLoc", dispLoc),
                     New SqlParameter("@alvoPres", alvoPres),
                     New SqlParameter("@alvoStipsi", alvoStipsi),
-                    New SqlParameter("@alvoColonIrr", alvoColonIrr),
                     New SqlParameter("@alvoAltrn", alvoAltrn),
                     New SqlParameter("@alvoDiarr", alvoDiarr),
                     New SqlParameter("@luts", luts),
@@ -507,4 +526,5 @@ Public Class VisitaSintomiNew
             main.MostraToast("Errore durante il salvataggio ..." & vbCrLf & "Compila correttamente tutti i campi")
         End If
     End Sub
+
 End Class

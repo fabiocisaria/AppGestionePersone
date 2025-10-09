@@ -32,20 +32,25 @@ Partial Class UC_Terapia
         Me.LabelMiglioramenti = New System.Windows.Forms.Label()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.LabelTerapieRiabilitative = New System.Windows.Forms.Label()
-        Me.SfButtonAggiungiTerapiaRiabilitativa = New Syncfusion.WinForms.Controls.SfButton()
-        Me.FlowLayoutPanelTerapieRiabilitative = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FlowLayoutPanelFarmaci = New System.Windows.Forms.FlowLayoutPanel()
+        Me.FlowLayoutPanelIntegratori = New System.Windows.Forms.FlowLayoutPanel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelIntegratori = New System.Windows.Forms.Label()
+        Me.SfButtonAggiungiIntegratore = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.SfButtonAggiungiFarmaco = New Syncfusion.WinForms.Controls.SfButton()
         Me.LabelFarmaci = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelTerapieRiabilitative = New System.Windows.Forms.Label()
+        Me.SfButtonAggiungiTerapiaRiabilitativa = New Syncfusion.WinForms.Controls.SfButton()
+        Me.FlowLayoutPanelFarmaci = New System.Windows.Forms.FlowLayoutPanel()
+        Me.FlowLayoutPanelTerapieRiabilitative = New System.Windows.Forms.FlowLayoutPanel()
         Me.TableLayoutPanelTerapia.SuspendLayout()
         Me.TableLayoutPanelMiglior.SuspendLayout()
         Me.TableLayoutPanelMiglioramenti.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
-        Me.TableLayoutPanel4.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanelTerapia
@@ -183,15 +188,16 @@ Partial Class UC_Terapia
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.BackColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel4, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.FlowLayoutPanelTerapieRiabilitative, 1, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.FlowLayoutPanelFarmaci, 0, 1)
+        Me.TableLayoutPanel2.ColumnCount = 3
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.Controls.Add(Me.FlowLayoutPanelIntegratori, 2, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel3, 2, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel1, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel4, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.FlowLayoutPanelFarmaci, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.FlowLayoutPanelTerapieRiabilitative, 1, 1)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 103)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
@@ -201,57 +207,49 @@ Partial Class UC_Terapia
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(760, 370)
         Me.TableLayoutPanel2.TabIndex = 4
         '
-        'TableLayoutPanel4
+        'FlowLayoutPanelIntegratori
         '
-        Me.TableLayoutPanel4.ColumnCount = 2
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel4.Controls.Add(Me.LabelTerapieRiabilitative, 1, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.SfButtonAggiungiTerapiaRiabilitativa, 0, 0)
-        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(383, 3)
-        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 1
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(374, 24)
-        Me.TableLayoutPanel4.TabIndex = 8
+        Me.FlowLayoutPanelIntegratori.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanelIntegratori.Location = New System.Drawing.Point(509, 33)
+        Me.FlowLayoutPanelIntegratori.Name = "FlowLayoutPanelIntegratori"
+        Me.FlowLayoutPanelIntegratori.Size = New System.Drawing.Size(248, 334)
+        Me.FlowLayoutPanelIntegratori.TabIndex = 10
         '
-        'LabelTerapieRiabilitative
+        'TableLayoutPanel3
         '
-        Me.LabelTerapieRiabilitative.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelTerapieRiabilitative.AutoSize = True
-        Me.LabelTerapieRiabilitative.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelTerapieRiabilitative.Location = New System.Drawing.Point(138, 3)
-        Me.LabelTerapieRiabilitative.Name = "LabelTerapieRiabilitative"
-        Me.LabelTerapieRiabilitative.Size = New System.Drawing.Size(128, 17)
-        Me.LabelTerapieRiabilitative.TabIndex = 1
-        Me.LabelTerapieRiabilitative.Text = "Terapie riabilitative"
+        Me.TableLayoutPanel3.ColumnCount = 2
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.LabelIntegratori, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.SfButtonAggiungiIntegratore, 0, 0)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(509, 3)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 1
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(248, 24)
+        Me.TableLayoutPanel3.TabIndex = 9
         '
-        'SfButtonAggiungiTerapiaRiabilitativa
+        'LabelIntegratori
         '
-        Me.SfButtonAggiungiTerapiaRiabilitativa.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
-        Me.SfButtonAggiungiTerapiaRiabilitativa.Location = New System.Drawing.Point(3, 3)
-        Me.SfButtonAggiungiTerapiaRiabilitativa.Name = "SfButtonAggiungiTerapiaRiabilitativa"
-        Me.SfButtonAggiungiTerapiaRiabilitativa.Size = New System.Drawing.Size(24, 18)
-        Me.SfButtonAggiungiTerapiaRiabilitativa.TabIndex = 4
-        Me.SfButtonAggiungiTerapiaRiabilitativa.Tag = "AddButton"
-        Me.SfButtonAggiungiTerapiaRiabilitativa.Text = "+"
+        Me.LabelIntegratori.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.LabelIntegratori.AutoSize = True
+        Me.LabelIntegratori.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelIntegratori.Location = New System.Drawing.Point(103, 3)
+        Me.LabelIntegratori.Name = "LabelIntegratori"
+        Me.LabelIntegratori.Size = New System.Drawing.Size(72, 17)
+        Me.LabelIntegratori.TabIndex = 1
+        Me.LabelIntegratori.Text = "Integratori"
         '
-        'FlowLayoutPanelTerapieRiabilitative
+        'SfButtonAggiungiIntegratore
         '
-        Me.FlowLayoutPanelTerapieRiabilitative.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanelTerapieRiabilitative.Location = New System.Drawing.Point(383, 33)
-        Me.FlowLayoutPanelTerapieRiabilitative.Name = "FlowLayoutPanelTerapieRiabilitative"
-        Me.FlowLayoutPanelTerapieRiabilitative.Size = New System.Drawing.Size(374, 334)
-        Me.FlowLayoutPanelTerapieRiabilitative.TabIndex = 6
-        '
-        'FlowLayoutPanelFarmaci
-        '
-        Me.FlowLayoutPanelFarmaci.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanelFarmaci.Location = New System.Drawing.Point(3, 33)
-        Me.FlowLayoutPanelFarmaci.Name = "FlowLayoutPanelFarmaci"
-        Me.FlowLayoutPanelFarmaci.Size = New System.Drawing.Size(374, 334)
-        Me.FlowLayoutPanelFarmaci.TabIndex = 5
+        Me.SfButtonAggiungiIntegratore.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.SfButtonAggiungiIntegratore.Location = New System.Drawing.Point(3, 3)
+        Me.SfButtonAggiungiIntegratore.Name = "SfButtonAggiungiIntegratore"
+        Me.SfButtonAggiungiIntegratore.Size = New System.Drawing.Size(24, 18)
+        Me.SfButtonAggiungiIntegratore.TabIndex = 4
+        Me.SfButtonAggiungiIntegratore.Tag = "AddButton"
+        Me.SfButtonAggiungiIntegratore.Text = "+"
         '
         'TableLayoutPanel1
         '
@@ -265,7 +263,7 @@ Partial Class UC_Terapia
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(374, 24)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(247, 24)
         Me.TableLayoutPanel1.TabIndex = 7
         '
         'SfButtonAggiungiFarmaco
@@ -283,11 +281,63 @@ Partial Class UC_Terapia
         Me.LabelFarmaci.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LabelFarmaci.AutoSize = True
         Me.LabelFarmaci.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelFarmaci.Location = New System.Drawing.Point(173, 3)
+        Me.LabelFarmaci.Location = New System.Drawing.Point(109, 3)
         Me.LabelFarmaci.Name = "LabelFarmaci"
         Me.LabelFarmaci.Size = New System.Drawing.Size(58, 17)
         Me.LabelFarmaci.TabIndex = 0
         Me.LabelFarmaci.Text = "Farmaci"
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.ColumnCount = 2
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.LabelTerapieRiabilitative, 1, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.SfButtonAggiungiTerapiaRiabilitativa, 0, 0)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(256, 3)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 1
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(247, 24)
+        Me.TableLayoutPanel4.TabIndex = 8
+        '
+        'LabelTerapieRiabilitative
+        '
+        Me.LabelTerapieRiabilitative.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.LabelTerapieRiabilitative.AutoSize = True
+        Me.LabelTerapieRiabilitative.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelTerapieRiabilitative.Location = New System.Drawing.Point(74, 3)
+        Me.LabelTerapieRiabilitative.Name = "LabelTerapieRiabilitative"
+        Me.LabelTerapieRiabilitative.Size = New System.Drawing.Size(128, 17)
+        Me.LabelTerapieRiabilitative.TabIndex = 1
+        Me.LabelTerapieRiabilitative.Text = "Terapie riabilitative"
+        '
+        'SfButtonAggiungiTerapiaRiabilitativa
+        '
+        Me.SfButtonAggiungiTerapiaRiabilitativa.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
+        Me.SfButtonAggiungiTerapiaRiabilitativa.Location = New System.Drawing.Point(3, 3)
+        Me.SfButtonAggiungiTerapiaRiabilitativa.Name = "SfButtonAggiungiTerapiaRiabilitativa"
+        Me.SfButtonAggiungiTerapiaRiabilitativa.Size = New System.Drawing.Size(24, 18)
+        Me.SfButtonAggiungiTerapiaRiabilitativa.TabIndex = 4
+        Me.SfButtonAggiungiTerapiaRiabilitativa.Tag = "AddButton"
+        Me.SfButtonAggiungiTerapiaRiabilitativa.Text = "+"
+        '
+        'FlowLayoutPanelFarmaci
+        '
+        Me.FlowLayoutPanelFarmaci.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanelFarmaci.Location = New System.Drawing.Point(3, 33)
+        Me.FlowLayoutPanelFarmaci.Name = "FlowLayoutPanelFarmaci"
+        Me.FlowLayoutPanelFarmaci.Size = New System.Drawing.Size(247, 334)
+        Me.FlowLayoutPanelFarmaci.TabIndex = 5
+        '
+        'FlowLayoutPanelTerapieRiabilitative
+        '
+        Me.FlowLayoutPanelTerapieRiabilitative.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.FlowLayoutPanelTerapieRiabilitative.Location = New System.Drawing.Point(256, 33)
+        Me.FlowLayoutPanelTerapieRiabilitative.Name = "FlowLayoutPanelTerapieRiabilitative"
+        Me.FlowLayoutPanelTerapieRiabilitative.Size = New System.Drawing.Size(247, 334)
+        Me.FlowLayoutPanelTerapieRiabilitative.TabIndex = 6
         '
         'UC_Terapia
         '
@@ -302,10 +352,12 @@ Partial Class UC_Terapia
         Me.TableLayoutPanelMiglioramenti.ResumeLayout(False)
         Me.TableLayoutPanelMiglioramenti.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
-        Me.TableLayoutPanel4.ResumeLayout(False)
-        Me.TableLayoutPanel4.PerformLayout()
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.TableLayoutPanel3.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
+        Me.TableLayoutPanel4.ResumeLayout(False)
+        Me.TableLayoutPanel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -328,4 +380,8 @@ Partial Class UC_Terapia
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents TableLayoutPanelMiglior As TableLayoutPanel
     Friend WithEvents LabelMiglioramenti As Label
+    Friend WithEvents FlowLayoutPanelIntegratori As FlowLayoutPanel
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents LabelIntegratori As Label
+    Friend WithEvents SfButtonAggiungiIntegratore As Syncfusion.WinForms.Controls.SfButton
 End Class

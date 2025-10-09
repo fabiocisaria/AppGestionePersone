@@ -17,6 +17,8 @@
                 GradientBackgroundThemer.ApplyGradient(pnl, Theme.UCBackgroundFirstColor, Theme.UCBackgroundSecondColor, 90)
             Case ThemeTags.DatiVisita
                 pnl.BackColor = Color.White
+            Case ThemeTags.Selection
+                pnl.BackColor = Theme.BackgroundPrimaryColor
             Case Else
                 pnl.BackColor = Theme.BackgroundPrimaryColor
         End Select
@@ -31,14 +33,25 @@
             BorderThemer.ApplyBorder(pnl, borderWidth:=0F)
         End If
 
-        ' Aggiorna anche lo sfondo dei controlli figli
-        Dim childColor As Color = pnl.BackColor
-        For Each ctrl As Control In pnl.Controls
-            If TypeOf ctrl Is TableLayoutPanel Then
-                ctrl.BackColor = childColor
-            End If
-        Next
+        UpdateChildTableLayoutBackColor(pnl, pnl.BackColor)
+
+        '' Aggiorna anche lo sfondo dei controlli figli
+        'Dim childColor As Color = pnl.BackColor
+        'For Each ctrl As Control In pnl.Controls
+        '    If TypeOf ctrl Is TableLayoutPanel Then
+        '        ctrl.BackColor = childColor
+        '    End If
+        'Next
 
         pnl.Invalidate()
+    End Sub
+
+    Private Shared Sub UpdateChildTableLayoutBackColor(parent As Control, color As Color)
+        For Each ctrl As Control In parent.Controls
+            If TypeOf ctrl Is TableLayoutPanel Then
+                ctrl.BackColor = color
+                UpdateChildTableLayoutBackColor(ctrl, color) ' Ricorsione
+            End If
+        Next
     End Sub
 End Class

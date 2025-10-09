@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class UC_TerapiaRiabilitativa
+Partial Class UC_Integratore
     Inherits System.Windows.Forms.UserControl
 
     'UserControl esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
@@ -23,14 +23,14 @@ Partial Class UC_TerapiaRiabilitativa
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TableLayoutPanelTerapRiab = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanelNuoviIntegratore = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelNuovoIntegratore = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelTitolo = New System.Windows.Forms.Label()
         Me.TableLayoutPanelIntegratore = New System.Windows.Forms.TableLayoutPanel()
         Me.TextBoxNomeIntegratore = New Syncfusion.Windows.Forms.Tools.TextBoxExt()
         Me.LabelNomeIntegratore = New System.Windows.Forms.Label()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanelTerapRiab.SuspendLayout()
-        Me.TableLayoutPanelNuoviIntegratore.SuspendLayout()
+        Me.TableLayoutPanelNuovoIntegratore.SuspendLayout()
         Me.TableLayoutPanelIntegratore.SuspendLayout()
         CType(Me.TextBoxNomeIntegratore, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -39,7 +39,7 @@ Partial Class UC_TerapiaRiabilitativa
         '
         Me.TableLayoutPanelTerapRiab.ColumnCount = 1
         Me.TableLayoutPanelTerapRiab.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelTerapRiab.Controls.Add(Me.TableLayoutPanelNuoviIntegratore, 0, 0)
+        Me.TableLayoutPanelTerapRiab.Controls.Add(Me.TableLayoutPanelNuovoIntegratore, 0, 0)
         Me.TableLayoutPanelTerapRiab.Controls.Add(Me.ButtonInserisci, 0, 1)
         Me.TableLayoutPanelTerapRiab.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanelTerapRiab.Location = New System.Drawing.Point(0, 0)
@@ -48,24 +48,24 @@ Partial Class UC_TerapiaRiabilitativa
         Me.TableLayoutPanelTerapRiab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelTerapRiab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.TableLayoutPanelTerapRiab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanelTerapRiab.Size = New System.Drawing.Size(766, 516)
-        Me.TableLayoutPanelTerapRiab.TabIndex = 4
+        Me.TableLayoutPanelTerapRiab.Size = New System.Drawing.Size(716, 516)
+        Me.TableLayoutPanelTerapRiab.TabIndex = 5
         '
-        'TableLayoutPanelNuoviIntegratore
+        'TableLayoutPanelNuovoIntegratore
         '
-        Me.TableLayoutPanelNuoviIntegratore.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TableLayoutPanelNuoviIntegratore.ColumnCount = 1
-        Me.TableLayoutPanelNuoviIntegratore.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelNuoviIntegratore.Controls.Add(Me.LabelTitolo, 0, 0)
-        Me.TableLayoutPanelNuoviIntegratore.Controls.Add(Me.TableLayoutPanelIntegratore, 0, 1)
-        Me.TableLayoutPanelNuoviIntegratore.Location = New System.Drawing.Point(183, 181)
-        Me.TableLayoutPanelNuoviIntegratore.Name = "TableLayoutPanelNuoviIntegratore"
-        Me.TableLayoutPanelNuoviIntegratore.RowCount = 2
-        Me.TableLayoutPanelNuoviIntegratore.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
-        Me.TableLayoutPanelNuoviIntegratore.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelNuoviIntegratore.Size = New System.Drawing.Size(400, 113)
-        Me.TableLayoutPanelNuoviIntegratore.TabIndex = 22
-        Me.TableLayoutPanelNuoviIntegratore.Tag = "PrimaryPanel"
+        Me.TableLayoutPanelNuovoIntegratore.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanelNuovoIntegratore.ColumnCount = 1
+        Me.TableLayoutPanelNuovoIntegratore.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelNuovoIntegratore.Controls.Add(Me.LabelTitolo, 0, 0)
+        Me.TableLayoutPanelNuovoIntegratore.Controls.Add(Me.TableLayoutPanelIntegratore, 0, 1)
+        Me.TableLayoutPanelNuovoIntegratore.Location = New System.Drawing.Point(158, 181)
+        Me.TableLayoutPanelNuovoIntegratore.Name = "TableLayoutPanelNuovoIntegratore"
+        Me.TableLayoutPanelNuovoIntegratore.RowCount = 2
+        Me.TableLayoutPanelNuovoIntegratore.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.TableLayoutPanelNuovoIntegratore.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelNuovoIntegratore.Size = New System.Drawing.Size(400, 113)
+        Me.TableLayoutPanelNuovoIntegratore.TabIndex = 22
+        Me.TableLayoutPanelNuovoIntegratore.Tag = "PrimaryPanel"
         '
         'LabelTitolo
         '
@@ -76,13 +76,13 @@ Partial Class UC_TerapiaRiabilitativa
         Me.LabelTitolo.Size = New System.Drawing.Size(92, 13)
         Me.LabelTitolo.TabIndex = 16
         Me.LabelTitolo.Tag = "PrimaryTitle"
-        Me.LabelTitolo.Text = "Nuovo integratore"
+        Me.LabelTitolo.Text = "Nuova integratore"
         '
         'TableLayoutPanelIntegratore
         '
         Me.TableLayoutPanelIntegratore.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TableLayoutPanelIntegratore.ColumnCount = 2
-        Me.TableLayoutPanelIntegratore.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanelIntegratore.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107.0!))
         Me.TableLayoutPanelIntegratore.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelIntegratore.Controls.Add(Me.TextBoxNomeIntegratore, 1, 0)
         Me.TableLayoutPanelIntegratore.Controls.Add(Me.LabelNomeIntegratore, 0, 0)
@@ -96,11 +96,11 @@ Partial Class UC_TerapiaRiabilitativa
         'TextBoxNomeIntegratore
         '
         Me.TextBoxNomeIntegratore.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.TextBoxNomeIntegratore.BeforeTouchSize = New System.Drawing.Size(206, 20)
+        Me.TextBoxNomeIntegratore.BeforeTouchSize = New System.Drawing.Size(248, 20)
         Me.TextBoxNomeIntegratore.BorderColor = System.Drawing.Color.Transparent
-        Me.TextBoxNomeIntegratore.Location = New System.Drawing.Point(143, 13)
+        Me.TextBoxNomeIntegratore.Location = New System.Drawing.Point(110, 13)
         Me.TextBoxNomeIntegratore.Name = "TextBoxNomeIntegratore"
-        Me.TextBoxNomeIntegratore.Size = New System.Drawing.Size(206, 20)
+        Me.TextBoxNomeIntegratore.Size = New System.Drawing.Size(248, 20)
         Me.TextBoxNomeIntegratore.TabIndex = 22
         Me.TextBoxNomeIntegratore.Tag = "Find"
         Me.TextBoxNomeIntegratore.Text = "Nome integratore"
@@ -119,23 +119,23 @@ Partial Class UC_TerapiaRiabilitativa
         '
         Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
-        Me.ButtonInserisci.Location = New System.Drawing.Point(667, 482)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(617, 482)
         Me.ButtonInserisci.Name = "ButtonInserisci"
         Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
         Me.ButtonInserisci.TabIndex = 2
         Me.ButtonInserisci.Tag = "OkButton"
         Me.ButtonInserisci.Text = "Inserisci"
         '
-        'UC_TerapiaRiabilitativa
+        'UC_Integratore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.TableLayoutPanelTerapRiab)
-        Me.Name = "UC_TerapiaRiabilitativa"
-        Me.Size = New System.Drawing.Size(766, 516)
+        Me.Name = "UC_Integratore"
+        Me.Size = New System.Drawing.Size(716, 516)
         Me.TableLayoutPanelTerapRiab.ResumeLayout(False)
-        Me.TableLayoutPanelNuoviIntegratore.ResumeLayout(False)
-        Me.TableLayoutPanelNuoviIntegratore.PerformLayout()
+        Me.TableLayoutPanelNuovoIntegratore.ResumeLayout(False)
+        Me.TableLayoutPanelNuovoIntegratore.PerformLayout()
         Me.TableLayoutPanelIntegratore.ResumeLayout(False)
         Me.TableLayoutPanelIntegratore.PerformLayout()
         CType(Me.TextBoxNomeIntegratore, System.ComponentModel.ISupportInitialize).EndInit()
@@ -144,10 +144,10 @@ Partial Class UC_TerapiaRiabilitativa
     End Sub
 
     Friend WithEvents TableLayoutPanelTerapRiab As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelNuovoIntegratore As TableLayoutPanel
+    Friend WithEvents LabelTitolo As Label
     Friend WithEvents TableLayoutPanelIntegratore As TableLayoutPanel
+    Friend WithEvents TextBoxNomeIntegratore As Syncfusion.Windows.Forms.Tools.TextBoxExt
     Friend WithEvents LabelNomeIntegratore As Label
     Friend WithEvents ButtonInserisci As Syncfusion.WinForms.Controls.SfButton
-    Friend WithEvents TableLayoutPanelNuoviIntegratore As TableLayoutPanel
-    Friend WithEvents LabelTitolo As Label
-    Friend WithEvents TextBoxNomeIntegratore As Syncfusion.Windows.Forms.Tools.TextBoxExt
 End Class

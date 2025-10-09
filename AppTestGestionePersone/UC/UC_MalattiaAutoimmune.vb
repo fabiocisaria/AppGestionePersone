@@ -1,7 +1,7 @@
 ﻿Imports System.Web.UI.WebControls
 Imports Microsoft.Data.SqlClient
-Public Class UC_TerapiaRiabilitativa
 
+Public Class UC_MalattiaAutoimmune
     Private Shared ReadOnly ControlText As New Dictionary(Of Control, String)
 
     Public Sub New()
@@ -17,15 +17,13 @@ Public Class UC_TerapiaRiabilitativa
     End Sub
 
     Private Sub FormClasseFarmaco_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ControlText(TextBoxNomeIntegratore) = "Nome terapia"
-        TextBoxNomeIntegratore.Text = ControlText(TextBoxNomeIntegratore)
-        HilightControls(False, TextBoxNomeIntegratore)
+        PulisciCampi(TextBoxNomeMalattia)
+        HilightControls(False, TextBoxNomeMalattia)
+        ControlText(TextBoxNomeMalattia) = "Nome malattia"
+        TextBoxNomeMalattia.Text = ControlText(TextBoxNomeMalattia)
     End Sub
 
-    ' ====================
-    ' Placeholder per TextBox
-    ' ====================
-    Private Sub TextBox_Enter(sender As Object, e As EventArgs) Handles TextBoxNomeIntegratore.Enter
+    Private Sub TextBox_Enter(sender As Object, e As EventArgs) Handles TextBoxNomeMalattia.Enter
         Dim ctrl As Control = DirectCast(sender, Control)
         If ctrl.Text = ControlText(ctrl) Then
             ctrl.Text = ""
@@ -34,7 +32,7 @@ Public Class UC_TerapiaRiabilitativa
         End If
     End Sub
 
-    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles TextBoxNomeIntegratore.Leave
+    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles TextBoxNomeMalattia.Leave
         Dim ctrl As Control = DirectCast(sender, Control)
         If String.IsNullOrWhiteSpace(ctrl.Text) Then
             ctrl.Text = ControlText(ctrl)
@@ -47,27 +45,30 @@ Public Class UC_TerapiaRiabilitativa
         Dim esito As Boolean = True
 
         ' Verifico se il campo Nome classe è stato compilato
-        If String.IsNullOrWhiteSpace(TextBoxNomeIntegratore.Text.Trim()) OrElse TextBoxNomeIntegratore.Text.Trim() = ControlText(TextBoxNomeIntegratore) Then
+        If String.IsNullOrWhiteSpace(TextBoxNomeMalattia.Text.Trim()) OrElse TextBoxNomeMalattia.Text.Trim() = ControlText(TextBoxNomeMalattia) Then
             esito = False
-            HilightControls(True, TextBoxNomeIntegratore)
+            HilightControls(True, TextBoxNomeMalattia)
+            If String.IsNullOrWhiteSpace(TextBoxNomeMalattia.Text.Trim()) Then
+                TextBoxNomeMalattia.Text = ControlText(TextBoxNomeMalattia)
+            End If
         Else
-            HilightControls(False, TextBoxNomeIntegratore)
+            HilightControls(False, TextBoxNomeMalattia)
         End If
 
         Return esito
     End Function
 
-    Private Async Function CercaClasseAsync() As Task(Of Boolean)
+    Private Async Function CercaMalattiaAutoimmAsync() As Task(Of Boolean)
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         Dim esiste As Boolean = False
 
         'Verifica che la classe inserita non esistà già
-        Dim checkQuery As String = "SELECT * FROM TerapieRiabilitative WHERE NomeTerapia = @nomeTerapia"
+        Dim checkQuery As String = "SELECT * FROM MalattieAutoimmuni WHERE NomeMalattia = @nomeMalattia"
 
-        Dim nomeTerapia As String = TextBoxNomeIntegratore.Text.Trim()
+        Dim nomeMalattia As String = TextBoxNomeMalattia.Text.Trim()
 
         Dim checkParam As New List(Of SqlParameter) From {
-            New SqlParameter("@nomeTerapia", nomeTerapia)
+            New SqlParameter("@nomeMalattia", nomeMalattia)
         }
 
         Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
@@ -90,32 +91,33 @@ Public Class UC_TerapiaRiabilitativa
 
             Dim successo As Boolean = True
 
-            Dim nomeTerapia As String = TextBoxNomeIntegratore.Text.Trim()
+            Dim nomeMalattia As String = TextBoxNomeMalattia.Text.Trim()
 
             ' TODO
             Try
-                Dim queryClassiFarmaci As String = ""
-                Dim esiste As Boolean = Await CercaClasseAsync()
+                Dim queryMalattie As String = ""
+
+                Dim esiste As Boolean = Await CercaMalattiaAutoimmAsync()
 
                 If Not esiste Then
-                    queryClassiFarmaci = "INSERT INTO TerapieRiabilitative (
-                                                        nomeTerapia
+                    queryMalattie = "INSERT INTO MalattieAutoimmuni (
+                                                        NomeMalattia
                                                         ) VALUES (
-                                                        @nomeTerapia)"
+                                                        @nomeMalattia)"
 
-                    Dim parametriClassiFarmaci As New List(Of SqlParameter) From {
-                        New SqlParameter("@nomeTerapia", nomeTerapia)
+                    Dim parametriMalattie As New List(Of SqlParameter) From {
+                        New SqlParameter("@nomeMalattia", nomeMalattia)
                     }
 
-                    If Await ConnessioneDB.EseguiNonQueryAsync(queryClassiFarmaci, parametriClassiFarmaci) > 0 Then
+                    If Await ConnessioneDB.EseguiNonQueryAsync(queryMalattie, parametriMalattie) > 0 Then
                         successo = True
                     End If
 
                     If successo Then
-                        main.MostraToast("Terapia aggiunta correttamente.")
+                        main.MostraToast("Malattia autoimmune aggiunta correttamente.")
                     End If
                 Else
-                    main.MostraToast("Terapia già esistente.")
+                    main.MostraToast("Malattia autoimmune già esistente.")
                     esito = False
                 End If
             Catch ex As Exception
@@ -133,14 +135,14 @@ Public Class UC_TerapiaRiabilitativa
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Disabilito tutti i controlli
-        TableLayoutPanelIntegratore.Enabled = False
+        TableLayoutPanelClassiFarmaco.Enabled = False
 
         main.MostraToast("Salvataggio in corso ...")
         Dim esito = Await SalvaDatiAsync()
 
-        TableLayoutPanelIntegratore.Enabled = True
+        TableLayoutPanelClassiFarmaco.Enabled = True
         If esito Then
-            PulisciCampi(TextBoxNomeIntegratore)
+            PulisciCampi(TextBoxNomeMalattia)
         End If
     End Sub
 End Class

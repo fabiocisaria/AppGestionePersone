@@ -1,11 +1,25 @@
-﻿Imports Syncfusion.WinForms.DataGrid
+﻿Imports System.Runtime.InteropServices
+Imports Syncfusion.WinForms.DataGrid
 Imports Syncfusion.WinForms.DataGrid.Enums
+
 
 Public Class FormSelezione
 
     Dim _radius As Integer = 8
 
     Public Event OnSelezioneConfermata As Action(Of List(Of (ID As Integer, Nome As String)))
+
+    <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
+    Public Shared Sub ReleaseCapture()
+    End Sub
+
+    <DllImport("user32.DLL", EntryPoint:="SendMessage")>
+    Public Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
+    End Sub
+
+    Public Const WM_NCLBUTTONDOWN As Integer = &HA1
+    Public Const HTCAPTION As Integer = 2
+
     ' ====================
     ' Costruttore
     ' ====================
@@ -13,16 +27,37 @@ Public Class FormSelezione
         InitializeComponent()
         ConfiguraDataGrid()
 
-        Me.SuspendLayout()
-        Me.DoubleBuffered = True
+        TableLayoutPanelSelezione.BackColor = Color.Transparent
 
-        ThemeManager.ApplyThemeToControls(Me)
+        PanelTitleBar.BackColor = Theme.StripMenuPrimaryColor
+
+        'Me.SuspendLayout()
+        'Me.DoubleBuffered = True
+
+        '' Pulsante X per chiusura
+        'Dim btnClose As New CloseButton()
+        'btnClose.Location = New Point(Me.Width - 45, 0)
+        'AddHandler btnClose.CloseClicked, AddressOf Me.ButtonAnnulla_Click
+        'Me.Controls.Add(btnClose)
+        'btnClose.BringToFront()
+
+        Me.Padding = New Padding(3) ' Bordo esterno
 
         Me.ResumeLayout()
         Me.Refresh() ' forza un unico ridisegno completo
 
+        ThemeManager.ApplyThemeToControls(Me)
+
         Rounder.ApplyRounded(Me, _radius)
-        BorderThemer.ApplyBorder(Me, _radius, 0, Color.Gray)
+        BorderThemer.ApplyBorder(Me, _radius, 0, Color.LightBlue)
+
+        Me.FormBorderStyle = FormBorderStyle.None
+    End Sub
+
+    Private Sub PanelTitleBar_MouseDown(sender As Object, e As MouseEventArgs) Handles PanelTitleBar.MouseDown
+        ' Qui chiamiamo i metodi Shared
+        ReleaseCapture()
+        SendMessage(Me.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0)
     End Sub
 
     ' ====================

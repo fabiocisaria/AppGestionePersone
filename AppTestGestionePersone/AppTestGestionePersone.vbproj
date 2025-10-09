@@ -94,6 +94,12 @@
     <Reference Include="Azure.Identity, Version=1.16.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\Azure.Identity.1.16.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=8.2.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.8.2.0\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=8.1.0.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.8.1.0\lib\net462\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
     </Reference>
@@ -159,6 +165,9 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=8.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.8.14.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Syncfusion.Core.WinForms, Version=31.1462.19.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
@@ -219,7 +228,11 @@
     <Reference Include="System.ClientModel, Version=1.6.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ClientModel.1.6.1\lib\netstandard2.0\System.ClientModel.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
@@ -269,6 +282,9 @@
     <Reference Include="System.Security.Cryptography.ProtectedData, Version=9.0.0.9, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.ProtectedData.9.0.9\lib\net462\System.Security.Cryptography.ProtectedData.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=8.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.8.0.2\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
@@ -306,6 +322,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Themes\ComboBoxThemer.vb" />
+    <Compile Include="UC\UC_Contraccettivo.Designer.vb">
+      <DependentUpon>UC_Contraccettivo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UC_Contraccettivo.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\UC_FileImportazione.Designer.vb">
+      <DependentUpon>UC_FileImportazione.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UC_FileImportazione.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\UC_Integratore.Designer.vb">
+      <DependentUpon>UC_Integratore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UC_Integratore.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\UC_MalattiaAutoimmune.Designer.vb">
+      <DependentUpon>UC_MalattiaAutoimmune.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UC_MalattiaAutoimmune.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Utils\ImportUtils.vb" />
     <Compile Include="Themes\SfComboBoxThemer.vb" />
     <Compile Include="Themes\DateTimePickerThemer.vb" />
@@ -480,6 +520,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Themes\UserControlThemer.vb" />
+    <Compile Include="Utils\Logs.vb" />
     <Compile Include="Utils\Utils.vb" />
     <Compile Include="Utils\ModuleSql.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -548,6 +589,9 @@
     <EmbeddedResource Include="UC\UC_ClasseFarmaco.resx">
       <DependentUpon>UC_ClasseFarmaco.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC\UC_Contraccettivo.resx">
+      <DependentUpon>UC_Contraccettivo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC\UC_DatiPaziente.resx">
       <DependentUpon>UC_DatiPaziente.vb</DependentUpon>
     </EmbeddedResource>
@@ -557,11 +601,17 @@
     <EmbeddedResource Include="UC\UC_Farmaco.resx">
       <DependentUpon>UC_Farmaco.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC\UC_FileImportazione.resx">
+      <DependentUpon>UC_FileImportazione.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC\UC_InserisciVisita.resx">
       <DependentUpon>UC_InserisciVisita.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\UC_Login.resx">
       <DependentUpon>UC_Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\UC_MalattiaAutoimmune.resx">
+      <DependentUpon>UC_MalattiaAutoimmune.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\UC_Terapia.resx">
       <DependentUpon>UC_Terapia.vb</DependentUpon>
@@ -595,6 +645,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC\VisitaSintomiNew.resx">
       <DependentUpon>VisitaSintomiNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\UC_Integratore.resx">
+      <DependentUpon>UC_Integratore.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

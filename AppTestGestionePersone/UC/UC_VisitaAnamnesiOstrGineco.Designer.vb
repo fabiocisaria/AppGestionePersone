@@ -27,18 +27,20 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanelAnGinecologica = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanelDierogest = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelDienogest = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelDienogest = New System.Windows.Forms.Label()
         Me.TableLayoutPanelDienogestSiNo = New System.Windows.Forms.TableLayoutPanel()
         Me.RadioButtonUsoDienogestNo = New System.Windows.Forms.RadioButton()
         Me.RadioButtonUsoDienogestSi = New System.Windows.Forms.RadioButton()
-        Me.TableLayoutPanelEstrogeno = New System.Windows.Forms.TableLayoutPanel()
-        Me.LabelEstrogeno = New System.Windows.Forms.Label()
-        Me.TableLayoutPanelEstrogSiNo = New System.Windows.Forms.TableLayoutPanel()
-        Me.RadioButtonAssocEstroNo = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonAssocEstroSi = New System.Windows.Forms.RadioButton()
+        Me.TableLayoutPanelPrimolutNor = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelPrimolutNor = New System.Windows.Forms.Label()
+        Me.TableLayoutPanelPrimolutNorSiNo = New System.Windows.Forms.TableLayoutPanel()
+        Me.RadioButtonPrimolutNorNo = New System.Windows.Forms.RadioButton()
+        Me.RadioButtonPrimolutNorSi = New System.Windows.Forms.RadioButton()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelContraccettivi = New System.Windows.Forms.Label()
-        Me.LabelDienogest = New System.Windows.Forms.Label()
         Me.TableLayoutPanelContracc = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanelContraccSiNo = New System.Windows.Forms.TableLayoutPanel()
         Me.RadioButtonUsoContraccNo = New System.Windows.Forms.RadioButton()
@@ -93,11 +95,13 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanelAnOstrGineco.SuspendLayout()
         Me.TableLayoutPanelAnGinecologica.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.TableLayoutPanel3.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
         Me.TableLayoutPanelDierogest.SuspendLayout()
+        Me.TableLayoutPanelDienogest.SuspendLayout()
         Me.TableLayoutPanelDienogestSiNo.SuspendLayout()
-        Me.TableLayoutPanelEstrogeno.SuspendLayout()
-        Me.TableLayoutPanelEstrogSiNo.SuspendLayout()
+        Me.TableLayoutPanelPrimolutNor.SuspendLayout()
+        Me.TableLayoutPanelPrimolutNorSiNo.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
         Me.TableLayoutPanelContracc.SuspendLayout()
         Me.TableLayoutPanelContraccSiNo.SuspendLayout()
         Me.TableLayoutPanelTipoContracc.SuspendLayout()
@@ -138,6 +142,7 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanelAnOstrGineco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
         Me.TableLayoutPanelAnOstrGineco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
         Me.TableLayoutPanelAnOstrGineco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelAnOstrGineco.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanelAnOstrGineco.Size = New System.Drawing.Size(800, 600)
         Me.TableLayoutPanelAnOstrGineco.TabIndex = 0
         '
@@ -184,7 +189,7 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel3, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel4, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanelCiclo, 1, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 33)
@@ -194,39 +199,63 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(774, 178)
         Me.TableLayoutPanel1.TabIndex = 16
         '
-        'TableLayoutPanel3
+        'TableLayoutPanel4
         '
-        Me.TableLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TableLayoutPanel3.ColumnCount = 2
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanelDierogest, 1, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.LabelContraccettivi, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.LabelDienogest, 0, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanelContracc, 1, 0)
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(13, 9)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 2
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(360, 160)
-        Me.TableLayoutPanel3.TabIndex = 0
-        Me.TableLayoutPanel3.Tag = "SecondaryPanel"
+        Me.TableLayoutPanel4.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanel4.ColumnCount = 1
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 360.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanelDierogest, 0, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel3, 0, 0)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(13, 9)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 2
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(360, 160)
+        Me.TableLayoutPanel4.TabIndex = 2
+        Me.TableLayoutPanel4.Tag = "SecondaryPanel"
         '
         'TableLayoutPanelDierogest
         '
         Me.TableLayoutPanelDierogest.ColumnCount = 2
-        Me.TableLayoutPanelDierogest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
-        Me.TableLayoutPanelDierogest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDierogest.Controls.Add(Me.TableLayoutPanelDienogestSiNo, 0, 0)
-        Me.TableLayoutPanelDierogest.Controls.Add(Me.TableLayoutPanelEstrogeno, 1, 0)
+        Me.TableLayoutPanelDierogest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelDierogest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelDierogest.Controls.Add(Me.TableLayoutPanelDienogest, 0, 0)
+        Me.TableLayoutPanelDierogest.Controls.Add(Me.TableLayoutPanelPrimolutNor, 1, 0)
         Me.TableLayoutPanelDierogest.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelDierogest.Location = New System.Drawing.Point(103, 83)
+        Me.TableLayoutPanelDierogest.Location = New System.Drawing.Point(3, 83)
         Me.TableLayoutPanelDierogest.Name = "TableLayoutPanelDierogest"
         Me.TableLayoutPanelDierogest.RowCount = 1
         Me.TableLayoutPanelDierogest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDierogest.Size = New System.Drawing.Size(254, 74)
+        Me.TableLayoutPanelDierogest.Size = New System.Drawing.Size(354, 74)
         Me.TableLayoutPanelDierogest.TabIndex = 10
+        '
+        'TableLayoutPanelDienogest
+        '
+        Me.TableLayoutPanelDienogest.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanelDienogest.ColumnCount = 2
+        Me.TableLayoutPanelDienogest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
+        Me.TableLayoutPanelDienogest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDienogest.Controls.Add(Me.LabelDienogest, 0, 0)
+        Me.TableLayoutPanelDienogest.Controls.Add(Me.TableLayoutPanelDienogestSiNo, 1, 0)
+        Me.TableLayoutPanelDienogest.Location = New System.Drawing.Point(8, 7)
+        Me.TableLayoutPanelDienogest.Name = "TableLayoutPanelDienogest"
+        Me.TableLayoutPanelDienogest.RowCount = 1
+        Me.TableLayoutPanelDienogest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDienogest.Size = New System.Drawing.Size(160, 60)
+        Me.TableLayoutPanelDienogest.TabIndex = 10
+        Me.TableLayoutPanelDienogest.Tag = "SecondaryPanel"
+        '
+        'LabelDienogest
+        '
+        Me.LabelDienogest.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelDienogest.AutoSize = True
+        Me.LabelDienogest.Location = New System.Drawing.Point(3, 23)
+        Me.LabelDienogest.Name = "LabelDienogest"
+        Me.LabelDienogest.Size = New System.Drawing.Size(77, 13)
+        Me.LabelDienogest.TabIndex = 7
+        Me.LabelDienogest.Text = "Uso Dienogest"
         '
         'TableLayoutPanelDienogestSiNo
         '
@@ -236,19 +265,19 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanelDienogestSiNo.Controls.Add(Me.RadioButtonUsoDienogestNo, 0, 1)
         Me.TableLayoutPanelDienogestSiNo.Controls.Add(Me.RadioButtonUsoDienogestSi, 0, 0)
         Me.TableLayoutPanelDienogestSiNo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelDienogestSiNo.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanelDienogestSiNo.Location = New System.Drawing.Point(88, 3)
         Me.TableLayoutPanelDienogestSiNo.Name = "TableLayoutPanelDienogestSiNo"
         Me.TableLayoutPanelDienogestSiNo.RowCount = 2
         Me.TableLayoutPanelDienogestSiNo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanelDienogestSiNo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelDienogestSiNo.Size = New System.Drawing.Size(74, 68)
+        Me.TableLayoutPanelDienogestSiNo.Size = New System.Drawing.Size(69, 54)
         Me.TableLayoutPanelDienogestSiNo.TabIndex = 10
         '
         'RadioButtonUsoDienogestNo
         '
         Me.RadioButtonUsoDienogestNo.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RadioButtonUsoDienogestNo.AutoSize = True
-        Me.RadioButtonUsoDienogestNo.Location = New System.Drawing.Point(3, 42)
+        Me.RadioButtonUsoDienogestNo.Location = New System.Drawing.Point(3, 32)
         Me.RadioButtonUsoDienogestNo.Name = "RadioButtonUsoDienogestNo"
         Me.RadioButtonUsoDienogestNo.Size = New System.Drawing.Size(39, 17)
         Me.RadioButtonUsoDienogestNo.TabIndex = 7
@@ -260,7 +289,7 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         '
         Me.RadioButtonUsoDienogestSi.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RadioButtonUsoDienogestSi.AutoSize = True
-        Me.RadioButtonUsoDienogestSi.Location = New System.Drawing.Point(3, 8)
+        Me.RadioButtonUsoDienogestSi.Location = New System.Drawing.Point(3, 5)
         Me.RadioButtonUsoDienogestSi.Name = "RadioButtonUsoDienogestSi"
         Me.RadioButtonUsoDienogestSi.Size = New System.Drawing.Size(34, 17)
         Me.RadioButtonUsoDienogestSi.TabIndex = 6
@@ -268,104 +297,111 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.RadioButtonUsoDienogestSi.Text = "Sì"
         Me.RadioButtonUsoDienogestSi.UseVisualStyleBackColor = True
         '
-        'TableLayoutPanelEstrogeno
+        'TableLayoutPanelPrimolutNor
         '
-        Me.TableLayoutPanelEstrogeno.ColumnCount = 2
-        Me.TableLayoutPanelEstrogeno.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
-        Me.TableLayoutPanelEstrogeno.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelEstrogeno.Controls.Add(Me.LabelEstrogeno, 0, 0)
-        Me.TableLayoutPanelEstrogeno.Controls.Add(Me.TableLayoutPanelEstrogSiNo, 1, 0)
-        Me.TableLayoutPanelEstrogeno.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelEstrogeno.Location = New System.Drawing.Point(83, 3)
-        Me.TableLayoutPanelEstrogeno.Name = "TableLayoutPanelEstrogeno"
-        Me.TableLayoutPanelEstrogeno.RowCount = 1
-        Me.TableLayoutPanelEstrogeno.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelEstrogeno.Size = New System.Drawing.Size(168, 68)
-        Me.TableLayoutPanelEstrogeno.TabIndex = 9
+        Me.TableLayoutPanelPrimolutNor.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanelPrimolutNor.ColumnCount = 2
+        Me.TableLayoutPanelPrimolutNor.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
+        Me.TableLayoutPanelPrimolutNor.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelPrimolutNor.Controls.Add(Me.LabelPrimolutNor, 0, 0)
+        Me.TableLayoutPanelPrimolutNor.Controls.Add(Me.TableLayoutPanelPrimolutNorSiNo, 1, 0)
+        Me.TableLayoutPanelPrimolutNor.Location = New System.Drawing.Point(185, 7)
+        Me.TableLayoutPanelPrimolutNor.Name = "TableLayoutPanelPrimolutNor"
+        Me.TableLayoutPanelPrimolutNor.RowCount = 1
+        Me.TableLayoutPanelPrimolutNor.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelPrimolutNor.Size = New System.Drawing.Size(160, 60)
+        Me.TableLayoutPanelPrimolutNor.TabIndex = 9
+        Me.TableLayoutPanelPrimolutNor.Tag = "SecondaryPanel"
         '
-        'LabelEstrogeno
+        'LabelPrimolutNor
         '
-        Me.LabelEstrogeno.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelEstrogeno.AutoSize = True
-        Me.LabelEstrogeno.Location = New System.Drawing.Point(3, 21)
-        Me.LabelEstrogeno.Name = "LabelEstrogeno"
-        Me.LabelEstrogeno.Size = New System.Drawing.Size(72, 26)
-        Me.LabelEstrogeno.TabIndex = 12
-        Me.LabelEstrogeno.Text = "Associazione estrogeno"
+        Me.LabelPrimolutNor.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelPrimolutNor.AutoSize = True
+        Me.LabelPrimolutNor.Location = New System.Drawing.Point(3, 23)
+        Me.LabelPrimolutNor.Name = "LabelPrimolutNor"
+        Me.LabelPrimolutNor.Size = New System.Drawing.Size(64, 13)
+        Me.LabelPrimolutNor.TabIndex = 12
+        Me.LabelPrimolutNor.Text = "Primolut Nor"
         '
-        'TableLayoutPanelEstrogSiNo
+        'TableLayoutPanelPrimolutNorSiNo
         '
-        Me.TableLayoutPanelEstrogSiNo.ColumnCount = 1
-        Me.TableLayoutPanelEstrogSiNo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelEstrogSiNo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelEstrogSiNo.Controls.Add(Me.RadioButtonAssocEstroNo, 0, 1)
-        Me.TableLayoutPanelEstrogSiNo.Controls.Add(Me.RadioButtonAssocEstroSi, 0, 0)
-        Me.TableLayoutPanelEstrogSiNo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelEstrogSiNo.Location = New System.Drawing.Point(83, 3)
-        Me.TableLayoutPanelEstrogSiNo.Name = "TableLayoutPanelEstrogSiNo"
-        Me.TableLayoutPanelEstrogSiNo.RowCount = 2
-        Me.TableLayoutPanelEstrogSiNo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelEstrogSiNo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelEstrogSiNo.Size = New System.Drawing.Size(82, 62)
-        Me.TableLayoutPanelEstrogSiNo.TabIndex = 11
+        Me.TableLayoutPanelPrimolutNorSiNo.ColumnCount = 1
+        Me.TableLayoutPanelPrimolutNorSiNo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelPrimolutNorSiNo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelPrimolutNorSiNo.Controls.Add(Me.RadioButtonPrimolutNorNo, 0, 1)
+        Me.TableLayoutPanelPrimolutNorSiNo.Controls.Add(Me.RadioButtonPrimolutNorSi, 0, 0)
+        Me.TableLayoutPanelPrimolutNorSiNo.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelPrimolutNorSiNo.Location = New System.Drawing.Point(88, 3)
+        Me.TableLayoutPanelPrimolutNorSiNo.Name = "TableLayoutPanelPrimolutNorSiNo"
+        Me.TableLayoutPanelPrimolutNorSiNo.RowCount = 2
+        Me.TableLayoutPanelPrimolutNorSiNo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelPrimolutNorSiNo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelPrimolutNorSiNo.Size = New System.Drawing.Size(69, 54)
+        Me.TableLayoutPanelPrimolutNorSiNo.TabIndex = 11
         '
-        'RadioButtonAssocEstroNo
+        'RadioButtonPrimolutNorNo
         '
-        Me.RadioButtonAssocEstroNo.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.RadioButtonAssocEstroNo.AutoSize = True
-        Me.RadioButtonAssocEstroNo.Location = New System.Drawing.Point(3, 38)
-        Me.RadioButtonAssocEstroNo.Name = "RadioButtonAssocEstroNo"
-        Me.RadioButtonAssocEstroNo.Size = New System.Drawing.Size(39, 17)
-        Me.RadioButtonAssocEstroNo.TabIndex = 7
-        Me.RadioButtonAssocEstroNo.TabStop = True
-        Me.RadioButtonAssocEstroNo.Text = "No"
-        Me.RadioButtonAssocEstroNo.UseVisualStyleBackColor = True
+        Me.RadioButtonPrimolutNorNo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RadioButtonPrimolutNorNo.AutoSize = True
+        Me.RadioButtonPrimolutNorNo.Location = New System.Drawing.Point(3, 32)
+        Me.RadioButtonPrimolutNorNo.Name = "RadioButtonPrimolutNorNo"
+        Me.RadioButtonPrimolutNorNo.Size = New System.Drawing.Size(39, 17)
+        Me.RadioButtonPrimolutNorNo.TabIndex = 7
+        Me.RadioButtonPrimolutNorNo.TabStop = True
+        Me.RadioButtonPrimolutNorNo.Text = "No"
+        Me.RadioButtonPrimolutNorNo.UseVisualStyleBackColor = True
         '
-        'RadioButtonAssocEstroSi
+        'RadioButtonPrimolutNorSi
         '
-        Me.RadioButtonAssocEstroSi.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.RadioButtonAssocEstroSi.AutoSize = True
-        Me.RadioButtonAssocEstroSi.Location = New System.Drawing.Point(3, 7)
-        Me.RadioButtonAssocEstroSi.Name = "RadioButtonAssocEstroSi"
-        Me.RadioButtonAssocEstroSi.Size = New System.Drawing.Size(34, 17)
-        Me.RadioButtonAssocEstroSi.TabIndex = 6
-        Me.RadioButtonAssocEstroSi.TabStop = True
-        Me.RadioButtonAssocEstroSi.Text = "Sì"
-        Me.RadioButtonAssocEstroSi.UseVisualStyleBackColor = True
+        Me.RadioButtonPrimolutNorSi.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.RadioButtonPrimolutNorSi.AutoSize = True
+        Me.RadioButtonPrimolutNorSi.Location = New System.Drawing.Point(3, 5)
+        Me.RadioButtonPrimolutNorSi.Name = "RadioButtonPrimolutNorSi"
+        Me.RadioButtonPrimolutNorSi.Size = New System.Drawing.Size(34, 17)
+        Me.RadioButtonPrimolutNorSi.TabIndex = 6
+        Me.RadioButtonPrimolutNorSi.TabStop = True
+        Me.RadioButtonPrimolutNorSi.Text = "Sì"
+        Me.RadioButtonPrimolutNorSi.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanel3.ColumnCount = 2
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.LabelContraccettivi, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanelContracc, 1, 0)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(10, 7)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 1
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(340, 65)
+        Me.TableLayoutPanel3.TabIndex = 0
+        Me.TableLayoutPanel3.Tag = "SecondaryPanel"
         '
         'LabelContraccettivi
         '
         Me.LabelContraccettivi.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.LabelContraccettivi.AutoSize = True
-        Me.LabelContraccettivi.Location = New System.Drawing.Point(3, 33)
+        Me.LabelContraccettivi.Location = New System.Drawing.Point(3, 19)
         Me.LabelContraccettivi.Name = "LabelContraccettivi"
-        Me.LabelContraccettivi.Size = New System.Drawing.Size(93, 13)
+        Me.LabelContraccettivi.Size = New System.Drawing.Size(71, 26)
         Me.LabelContraccettivi.TabIndex = 9
         Me.LabelContraccettivi.Text = "Uso contraccettivi"
-        '
-        'LabelDienogest
-        '
-        Me.LabelDienogest.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelDienogest.AutoSize = True
-        Me.LabelDienogest.Location = New System.Drawing.Point(3, 113)
-        Me.LabelDienogest.Name = "LabelDienogest"
-        Me.LabelDienogest.Size = New System.Drawing.Size(77, 13)
-        Me.LabelDienogest.TabIndex = 7
-        Me.LabelDienogest.Text = "Uso Dienogest"
         '
         'TableLayoutPanelContracc
         '
         Me.TableLayoutPanelContracc.ColumnCount = 2
-        Me.TableLayoutPanelContracc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
+        Me.TableLayoutPanelContracc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
         Me.TableLayoutPanelContracc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelContracc.Controls.Add(Me.TableLayoutPanelContraccSiNo, 0, 0)
         Me.TableLayoutPanelContracc.Controls.Add(Me.TableLayoutPanelTipoContracc, 1, 0)
         Me.TableLayoutPanelContracc.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelContracc.Location = New System.Drawing.Point(103, 3)
+        Me.TableLayoutPanelContracc.Location = New System.Drawing.Point(88, 3)
         Me.TableLayoutPanelContracc.Name = "TableLayoutPanelContracc"
         Me.TableLayoutPanelContracc.RowCount = 1
         Me.TableLayoutPanelContracc.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelContracc.Size = New System.Drawing.Size(254, 74)
+        Me.TableLayoutPanelContracc.Size = New System.Drawing.Size(249, 59)
         Me.TableLayoutPanelContracc.TabIndex = 8
         '
         'TableLayoutPanelContraccSiNo
@@ -381,14 +417,14 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanelContraccSiNo.RowCount = 2
         Me.TableLayoutPanelContraccSiNo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanelContraccSiNo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelContraccSiNo.Size = New System.Drawing.Size(74, 68)
+        Me.TableLayoutPanelContraccSiNo.Size = New System.Drawing.Size(69, 53)
         Me.TableLayoutPanelContraccSiNo.TabIndex = 11
         '
         'RadioButtonUsoContraccNo
         '
         Me.RadioButtonUsoContraccNo.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RadioButtonUsoContraccNo.AutoSize = True
-        Me.RadioButtonUsoContraccNo.Location = New System.Drawing.Point(3, 42)
+        Me.RadioButtonUsoContraccNo.Location = New System.Drawing.Point(3, 31)
         Me.RadioButtonUsoContraccNo.Name = "RadioButtonUsoContraccNo"
         Me.RadioButtonUsoContraccNo.Size = New System.Drawing.Size(39, 17)
         Me.RadioButtonUsoContraccNo.TabIndex = 6
@@ -400,7 +436,7 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         '
         Me.RadioButtonUsoContraccSi.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.RadioButtonUsoContraccSi.AutoSize = True
-        Me.RadioButtonUsoContraccSi.Location = New System.Drawing.Point(3, 8)
+        Me.RadioButtonUsoContraccSi.Location = New System.Drawing.Point(3, 4)
         Me.RadioButtonUsoContraccSi.Name = "RadioButtonUsoContraccSi"
         Me.RadioButtonUsoContraccSi.Size = New System.Drawing.Size(34, 17)
         Me.RadioButtonUsoContraccSi.TabIndex = 5
@@ -416,12 +452,12 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanelTipoContracc.Controls.Add(Me.ComboBoxTipoContracc, 0, 1)
         Me.TableLayoutPanelTipoContracc.Controls.Add(Me.LabelContrTipoContracc, 0, 0)
         Me.TableLayoutPanelTipoContracc.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanelTipoContracc.Location = New System.Drawing.Point(83, 3)
+        Me.TableLayoutPanelTipoContracc.Location = New System.Drawing.Point(78, 3)
         Me.TableLayoutPanelTipoContracc.Name = "TableLayoutPanelTipoContracc"
         Me.TableLayoutPanelTipoContracc.RowCount = 2
         Me.TableLayoutPanelTipoContracc.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanelTipoContracc.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelTipoContracc.Size = New System.Drawing.Size(168, 68)
+        Me.TableLayoutPanelTipoContracc.Size = New System.Drawing.Size(168, 53)
         Me.TableLayoutPanelTipoContracc.TabIndex = 9
         '
         'ComboBoxTipoContracc
@@ -431,7 +467,7 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.ComboBoxTipoContracc.AutoCompleteSuggestDelay = 1
         Me.ComboBoxTipoContracc.AutoCompleteSuggestMode = Syncfusion.WinForms.ListView.Enums.AutoCompleteSuggestMode.Contains
         Me.ComboBoxTipoContracc.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center
-        Me.ComboBoxTipoContracc.Location = New System.Drawing.Point(14, 40)
+        Me.ComboBoxTipoContracc.Location = New System.Drawing.Point(14, 29)
         Me.ComboBoxTipoContracc.Name = "ComboBoxTipoContracc"
         Me.ComboBoxTipoContracc.Size = New System.Drawing.Size(139, 21)
         Me.ComboBoxTipoContracc.Style.DropDownStyle.BorderColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
@@ -444,7 +480,7 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         '
         Me.LabelContrTipoContracc.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.LabelContrTipoContracc.AutoSize = True
-        Me.LabelContrTipoContracc.Location = New System.Drawing.Point(70, 21)
+        Me.LabelContrTipoContracc.Location = New System.Drawing.Point(70, 13)
         Me.LabelContrTipoContracc.Name = "LabelContrTipoContracc"
         Me.LabelContrTipoContracc.Size = New System.Drawing.Size(28, 13)
         Me.LabelContrTipoContracc.TabIndex = 8
@@ -454,7 +490,7 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         '
         Me.TableLayoutPanelCiclo.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TableLayoutPanelCiclo.ColumnCount = 1
-        Me.TableLayoutPanelCiclo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 340.0!))
+        Me.TableLayoutPanelCiclo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 360.0!))
         Me.TableLayoutPanelCiclo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelCiclo.Controls.Add(Me.TableLayoutPanelMenopausa, 0, 2)
         Me.TableLayoutPanelCiclo.Controls.Add(Me.TableLayoutPanelAmenorrea, 0, 0)
@@ -1046,15 +1082,18 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.TableLayoutPanelAnGinecologica.ResumeLayout(False)
         Me.TableLayoutPanelAnGinecologica.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.TableLayoutPanel3.ResumeLayout(False)
-        Me.TableLayoutPanel3.PerformLayout()
+        Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanelDierogest.ResumeLayout(False)
+        Me.TableLayoutPanelDienogest.ResumeLayout(False)
+        Me.TableLayoutPanelDienogest.PerformLayout()
         Me.TableLayoutPanelDienogestSiNo.ResumeLayout(False)
         Me.TableLayoutPanelDienogestSiNo.PerformLayout()
-        Me.TableLayoutPanelEstrogeno.ResumeLayout(False)
-        Me.TableLayoutPanelEstrogeno.PerformLayout()
-        Me.TableLayoutPanelEstrogSiNo.ResumeLayout(False)
-        Me.TableLayoutPanelEstrogSiNo.PerformLayout()
+        Me.TableLayoutPanelPrimolutNor.ResumeLayout(False)
+        Me.TableLayoutPanelPrimolutNor.PerformLayout()
+        Me.TableLayoutPanelPrimolutNorSiNo.ResumeLayout(False)
+        Me.TableLayoutPanelPrimolutNorSiNo.PerformLayout()
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.TableLayoutPanel3.PerformLayout()
         Me.TableLayoutPanelContracc.ResumeLayout(False)
         Me.TableLayoutPanelContraccSiNo.ResumeLayout(False)
         Me.TableLayoutPanelContraccSiNo.PerformLayout()
@@ -1105,22 +1144,15 @@ Partial Class UC_VisitaAnamnesiOstrGineco
     Friend WithEvents LabelAmenorrea As Label
     Friend WithEvents LabelMenopausa As Label
     Friend WithEvents LabelDienogest As Label
-    Friend WithEvents TableLayoutPanelContracc As TableLayoutPanel
-    Friend WithEvents TableLayoutPanelTipoContracc As TableLayoutPanel
-    Friend WithEvents LabelContraccettivi As Label
-    Friend WithEvents LabelContrTipoContracc As Label
     Friend WithEvents TableLayoutPanelDierogest As TableLayoutPanel
-    Friend WithEvents TableLayoutPanelEstrogeno As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelPrimolutNor As TableLayoutPanel
     Friend WithEvents TableLayoutPanelDienogestSiNo As TableLayoutPanel
-    Friend WithEvents TableLayoutPanelContraccSiNo As TableLayoutPanel
-    Friend WithEvents RadioButtonUsoContraccSi As RadioButton
     Friend WithEvents RadioButtonUsoDienogestNo As RadioButton
     Friend WithEvents RadioButtonUsoDienogestSi As RadioButton
-    Friend WithEvents RadioButtonUsoContraccNo As RadioButton
-    Friend WithEvents LabelEstrogeno As Label
-    Friend WithEvents TableLayoutPanelEstrogSiNo As TableLayoutPanel
-    Friend WithEvents RadioButtonAssocEstroNo As RadioButton
-    Friend WithEvents RadioButtonAssocEstroSi As RadioButton
+    Friend WithEvents LabelPrimolutNor As Label
+    Friend WithEvents TableLayoutPanelPrimolutNorSiNo As TableLayoutPanel
+    Friend WithEvents RadioButtonPrimolutNorNo As RadioButton
+    Friend WithEvents RadioButtonPrimolutNorSi As RadioButton
     Friend WithEvents TableLayoutPanelAmenorrea As TableLayoutPanel
     Friend WithEvents RadioButtonAmenorreaNo As RadioButton
     Friend WithEvents RadioButtonAmenorreaSi As RadioButton
@@ -1130,7 +1162,6 @@ Partial Class UC_VisitaAnamnesiOstrGineco
     Friend WithEvents RadioButtonDismenorrea1 As RadioButton
     Friend WithEvents RadioButtonDismenorrea0 As RadioButton
     Friend WithEvents TableLayoutPanelMenopausa As TableLayoutPanel
-    Friend WithEvents ComboBoxTipoContracc As Syncfusion.WinForms.ListView.SfComboBox
     Friend WithEvents ComboBoxMenopausa As Syncfusion.WinForms.ListView.SfComboBox
     Friend WithEvents TableLayoutPanelAnOstetrica As TableLayoutPanel
     Friend WithEvents TableLayoutPanel6 As TableLayoutPanel
@@ -1165,4 +1196,14 @@ Partial Class UC_VisitaAnamnesiOstrGineco
     Friend WithEvents TableLayoutPanelAnGinecologica As TableLayoutPanel
     Friend WithEvents Label1 As Label
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelDienogest As TableLayoutPanel
+    Friend WithEvents LabelContraccettivi As Label
+    Friend WithEvents TableLayoutPanelContracc As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelContraccSiNo As TableLayoutPanel
+    Friend WithEvents RadioButtonUsoContraccNo As RadioButton
+    Friend WithEvents RadioButtonUsoContraccSi As RadioButton
+    Friend WithEvents TableLayoutPanelTipoContracc As TableLayoutPanel
+    Friend WithEvents ComboBoxTipoContracc As Syncfusion.WinForms.ListView.SfComboBox
+    Friend WithEvents LabelContrTipoContracc As Label
 End Class

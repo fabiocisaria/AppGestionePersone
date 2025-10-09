@@ -1,5 +1,6 @@
 ﻿'Imports System.Data.SqlClient
 'Imports System.Data.SqlClient
+Imports System.Threading
 Imports Azure.Core
 Imports Microsoft.Data.Common
 Imports Microsoft.Data.SqlClient
@@ -19,6 +20,8 @@ Module ConnessioneDB
 
     Private accessToken As String = Nothing
     Private tokenExpiry As DateTimeOffset
+
+    Private connectionTimeout As Integer = 30 ' Timeout di connessione in secondi
 
     ' Gestisco l'errato rinnovo del token
     Public Event RichiediNuovoLogin()
@@ -87,7 +90,7 @@ Module ConnessioneDB
                                          "Encrypt = True;" &
                                          "Column Encryption Setting = Disabled;" &
                                          "TrustServerCertificate = False;" &
-                                         "Connect Timeout = 5;"
+                                         "Connect Timeout = " & connectionTimeout.ToString() & ";"
 
         ' Costruzione della connessione con Access Token
         Dim conn As New SqlConnection(connectionString)
@@ -96,7 +99,8 @@ Module ConnessioneDB
         Try
             Await conn.OpenAsync()
         Catch ex As Exception
-            MessageBox.Show("Errore di connessione al database: " & ex.Message)
+            Debug.WriteLine("Errore di connessione al database: " & ex.Message)
+            Throw
         End Try
 
         Return conn
@@ -107,11 +111,56 @@ Module ConnessioneDB
         tokenExpiry = DateTimeOffset.MinValue
     End Sub
 
+    Public Async Function WakeUpQuery(Optional updateTentativi As Action(Of Integer) = Nothing) As Task
+        ' Wake up query per risvegliare il database in caso di pausa
+
+        connectionTimeout = 9 ' abbasso il connection timeout perché se il server è attivo risponde subito
+
+        Dim timeout As Integer = 5
+
+        Dim query As String = "SELECT 1"
+
+        Dim dbReady As Boolean = False
+        Dim tentativi As Integer = 0
+        Const maxTentativi As Integer = 10
+
+        While Not dbReady AndAlso tentativi < maxTentativi
+            tentativi += 1
+
+            updateTentativi?.Invoke(tentativi) ' Aggiorna tentativi nello UC
+
+            Try
+                Using conn As SqlConnection = Await GetConnectionAsync()
+                    Using cmd As New SqlCommand(query, conn)
+                        cmd.CommandTimeout = timeout
+                        Dim result = Await cmd.ExecuteScalarAsync()
+                        dbReady = True ' Query eseguita con successo, il DB è pronto
+
+                        connectionTimeout = 30 ' ripristino timeout normale
+                    End Using
+                End Using
+            Catch ex As Exception
+                Debug.WriteLine($"Tentativo {tentativi}: DB non ancora pronto → {ex.Message}")
+            End Try
+
+            If Not dbReady Then
+                Await Task.Delay(1000) ' attesa di 1 secondi prima del prossimo tentativo
+            End If
+        End While
+
+        If Not dbReady Then
+            Throw New Exception("Impossibile risvegliare il database dopo diversi tentativi.")
+        End If
+    End Function
+
     ' 🔹 Funzione per eseguire query di tipo INSERT/UPDATE/DELETE
-    Public Async Function EseguiNonQueryAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Task(Of Integer)
+    Public Async Function EseguiNonQueryAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing, Optional timeout As Integer = 15) As Task(Of Integer)
         Dim righeAffette As Integer = 0
         Using conn As SqlConnection = Await GetConnectionAsync()
             Using cmd As New SqlCommand(query, conn)
+
+                cmd.CommandTimeout = timeout
+
                 If parameters IsNot Nothing Then
                     ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)
                     'Dim fixedParams = NormalizeParameters(parameters)
@@ -121,17 +170,21 @@ Module ConnessioneDB
                 Try
                     righeAffette = Await cmd.ExecuteNonQueryAsync()
                 Catch ex As Exception
-                    MessageBox.Show("Errore nell'esecuzione della query: " & ex.Message, "Errore SQL", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Debug.WriteLine("Errore nell'esecuzione della query: " & ex.Message)
+                    Throw
                 End Try
             End Using
         End Using
         Return righeAffette
     End Function
 
-    Public Async Function EseguiScalarAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Task(Of Integer)
+    Public Async Function EseguiScalarAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing, Optional timeout As Integer = 15) As Task(Of Integer)
         Dim result As Object = Nothing
         Using conn As SqlConnection = Await GetConnectionAsync()
             Using cmd As New SqlCommand(query, conn)
+
+                cmd.CommandTimeout = timeout
+
                 If parameters IsNot Nothing Then
                     ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)
                     'Dim fixedParams = NormalizeParameters(parameters)
@@ -141,7 +194,8 @@ Module ConnessioneDB
                 Try
                     result = Await cmd.ExecuteScalarAsync()
                 Catch ex As Exception
-                    MessageBox.Show("Errore nell'esecuzione della query: " & ex.Message, "Errore SQL", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Debug.WriteLine("Errore nell'esecuzione della query: " & ex.Message)
+                    Throw
                 End Try
             End Using
         End Using
@@ -155,10 +209,13 @@ Module ConnessioneDB
     End Function
 
     ' 🔹 Funzione per eseguire query di tipo SELECT (ritorna DataTable)
-    Public Async Function EseguiQueryAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing) As Task(Of DataTable)
+    Public Async Function EseguiQueryAsync(query As String, Optional parameters As List(Of SqlParameter) = Nothing, Optional timeout As Integer = 15) As Task(Of DataTable)
         Dim dt As New DataTable()
         Using conn As SqlConnection = Await GetConnectionAsync()
             Using cmd As New SqlCommand(query, conn)
+
+                cmd.CommandTimeout = timeout
+
                 If parameters IsNot Nothing Then
                     ' Servono in caso di colonne crittografate (funzionano anche su quelle normali)
                     'Dim fixedParams = NormalizeParameters(parameters)
@@ -170,7 +227,8 @@ Module ConnessioneDB
                         da.Fill(dt)
                     End Using
                 Catch ex As Exception
-                    MessageBox.Show("Errore nell'esecuzione della query: " & ex.Message, "Errore SQL", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Debug.WriteLine("Errore nell'esecuzione della query: " & ex.Message)
+                    Throw
                 End Try
             End Using
         End Using

@@ -6,8 +6,32 @@ Imports Syncfusion.WinForms.Controls
 Public Class UC_Login
     Inherits UserControl
 
+    Private _tentativoWakeup As Integer = 0
+
+    Public Property TentativoWakeup As Integer
+        Get
+            Return _tentativoWakeup
+        End Get
+        Set(value As Integer)
+            _tentativoWakeup = value
+            LabelTentativi.Text = "Tentativo " & value & " di 10"
+        End Set
+    End Property
+
+    Public Property MessaggioStatoLogin As String
+        Get
+            Return LabelStatoLogin.Text
+        End Get
+        Set(value As String)
+            LabelStatoLogin.Text = value
+        End Set
+    End Property
+
     Public Sub New()
         InitializeComponent()
+
+        LabelTentativi.Text = ""
+        LabelTentativi.Visible = False
 
         With ButtonAccedi.Style
             .BackColor = Color.FromArgb(41, 144, 228)
@@ -45,9 +69,14 @@ Public Class UC_Login
         LabelAccesso.ForeColor = Color.White
         LabelBenvenuto.ForeColor = Color.White
         LabelStatoLogin.ForeColor = Color.White
+        LabelTentativi.ForeColor = Color.White
 
         Utils.RoundControl(ButtonAccedi, 7)
         Utils.RoundControl(ButtonEsci, 7)
+    End Sub
+
+    Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LabelTentativi.Visible = False
     End Sub
 
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
@@ -130,21 +159,26 @@ Public Class UC_Login
 
     Private Async Sub btnLogin_Click(sender As Object, e As EventArgs) Handles ButtonAccedi.Click
         ButtonAccedi.Enabled = False
-        LabelStatoLogin.Text = "Autenticazione in corso..."
+        MessaggioStatoLogin = "Autenticazione in corso..."
 
         Try
             Dim success = Await ConnessioneDB.AcquireTokenAsync()
             If success IsNot Nothing Then
                 If success = "Accesso negato" Then
-                    LabelStatoLogin.Text = "Credenziali non valide o accesso rifiutato."
+                    MessaggioStatoLogin = "Credenziali non valide o accesso rifiutato."
                 Else
-                    LabelStatoLogin.Text = "Login eseguito con successo!"
+                    MessaggioStatoLogin = "Login eseguito con successo!"
+                    Await Task.Delay(1500)
+                    MessaggioStatoLogin = "Connessione al database in corso ..."
+                    LabelTentativi.Visible = True
+                    Await Task.Delay(1000)
                     RaiseEvent LoginSuccess()
                 End If
             Else
                 LabelStatoLogin.Text = "Errore di connessione o autenticazione."
+                LabelTentativi.Visible = False
+                ButtonAccedi.Enabled = True
             End If
-            ButtonAccedi.Enabled = True
         Catch ex As Exception
             LabelStatoLogin.Text = "Errore: " & ex.Message
             ButtonAccedi.Enabled = True

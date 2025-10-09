@@ -68,7 +68,6 @@ Public Class UC_VisitaAnamnesiOstrGineco
             tipoVisita = main.TipoVisitaSelezionata
 
             ResetAndDisableControls(False, TableLayoutPanelTipoContracc)
-            ResetAndDisableControls(False, TableLayoutPanelEstrogeno)
             ResetAndDisableControls(False, TableLayoutPanelDismenorrea)
             ResetAndDisableControls(False, TableLayoutPanelMenopausa)
             ResetAndDisableControls(False, TableLayoutPanelParti)
@@ -153,14 +152,29 @@ Public Class UC_VisitaAnamnesiOstrGineco
         ResetAndDisableControls(Not RadioButtonUsoContraccNo.Checked, TableLayoutPanelTipoContracc)
     End Sub
 
-    Private Sub RadioButtonUsoDienogestSi_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonUsoDienogestSi.CheckedChanged
-        ' Mostra i dettagli solo se "Sì" è selezionato
-        ResetAndDisableControls(RadioButtonUsoDienogestSi.Checked, TableLayoutPanelEstrogeno)
+    Private Sub RadioButtonDienogest_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonUsoDienogestSi.CheckedChanged, RadioButtonUsoDienogestNo.CheckedChanged
+        If RadioButtonUsoDienogestSi.Checked Then
+            ' Mostra i dettagli solo se "Sì" è selezionato
+            TableLayoutPanelPrimolutNor.Enabled = False
+            TableLayoutPanelPrimolutNor.BackColor = Theme.SecondaryPanelInactiveBackgroundColor
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelPrimolutNor, False)
+            RadioButtonPrimolutNorNo.Checked = True
+        ElseIf RadioButtonUsoDienogestNo.Checked And RadioButtonPrimolutNorSi.Checked = False Then
+            TableLayoutPanelPrimolutNor.Enabled = True
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelPrimolutNor, True)
+        End If
     End Sub
 
-    Private Sub RadioButtonUsoDienogestNo_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonUsoDienogestNo.CheckedChanged
-        ' Nasconde i dettagli se "No" è selezionato
-        ResetAndDisableControls(Not RadioButtonUsoDienogestNo.Checked, TableLayoutPanelEstrogeno)
+    Private Sub RadioButtonPrimolutNor_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonPrimolutNorSi.CheckedChanged, RadioButtonPrimolutNorNo.CheckedChanged
+        If RadioButtonPrimolutNorSi.Checked Then
+            ' Mostra i dettagli solo se "Sì" è selezionato
+            TableLayoutPanelDienogest.Enabled = False
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelDienogest, False)
+            RadioButtonUsoDienogestNo.Checked = True
+        ElseIf RadioButtonPrimolutNorNo.Checked And RadioButtonUsoDienogestSi.Checked = False Then
+            TableLayoutPanelDienogest.Enabled = True
+            ThemeManager.SetSecondaryPanelState(TableLayoutPanelDienogest, True)
+        End If
     End Sub
 
     Private Sub RadioButtonAmenorreaSi_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonAmenorreaSi.CheckedChanged
@@ -192,30 +206,30 @@ Public Class UC_VisitaAnamnesiOstrGineco
         End If
     End Sub
 
-    Private Sub ComboBoxTipoContracc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxTipoContracc.SelectedIndexChanged, RadioButtonUsoDienogestNo.CheckedChanged, RadioButtonUsoDienogestSi.CheckedChanged, RadioButtonUsoContraccSi.CheckedChanged, RadioButtonUsoContraccNo.CheckedChanged
+    'Private Sub ComboBoxTipoContracc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxTipoContracc.SelectedIndexChanged, RadioButtonUsoDienogestNo.CheckedChanged, RadioButtonUsoDienogestSi.CheckedChanged, RadioButtonUsoContraccSi.CheckedChanged, RadioButtonUsoContraccNo.CheckedChanged
 
-        Dim selectedTipo As String = ""
-        Dim selectedID As Integer = -1
+    '    Dim selectedTipo As String = ""
+    '    Dim selectedID As Integer = -1
 
-        If ComboBoxTipoContracc.SelectedItem IsNot Nothing AndAlso TypeOf ComboBoxTipoContracc.SelectedItem Is DataRowView Then
-            Dim drv As DataRowView = DirectCast(ComboBoxTipoContracc.SelectedItem, DataRowView)
+    '    If ComboBoxTipoContracc.SelectedItem IsNot Nothing AndAlso TypeOf ComboBoxTipoContracc.SelectedItem Is DataRowView Then
+    '        Dim drv As DataRowView = DirectCast(ComboBoxTipoContracc.SelectedItem, DataRowView)
 
-            selectedID = Convert.ToInt32(drv("ID"))
-            selectedTipo = drv("Tipo").ToString()
-        End If
+    '        selectedID = Convert.ToInt32(drv("ID"))
+    '        selectedTipo = drv("Tipo").ToString()
+    '    End If
 
-        ' Se il tipo di contraccettivo selezionato contiene "Estro", disabilito l'opzione di associare estrogeni e forzo la selezione su "Sì"
-        If Not String.IsNullOrEmpty(selectedTipo) AndAlso selectedTipo.Contains("Estro") And RadioButtonUsoDienogestSi.Checked Then
-            RadioButtonAssocEstroSi.Checked = True
-            TableLayoutPanelEstrogeno.Enabled = False
-        ElseIf Not RadioButtonUsoDienogestSi.Checked And Not RadioButtonUsoDienogestNo.Checked Then
-            ResetAndDisableControls(False, TableLayoutPanelEstrogeno)
-        ElseIf RadioButtonUsoDienogestSi.Checked Then
-            ResetAndDisableControls(True, TableLayoutPanelEstrogeno)
-        ElseIf RadioButtonUsoDienogestNo.Checked Then
-            ResetAndDisableControls(False, TableLayoutPanelEstrogeno)
-        End If
-    End Sub
+    '    ' Se il tipo di contraccettivo selezionato contiene "Estro", disabilito l'opzione di associare estrogeni e forzo la selezione su "Sì"
+    '    If Not String.IsNullOrEmpty(selectedTipo) AndAlso selectedTipo.Contains("Estro") And RadioButtonUsoDienogestSi.Checked Then
+    '        RadioButtonPrimolutNorSi.Checked = True
+    '        TableLayoutPanelPrimolutNor.Enabled = False
+    '    ElseIf Not RadioButtonUsoDienogestSi.Checked And Not RadioButtonUsoDienogestNo.Checked Then
+    '        ResetAndDisableControls(False, TableLayoutPanelPrimolutNor)
+    '    ElseIf RadioButtonUsoDienogestSi.Checked Then
+    '        ResetAndDisableControls(True, TableLayoutPanelPrimolutNor)
+    '    ElseIf RadioButtonUsoDienogestNo.Checked Then
+    '        ResetAndDisableControls(False, TableLayoutPanelPrimolutNor)
+    '    End If
+    'End Sub
 
     Private Sub NumericUpDownParti_NumChanged(sender As Object, e As EventArgs) Handles NumericUpDownPartiNaturali.ValueChanged, NumericUpDownPartiCesarei.ValueChanged
         If NumericUpDownPartiNaturali.Value > 0 Or NumericUpDownPartiCesarei.Value > 0 Then
@@ -249,11 +263,6 @@ Public Class UC_VisitaAnamnesiOstrGineco
         '-------
         ' Gineco
         '-------
-        ' Se "Uso Dienogest = No", rimuovo i gruppi collegati dai controlli obbligatori
-        If RadioButtonUsoDienogestNo.Checked Then
-            invalidGroups = invalidGroups.Where(Function(gb) Not gb Is TableLayoutPanelEstrogSiNo).ToList()
-        End If
-
         ' Se "Amenorrea", rimuovo i gruppi collegati dai controlli obbligatori
         If RadioButtonAmenorreaSi.Checked Then
             invalidGroups = invalidGroups.Where(Function(gb) Not (gb Is TableLayoutPanelDismenorrea)).ToList()
@@ -397,10 +406,10 @@ Public Class UC_VisitaAnamnesiOstrGineco
             ' Uso di Dienogest/Estrogeni
             If dettagliVisitaGineco("Dienogest") Then
                 RadioButtonUsoDienogestSi.Checked = True
-                If dettagliVisitaGineco("Estrogeno") Then
-                    RadioButtonAssocEstroSi.Checked = True
+                If dettagliVisitaGineco("PrimolutNor") Then
+                    RadioButtonPrimolutNorSi.Checked = True
                 Else
-                    RadioButtonAssocEstroNo.Checked = True
+                    RadioButtonPrimolutNorNo.Checked = True
                 End If
             Else
                 RadioButtonUsoDienogestNo.Checked = True
@@ -580,21 +589,7 @@ Public Class UC_VisitaAnamnesiOstrGineco
             End If
 
             Dim usoDienogest As Boolean = RadioButtonUsoDienogestSi.Checked
-            Dim usoEstrogeno As Object
-
-            If usoDienogest Then
-                progesterone = True
-                If IsDBNull(tipoContraccettivo) Then
-                    usoEstrogeno = RadioButtonAssocEstroSi.Checked
-                    If usoEstrogeno Then
-                        estrogeno = True
-                    Else
-                        estrogeno = False
-                    End If
-                Else
-                    usoEstrogeno = DBNull.Value
-                End If
-            End If
+            Dim primolutNor As Boolean = RadioButtonPrimolutNorSi.Checked
 
             Dim amenorrea As Boolean = RadioButtonAmenorreaSi.Checked
             Dim dismenorrea As Object
@@ -683,7 +678,8 @@ Public Class UC_VisitaAnamnesiOstrGineco
                                                            Amenorrea = @amenorrea,
                                                            Dismenorrea = @dismenorrea,
                                                            Menopausa = @menopausa,
-                                                           ID_Contraccettivo = @idContraccettivo
+                                                           ID_Contraccettivo = @idContraccettivo,
+                                                           PrimolutNor = @primolutNor
                                                            WHERE ID_Visita = @idVisita"
                     queryAnOstetrico = "UPDATE VisitaAnamnesiOstetrica SET 
                                                            Gravidanze = @gravidanze,
@@ -706,7 +702,8 @@ Public Class UC_VisitaAnamnesiOstrGineco
                                                     Amenorrea,
                                                     Dismenorrea,
                                                     Menopausa,
-                                                    ID_Contraccettivo
+                                                    ID_Contraccettivo,
+                                                    PrimolutNor
                                                     ) VALUES (
                                                     @idVisita,
                                                     @usoContracc,
@@ -716,7 +713,8 @@ Public Class UC_VisitaAnamnesiOstrGineco
                                                     @amenorrea,
                                                     @dismenorrea,
                                                     @menopausa,
-                                                    @idContraccettivo)"
+                                                    @idContraccettivo,
+                                                    @primolutNor)"
                     queryAnOstetrico = "INSERT INTO VisitaAnamnesiOstetrica (
                                                     ID_Visita,
                                                     Gravidanze,
@@ -748,7 +746,8 @@ Public Class UC_VisitaAnamnesiOstrGineco
                             New SqlParameter("@amenorrea", amenorrea),
                             New SqlParameter("@dismenorrea", dismenorrea),
                             New SqlParameter("@menopausa", menopausa),
-                            New SqlParameter("@idContraccettivo", idContraccettivo)
+                            New SqlParameter("@idContraccettivo", idContraccettivo),
+                            New SqlParameter("@primolutNor", primolutNor)
                         }
 
                 Dim parametriAnOstetrico As New List(Of SqlParameter) From {

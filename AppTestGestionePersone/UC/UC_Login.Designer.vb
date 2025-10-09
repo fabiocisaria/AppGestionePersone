@@ -30,6 +30,7 @@ Partial Class UC_Login
         Me.LabelBenvenuto = New System.Windows.Forms.Label()
         Me.PictureBoxLogo = New System.Windows.Forms.PictureBox()
         Me.LabelStatoLogin = New System.Windows.Forms.Label()
+        Me.LabelTentativi = New System.Windows.Forms.Label()
         Me.TableLayoutPanelLogin.SuspendLayout()
         CType(Me.PictureBoxLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -39,6 +40,7 @@ Partial Class UC_Login
         Me.TableLayoutPanelLogin.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanelLogin.ColumnCount = 1
         Me.TableLayoutPanelLogin.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelLogin.Controls.Add(Me.LabelTentativi, 0, 6)
         Me.TableLayoutPanelLogin.Controls.Add(Me.ButtonEsci, 0, 4)
         Me.TableLayoutPanelLogin.Controls.Add(Me.ButtonAccedi, 0, 3)
         Me.TableLayoutPanelLogin.Controls.Add(Me.LabelAccesso, 0, 2)
@@ -48,13 +50,14 @@ Partial Class UC_Login
         Me.TableLayoutPanelLogin.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanelLogin.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanelLogin.Name = "TableLayoutPanelLogin"
-        Me.TableLayoutPanelLogin.RowCount = 6
+        Me.TableLayoutPanelLogin.RowCount = 7
         Me.TableLayoutPanelLogin.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250.0!))
         Me.TableLayoutPanelLogin.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.TableLayoutPanelLogin.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.TableLayoutPanelLogin.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanelLogin.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanelLogin.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelLogin.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanelLogin.Size = New System.Drawing.Size(766, 516)
         Me.TableLayoutPanelLogin.TabIndex = 0
         '
@@ -63,7 +66,7 @@ Partial Class UC_Login
         Me.ButtonEsci.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ButtonEsci.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonEsci.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonEsci.Location = New System.Drawing.Point(320, 422)
+        Me.ButtonEsci.Location = New System.Drawing.Point(320, 411)
         Me.ButtonEsci.Name = "ButtonEsci"
         Me.ButtonEsci.Size = New System.Drawing.Size(126, 35)
         Me.ButtonEsci.TabIndex = 8
@@ -74,7 +77,7 @@ Partial Class UC_Login
         Me.ButtonAccedi.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ButtonAccedi.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonAccedi.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonAccedi.Location = New System.Drawing.Point(320, 349)
+        Me.ButtonAccedi.Location = New System.Drawing.Point(320, 345)
         Me.ButtonAccedi.Name = "ButtonAccedi"
         Me.ButtonAccedi.Size = New System.Drawing.Size(126, 35)
         Me.ButtonAccedi.TabIndex = 3
@@ -119,11 +122,22 @@ Partial Class UC_Login
         Me.LabelStatoLogin.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LabelStatoLogin.AutoSize = True
         Me.LabelStatoLogin.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelStatoLogin.Location = New System.Drawing.Point(330, 488)
+        Me.LabelStatoLogin.Location = New System.Drawing.Point(330, 474)
         Me.LabelStatoLogin.Name = "LabelStatoLogin"
         Me.LabelStatoLogin.Size = New System.Drawing.Size(105, 15)
         Me.LabelStatoLogin.TabIndex = 5
         Me.LabelStatoLogin.Text = "Stato login..."
+        '
+        'LabelTentativi
+        '
+        Me.LabelTentativi.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.LabelTentativi.AutoSize = True
+        Me.LabelTentativi.Font = New System.Drawing.Font("Consolas", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelTentativi.Location = New System.Drawing.Point(352, 502)
+        Me.LabelTentativi.Name = "LabelTentativi"
+        Me.LabelTentativi.Size = New System.Drawing.Size(61, 13)
+        Me.LabelTentativi.TabIndex = 9
+        Me.LabelTentativi.Text = "Tentativi"
         '
         'UC_Login
         '
@@ -146,4 +160,5 @@ Partial Class UC_Login
     Friend WithEvents LabelBenvenuto As Label
     Friend WithEvents PictureBoxLogo As PictureBox
     Friend WithEvents ButtonEsci As Syncfusion.WinForms.Controls.SfButton
+    Friend WithEvents LabelTentativi As Label
 End Class

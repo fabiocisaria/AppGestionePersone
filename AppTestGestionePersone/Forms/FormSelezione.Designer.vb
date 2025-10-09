@@ -24,13 +24,14 @@ Partial Class FormSelezione
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSelezione))
         Me.dgvSelezione = New Syncfusion.WinForms.DataGrid.SfDataGrid()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanelSelezione = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.ButtonSeleziona = New Syncfusion.WinForms.Controls.SfButton()
         Me.ButtonAnnulla = New Syncfusion.WinForms.Controls.SfButton()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.PanelTitleBar = New System.Windows.Forms.TableLayoutPanel()
         CType(Me.dgvSelezione, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel1.SuspendLayout()
+        Me.TableLayoutPanelSelezione.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
@@ -43,24 +44,27 @@ Partial Class FormSelezione
         Me.dgvSelezione.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvSelezione.Location = New System.Drawing.Point(3, 3)
         Me.dgvSelezione.Name = "dgvSelezione"
-        Me.dgvSelezione.Size = New System.Drawing.Size(788, 398)
+        Me.dgvSelezione.Size = New System.Drawing.Size(788, 368)
         Me.dgvSelezione.TabIndex = 3
         Me.dgvSelezione.Text = "SfDataGrid1"
         '
-        'TableLayoutPanel1
+        'TableLayoutPanelSelezione
         '
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel5, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 450)
-        Me.TableLayoutPanel1.TabIndex = 1
+        Me.TableLayoutPanelSelezione.ColumnCount = 1
+        Me.TableLayoutPanelSelezione.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelSelezione.Controls.Add(Me.PanelTitleBar, 0, 0)
+        Me.TableLayoutPanelSelezione.Controls.Add(Me.TableLayoutPanel5, 0, 2)
+        Me.TableLayoutPanelSelezione.Controls.Add(Me.TableLayoutPanel2, 0, 1)
+        Me.TableLayoutPanelSelezione.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanelSelezione.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanelSelezione.Name = "TableLayoutPanelSelezione"
+        Me.TableLayoutPanelSelezione.RowCount = 3
+        Me.TableLayoutPanelSelezione.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.TableLayoutPanelSelezione.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelSelezione.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanelSelezione.Size = New System.Drawing.Size(800, 450)
+        Me.TableLayoutPanelSelezione.TabIndex = 1
+        Me.TableLayoutPanelSelezione.Tag = "Selection"
         '
         'TableLayoutPanel5
         '
@@ -106,20 +110,37 @@ Partial Class FormSelezione
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.dgvSelezione, 0, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 33)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(794, 404)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(794, 374)
         Me.TableLayoutPanel2.TabIndex = 0
+        '
+        'PanelTitleBar
+        '
+        Me.PanelTitleBar.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.PanelTitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.PanelTitleBar.ColumnCount = 3
+        Me.PanelTitleBar.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.PanelTitleBar.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.PanelTitleBar.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.PanelTitleBar.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PanelTitleBar.ForeColor = System.Drawing.Color.Gainsboro
+        Me.PanelTitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.PanelTitleBar.Name = "PanelTitleBar"
+        Me.PanelTitleBar.RowCount = 1
+        Me.PanelTitleBar.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.PanelTitleBar.Size = New System.Drawing.Size(794, 24)
+        Me.PanelTitleBar.TabIndex = 3
         '
         'FormSelezione
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.Controls.Add(Me.TableLayoutPanelSelezione)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormSelezione"
@@ -127,7 +148,7 @@ Partial Class FormSelezione
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "FormSelezione"
         CType(Me.dgvSelezione, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanelSelezione.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -135,9 +156,10 @@ Partial Class FormSelezione
     End Sub
 
     Friend WithEvents dgvSelezione As Syncfusion.WinForms.DataGrid.SfDataGrid
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanelSelezione As TableLayoutPanel
     Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
     Friend WithEvents ButtonSeleziona As Syncfusion.WinForms.Controls.SfButton
     Friend WithEvents ButtonAnnulla As Syncfusion.WinForms.Controls.SfButton
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents PanelTitleBar As TableLayoutPanel
 End Class

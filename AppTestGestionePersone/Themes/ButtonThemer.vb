@@ -64,7 +64,7 @@ Friend NotInheritable Class ButtonThemer
                     .FocusedForeColor = Color.White
                 End With
                 btn.Font = Theme.ButtonFont
-                btn.Margin = New Padding(0, 7, 7, 7)
+                btn.Margin = New Padding(0, 0, 0, 0)
         End Select
     End Sub
 End Class

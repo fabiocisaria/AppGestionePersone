@@ -23,7 +23,7 @@ Public Class UC_Anagrafica
         ' ==================
         With ComboBoxRelazione
             ' Imposta i dati
-            .DataSource = New List(Of String) From {"Coniugata", "Nessuna relazione", "Relazione stabile", "NA"}
+            .DataSource = New List(Of String) From {"Coniugata", "Nessuna relazione", "Relazione stabile", "Relazione non stabile", "NA"}
             .SelectedIndex = -1
         End With
 
@@ -86,7 +86,7 @@ Public Class UC_Anagrafica
 
         Dim professione As Object = TextBoxProfessione.Text.Trim()
         Dim sportPraticati As Object = TextBoxSport.Text.Trim()
-        Dim relazione As String = ComboBoxRelazione.Text.Trim()
+        Dim relazione As Object = ComboBoxRelazione.Text.Trim()
         Dim codiceID As String = ""
 
         Try
@@ -138,6 +138,10 @@ Public Class UC_Anagrafica
 
             If String.IsNullOrEmpty(sportPraticati) Or sportPraticati = ControlText(TextBoxSport) Then
                 sportPraticati = DBNull.Value
+            End If
+
+            If relazione = " NA" Then
+                relazione = DBNull.Value
             End If
 
             ' Mostra CodiceID nella Label

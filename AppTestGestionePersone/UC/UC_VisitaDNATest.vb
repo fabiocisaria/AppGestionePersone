@@ -145,7 +145,7 @@ Public Class UC_VisitaDNATest
         idVisita = main.IDVisitaSelezionata
 
         'Verifica che non esista già la parte uro - ginecologica per quella visita
-        Dim checkQuery As String = "SELECT * FROM VisitaDNATest WHERE ID_Visita = @idVisita"
+        Dim checkQuery As String = "SELECT * FROM VisitaHPVDNATest WHERE ID_Visita = @idVisita"
 
         Dim checkParam As New List(Of SqlParameter) From {
             New SqlParameter("@idVisita", idVisita)
@@ -220,14 +220,14 @@ Public Class UC_VisitaDNATest
                 Dim queryDNATest As String = ""
                 If esiste Then
                     ' Query di aggiornamento se la visita esiste già
-                    queryDNATest = "UPDATE VisitaDNATest SET 
+                    queryDNATest = "UPDATE VisitaHPVDNATest SET 
                                                           DataDNATest = @dataDNATest,
                                                           EsitoDNATest = @esitoDNATest,
                                                           ID_Ceppo = @idCeppo
                                                           WHERE ID_Visita = @idVisita"
                 Else
                     'Se non esiste, esegui l'inserimento
-                    queryDNATest = "INSERT INTO VisitaDNATest (
+                    queryDNATest = "INSERT INTO VisitaHPVDNATest (
                                                     ID_Visita,
                                                     DataDNATest,
                                                     EsitoDNATest,

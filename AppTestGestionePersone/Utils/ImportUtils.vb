@@ -1,8 +1,66 @@
-﻿Imports System.Data.SqlClient
-Imports System.IO
+﻿Imports System.ComponentModel
 Imports System.Data.OleDb
+Imports System.Data.SqlClient
+Imports System.IO
+Imports OfficeOpenXml
 
 Module ImportUtils
+    Public Function LeggiFile(filePath As String) As DataTable
+        Dim estensione = Path.GetExtension(filePath).ToLower()
+
+        Select Case estensione
+            Case ".csv"
+                Return CaricaDaCsv(filePath)
+            Case ".xlsx"
+                Return CaricaDaExcel(filePath)
+            Case Else
+                Throw New Exception("Formato file non supportato")
+        End Select
+    End Function
+
+    Public Function CaricaDaCsv(filePath As String) As DataTable
+        Dim dt As New DataTable()
+
+        Dim lines = File.ReadLines(filePath).ToList()
+        If lines.Count = 0 Then Throw New Exception("File vuoto")
+
+        ' Creo le colonne dall'intestazione (prima riga)
+        Dim headers = lines(0).Split(","c)
+        For Each header In headers
+            dt.Columns.Add(header)
+        Next
+
+        ' Aggiungo i dati (salto la riga 0 = intestazioni)
+        For i As Integer = 1 To lines.Count - 1
+            dt.Rows.Add(lines(i).Split(","c))
+        Next
+
+        Return dt
+    End Function
+
+    Public Function CaricaDaExcel(filePath As String) As DataTable
+        Dim dt As New DataTable()
+
+        Using package As New ExcelPackage(New FileInfo(filePath))
+            Dim ws = package.Workbook.Worksheets(0) ' primo foglio
+
+            ' Creo intestazioni
+            For col As Integer = 1 To ws.Dimension.End.Column
+                dt.Columns.Add(ws.Cells(1, col).Text)
+            Next
+
+            ' Leggo dati (limito a prime 100 righe per anteprima)
+            For row As Integer = 2 To Math.Min(101, ws.Dimension.End.Row)
+                Dim dr = dt.NewRow()
+                For col As Integer = 1 To ws.Dimension.End.Column
+                    dr(col - 1) = ws.Cells(row, col).Text
+                Next
+                dt.Rows.Add(dr)
+            Next
+        End Using
+
+        Return dt
+    End Function
 
     Private connectionString As String = "Server=tuo_server.database.windows.net;Database=nome_db;User Id=utente;Password=xxx;"
 
