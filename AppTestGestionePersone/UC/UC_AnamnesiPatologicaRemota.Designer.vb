@@ -57,9 +57,9 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.LabelIntoll = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel11 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanelDistroidismo = New System.Windows.Forms.TableLayoutPanel()
-        Me.LabelDistroidismo = New System.Windows.Forms.Label()
-        Me.MetroToggleDistroidismo = New MetroFramework.Controls.MetroToggle()
+        Me.TableLayoutPanelDistiroidismo = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelDistiroidismo = New System.Windows.Forms.Label()
+        Me.MetroToggleDistiroidismo = New MetroFramework.Controls.MetroToggle()
         Me.TableLayoutPanelIVU = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelPatPsic = New System.Windows.Forms.Label()
         Me.MetroTogglePatPsic = New MetroFramework.Controls.MetroToggle()
@@ -67,6 +67,9 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.LabelVescIperatt = New System.Windows.Forms.Label()
         Me.MetroToggleVescIperatt = New MetroFramework.Controls.MetroToggle()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelNevPudendo = New System.Windows.Forms.Label()
+        Me.MetroToggleNevPudendo = New MetroFramework.Controls.MetroToggle()
         Me.TableLayoutPanelColonIrr = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelColonIrr = New System.Windows.Forms.Label()
         Me.MetroToggleColonIrr = New MetroFramework.Controls.MetroToggle()
@@ -77,9 +80,6 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.LabelEndometriosi = New System.Windows.Forms.Label()
         Me.MetroToggleEndometriosi = New MetroFramework.Controls.MetroToggle()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
-        Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
-        Me.LabelNevPudendo = New System.Windows.Forms.Label()
-        Me.MetroToggleNevPudendo = New MetroFramework.Controls.MetroToggle()
         Me.TableLayoutPanelAnPatRem.SuspendLayout()
         Me.TableLayoutPanel6.SuspendLayout()
         Me.TableLayoutPanel8.SuspendLayout()
@@ -98,14 +98,14 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel11.SuspendLayout()
-        Me.TableLayoutPanelDistroidismo.SuspendLayout()
+        Me.TableLayoutPanelDistiroidismo.SuspendLayout()
         Me.TableLayoutPanelIVU.SuspendLayout()
         Me.TableLayoutPanelVescIperatt.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
+        Me.TableLayoutPanel10.SuspendLayout()
         Me.TableLayoutPanelColonIrr.SuspendLayout()
         Me.TableLayoutPanelFibromialgie.SuspendLayout()
         Me.TableLayoutPanelEndometriosi.SuspendLayout()
-        Me.TableLayoutPanel10.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanelAnPatRem
@@ -573,7 +573,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel11.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TableLayoutPanel11.ColumnCount = 1
         Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel11.Controls.Add(Me.TableLayoutPanelDistroidismo, 0, 2)
+        Me.TableLayoutPanel11.Controls.Add(Me.TableLayoutPanelDistiroidismo, 0, 2)
         Me.TableLayoutPanel11.Controls.Add(Me.TableLayoutPanelIVU, 0, 1)
         Me.TableLayoutPanel11.Controls.Add(Me.TableLayoutPanelVescIperatt, 0, 0)
         Me.TableLayoutPanel11.Location = New System.Drawing.Point(4, 260)
@@ -585,44 +585,44 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel11.Size = New System.Drawing.Size(240, 170)
         Me.TableLayoutPanel11.TabIndex = 8
         '
-        'TableLayoutPanelDistroidismo
+        'TableLayoutPanelDistiroidismo
         '
-        Me.TableLayoutPanelDistroidismo.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TableLayoutPanelDistroidismo.ColumnCount = 2
-        Me.TableLayoutPanelDistroidismo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
-        Me.TableLayoutPanelDistroidismo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDistroidismo.Controls.Add(Me.LabelDistroidismo, 1, 0)
-        Me.TableLayoutPanelDistroidismo.Controls.Add(Me.MetroToggleDistroidismo, 0, 0)
-        Me.TableLayoutPanelDistroidismo.Location = New System.Drawing.Point(3, 121)
-        Me.TableLayoutPanelDistroidismo.Name = "TableLayoutPanelDistroidismo"
-        Me.TableLayoutPanelDistroidismo.RowCount = 1
-        Me.TableLayoutPanelDistroidismo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelDistroidismo.Size = New System.Drawing.Size(234, 40)
-        Me.TableLayoutPanelDistroidismo.TabIndex = 26
-        Me.TableLayoutPanelDistroidismo.Tag = "PrimaryPanel"
+        Me.TableLayoutPanelDistiroidismo.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanelDistiroidismo.ColumnCount = 2
+        Me.TableLayoutPanelDistiroidismo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
+        Me.TableLayoutPanelDistiroidismo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDistiroidismo.Controls.Add(Me.LabelDistiroidismo, 1, 0)
+        Me.TableLayoutPanelDistiroidismo.Controls.Add(Me.MetroToggleDistiroidismo, 0, 0)
+        Me.TableLayoutPanelDistiroidismo.Location = New System.Drawing.Point(3, 121)
+        Me.TableLayoutPanelDistiroidismo.Name = "TableLayoutPanelDistiroidismo"
+        Me.TableLayoutPanelDistiroidismo.RowCount = 1
+        Me.TableLayoutPanelDistiroidismo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanelDistiroidismo.Size = New System.Drawing.Size(234, 40)
+        Me.TableLayoutPanelDistiroidismo.TabIndex = 26
+        Me.TableLayoutPanelDistiroidismo.Tag = "PrimaryPanel"
         '
-        'LabelDistroidismo
+        'LabelDistiroidismo
         '
-        Me.LabelDistroidismo.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelDistroidismo.Location = New System.Drawing.Point(93, 11)
-        Me.LabelDistroidismo.Name = "LabelDistroidismo"
-        Me.LabelDistroidismo.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.LabelDistroidismo.Size = New System.Drawing.Size(138, 18)
-        Me.LabelDistroidismo.TabIndex = 1
-        Me.LabelDistroidismo.Text = "Distroidismo"
-        Me.LabelDistroidismo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LabelDistiroidismo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelDistiroidismo.Location = New System.Drawing.Point(93, 11)
+        Me.LabelDistiroidismo.Name = "LabelDistiroidismo"
+        Me.LabelDistiroidismo.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.LabelDistiroidismo.Size = New System.Drawing.Size(138, 18)
+        Me.LabelDistiroidismo.TabIndex = 1
+        Me.LabelDistiroidismo.Text = "Distiroidismo"
+        Me.LabelDistiroidismo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'MetroToggleDistroidismo
+        'MetroToggleDistiroidismo
         '
-        Me.MetroToggleDistroidismo.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MetroToggleDistroidismo.AutoSize = True
-        Me.MetroToggleDistroidismo.DisplayStatus = False
-        Me.MetroToggleDistroidismo.Location = New System.Drawing.Point(20, 11)
-        Me.MetroToggleDistroidismo.Name = "MetroToggleDistroidismo"
-        Me.MetroToggleDistroidismo.Size = New System.Drawing.Size(50, 17)
-        Me.MetroToggleDistroidismo.TabIndex = 2
-        Me.MetroToggleDistroidismo.Text = "Off"
-        Me.MetroToggleDistroidismo.UseVisualStyleBackColor = True
+        Me.MetroToggleDistiroidismo.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.MetroToggleDistiroidismo.AutoSize = True
+        Me.MetroToggleDistiroidismo.DisplayStatus = False
+        Me.MetroToggleDistiroidismo.Location = New System.Drawing.Point(20, 11)
+        Me.MetroToggleDistiroidismo.Name = "MetroToggleDistiroidismo"
+        Me.MetroToggleDistiroidismo.Size = New System.Drawing.Size(50, 17)
+        Me.MetroToggleDistiroidismo.TabIndex = 2
+        Me.MetroToggleDistiroidismo.Text = "Off"
+        Me.MetroToggleDistiroidismo.UseVisualStyleBackColor = True
         '
         'TableLayoutPanelIVU
         '
@@ -720,6 +720,45 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(240, 224)
         Me.TableLayoutPanel4.TabIndex = 6
+        '
+        'TableLayoutPanel10
+        '
+        Me.TableLayoutPanel10.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanel10.ColumnCount = 2
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel10.Controls.Add(Me.LabelNevPudendo, 1, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.MetroToggleNevPudendo, 0, 0)
+        Me.TableLayoutPanel10.Location = New System.Drawing.Point(3, 121)
+        Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
+        Me.TableLayoutPanel10.RowCount = 1
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(234, 38)
+        Me.TableLayoutPanel10.TabIndex = 27
+        Me.TableLayoutPanel10.Tag = "PrimaryPanel"
+        '
+        'LabelNevPudendo
+        '
+        Me.LabelNevPudendo.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelNevPudendo.Location = New System.Drawing.Point(93, 10)
+        Me.LabelNevPudendo.Name = "LabelNevPudendo"
+        Me.LabelNevPudendo.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.LabelNevPudendo.Size = New System.Drawing.Size(124, 18)
+        Me.LabelNevPudendo.TabIndex = 1
+        Me.LabelNevPudendo.Text = "Nevralgia del pudendo"
+        Me.LabelNevPudendo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'MetroToggleNevPudendo
+        '
+        Me.MetroToggleNevPudendo.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.MetroToggleNevPudendo.AutoSize = True
+        Me.MetroToggleNevPudendo.DisplayStatus = False
+        Me.MetroToggleNevPudendo.Location = New System.Drawing.Point(20, 10)
+        Me.MetroToggleNevPudendo.Name = "MetroToggleNevPudendo"
+        Me.MetroToggleNevPudendo.Size = New System.Drawing.Size(50, 17)
+        Me.MetroToggleNevPudendo.TabIndex = 2
+        Me.MetroToggleNevPudendo.Text = "Off"
+        Me.MetroToggleNevPudendo.UseVisualStyleBackColor = True
         '
         'TableLayoutPanelColonIrr
         '
@@ -850,45 +889,6 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.ButtonInserisci.Tag = "OkButton"
         Me.ButtonInserisci.Text = "Inserisci"
         '
-        'TableLayoutPanel10
-        '
-        Me.TableLayoutPanel10.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TableLayoutPanel10.ColumnCount = 2
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel10.Controls.Add(Me.LabelNevPudendo, 1, 0)
-        Me.TableLayoutPanel10.Controls.Add(Me.MetroToggleNevPudendo, 0, 0)
-        Me.TableLayoutPanel10.Location = New System.Drawing.Point(3, 121)
-        Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
-        Me.TableLayoutPanel10.RowCount = 1
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel10.Size = New System.Drawing.Size(234, 38)
-        Me.TableLayoutPanel10.TabIndex = 27
-        Me.TableLayoutPanel10.Tag = "PrimaryPanel"
-        '
-        'LabelNevPudendo
-        '
-        Me.LabelNevPudendo.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelNevPudendo.Location = New System.Drawing.Point(93, 10)
-        Me.LabelNevPudendo.Name = "LabelNevPudendo"
-        Me.LabelNevPudendo.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.LabelNevPudendo.Size = New System.Drawing.Size(124, 18)
-        Me.LabelNevPudendo.TabIndex = 1
-        Me.LabelNevPudendo.Text = "Nevralgia del pudendo"
-        Me.LabelNevPudendo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'MetroToggleNevPudendo
-        '
-        Me.MetroToggleNevPudendo.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MetroToggleNevPudendo.AutoSize = True
-        Me.MetroToggleNevPudendo.DisplayStatus = False
-        Me.MetroToggleNevPudendo.Location = New System.Drawing.Point(20, 10)
-        Me.MetroToggleNevPudendo.Name = "MetroToggleNevPudendo"
-        Me.MetroToggleNevPudendo.Size = New System.Drawing.Size(50, 17)
-        Me.MetroToggleNevPudendo.TabIndex = 2
-        Me.MetroToggleNevPudendo.Text = "Off"
-        Me.MetroToggleNevPudendo.UseVisualStyleBackColor = True
-        '
         'UC_AnamnesiPatologicaRemota
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -925,21 +925,21 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel1.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel11.ResumeLayout(False)
-        Me.TableLayoutPanelDistroidismo.ResumeLayout(False)
-        Me.TableLayoutPanelDistroidismo.PerformLayout()
+        Me.TableLayoutPanelDistiroidismo.ResumeLayout(False)
+        Me.TableLayoutPanelDistiroidismo.PerformLayout()
         Me.TableLayoutPanelIVU.ResumeLayout(False)
         Me.TableLayoutPanelIVU.PerformLayout()
         Me.TableLayoutPanelVescIperatt.ResumeLayout(False)
         Me.TableLayoutPanelVescIperatt.PerformLayout()
         Me.TableLayoutPanel4.ResumeLayout(False)
+        Me.TableLayoutPanel10.ResumeLayout(False)
+        Me.TableLayoutPanel10.PerformLayout()
         Me.TableLayoutPanelColonIrr.ResumeLayout(False)
         Me.TableLayoutPanelColonIrr.PerformLayout()
         Me.TableLayoutPanelFibromialgie.ResumeLayout(False)
         Me.TableLayoutPanelFibromialgie.PerformLayout()
         Me.TableLayoutPanelEndometriosi.ResumeLayout(False)
         Me.TableLayoutPanelEndometriosi.PerformLayout()
-        Me.TableLayoutPanel10.ResumeLayout(False)
-        Me.TableLayoutPanel10.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -947,9 +947,9 @@ Partial Class UC_AnamnesiPatologicaRemota
     Friend WithEvents TableLayoutPanelAnPatRem As TableLayoutPanel
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel11 As TableLayoutPanel
-    Friend WithEvents TableLayoutPanelDistroidismo As TableLayoutPanel
-    Friend WithEvents LabelDistroidismo As Label
-    Friend WithEvents MetroToggleDistroidismo As MetroFramework.Controls.MetroToggle
+    Friend WithEvents TableLayoutPanelDistiroidismo As TableLayoutPanel
+    Friend WithEvents LabelDistiroidismo As Label
+    Friend WithEvents MetroToggleDistiroidismo As MetroFramework.Controls.MetroToggle
     Friend WithEvents TableLayoutPanelIVU As TableLayoutPanel
     Friend WithEvents LabelPatPsic As Label
     Friend WithEvents MetroTogglePatPsic As MetroFramework.Controls.MetroToggle

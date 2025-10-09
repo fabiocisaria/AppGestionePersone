@@ -202,9 +202,9 @@ Public Class UC_AnamnesiPatologicaRemota
 
             'Distiroidismo
             If dettagliAnamnesi("Distiroidismo") Then
-                MetroToggleDistroidismo.Checked = True
+                MetroToggleDistiroidismo.Checked = True
             Else
-                MetroToggleDistroidismo.Checked = False
+                MetroToggleDistiroidismo.Checked = False
             End If
 
             'PatPsicologicaPsichiatrica
@@ -742,7 +742,7 @@ Public Class UC_AnamnesiPatologicaRemota
             Dim colonIrr As Boolean = MetroToggleColonIrr.Checked
             Dim vescicaIperatt As Boolean = MetroToggleVescIperatt.Checked
             Dim patPsicologicaPsichiatrica As Boolean = MetroTogglePatPsic.Checked
-            Dim sindromeVescDol As Boolean = MetroToggleDistroidismo.Checked
+            Dim sindromeVescDol As Boolean = MetroToggleDistiroidismo.Checked
             Dim celiachia As Boolean = RadioButtonCeliachiaSi.Checked
             Dim intollLattosio As Boolean = RadioButtonIntollLattSi.Checked
             Dim dm1 As Boolean = RadioButtonDM1Si.Checked
