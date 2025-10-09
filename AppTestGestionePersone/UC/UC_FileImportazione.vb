@@ -110,6 +110,7 @@ Public Class UC_FileImportazione
         Using openFileDialog As New OpenFileDialog()
             openFileDialog.Title = "Seleziona un file da importare"
             openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|Tutti i file (*.*)|*.*"
+            openFileDialog.FilterIndex = 2 ' Imposta Excel come filtro predefinito (1=CSV, 2=Excel, 3=Tutti i file)
             openFileDialog.Multiselect = False ' uno alla volta
 
             If openFileDialog.ShowDialog() = DialogResult.OK Then
