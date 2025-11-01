@@ -245,7 +245,7 @@ Public Class UC_VisitaUroGineco
             NumericUpDownClit.Value = Convert.ToInt32(dettagliSwab("Clitoride"))
             NumericUpDownVestDx.Value = Convert.ToInt32(dettagliSwab("VestiboloDx"))
             NumericUpDownVestSx.Value = Convert.ToInt32(dettagliSwab("VestiboloSx"))
-            NumericUpDownSubr.Value = Convert.ToInt32(dettagliSwab("Subretrale"))
+            NumericUpDownSubr.Value = Convert.ToInt32(dettagliSwab("Suburetrale"))
             NumericUpDownForc.Value = Convert.ToInt32(dettagliSwab("Forchetta"))
 
             Return esiste
@@ -272,7 +272,7 @@ Public Class UC_VisitaUroGineco
             Dim swabClit As Integer = CInt(NumericUpDownClit.Value)
             Dim swabVestDx As Integer = CInt(NumericUpDownVestDx.Value)
             Dim swabVestSx As Integer = CInt(NumericUpDownVestSx.Value)
-            Dim swabSubr As Integer = CInt(NumericUpDownSubr.Value)
+            Dim swabSubur As Integer = CInt(NumericUpDownSubr.Value)
             Dim swabForc As Integer = CInt(NumericUpDownForc.Value)
 
             Dim vgStato As String = GetSelectedRadioText(TableLayoutPanelVagStato)
@@ -304,7 +304,7 @@ Public Class UC_VisitaUroGineco
                                                     Clitoride = @swabClit,
                                                     VestiboloDx = @swabVestDx,
                                                     VestiboloSx = @swabVestSx,
-                                                    Subretrale = @swabSubr,
+                                                    Suburetrale = @swabSubur,
                                                     Forchetta = @swabForc
                                                     WHERE ID_Visita = @idVisita"
 
@@ -315,14 +315,14 @@ Public Class UC_VisitaUroGineco
                                                     Clitoride,
                                                     VestiboloDx,
                                                     VestiboloSx,
-                                                    Subretrale,
+                                                    Suburetrale,
                                                     Forchetta
                                                     ) VALUES (
                                                     @idVisita,
                                                     @swabClit,
                                                     @swabVestDx,
                                                     @swabVestSx,
-                                                    @swabSubr,
+                                                    @swabSubur,
                                                     @swabForc
                                                     )"
                     queryVisitaUroGineco = "INSERT INTO VisitaUroGineco (
@@ -347,7 +347,7 @@ Public Class UC_VisitaUroGineco
                         New SqlParameter("@swabClit", swabClit),
                         New SqlParameter("@swabVestDx", swabVestDx),
                         New SqlParameter("@swabVestSx", swabVestSx),
-                        New SqlParameter("@swabSubr", swabSubr),
+                        New SqlParameter("@swabSubur", swabSubur),
                         New SqlParameter("@swabForc", swabForc)
                     }
 

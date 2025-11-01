@@ -58,9 +58,10 @@ Public Class UC_CercaVisita
         ConfiguraDataGrid()
     End Sub
 
-    'Private Sub UC_CercaVisita_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    ' AddHandler Me.Resize, Sub() Utils.RoundControl(Me, 5)
-    ' End Sub
+    Private Async Sub UC_CercaVisita_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' AddHandler Me.Resize, Sub() Utils.RoundControl(Me, 5)
+        Await CaricaVisite()
+    End Sub
 
     ' ====================
     ' Configurazione SfDataGrid
@@ -103,13 +104,34 @@ Public Class UC_CercaVisita
         dgvSelezioneVisita.Refresh()
     End Sub
 
+    ' ==============================
+    ' FUNZIONE DI CARICAMENTO VISITE
+    ' ==============================
+    Private Async Function CaricaVisite(Optional dataVisita As Date? = Nothing, Optional tipoVisita As String = "") As Task
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+        Dim idPaziente As Integer = main.IDPazienteSelezionato
+
+        TableLayoutPanel1.Enabled = False
+        main.MostraToast("Caricamento in corso ...")
+
+        ' Chiamo la funzione di utilità
+        Dim visiteTrovate = Await Utils.CercaVisiteUCAsync(idPaziente, dataVisita, tipoVisita)
+
+        TableLayoutPanel1.Enabled = True
+
+        If visiteTrovate.Rows.Count > 0 Then
+            dgvSelezioneVisita.DataSource = visiteTrovate
+            main.MostraToast($"Trovate {visiteTrovate.Rows.Count} visite.")
+        Else
+            dgvSelezioneVisita.DataSource = Nothing
+            main.MostraToast("Nessuna visita trovata.")
+        End If
+    End Function
+
     ' ====================
     ' Eventi pulsanti
     ' ====================
     Private Async Sub ButtonCercaVisita_Click(sender As Object, e As EventArgs) Handles ButtonCercaVisita.Click
-        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
-
-        Dim idPaziente As Integer = main.IDPazienteSelezionato
         Dim dataVisita As Date? = Nothing
         Dim tipoVisita As String = ""
 
@@ -123,18 +145,7 @@ Public Class UC_CercaVisita
 
         TableLayoutPanel1.Enabled = False
 
-        main.MostraToast("Caricamento in corso ...")
-        Dim visiteTrovate = Await Utils.CercaVisiteUCAsync(idPaziente, dataVisita, tipoVisita)
-
-        TableLayoutPanel1.Enabled = True
-
-        If visiteTrovate.Rows.Count > 0 Then
-            dgvSelezioneVisita.DataSource = visiteTrovate
-            DirectCast(Me.ParentForm, MainForm).MostraToast("Trovate " & visiteTrovate.Rows.Count & " visite.")
-        Else
-            dgvSelezioneVisita.DataSource = Nothing
-            DirectCast(Me.ParentForm, MainForm).MostraToast("Nessuna visita trovata.")
-        End If
+        Await CaricaVisite(dataVisita, tipoVisita)
     End Sub
 
     Private Sub ButtonSeleziona_Click(sender As Object, e As EventArgs) Handles ButtonSeleziona.Click

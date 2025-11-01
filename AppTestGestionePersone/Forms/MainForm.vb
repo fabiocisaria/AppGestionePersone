@@ -225,9 +225,21 @@ Public Class MainForm
             .Ricreabile = True
         }
 
+        UCRegistry("AnamnesiFamiliareSelezione") = New UCInfo With {
+            .Categoria = "Paziente",
+            .Factory = Function() New UC_AnamnesiFamiliareSelezione(),
+            .Ricreabile = True
+        }
+
         UCRegistry("AnamnesiFamiliare") = New UCInfo With {
             .Categoria = "Paziente",
             .Factory = Function() New UC_AnamnesiFamiliare(),
+            .Ricreabile = True
+        }
+
+        UCRegistry("Patologia") = New UCInfo With {
+            .Categoria = "Patologia",
+            .Factory = Function() New UC_Patologia(),
             .Ricreabile = True
         }
 
@@ -782,9 +794,11 @@ Public Class MainForm
 
         ' Ottiene UC DatiPaziente e AnamnesiFisiologica dal registry
         Dim ucDatiPaziente As UC_DatiPaziente = DirectCast(GetUC("DatiPaziente"), UC_DatiPaziente)
-        Dim ucAnamnesiFamiliare As UC_AnamnesiFamiliare = DirectCast(GetUC("AnamnesiFamiliare"), UC_AnamnesiFamiliare)
+        Dim ucAnamnesiFamiliareSelezione As UC_AnamnesiFamiliareSelezione = DirectCast(GetUC("AnamnesiFamiliareSelezione"), UC_AnamnesiFamiliareSelezione)
 
-        ucAnamnesiFamiliare.Visible = False
+        AddHandler ucAnamnesiFamiliareSelezione.ParenteSelezionato, AddressOf GestisciPatologieParenteSelezionato
+
+        ucAnamnesiFamiliareSelezione.Visible = False
 
         ' Aggiorna dati paziente
         ucDatiPaziente.CaricaDatiPaziente(Me)
@@ -793,9 +807,22 @@ Public Class MainForm
 
         ' Carica UC
         CaricaControllo(ucDatiPaziente, 0, 0)
-        CaricaControllo(ucAnamnesiFamiliare, 0, 2)
+        CaricaControllo(ucAnamnesiFamiliareSelezione, 0, 2)
 
-        ucAnamnesiFamiliare.Visible = True
+        ucAnamnesiFamiliareSelezione.Visible = True
+    End Sub
+
+    Private Sub GestisciPatologieParenteSelezionato(idParenteSelezionato As Integer, idAnamnesiFamiliareSelezionata As Integer)
+        ' Rimuovo UC corrente (selezione) e carico UC per il parente
+        EliminaControllo()
+        'RimuoviUC("AnamnesiFamiliareSelezione")
+
+        ' Creo il nuovo UC e imposto l'ID del parente
+        Dim ucAnamnesiFamiliare As UC_AnamnesiFamiliare = DirectCast(GetUC("AnamnesiFamiliare"), UC_AnamnesiFamiliare)
+        ucAnamnesiFamiliare.idParenteSelezionato = idParenteSelezionato
+        ucAnamnesiFamiliare.idAnamnesiFamiliareSelezionata = idAnamnesiFamiliareSelezionata
+        ' Carico UC nel TableLayoutPanel
+        CaricaControllo(ucAnamnesiFamiliare, 0, 2)
     End Sub
 
     Private Sub PrimaVisitaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrimaVisitaToolStripMenuItem.Click
@@ -1719,5 +1746,12 @@ Public Class MainForm
 
         Dim ucImportaFile As UC_FileImportazione = DirectCast(GetUC("Importazione"), UC_FileImportazione)
         CaricaControllo(ucImportaFile, 0, 2)
+    End Sub
+
+    Private Sub PatologiaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatologiaToolStripMenuItem.Click
+        EliminaControllo()
+
+        Dim ucPatologia As UC_Patologia = DirectCast(GetUC("Patologia"), UC_Patologia)
+        CaricaControllo(ucPatologia, 0, 2)
     End Sub
 End Class

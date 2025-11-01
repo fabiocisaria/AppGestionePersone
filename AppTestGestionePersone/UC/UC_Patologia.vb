@@ -1,7 +1,6 @@
 ﻿Imports System.Web.UI.WebControls
 Imports Microsoft.Data.SqlClient
-
-Public Class UC_ClasseFarmaco
+Public Class UC_Patologia
 
     Private Shared ReadOnly ControlText As New Dictionary(Of Control, String)
 
@@ -18,13 +17,15 @@ Public Class UC_ClasseFarmaco
     End Sub
 
     Private Sub FormClasseFarmaco_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        PulisciCampi(TextBoxNomeClasse)
-        HilightControls(False, TextBoxNomeClasse)
-        ControlText(TextBoxNomeClasse) = "Classe"
-        TextBoxNomeClasse.Text = ControlText(TextBoxNomeClasse)
+        ControlText(TextBoxNomePatologia) = "Nome patologia"
+        TextBoxNomePatologia.Text = ControlText(TextBoxNomePatologia)
+        HilightControls(False, TextBoxNomePatologia)
     End Sub
 
-    Private Sub TextBox_Enter(sender As Object, e As EventArgs) Handles TextBoxNomeClasse.Enter
+    ' ====================
+    ' Placeholder per TextBox
+    ' ====================
+    Private Sub TextBox_Enter(sender As Object, e As EventArgs) Handles TextBoxNomePatologia.Enter
         Dim ctrl As Control = DirectCast(sender, Control)
         If ctrl.Text = ControlText(ctrl) Then
             ctrl.Text = ""
@@ -33,7 +34,7 @@ Public Class UC_ClasseFarmaco
         End If
     End Sub
 
-    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles TextBoxNomeClasse.Leave
+    Private Sub TextBox_Leave(sender As Object, e As EventArgs) Handles TextBoxNomePatologia.Leave
         Dim ctrl As Control = DirectCast(sender, Control)
         If String.IsNullOrWhiteSpace(ctrl.Text) Then
             ctrl.Text = ControlText(ctrl)
@@ -46,14 +47,11 @@ Public Class UC_ClasseFarmaco
         Dim esito As Boolean = True
 
         ' Verifico se il campo Nome classe è stato compilato
-        If String.IsNullOrWhiteSpace(TextBoxNomeClasse.Text.Trim()) OrElse TextBoxNomeClasse.Text.Trim() = ControlText(TextBoxNomeClasse) Then
+        If String.IsNullOrWhiteSpace(TextBoxNomePatologia.Text.Trim()) OrElse TextBoxNomePatologia.Text.Trim() = ControlText(TextBoxNomePatologia) Then
             esito = False
-            HilightControls(True, TextBoxNomeClasse)
-            If String.IsNullOrWhiteSpace(TextBoxNomeClasse.Text.Trim()) Then
-                TextBoxNomeClasse.Text = ControlText(TextBoxNomeClasse)
-            End If
+            HilightControls(True, TextBoxNomePatologia)
         Else
-            HilightControls(False, TextBoxNomeClasse)
+            HilightControls(False, TextBoxNomePatologia)
         End If
 
         Return esito
@@ -64,18 +62,18 @@ Public Class UC_ClasseFarmaco
         Dim esiste As Boolean = False
 
         'Verifica che la classe inserita non esistà già
-        Dim checkQuery As String = "SELECT * FROM ClassiFarmaci WHERE Classe = @classe"
+        Dim checkQuery As String = "SELECT * FROM Patologie WHERE NomePatologia = @nomePatologia"
 
-        Dim classe As String = TextBoxNomeClasse.Text.Trim()
+        Dim nomePatologia As String = TextBoxNomePatologia.Text.Trim()
 
         Dim checkParam As New List(Of SqlParameter) From {
-            New SqlParameter("@classe", classe)
+            New SqlParameter("@nomePatologia", nomePatologia)
         }
 
         Dim dtCheck As DataTable = Await ConnessioneDB.EseguiQueryAsync(checkQuery, checkParam)
 
         If dtCheck.Rows.Count <> 0 Then
-            esiste = True ' Classe di farmaco esistente
+            esiste = True ' Patologia esistente
         Else
             esiste = False
         End If
@@ -92,35 +90,32 @@ Public Class UC_ClasseFarmaco
 
             Dim successo As Boolean = True
 
-            Dim classe As String = TextBoxNomeClasse.Text.Trim()
+            Dim nomePatologia As String = TextBoxNomePatologia.Text.Trim()
 
             ' TODO
             Try
-                Dim queryClassiFarmaci As String = ""
-
+                Dim queryPatologia As String = ""
                 Dim esiste As Boolean = Await CercaClasseAsync()
 
                 If Not esiste Then
-                    queryClassiFarmaci = "INSERT INTO ClassiFarmaci (
-                                                        Classe
+                    queryPatologia = "INSERT INTO Patologie (
+                                                        NomePatologia
                                                         ) VALUES (
-                                                        @classe)"
+                                                        @nomePatologia)"
 
-                    Dim parametriClassiFarmaci As New List(Of SqlParameter) From {
-                        New SqlParameter("@classe", classe)
+                    Dim parametriPatologia As New List(Of SqlParameter) From {
+                        New SqlParameter("@nomePatologia", nomePatologia)
                     }
 
-                    If Await ConnessioneDB.EseguiNonQueryAsync(queryClassiFarmaci, parametriClassiFarmaci) > 0 Then
+                    If Await ConnessioneDB.EseguiNonQueryAsync(queryPatologia, parametriPatologia) > 0 Then
                         successo = True
-                    Else
-                        successo = False
                     End If
 
                     If successo Then
-                        main.MostraToast("Classe di farmaco aggiunta correttamente.")
+                        main.MostraToast("Patologia aggiunta correttamente.")
                     End If
                 Else
-                    main.MostraToast("Classe di farmaco già esistente.")
+                    main.MostraToast("Patologia già esistente.")
                     esito = False
                 End If
             Catch ex As Exception
@@ -138,14 +133,14 @@ Public Class UC_ClasseFarmaco
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
         ' Disabilito tutti i controlli
-        TableLayoutPanelClassiFarmaco.Enabled = False
+        TableLayoutPanelPatologia.Enabled = False
 
         main.MostraToast("Salvataggio in corso ...")
         Dim esito = Await SalvaDatiAsync()
 
-        TableLayoutPanelClassiFarmaco.Enabled = True
+        TableLayoutPanelPatologia.Enabled = True
         If esito Then
-            PulisciCampi(TextBoxNomeClasse)
+            PulisciCampi(TextBoxNomePatologia)
         End If
     End Sub
 End Class

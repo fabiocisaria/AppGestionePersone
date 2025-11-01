@@ -44,6 +44,7 @@ Partial Class UC_Terapia
         Me.SfButtonAggiungiTerapiaRiabilitativa = New Syncfusion.WinForms.Controls.SfButton()
         Me.FlowLayoutPanelFarmaci = New System.Windows.Forms.FlowLayoutPanel()
         Me.FlowLayoutPanelTerapieRiabilitative = New System.Windows.Forms.FlowLayoutPanel()
+        Me.RadioButtonPeggiorativo = New System.Windows.Forms.RadioButton()
         Me.TableLayoutPanelTerapia.SuspendLayout()
         Me.TableLayoutPanelMiglior.SuspendLayout()
         Me.TableLayoutPanelMiglioramenti.SuspendLayout()
@@ -90,20 +91,21 @@ Partial Class UC_Terapia
         'TableLayoutPanelMiglioramenti
         '
         Me.TableLayoutPanelMiglioramenti.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TableLayoutPanelMiglioramenti.ColumnCount = 4
-        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonNullo, 0, 0)
-        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonLieve, 1, 0)
-        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonNotevole, 2, 0)
-        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonAsintomatico, 3, 0)
+        Me.TableLayoutPanelMiglioramenti.ColumnCount = 5
+        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanelMiglioramenti.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonPeggiorativo, 0, 0)
+        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonNullo, 1, 0)
+        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonLieve, 2, 0)
+        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonNotevole, 3, 0)
+        Me.TableLayoutPanelMiglioramenti.Controls.Add(Me.RadioButtonAsintomatico, 4, 0)
         Me.TableLayoutPanelMiglioramenti.Location = New System.Drawing.Point(20, 37)
         Me.TableLayoutPanelMiglioramenti.Name = "TableLayoutPanelMiglioramenti"
         Me.TableLayoutPanelMiglioramenti.RowCount = 1
-        Me.TableLayoutPanelMiglioramenti.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanelMiglioramenti.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanelMiglioramenti.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelMiglioramenti.Size = New System.Drawing.Size(379, 35)
         Me.TableLayoutPanelMiglioramenti.TabIndex = 0
         '
@@ -112,7 +114,7 @@ Partial Class UC_Terapia
         Me.RadioButtonNullo.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.RadioButtonNullo.AutoSize = True
         Me.RadioButtonNullo.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.RadioButtonNullo.Location = New System.Drawing.Point(29, 3)
+        Me.RadioButtonNullo.Location = New System.Drawing.Point(95, 3)
         Me.RadioButtonNullo.Name = "RadioButtonNullo"
         Me.RadioButtonNullo.Size = New System.Drawing.Size(35, 29)
         Me.RadioButtonNullo.TabIndex = 9
@@ -126,7 +128,7 @@ Partial Class UC_Terapia
         Me.RadioButtonLieve.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.RadioButtonLieve.AutoSize = True
         Me.RadioButtonLieve.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.RadioButtonLieve.Location = New System.Drawing.Point(122, 3)
+        Me.RadioButtonLieve.Location = New System.Drawing.Point(169, 3)
         Me.RadioButtonLieve.Name = "RadioButtonLieve"
         Me.RadioButtonLieve.Size = New System.Drawing.Size(37, 29)
         Me.RadioButtonLieve.TabIndex = 10
@@ -140,7 +142,7 @@ Partial Class UC_Terapia
         Me.RadioButtonNotevole.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.RadioButtonNotevole.AutoSize = True
         Me.RadioButtonNotevole.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.RadioButtonNotevole.Location = New System.Drawing.Point(208, 3)
+        Me.RadioButtonNotevole.Location = New System.Drawing.Point(235, 3)
         Me.RadioButtonNotevole.Name = "RadioButtonNotevole"
         Me.RadioButtonNotevole.Size = New System.Drawing.Size(54, 29)
         Me.RadioButtonNotevole.TabIndex = 11
@@ -154,7 +156,7 @@ Partial Class UC_Terapia
         Me.RadioButtonAsintomatico.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.RadioButtonAsintomatico.AutoSize = True
         Me.RadioButtonAsintomatico.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.RadioButtonAsintomatico.Location = New System.Drawing.Point(295, 3)
+        Me.RadioButtonAsintomatico.Location = New System.Drawing.Point(304, 3)
         Me.RadioButtonAsintomatico.Name = "RadioButtonAsintomatico"
         Me.RadioButtonAsintomatico.Size = New System.Drawing.Size(71, 29)
         Me.RadioButtonAsintomatico.TabIndex = 12
@@ -339,6 +341,20 @@ Partial Class UC_Terapia
         Me.FlowLayoutPanelTerapieRiabilitative.Size = New System.Drawing.Size(247, 334)
         Me.FlowLayoutPanelTerapieRiabilitative.TabIndex = 6
         '
+        'RadioButtonPeggiorativo
+        '
+        Me.RadioButtonPeggiorativo.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.RadioButtonPeggiorativo.AutoSize = True
+        Me.RadioButtonPeggiorativo.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.RadioButtonPeggiorativo.Location = New System.Drawing.Point(6, 3)
+        Me.RadioButtonPeggiorativo.Name = "RadioButtonPeggiorativo"
+        Me.RadioButtonPeggiorativo.Size = New System.Drawing.Size(62, 29)
+        Me.RadioButtonPeggiorativo.TabIndex = 13
+        Me.RadioButtonPeggiorativo.TabStop = True
+        Me.RadioButtonPeggiorativo.Text = "Peggiorato"
+        Me.RadioButtonPeggiorativo.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.RadioButtonPeggiorativo.UseVisualStyleBackColor = True
+        '
         'UC_Terapia
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -384,4 +400,5 @@ Partial Class UC_Terapia
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents LabelIntegratori As Label
     Friend WithEvents SfButtonAggiungiIntegratore As Syncfusion.WinForms.Controls.SfButton
+    Friend WithEvents RadioButtonPeggiorativo As RadioButton
 End Class

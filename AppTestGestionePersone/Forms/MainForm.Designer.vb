@@ -64,6 +64,7 @@ Partial Class MainForm
         Me.SQLConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanelMain = New System.Windows.Forms.TableLayoutPanel()
         Me.PanelTitleBar = New System.Windows.Forms.TableLayoutPanel()
+        Me.PatologiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.MenuStrip1.SuspendLayout()
         Me.PanelTitleBar.SuspendLayout()
@@ -76,10 +77,10 @@ Partial Class MainForm
         Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.None
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.NuovoToolStripMenuItem1, Me.InserisciToolStripMenuItem, Me.CercaToolStripMenuItem, Me.ImportaToolStripMenuItem, Me.ImpostazioniToolStripMenuItem})
         Me.MenuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.MenuStrip1.Location = New System.Drawing.Point(38, 6)
+        Me.MenuStrip1.Location = New System.Drawing.Point(48, 6)
         Me.MenuStrip1.Margin = New System.Windows.Forms.Padding(8, 0, 0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(358, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(478, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -104,7 +105,7 @@ Partial Class MainForm
         '
         'NuovoToolStripMenuItem1
         '
-        Me.NuovoToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PazienteToolStripMenuItem1, Me.VisitaToolStripMenuItem2, Me.FarmacoToolStripMenuItem1, Me.ContraccettivoToolStripMenuItem1, Me.IntegratoreToolStripMenuItem, Me.MalattiaAutoimmuneToolStripMenuItem, Me.TerapiaRiabilitativaToolStripMenuItem})
+        Me.NuovoToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PazienteToolStripMenuItem1, Me.VisitaToolStripMenuItem2, Me.FarmacoToolStripMenuItem1, Me.ContraccettivoToolStripMenuItem1, Me.IntegratoreToolStripMenuItem, Me.MalattiaAutoimmuneToolStripMenuItem, Me.TerapiaRiabilitativaToolStripMenuItem, Me.PatologiaToolStripMenuItem})
         Me.NuovoToolStripMenuItem1.Name = "NuovoToolStripMenuItem1"
         Me.NuovoToolStripMenuItem1.Size = New System.Drawing.Size(55, 20)
         Me.NuovoToolStripMenuItem1.Text = "Nuovo"
@@ -341,7 +342,7 @@ Partial Class MainForm
         '
         Me.PanelTitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.PanelTitleBar.ColumnCount = 3
-        Me.PanelTitleBar.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.PanelTitleBar.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.PanelTitleBar.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.PanelTitleBar.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.PanelTitleBar.Controls.Add(Me.MenuStrip1, 1, 0)
@@ -356,14 +357,20 @@ Partial Class MainForm
         Me.PanelTitleBar.Size = New System.Drawing.Size(1280, 30)
         Me.PanelTitleBar.TabIndex = 0
         '
+        'PatologiaToolStripMenuItem
+        '
+        Me.PatologiaToolStripMenuItem.Name = "PatologiaToolStripMenuItem"
+        Me.PatologiaToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.PatologiaToolStripMenuItem.Text = "Patologia"
+        '
         'PictureBox1
         '
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(8, 3)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(8, 3, 3, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(6, 1)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(6, 1, 1, 1)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(19, 24)
+        Me.PictureBox1.Size = New System.Drawing.Size(33, 28)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
@@ -432,4 +439,5 @@ Partial Class MainForm
     Friend WithEvents FileToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents IntegratoreToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MalattiaAutoimmuneToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PatologiaToolStripMenuItem As ToolStripMenuItem
 End Class

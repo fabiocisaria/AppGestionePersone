@@ -39,9 +39,10 @@ Public Class UC_CercaPaziente
         Me.Refresh() ' forza un unico ridisegno completo
     End Sub
 
-    'Private Sub UC_CercaPaziente_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    ' AddHandler Me.Resize, Sub() Utils.RoundControl(Me, 5)
-    ' End Sub
+    Private Async Sub UC_CercaPaziente_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' AddHandler Me.Resize, Sub() Utils.RoundControl(Me, 5)
+        Await CaricaPazienti()
+    End Sub
 
     ' ====================
     ' Configurazione SfDataGrid
@@ -154,12 +155,29 @@ Public Class UC_CercaPaziente
         dgvSelezionePaziente.Refresh()
     End Sub
 
+    Private Async Function CaricaPazienti(Optional codiceID As String = "", Optional cognome As String = "") As Task
+        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+        TableLayoutPanel1.Enabled = False
+        main.MostraToast("Caricamento in corso ...")
+
+        Dim pazientiTrovati = Await Utils.CercaPazienteUCAsync(codiceID, cognome)
+
+        TableLayoutPanel1.Enabled = True
+
+        If pazientiTrovati.Rows.Count > 0 Then
+            dgvSelezionePaziente.DataSource = pazientiTrovati
+            main.MostraToast($"Trovati {pazientiTrovati.Rows.Count} pazienti.")
+        Else
+            dgvSelezionePaziente.DataSource = Nothing
+            main.MostraToast("Nessun paziente trovato.")
+        End If
+    End Function
+
     ' ====================
     ' Eventi pulsanti
     ' ====================
     Private Async Sub ButtonCercaPaziente_Click(sender As Object, e As EventArgs) Handles ButtonCercaPaziente.Click
-        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
-
         Dim cognome As String = ""
         Dim codiceID As String = ""
 
@@ -171,21 +189,7 @@ Public Class UC_CercaPaziente
             codiceID = TextBoxCodiceID.Text.Trim()
         End If
 
-        ' Cerco i pazienti in base ai filtri
-        TableLayoutPanel1.Enabled = False
-
-        main.MostraToast("Caricamento in corso ...")
-        Dim pazientiTrovati = Await Utils.CercaPazienteUCAsync(codiceID, cognome)
-
-        TableLayoutPanel1.Enabled = True
-
-        If pazientiTrovati.Rows.Count > 0 Then
-            dgvSelezionePaziente.DataSource = pazientiTrovati
-            main.MostraToast("Trovati " & pazientiTrovati.Rows.Count & " pazienti.")
-        Else
-            dgvSelezionePaziente.DataSource = Nothing
-            main.MostraToast("Nessun paziente trovato.")
-        End If
+        Await CaricaPazienti(codiceID, cognome)
     End Sub
 
     Private Sub ButtonSeleziona_Click(sender As Object, e As EventArgs) Handles ButtonSeleziona.Click

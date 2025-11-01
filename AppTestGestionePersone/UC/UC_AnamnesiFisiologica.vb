@@ -262,11 +262,35 @@ Public Class UC_AnamnesiFisiologica
             ' Carico i dati esistenti nei campi
             '----------------------------------
             TextBoxPeso.Text = dettagliAnamnesi("Peso")
+            TextBoxPeso.ForeColor = Theme.TextBoxForeColor
+            TextBoxPeso.Font = Theme.TxtFont
+
             TextBoxAltezza.Text = dettagliAnamnesi("Altezza")
+            TextBoxAltezza.ForeColor = Theme.TextBoxForeColor
+            TextBoxAltezza.Font = Theme.TxtFont
+
             TextBoxBMI.Text = dettagliAnamnesi("BMI")
             ComboBoxIdratazione.SelectedItem = dettagliAnamnesi("Idratazione").ToString()
-            TextBoxIntolleranze.Text = If(IsDBNull(dettagliAnamnesi("Intolleranze")), "", dettagliAnamnesi("Intolleranze").ToString())
-            TextBoxAllergie.Text = If(IsDBNull(dettagliAnamnesi("Allergie")), "", dettagliAnamnesi("Allergie").ToString())
+
+            If IsDBNull(dettagliAnamnesi("Intolleranze")) Then
+                TextBoxIntolleranze.Text = ControlText(TextBoxIntolleranze)
+            Else
+                TextBoxIntolleranze.Text = dettagliAnamnesi("Intolleranze").ToString()
+                TextBoxIntolleranze.ForeColor = Theme.TextBoxForeColor
+                TextBoxIntolleranze.Font = Theme.TxtFont
+            End If
+
+            If IsDBNull(dettagliAnamnesi("Allergie")) Then
+                TextBoxAllergie.Text = ControlText(TextBoxAllergie)
+            Else
+                TextBoxAllergie.Text = dettagliAnamnesi("Allergie").ToString()
+                TextBoxAllergie.ForeColor = Theme.TextBoxForeColor
+                TextBoxAllergie.Font = Theme.TxtFont
+            End If
+
+            ' TextBoxIntolleranze.Text = If(IsDBNull(dettagliAnamnesi("Intolleranze")), ControlText(TextBoxIntolleranze), dettagliAnamnesi("Intolleranze").ToString())
+
+            ' TextBoxAllergie.Text = If(IsDBNull(dettagliAnamnesi("Allergie")), ControlText(TextBoxAllergie), dettagliAnamnesi("Allergie").ToString())
             ComboBoxQuantita.SelectedItem = dettagliAnamnesi("FumoQuantita").ToString()
             ComboBoxTipo.SelectedItem = dettagliAnamnesi("TipoSigaretta").ToString()
         Else
@@ -292,14 +316,15 @@ Public Class UC_AnamnesiFisiologica
             Dim bmi As Double = Math.Round(_bmi, 1)
             Dim idratazione As String = ComboBoxIdratazione.SelectedItem.ToString()
             Dim intolleranze As Object
-            If String.IsNullOrWhiteSpace(TextBoxIntolleranze.Text) Then
+
+            If String.IsNullOrWhiteSpace(TextBoxIntolleranze.Text) OrElse TextBoxIntolleranze.Text.Trim() = ControlText(TextBoxIntolleranze) Then
                 intolleranze = DBNull.Value
             Else
                 intolleranze = TextBoxIntolleranze.Text
             End If
 
             Dim allergie As Object
-            If String.IsNullOrWhiteSpace(TextBoxAllergie.Text) Then
+            If String.IsNullOrWhiteSpace(TextBoxAllergie.Text) OrElse TextBoxAllergie.Text.Trim() = ControlText(TextBoxAllergie) Then
                 allergie = DBNull.Value
             Else
                 allergie = TextBoxAllergie.Text

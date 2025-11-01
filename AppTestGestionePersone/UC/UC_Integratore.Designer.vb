@@ -76,7 +76,7 @@ Partial Class UC_Integratore
         Me.LabelTitolo.Size = New System.Drawing.Size(92, 13)
         Me.LabelTitolo.TabIndex = 16
         Me.LabelTitolo.Tag = "PrimaryTitle"
-        Me.LabelTitolo.Text = "Nuova integratore"
+        Me.LabelTitolo.Text = "Nuovo integratore"
         '
         'TableLayoutPanelIntegratore
         '

@@ -189,6 +189,8 @@ Public Class UC_Terapia
 
             If Not IsDBNull(dettagliTerapia("Miglioramenti")) Then
                 Select Case dettagliTerapia("Miglioramenti")
+                    Case "Peggiorato"
+                        RadioButtonPeggiorativo.Checked = True
                     Case "Nullo"
                         RadioButtonNullo.Checked = True
                     Case "Lieve"
@@ -350,7 +352,7 @@ Public Class UC_Terapia
                                    End Sub
 
         'Click con il destro
-        AddHandler tlp.MouseDown, AddressOf Farmaco_RightClick
+        AddHandler tlp.MouseDown, Sub(s, e) Farmaco_RightClick(panel, e)
         AddHandler lbl.MouseDown, Sub(s, e) Farmaco_RightClick(panel, e)
 
         FlowLayoutPanelFarmaci.Controls.Add(panel)
@@ -450,7 +452,7 @@ Public Class UC_Terapia
                                    End Sub
 
         'Click con il destro
-        AddHandler tlp.MouseDown, AddressOf TerapiaRiabilitativa_RightClick
+        AddHandler tlp.MouseDown, Sub(s, e) TerapiaRiabilitativa_RightClick(panel, e)
         AddHandler lbl.MouseDown, Sub(s, e) TerapiaRiabilitativa_RightClick(panel, e)
 
         FlowLayoutPanelTerapieRiabilitative.Controls.Add(panel)
@@ -550,7 +552,7 @@ Public Class UC_Terapia
                                    End Sub
 
         'Click con il destro
-        AddHandler tlp.MouseDown, AddressOf Integratore_RightClick
+        AddHandler tlp.MouseDown, Sub(s, e) Integratore_RightClick(panel, e)
         AddHandler lbl.MouseDown, Sub(s, e) Integratore_RightClick(panel, e)
 
         FlowLayoutPanelIntegratori.Controls.Add(panel)
@@ -648,7 +650,7 @@ Public Class UC_Terapia
                                    End Sub
 
         'Click con il destro
-        AddHandler tlp.MouseDown, AddressOf Farmaco_RightClick
+        AddHandler tlp.MouseDown, Sub(s, e) Farmaco_RightClick(panel, e)
         AddHandler lbl.MouseDown, Sub(s, e) Farmaco_RightClick(panel, e)
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -766,7 +768,7 @@ Public Class UC_Terapia
                                    End Sub
 
         'Click con il destro
-        AddHandler tlp.MouseDown, AddressOf TerapiaRiabilitativa_RightClick
+        AddHandler tlp.MouseDown, Sub(s, e) TerapiaRiabilitativa_RightClick(panel, e)
         AddHandler lbl.MouseDown, Sub(s, e) TerapiaRiabilitativa_RightClick(panel, e)
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -884,7 +886,7 @@ Public Class UC_Terapia
                                    End Sub
 
         'Click con il destro
-        AddHandler tlp.MouseDown, AddressOf Integratore_RightClick
+        AddHandler tlp.MouseDown, Sub(s, e) Integratore_RightClick(panel, e)
         AddHandler lbl.MouseDown, Sub(s, e) Integratore_RightClick(panel, e)
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)

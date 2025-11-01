@@ -121,7 +121,11 @@ Public Class UC_VisitaPapTest
             ' Carico i dati esistenti nei campi
             '----------------------------------
             DateTimePickerDataEsecuzione.Value = CDate(dettagliVisita("DataPapTest"))
-            ComboBoxEsito.SelectedItem = dettagliVisita("EsitoPapTest")
+            If dettagliVisita("EsitoPapTest") Then
+                ComboBoxEsito.SelectedIndex = 1 ' Positivo
+            Else
+                ComboBoxEsito.SelectedIndex = 0 ' Negativo
+            End If
 
             Return esiste
         Else

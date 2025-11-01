@@ -169,9 +169,9 @@ Public Class UC_VisitaDNATest
             Dim esito As Boolean = Convert.ToBoolean(dettagliVisita("EsitoDNATest"))
 
             If esito Then
-                ComboBoxEsito.SelectedItem = "Positivo"
+                ComboBoxEsito.SelectedIndex = 1 ' Positivo
             Else
-                ComboBoxEsito.SelectedItem = "Negativo"
+                ComboBoxEsito.SelectedIndex = 0 ' Negativo
             End If
 
             If dettagliVisita("EsitoDNATest") = True Then

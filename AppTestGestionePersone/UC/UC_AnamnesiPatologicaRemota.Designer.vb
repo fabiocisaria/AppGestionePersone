@@ -80,6 +80,9 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.LabelEndometriosi = New System.Windows.Forms.Label()
         Me.MetroToggleEndometriosi = New MetroFramework.Controls.MetroToggle()
         Me.ButtonInserisci = New Syncfusion.WinForms.Controls.SfButton()
+        Me.TableLayoutPanel12 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelLichen = New System.Windows.Forms.Label()
+        Me.MetroToggleLichen = New MetroFramework.Controls.MetroToggle()
         Me.TableLayoutPanelAnPatRem.SuspendLayout()
         Me.TableLayoutPanel6.SuspendLayout()
         Me.TableLayoutPanel8.SuspendLayout()
@@ -106,14 +109,15 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanelColonIrr.SuspendLayout()
         Me.TableLayoutPanelFibromialgie.SuspendLayout()
         Me.TableLayoutPanelEndometriosi.SuspendLayout()
+        Me.TableLayoutPanel12.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanelAnPatRem
         '
         Me.TableLayoutPanelAnPatRem.ColumnCount = 3
-        Me.TableLayoutPanelAnPatRem.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelAnPatRem.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanelAnPatRem.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanelAnPatRem.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.0!))
+        Me.TableLayoutPanelAnPatRem.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.0!))
+        Me.TableLayoutPanelAnPatRem.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
         Me.TableLayoutPanelAnPatRem.Controls.Add(Me.TableLayoutPanel6, 2, 0)
         Me.TableLayoutPanelAnPatRem.Controls.Add(Me.TableLayoutPanel3, 1, 0)
         Me.TableLayoutPanelAnPatRem.Controls.Add(Me.TableLayoutPanel2, 0, 0)
@@ -124,7 +128,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanelAnPatRem.RowCount = 2
         Me.TableLayoutPanelAnPatRem.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelAnPatRem.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanelAnPatRem.Size = New System.Drawing.Size(766, 516)
+        Me.TableLayoutPanelAnPatRem.Size = New System.Drawing.Size(800, 600)
         Me.TableLayoutPanelAnPatRem.TabIndex = 2
         '
         'TableLayoutPanel6
@@ -134,12 +138,12 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel6.Controls.Add(Me.FlowLayoutPanelMalattieAutoimmuni, 0, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.TableLayoutPanel8, 0, 0)
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(513, 9)
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(563, 15)
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 2
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(249, 457)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(234, 530)
         Me.TableLayoutPanel6.TabIndex = 30
         '
         'FlowLayoutPanelMalattieAutoimmuni
@@ -147,7 +151,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.FlowLayoutPanelMalattieAutoimmuni.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanelMalattieAutoimmuni.Location = New System.Drawing.Point(3, 33)
         Me.FlowLayoutPanelMalattieAutoimmuni.Name = "FlowLayoutPanelMalattieAutoimmuni"
-        Me.FlowLayoutPanelMalattieAutoimmuni.Size = New System.Drawing.Size(243, 421)
+        Me.FlowLayoutPanelMalattieAutoimmuni.Size = New System.Drawing.Size(228, 494)
         Me.FlowLayoutPanelMalattieAutoimmuni.TabIndex = 11
         '
         'TableLayoutPanel8
@@ -162,7 +166,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
         Me.TableLayoutPanel8.RowCount = 1
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(243, 24)
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(228, 24)
         Me.TableLayoutPanel8.TabIndex = 10
         '
         'LabelMalattieAutoimmuni
@@ -170,7 +174,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.LabelMalattieAutoimmuni.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LabelMalattieAutoimmuni.AutoSize = True
         Me.LabelMalattieAutoimmuni.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelMalattieAutoimmuni.Location = New System.Drawing.Point(53, 3)
+        Me.LabelMalattieAutoimmuni.Location = New System.Drawing.Point(46, 3)
         Me.LabelMalattieAutoimmuni.Name = "LabelMalattieAutoimmuni"
         Me.LabelMalattieAutoimmuni.Size = New System.Drawing.Size(166, 17)
         Me.LabelMalattieAutoimmuni.TabIndex = 1
@@ -178,6 +182,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         '
         'SfButtonAggiungiMalattieAutoimmuni
         '
+        Me.SfButtonAggiungiMalattieAutoimmuni.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.SfButtonAggiungiMalattieAutoimmuni.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
         Me.SfButtonAggiungiMalattieAutoimmuni.Location = New System.Drawing.Point(3, 3)
         Me.SfButtonAggiungiMalattieAutoimmuni.Name = "SfButtonAggiungiMalattieAutoimmuni"
@@ -194,12 +199,12 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanelDiabete, 0, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanelIntoll, 0, 1)
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(258, 9)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(295, 15)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(249, 457)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(249, 530)
         Me.TableLayoutPanel3.TabIndex = 29
         '
         'TableLayoutPanelDiabete
@@ -209,7 +214,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanelDiabete.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelDiabete.Controls.Add(Me.TableLayoutPanel5, 0, 1)
         Me.TableLayoutPanelDiabete.Controls.Add(Me.LabelDiabete, 0, 0)
-        Me.TableLayoutPanelDiabete.Location = New System.Drawing.Point(4, 29)
+        Me.TableLayoutPanelDiabete.Location = New System.Drawing.Point(4, 47)
         Me.TableLayoutPanelDiabete.Name = "TableLayoutPanelDiabete"
         Me.TableLayoutPanelDiabete.RowCount = 2
         Me.TableLayoutPanelDiabete.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
@@ -384,7 +389,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanelIntoll.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelIntoll.Controls.Add(Me.TableLayoutPanelVg, 0, 1)
         Me.TableLayoutPanelIntoll.Controls.Add(Me.LabelIntoll, 0, 0)
-        Me.TableLayoutPanelIntoll.Location = New System.Drawing.Point(4, 257)
+        Me.TableLayoutPanelIntoll.Location = New System.Drawing.Point(4, 312)
         Me.TableLayoutPanelIntoll.Name = "TableLayoutPanelIntoll"
         Me.TableLayoutPanelIntoll.RowCount = 2
         Me.TableLayoutPanelIntoll.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
@@ -560,12 +565,12 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel11, 0, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel4, 0, 0)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 7)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(15, 15)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 2
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(249, 461)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(249, 530)
         Me.TableLayoutPanel2.TabIndex = 28
         '
         'TableLayoutPanel11
@@ -573,16 +578,18 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel11.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TableLayoutPanel11.ColumnCount = 1
         Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel11.Controls.Add(Me.TableLayoutPanel12, 0, 3)
         Me.TableLayoutPanel11.Controls.Add(Me.TableLayoutPanelDistiroidismo, 0, 2)
         Me.TableLayoutPanel11.Controls.Add(Me.TableLayoutPanelIVU, 0, 1)
         Me.TableLayoutPanel11.Controls.Add(Me.TableLayoutPanelVescIperatt, 0, 0)
-        Me.TableLayoutPanel11.Location = New System.Drawing.Point(4, 260)
+        Me.TableLayoutPanel11.Location = New System.Drawing.Point(4, 285)
         Me.TableLayoutPanel11.Name = "TableLayoutPanel11"
-        Me.TableLayoutPanel11.RowCount = 3
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel11.Size = New System.Drawing.Size(240, 170)
+        Me.TableLayoutPanel11.RowCount = 4
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel11.Size = New System.Drawing.Size(240, 224)
         Me.TableLayoutPanel11.TabIndex = 8
         '
         'TableLayoutPanelDistiroidismo
@@ -593,7 +600,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanelDistiroidismo.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelDistiroidismo.Controls.Add(Me.LabelDistiroidismo, 1, 0)
         Me.TableLayoutPanelDistiroidismo.Controls.Add(Me.MetroToggleDistiroidismo, 0, 0)
-        Me.TableLayoutPanelDistiroidismo.Location = New System.Drawing.Point(3, 121)
+        Me.TableLayoutPanelDistiroidismo.Location = New System.Drawing.Point(3, 120)
         Me.TableLayoutPanelDistiroidismo.Name = "TableLayoutPanelDistiroidismo"
         Me.TableLayoutPanelDistiroidismo.RowCount = 1
         Me.TableLayoutPanelDistiroidismo.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -604,10 +611,10 @@ Partial Class UC_AnamnesiPatologicaRemota
         'LabelDistiroidismo
         '
         Me.LabelDistiroidismo.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelDistiroidismo.Location = New System.Drawing.Point(93, 11)
+        Me.LabelDistiroidismo.Location = New System.Drawing.Point(93, 5)
         Me.LabelDistiroidismo.Name = "LabelDistiroidismo"
         Me.LabelDistiroidismo.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.LabelDistiroidismo.Size = New System.Drawing.Size(138, 18)
+        Me.LabelDistiroidismo.Size = New System.Drawing.Size(138, 29)
         Me.LabelDistiroidismo.TabIndex = 1
         Me.LabelDistiroidismo.Text = "Distiroidismo"
         Me.LabelDistiroidismo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -682,10 +689,10 @@ Partial Class UC_AnamnesiPatologicaRemota
         'LabelVescIperatt
         '
         Me.LabelVescIperatt.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelVescIperatt.Location = New System.Drawing.Point(93, 11)
+        Me.LabelVescIperatt.Location = New System.Drawing.Point(93, 5)
         Me.LabelVescIperatt.Name = "LabelVescIperatt"
         Me.LabelVescIperatt.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.LabelVescIperatt.Size = New System.Drawing.Size(102, 18)
+        Me.LabelVescIperatt.Size = New System.Drawing.Size(138, 29)
         Me.LabelVescIperatt.TabIndex = 1
         Me.LabelVescIperatt.Text = "Vescica iperattiva"
         Me.LabelVescIperatt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -711,7 +718,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanelColonIrr, 0, 3)
         Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanelFibromialgie, 0, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanelEndometriosi, 0, 0)
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(4, 3)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(4, 20)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 4
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
@@ -740,10 +747,10 @@ Partial Class UC_AnamnesiPatologicaRemota
         'LabelNevPudendo
         '
         Me.LabelNevPudendo.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelNevPudendo.Location = New System.Drawing.Point(93, 10)
+        Me.LabelNevPudendo.Location = New System.Drawing.Point(93, 4)
         Me.LabelNevPudendo.Name = "LabelNevPudendo"
         Me.LabelNevPudendo.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.LabelNevPudendo.Size = New System.Drawing.Size(124, 18)
+        Me.LabelNevPudendo.Size = New System.Drawing.Size(138, 29)
         Me.LabelNevPudendo.TabIndex = 1
         Me.LabelNevPudendo.Text = "Nevralgia del pudendo"
         Me.LabelNevPudendo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -779,10 +786,10 @@ Partial Class UC_AnamnesiPatologicaRemota
         'LabelColonIrr
         '
         Me.LabelColonIrr.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelColonIrr.Location = New System.Drawing.Point(93, 11)
+        Me.LabelColonIrr.Location = New System.Drawing.Point(93, 5)
         Me.LabelColonIrr.Name = "LabelColonIrr"
         Me.LabelColonIrr.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.LabelColonIrr.Size = New System.Drawing.Size(83, 18)
+        Me.LabelColonIrr.Size = New System.Drawing.Size(138, 29)
         Me.LabelColonIrr.TabIndex = 1
         Me.LabelColonIrr.Text = "Colon irritabile"
         Me.LabelColonIrr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -830,10 +837,10 @@ Partial Class UC_AnamnesiPatologicaRemota
         'LabelFibromialgie
         '
         Me.LabelFibromialgie.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelFibromialgie.Location = New System.Drawing.Point(93, 11)
+        Me.LabelFibromialgie.Location = New System.Drawing.Point(93, 5)
         Me.LabelFibromialgie.Name = "LabelFibromialgie"
         Me.LabelFibromialgie.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.LabelFibromialgie.Size = New System.Drawing.Size(83, 18)
+        Me.LabelFibromialgie.Size = New System.Drawing.Size(138, 29)
         Me.LabelFibromialgie.TabIndex = 1
         Me.LabelFibromialgie.Text = "Fibromialgie"
         Me.LabelFibromialgie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -857,10 +864,10 @@ Partial Class UC_AnamnesiPatologicaRemota
         'LabelEndometriosi
         '
         Me.LabelEndometriosi.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelEndometriosi.Location = New System.Drawing.Point(93, 11)
+        Me.LabelEndometriosi.Location = New System.Drawing.Point(93, 5)
         Me.LabelEndometriosi.Name = "LabelEndometriosi"
         Me.LabelEndometriosi.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.LabelEndometriosi.Size = New System.Drawing.Size(83, 18)
+        Me.LabelEndometriosi.Size = New System.Drawing.Size(138, 29)
         Me.LabelEndometriosi.TabIndex = 1
         Me.LabelEndometriosi.Text = "Endometriosi"
         Me.LabelEndometriosi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -881,7 +888,7 @@ Partial Class UC_AnamnesiPatologicaRemota
         '
         Me.ButtonInserisci.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.ButtonInserisci.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!)
-        Me.ButtonInserisci.Location = New System.Drawing.Point(665, 481)
+        Me.ButtonInserisci.Location = New System.Drawing.Point(699, 565)
         Me.ButtonInserisci.Margin = New System.Windows.Forms.Padding(3, 3, 5, 5)
         Me.ButtonInserisci.Name = "ButtonInserisci"
         Me.ButtonInserisci.Size = New System.Drawing.Size(96, 27)
@@ -889,13 +896,52 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.ButtonInserisci.Tag = "OkButton"
         Me.ButtonInserisci.Text = "Inserisci"
         '
+        'TableLayoutPanel12
+        '
+        Me.TableLayoutPanel12.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TableLayoutPanel12.ColumnCount = 2
+        Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
+        Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel12.Controls.Add(Me.LabelLichen, 1, 0)
+        Me.TableLayoutPanel12.Controls.Add(Me.MetroToggleLichen, 0, 0)
+        Me.TableLayoutPanel12.Location = New System.Drawing.Point(3, 176)
+        Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
+        Me.TableLayoutPanel12.RowCount = 1
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel12.Size = New System.Drawing.Size(234, 40)
+        Me.TableLayoutPanel12.TabIndex = 27
+        Me.TableLayoutPanel12.Tag = "PrimaryPanel"
+        '
+        'LabelLichen
+        '
+        Me.LabelLichen.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelLichen.Location = New System.Drawing.Point(93, 5)
+        Me.LabelLichen.Name = "LabelLichen"
+        Me.LabelLichen.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.LabelLichen.Size = New System.Drawing.Size(138, 29)
+        Me.LabelLichen.TabIndex = 1
+        Me.LabelLichen.Text = "Lichen scleroatrofico"
+        Me.LabelLichen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'MetroToggleLichen
+        '
+        Me.MetroToggleLichen.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.MetroToggleLichen.AutoSize = True
+        Me.MetroToggleLichen.DisplayStatus = False
+        Me.MetroToggleLichen.Location = New System.Drawing.Point(20, 11)
+        Me.MetroToggleLichen.Name = "MetroToggleLichen"
+        Me.MetroToggleLichen.Size = New System.Drawing.Size(50, 17)
+        Me.MetroToggleLichen.TabIndex = 2
+        Me.MetroToggleLichen.Text = "Off"
+        Me.MetroToggleLichen.UseVisualStyleBackColor = True
+        '
         'UC_AnamnesiPatologicaRemota
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.TableLayoutPanelAnPatRem)
         Me.Name = "UC_AnamnesiPatologicaRemota"
-        Me.Size = New System.Drawing.Size(766, 516)
+        Me.Size = New System.Drawing.Size(800, 600)
         Me.TableLayoutPanelAnPatRem.ResumeLayout(False)
         Me.TableLayoutPanel6.ResumeLayout(False)
         Me.TableLayoutPanel8.ResumeLayout(False)
@@ -940,6 +986,8 @@ Partial Class UC_AnamnesiPatologicaRemota
         Me.TableLayoutPanelFibromialgie.PerformLayout()
         Me.TableLayoutPanelEndometriosi.ResumeLayout(False)
         Me.TableLayoutPanelEndometriosi.PerformLayout()
+        Me.TableLayoutPanel12.ResumeLayout(False)
+        Me.TableLayoutPanel12.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1002,4 +1050,7 @@ Partial Class UC_AnamnesiPatologicaRemota
     Friend WithEvents TableLayoutPanel10 As TableLayoutPanel
     Friend WithEvents LabelNevPudendo As Label
     Friend WithEvents MetroToggleNevPudendo As MetroFramework.Controls.MetroToggle
+    Friend WithEvents TableLayoutPanel12 As TableLayoutPanel
+    Friend WithEvents LabelLichen As Label
+    Friend WithEvents MetroToggleLichen As MetroFramework.Controls.MetroToggle
 End Class

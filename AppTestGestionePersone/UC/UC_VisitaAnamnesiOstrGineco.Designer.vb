@@ -1066,10 +1066,10 @@ Partial Class UC_VisitaAnamnesiOstrGineco
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(3, 8)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(116, 13)
+        Me.Label2.Size = New System.Drawing.Size(96, 13)
         Me.Label2.TabIndex = 15
         Me.Label2.Tag = "PrimaryTitle"
-        Me.Label2.Text = "Anamnesi ginecologica"
+        Me.Label2.Text = "Anamnesi ostetrica"
         '
         'UC_VisitaAnamnesiOstrGineco
         '

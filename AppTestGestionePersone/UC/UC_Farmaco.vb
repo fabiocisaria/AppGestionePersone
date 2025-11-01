@@ -143,7 +143,9 @@ Public Class UC_Farmaco
         Dim esiste As Boolean = False
 
         'Verifica che la classe inserita non esistà già
-        Dim checkQuery As String = "SELECT * FROM Farmaci WHERE NomeCommerciale = @nomeCommerciale AND ID_VieSomministrazione = @idVieSomministrazione"
+        Dim checkQuery As String = "SELECT * FROM Farmaci
+                                    WHERE NomeCommerciale = @nomeCommerciale
+                                    AND ID_VieSomministrazione = @idVieSomministrazione"
 
         Dim nomeCommerciale As String = TextBoxNomeCommerciale.Text.Trim()
         Dim principioAttivo As String = TextBoxPrincipioAttivo.Text.Trim()

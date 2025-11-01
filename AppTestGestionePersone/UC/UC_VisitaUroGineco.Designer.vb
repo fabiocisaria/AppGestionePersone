@@ -60,7 +60,7 @@ Partial Class UC_VisitaUroGineco
         Me.NumericUpDownSubr = New System.Windows.Forms.NumericUpDown()
         Me.LabelForc = New System.Windows.Forms.Label()
         Me.NumericUpDownClit = New System.Windows.Forms.NumericUpDown()
-        Me.LabelSubr = New System.Windows.Forms.Label()
+        Me.LabelSubur = New System.Windows.Forms.Label()
         Me.LabelVest = New System.Windows.Forms.Label()
         Me.LabelClit = New System.Windows.Forms.Label()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
@@ -524,12 +524,12 @@ Partial Class UC_VisitaUroGineco
         Me.TableLayoutPanelSwabTest.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelSwabTest.Controls.Add(Me.Label2, 0, 0)
         Me.TableLayoutPanelSwabTest.Controls.Add(Me.TableLayoutPanelSwab, 0, 1)
-        Me.TableLayoutPanelSwabTest.Location = New System.Drawing.Point(28, 28)
+        Me.TableLayoutPanelSwabTest.Location = New System.Drawing.Point(23, 28)
         Me.TableLayoutPanelSwabTest.Name = "TableLayoutPanelSwabTest"
         Me.TableLayoutPanelSwabTest.RowCount = 2
         Me.TableLayoutPanelSwabTest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanelSwabTest.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanelSwabTest.Size = New System.Drawing.Size(320, 268)
+        Me.TableLayoutPanelSwabTest.Size = New System.Drawing.Size(330, 268)
         Me.TableLayoutPanelSwabTest.TabIndex = 24
         Me.TableLayoutPanelSwabTest.Tag = "PrimaryPanel"
         '
@@ -548,30 +548,30 @@ Partial Class UC_VisitaUroGineco
         '
         Me.TableLayoutPanelSwab.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.TableLayoutPanelSwab.ColumnCount = 2
-        Me.TableLayoutPanelSwab.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
+        Me.TableLayoutPanelSwab.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
         Me.TableLayoutPanelSwab.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanelSwab.Controls.Add(Me.NumericUpDownForc, 1, 3)
         Me.TableLayoutPanelSwab.Controls.Add(Me.NumericUpDownSubr, 1, 2)
         Me.TableLayoutPanelSwab.Controls.Add(Me.LabelForc, 0, 3)
         Me.TableLayoutPanelSwab.Controls.Add(Me.NumericUpDownClit, 1, 0)
-        Me.TableLayoutPanelSwab.Controls.Add(Me.LabelSubr, 0, 2)
+        Me.TableLayoutPanelSwab.Controls.Add(Me.LabelSubur, 0, 2)
         Me.TableLayoutPanelSwab.Controls.Add(Me.LabelVest, 0, 1)
         Me.TableLayoutPanelSwab.Controls.Add(Me.LabelClit, 0, 0)
         Me.TableLayoutPanelSwab.Controls.Add(Me.TableLayoutPanel3, 1, 1)
-        Me.TableLayoutPanelSwab.Location = New System.Drawing.Point(15, 69)
+        Me.TableLayoutPanelSwab.Location = New System.Drawing.Point(10, 69)
         Me.TableLayoutPanelSwab.Name = "TableLayoutPanelSwab"
         Me.TableLayoutPanelSwab.RowCount = 4
         Me.TableLayoutPanelSwab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanelSwab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanelSwab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanelSwab.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanelSwab.Size = New System.Drawing.Size(290, 159)
+        Me.TableLayoutPanelSwab.Size = New System.Drawing.Size(310, 159)
         Me.TableLayoutPanelSwab.TabIndex = 0
         '
         'NumericUpDownForc
         '
         Me.NumericUpDownForc.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.NumericUpDownForc.Location = New System.Drawing.Point(73, 128)
+        Me.NumericUpDownForc.Location = New System.Drawing.Point(83, 128)
         Me.NumericUpDownForc.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDownForc.Name = "NumericUpDownForc"
         Me.NumericUpDownForc.Size = New System.Drawing.Size(69, 20)
@@ -580,7 +580,7 @@ Partial Class UC_VisitaUroGineco
         'NumericUpDownSubr
         '
         Me.NumericUpDownSubr.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.NumericUpDownSubr.Location = New System.Drawing.Point(73, 87)
+        Me.NumericUpDownSubr.Location = New System.Drawing.Point(83, 87)
         Me.NumericUpDownSubr.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDownSubr.Name = "NumericUpDownSubr"
         Me.NumericUpDownSubr.Size = New System.Drawing.Size(69, 20)
@@ -599,21 +599,21 @@ Partial Class UC_VisitaUroGineco
         'NumericUpDownClit
         '
         Me.NumericUpDownClit.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.NumericUpDownClit.Location = New System.Drawing.Point(73, 9)
+        Me.NumericUpDownClit.Location = New System.Drawing.Point(83, 9)
         Me.NumericUpDownClit.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDownClit.Name = "NumericUpDownClit"
         Me.NumericUpDownClit.Size = New System.Drawing.Size(69, 20)
         Me.NumericUpDownClit.TabIndex = 1
         '
-        'LabelSubr
+        'LabelSubur
         '
-        Me.LabelSubr.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.LabelSubr.AutoSize = True
-        Me.LabelSubr.Location = New System.Drawing.Point(3, 91)
-        Me.LabelSubr.Name = "LabelSubr"
-        Me.LabelSubr.Size = New System.Drawing.Size(55, 13)
-        Me.LabelSubr.TabIndex = 4
-        Me.LabelSubr.Text = "Subretrale"
+        Me.LabelSubur.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.LabelSubur.AutoSize = True
+        Me.LabelSubur.Location = New System.Drawing.Point(3, 91)
+        Me.LabelSubur.Name = "LabelSubur"
+        Me.LabelSubur.Size = New System.Drawing.Size(61, 13)
+        Me.LabelSubur.TabIndex = 4
+        Me.LabelSubur.Text = "Suburetrale"
         '
         'LabelVest
         '
@@ -647,17 +647,17 @@ Partial Class UC_VisitaUroGineco
         Me.TableLayoutPanel3.Controls.Add(Me.LabelVestSx, 2, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.LabelVestDx, 0, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(73, 42)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(83, 42)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(214, 33)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(224, 33)
         Me.TableLayoutPanel3.TabIndex = 0
         '
         'NumericUpDownVestSx
         '
         Me.NumericUpDownVestSx.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.NumericUpDownVestSx.Location = New System.Drawing.Point(145, 6)
+        Me.NumericUpDownVestSx.Location = New System.Drawing.Point(150, 6)
         Me.NumericUpDownVestSx.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.NumericUpDownVestSx.Name = "NumericUpDownVestSx"
         Me.NumericUpDownVestSx.Size = New System.Drawing.Size(64, 20)
@@ -676,7 +676,7 @@ Partial Class UC_VisitaUroGineco
         '
         Me.LabelVestSx.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LabelVestSx.AutoSize = True
-        Me.LabelVestSx.Location = New System.Drawing.Point(115, 10)
+        Me.LabelVestSx.Location = New System.Drawing.Point(120, 10)
         Me.LabelVestSx.Name = "LabelVestSx"
         Me.LabelVestSx.Size = New System.Drawing.Size(19, 13)
         Me.LabelVestSx.TabIndex = 5
@@ -795,7 +795,7 @@ Partial Class UC_VisitaUroGineco
     Friend WithEvents NumericUpDownSubr As NumericUpDown
     Friend WithEvents LabelForc As Label
     Friend WithEvents NumericUpDownClit As NumericUpDown
-    Friend WithEvents LabelSubr As Label
+    Friend WithEvents LabelSubur As Label
     Friend WithEvents LabelVest As Label
     Friend WithEvents LabelClit As Label
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel

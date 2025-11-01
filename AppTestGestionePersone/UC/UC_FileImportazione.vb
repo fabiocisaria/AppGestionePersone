@@ -341,7 +341,34 @@ Public Class UC_FileImportazione
                         Case "TerapieRiabilitative"
                             'TODO
                         Case "Farmaci"
-                            'TODO
+                            'Da finire
+                            Dim nomeParam = paramList.FirstOrDefault(Function(p) p.ParameterName = "@NomeCommerciale")
+                            Dim idVieSommParam = paramList.FirstOrDefault(Function(p) p.ParameterName = "@ID_VieSomministrazione")
+                            Dim nome As Object = Nothing
+                            Dim idVieSomm As Object = Nothing
+
+                            If nomeParam IsNot Nothing Then
+                                nome = nomeParam.Value
+                            End If
+
+                            If idVieSommParam IsNot Nothing Then
+                                idVieSomm = idVieSommParam.Value
+                            End If
+
+                            Dim checkQuery As String = "SELECT * FROM Farmaci
+                                                        WHERE NomeCommerciale = @nomeCommerciale
+                                                        AND ID_VieSomministrazione = @idVieSomministrazione"
+
+                            Dim checkParam As New List(Of SqlParameter) From {
+                                   New SqlParameter("@nomeCommerciale", nome),
+                                   New SqlParameter("@idVieSomministrazione", idVieSomm)
+                                }
+
+                            esiste = Await ConnessioneDB.EseguiScalarAsync(checkQuery, checkParam) > 0
+
+                            If esiste Then
+                                Logs.WriteLog($"Anagrafica con CodiceIdentificativo '{nome}' già esistente per la via di somministrazione selezionata. Riga non importata.", "WARNING")
+                            End If
                         Case "FarmacoVieSomministrazione"
                             'TODO
                         Case "ClassiFarmaci"

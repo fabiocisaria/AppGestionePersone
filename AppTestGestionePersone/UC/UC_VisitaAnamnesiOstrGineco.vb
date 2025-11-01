@@ -449,9 +449,9 @@ Public Class UC_VisitaAnamnesiOstrGineco
                 ElseIf dettagliVisitaGineco("Menopausa").ToString().Trim() = "< 1 anno" Then
                     ComboBoxMenopausa.SelectedIndex = 1
                 ElseIf dettagliVisitaGineco("Menopausa").ToString().Trim() = "1 - 3 anni" Then
-                    ComboBoxMenopausa.SelectedValue = 2
+                    ComboBoxMenopausa.SelectedIndex = 2
                 ElseIf dettagliVisitaGineco("Menopausa").ToString().Trim() = "> 3 anni" Then
-                    ComboBoxMenopausa.SelectedValue = 3
+                    ComboBoxMenopausa.SelectedIndex = 3
                 End If
             End If
 
@@ -508,7 +508,7 @@ Public Class UC_VisitaAnamnesiOstrGineco
                 ElseIf dettagliVisitaOstetrico("VentosaOstetrica") And Not dettagliVisitaOstetrico("Kristeller") Then
                     ComboBoxPartiOperativiTipo.SelectedIndex = 0
                 ElseIf Not dettagliVisitaOstetrico("VentosaOstetrica") And dettagliVisitaOstetrico("Kristeller") Then
-                    ComboBoxPartiOperativiTipo.SelectedValue = 1
+                    ComboBoxPartiOperativiTipo.SelectedIndex = 1
                 End If
             End If
 
@@ -558,34 +558,38 @@ Public Class UC_VisitaAnamnesiOstrGineco
             Dim usoContracc As Boolean = RadioButtonUsoContraccSi.Checked
 
             Dim tipoContraccettivo As Object
-            Dim idContraccettivo As Integer = -1
-
-            Dim estrogeno As Object = False
-            Dim progesterone As Object = False
+            Dim idContraccettivo As Object
 
             If ComboBoxTipoContracc.SelectedIndex = -1 Then
                 tipoContraccettivo = DBNull.Value
+                idContraccettivo = DBNull.Value
             Else
                 Dim drv As DataRowView = DirectCast(ComboBoxTipoContracc.SelectedItem, DataRowView)
                 tipoContraccettivo = drv("Tipo").ToString()
                 idContraccettivo = CInt(drv("ID"))
-                Select Case tipoContraccettivo
-                    Case "Estroprogestinico orale"
-                        estrogeno = True
-                        progesterone = True
-                    Case "Estroprogestinico vaginale"
-                        estrogeno = True
-                        progesterone = True
-                    Case "Progesterone IUD"
-                        estrogeno = False
-                        progesterone = True
-                    Case "Progesterone orale"
-                        estrogeno = False
-                        progesterone = True
-                    Case "Progesterone sottocutaneo"
-                        estrogeno = False
-                        progesterone = True
-                End Select
+            End If
+
+            Dim estrogeno As Object = False
+            Dim progesterone As Object = False
+
+            If RadioButtonUsoDienogestSi.Checked OrElse RadioButtonPrimolutNorSi.Checked Then
+                If IsDBNull(tipoContraccettivo) Then
+                    estrogeno = False
+                Else
+                    estrogeno = tipoContraccettivo.IndexOf("estr", StringComparison.OrdinalIgnoreCase) >= 0
+                End If
+                progesterone = True
+            ElseIf Not RadioButtonUsoDienogestSi.Checked AndAlso Not RadioButtonPrimolutNorSi.Checked Then
+                If IsDBNull(tipoContraccettivo) Then
+                    estrogeno = False
+                    progesterone = False
+                Else
+                    estrogeno = tipoContraccettivo.IndexOf("estr", StringComparison.OrdinalIgnoreCase) >= 0
+                    progesterone = tipoContraccettivo.IndexOf("prog", StringComparison.OrdinalIgnoreCase) >= 0
+                End If
+            ElseIf Not IsDBNull(tipoContraccettivo) Then
+                estrogeno = tipoContraccettivo.IndexOf("estr", StringComparison.OrdinalIgnoreCase) >= 0
+                progesterone = tipoContraccettivo.IndexOf("prog", StringComparison.OrdinalIgnoreCase) >= 0
             End If
 
             Dim usoDienogest As Boolean = RadioButtonUsoDienogestSi.Checked
@@ -612,13 +616,13 @@ Public Class UC_VisitaAnamnesiOstrGineco
             Dim partiNaturali As Object = CInt(NumericUpDownPartiNaturali.Value)
             Dim partiCesarei As Object = CInt(NumericUpDownPartiCesarei.Value)
 
-            Dim partiOperativi As Object
+            Dim partiOperativi As Object = Nothing
 
-            Dim ventosaOstetrica As Object
-            Dim kristeller As Object
+            Dim ventosaOstetrica As Object = Nothing
+            Dim kristeller As Object = Nothing
 
-            Dim lacerazioni As Object
-            Dim episiotomia As Object
+            Dim lacerazioni As Object = Nothing
+            Dim episiotomia As Object = Nothing
 
             If gravidanze = 0 Then
                 partiCesarei = DBNull.Value

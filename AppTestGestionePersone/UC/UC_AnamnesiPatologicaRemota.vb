@@ -214,6 +214,13 @@ Public Class UC_AnamnesiPatologicaRemota
                 MetroTogglePatPsic.Checked = False
             End If
 
+            'Lichen scleroatrofico
+            If dettagliAnamnesi("Lichen") Then
+                MetroToggleLichen.Checked = True
+            Else
+                MetroToggleLichen.Checked = False
+            End If
+
             'Celiachia
             If dettagliAnamnesi("Celiachia") Then
                 RadioButtonCeliachiaSi.Checked = True
@@ -283,7 +290,8 @@ Public Class UC_AnamnesiPatologicaRemota
                                                                                 DM1,
                                                                                 DM2,
                                                                                 PresenzaMalattieAutoimmuni,
-                                                                                NevralgiaPudendo) VALUES (
+                                                                                NevralgiaPudendo,
+                                                                                Lichen) VALUES (
                                                                                 @idPaziente,
                                                                                 @Endometriosi,
                                                                                 @Fibromialgie,
@@ -296,7 +304,8 @@ Public Class UC_AnamnesiPatologicaRemota
                                                                                 @dm1,
                                                                                 @dm2,
                                                                                 @malattieAutoimmPresenti,
-                                                                                @nevralgiaPudendo)"
+                                                                                @nevralgiaPudendo,
+                                                                                @lichen)"
             Dim insertParam As New List(Of SqlParameter) From {
                 New SqlParameter("@idPaziente", idPaziente),
                 New SqlParameter("@endometriosi", False),
@@ -310,7 +319,8 @@ Public Class UC_AnamnesiPatologicaRemota
                 New SqlParameter("@dm1", False),
                 New SqlParameter("@dm2", False),
                 New SqlParameter("@malattieAutoimmPresenti", False),
-                New SqlParameter("@nevralgiaPudendo", False)
+                New SqlParameter("@nevralgiaPudendo", False),
+                New SqlParameter("@lichen", False)
             }
             Dim dtInsertAnmPatRem As DataTable = Await ConnessioneDB.EseguiQueryAsync(insertQuery, insertParam)
             If dtInsertAnmPatRem.Rows.Count = 1 Then
@@ -424,7 +434,7 @@ Public Class UC_AnamnesiPatologicaRemota
                                    End Sub
 
         'Click con il destro
-        AddHandler tlp.MouseDown, AddressOf MalattiaAutoimm_RightClick
+        AddHandler tlp.MouseDown, Sub(s, e) MalattiaAutoimm_RightClick(panel, e)
         AddHandler lbl.MouseDown, Sub(s, e) MalattiaAutoimm_RightClick(panel, e)
 
         FlowLayoutPanelMalattieAutoimmuni.Controls.Add(panel)
@@ -528,7 +538,7 @@ Public Class UC_AnamnesiPatologicaRemota
                                    End Sub
 
         'Click con il destro
-        AddHandler tlp.MouseDown, AddressOf MalattiaAutoimm_RightClick
+        AddHandler tlp.MouseDown, Sub(s, e) MalattiaAutoimm_RightClick(panel, e)
         AddHandler lbl.MouseDown, Sub(s, e) MalattiaAutoimm_RightClick(panel, e)
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
@@ -548,7 +558,7 @@ Public Class UC_AnamnesiPatologicaRemota
             main.MostraToast("Malattia autoimmune aggiunta correttamente all'anamnesi patologica remota.")
             FlowLayoutPanelMalattieAutoimmuni.Controls.Add(panel)
         Else
-            main.MostraToast("Errore nell'aggiunta della terapia riabilitativa.")
+            main.MostraToast("Errore nell'aggiunta della malattia autoimmune.")
         End If
     End Function
 
@@ -568,6 +578,29 @@ Public Class UC_AnamnesiPatologicaRemota
 
             If esito Then
                 main.MostraToast("Malattia autoimmune rimossa correttamente dall'anamnesi patologica remota.")
+
+                CheckMalattieAutoimmPresenti()
+
+                If malattieAutoimmPresenti <> malattieAutoimmPresenti_old Then
+                    Try
+                        Dim queryAnamnesiPatRem As String = "UPDATE AnamnesiPatologicaRemota
+                                                             SET PresenzaMalattieAutoimmuni = @malattieAutoimmPresenti
+                                                             WHERE ID_Anagrafica = @idAnagrafica;"
+
+                        Dim parametriAnamnesiPatRem As New List(Of SqlParameter) From {
+                              New SqlParameter("@idAnagrafica", idPaziente),
+                              New SqlParameter("@malattieAutoimmPresenti", malattieAutoimmPresenti)
+                        }
+
+                        If Await ConnessioneDB.EseguiNonQueryAsync(queryAnamnesiPatRem, parametriAnamnesiPatRem) > 0 Then
+                            main.MostraToast("Malattie autoimmuni aggiornate correttamente")
+                        End If
+
+                        malattieAutoimmPresenti_old = malattieAutoimmPresenti
+                    Catch ex As Exception
+                        MessageBox.Show("Errore imprevisto: " & ex.Message)
+                    End Try
+                End If
             End If
         Catch ex As Exception
             MessageBox.Show("Errore nella rimozione della malattia autoimmune: " & ex.Message)
@@ -667,7 +700,7 @@ Public Class UC_AnamnesiPatologicaRemota
                                                               ' Rimuovo dal FlowPanel
                                                               RimuoviMalattiaAutoimmDalFlowPanel(idIniziale)
                                                           Catch ex As Exception
-                                                              MessageBox.Show($"Errore rimuovendo malattia ID {idIniziale}: {ex.Message}")
+                                                              MessageBox.Show($"Errore rimuovendo la malattia ID {idIniziale}: {ex.Message}")
                                                           End Try
                                                       End If
                                                   Next
@@ -681,7 +714,7 @@ Public Class UC_AnamnesiPatologicaRemota
                                                       End If
                                                   Next
 
-                                                  checkMalattieAutoimmPresenti()
+                                                  CheckMalattieAutoimmPresenti()
 
                                                   If malattieAutoimmPresenti <> malattieAutoimmPresenti_old Then
                                                       Try
@@ -714,7 +747,7 @@ Public Class UC_AnamnesiPatologicaRemota
         Me.ActiveControl = Nothing
     End Sub
 
-    Public Async Sub checkMalattieAutoimmPresenti()
+    Public Async Sub CheckMalattieAutoimmPresenti()
         ' Controllo se ci sono malattie autoimmuni associate
         Dim malattie As List(Of (ID As Integer, Nome As String)) = Await CercaMalattieAutoimmAsync(idAnamnesi)
         If malattie Is Nothing OrElse malattie.Count = 0 Then
@@ -730,7 +763,7 @@ Public Class UC_AnamnesiPatologicaRemota
 
         If selezioneOK Then
             'aggiorno la presenza di malattie autoimmuni
-            checkMalattieAutoimmPresenti()
+            CheckMalattieAutoimmPresenti()
 
             Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
             idPaziente = main.IDPazienteSelezionato
@@ -742,12 +775,13 @@ Public Class UC_AnamnesiPatologicaRemota
             Dim colonIrr As Boolean = MetroToggleColonIrr.Checked
             Dim vescicaIperatt As Boolean = MetroToggleVescIperatt.Checked
             Dim patPsicologicaPsichiatrica As Boolean = MetroTogglePatPsic.Checked
-            Dim sindromeVescDol As Boolean = MetroToggleDistiroidismo.Checked
+            Dim distiroidismo As Boolean = MetroToggleDistiroidismo.Checked
             Dim celiachia As Boolean = RadioButtonCeliachiaSi.Checked
             Dim intollLattosio As Boolean = RadioButtonIntollLattSi.Checked
             Dim dm1 As Boolean = RadioButtonDM1Si.Checked
             Dim dm2 As Boolean = RadioButtonDM2Si.Checked
             Dim nevralgiaPudendo As Boolean = MetroToggleNevPudendo.Checked
+            Dim lichen As Boolean = MetroToggleLichen.Checked
 
             ' TODO
             Try
@@ -766,7 +800,8 @@ Public Class UC_AnamnesiPatologicaRemota
                                                           DM1 = @dm1,
                                                           DM2 = @dm2,
                                                           PresenzaMalattieAutoimmuni = @malattieAutoimmPresenti,
-                                                          NevralgiaPudendo = @nevralgiaPudendo
+                                                          NevralgiaPudendo = @nevralgiaPudendo,
+                                                          Lichen = @lichen
                                                           WHERE ID_Anagrafica = @idAnagrafica"
                 Else
                     queryAnamnesiPatRem = "INSERT INTO AnamnesiPatologicaRemota (
@@ -782,7 +817,8 @@ Public Class UC_AnamnesiPatologicaRemota
                                                         DM1,
                                                         DM2,
                                                         PresenzaMalattieAutoimmuni,
-                                                        NevralgiaPudendo
+                                                        NevralgiaPudendo,
+                                                        Lichen
                                                         ) VALUES (
                                                         @idAnagrafica,
                                                         @endometriosi,
@@ -796,7 +832,8 @@ Public Class UC_AnamnesiPatologicaRemota
                                                         @dm1,
                                                         @dm2,
                                                         @malattieAutoimmPresenti,
-                                                        @nevralgiaPudendo)"
+                                                        @nevralgiaPudendo,
+                                                        @lichen)"
                 End If
 
                 Dim parametriAnamnesiPatRem As New List(Of SqlParameter) From {
@@ -806,13 +843,14 @@ Public Class UC_AnamnesiPatologicaRemota
                     New SqlParameter("@colonIrr", colonIrr),
                     New SqlParameter("@vescicaIperatt", vescicaIperatt),
                     New SqlParameter("@patPsicologicaPsichiatrica", patPsicologicaPsichiatrica),
-                    New SqlParameter("@sindromeVescDol", sindromeVescDol),
+                    New SqlParameter("@distiroidismo", distiroidismo),
                     New SqlParameter("@celiachia", celiachia),
                     New SqlParameter("@intollLattosio", intollLattosio),
                     New SqlParameter("@dm1", dm1),
                     New SqlParameter("@dm2", dm2),
                     New SqlParameter("@malattieAutoimmPresenti", malattieAutoimmPresenti),
-                    New SqlParameter("@malattieAutoimmPresenti", nevralgiaPudendo)
+                    New SqlParameter("@nevralgiaPudendo", nevralgiaPudendo),
+                    New SqlParameter("@lichen", lichen)
                 }
 
                 If Await ConnessioneDB.EseguiNonQueryAsync(queryAnamnesiPatRem, parametriAnamnesiPatRem) > 0 Then
