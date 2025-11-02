@@ -814,7 +814,7 @@ Public Class MainForm
 
     Private Sub GestisciPatologieParenteSelezionato(idParenteSelezionato As Integer, idAnamnesiFamiliareSelezionata As Integer)
         ' Rimuovo UC corrente (selezione) e carico UC per il parente
-        EliminaControllo()
+        EliminaControllo(0, 2)
         'RimuoviUC("AnamnesiFamiliareSelezione")
 
         ' Creo il nuovo UC e imposto l'ID del parente

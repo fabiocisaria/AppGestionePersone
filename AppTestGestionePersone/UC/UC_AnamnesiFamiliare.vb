@@ -9,8 +9,8 @@ Public Class UC_AnamnesiFamiliare
     Private _aggiornamentoInterno As Boolean = False
 
     Dim idPaziente As Integer = -1
-    Dim idParente As Integer = -1
-    Dim idAnamnesi As Integer = -1
+    'Dim idParente As Integer = -1
+    'Dim idAnamnesi As Integer = -1
     Dim patologiePresenti As Boolean = False
     Dim patologiePresenti_old As Boolean = False
 
@@ -347,25 +347,31 @@ Public Class UC_AnamnesiFamiliare
         AddHandler tlp.MouseDown, AddressOf Patologia_RightClick
         AddHandler lbl.MouseDown, Sub(s, e) Patologia_RightClick(panel, e)
 
-        Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+        Try
+            Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
 
-        Dim insertQuery As String = "INSERT INTO AnamnesiFamiliarePatologie (
+            Dim insertQuery As String = "INSERT INTO AnamnesiFamiliarePatologie (
                                                     ID_AnamnesiFamiliare,
                                                     ID_Patologia) VALUES(
                                                     @idAnamnesi,
                                                     @idPatologia)"
-        Dim insertParam As New List(Of SqlParameter) From {
-            New SqlParameter("@idAnamnesi", idAnamnesi),
-            New SqlParameter("@idPatologia", id)
-        }
-        Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(insertQuery, insertParam)
+            Dim insertParam As New List(Of SqlParameter) From {
+                New SqlParameter("@idAnamnesi", idAnamnesiFamiliareSelezionata),
+                New SqlParameter("@idPatologia", id)
+            }
+            Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(insertQuery, insertParam)
 
-        If esito Then
-            main.MostraToast("Patologia aggiunta correttamente all'anamnesi familiare.")
-            FlowLayoutPanelPatologie.Controls.Add(panel)
-        Else
-            main.MostraToast("Errore nell'aggiunta della patologia.")
-        End If
+            If esito Then
+                main.MostraToast("Patologia aggiunta correttamente all'anamnesi familiare.")
+                FlowLayoutPanelPatologie.Controls.Add(panel)
+            Else
+                main.MostraToast("Errore nell'aggiunta della patologia.")
+            End If
+
+            Await UpdatePatologiePresenti()
+        Catch ex As Exception
+            MessageBox.Show("Errore durante l'aggiunta della patologia: " & ex.Message)
+        End Try
     End Function
 
     Private Async Function RimuoviPatologia(idPatologia As Integer) As Task
@@ -377,14 +383,18 @@ Public Class UC_AnamnesiFamiliare
                                          AND ID_AnamnesiFamiliare = @idAnamnesi"
 
             Dim removeParam As New List(Of SqlParameter) From {
-                New SqlParameter("@idAnamnesi", idAnamnesi),
+                New SqlParameter("@idAnamnesi", idAnamnesiFamiliareSelezionata),
                 New SqlParameter("@idPatologia", idPatologia)
             }
             Dim esito As Boolean = Await ConnessioneDB.EseguiNonQueryAsync(removeQuery, removeParam)
 
             If esito Then
                 main.MostraToast("Patologia rimossa correttamente dall'anamnesi familiare.")
+            Else
+                main.MostraToast("Errore nella rimozione della patologia.")
             End If
+
+            Await UpdatePatologiePresenti()
         Catch ex As Exception
             MessageBox.Show("Errore nella rimozione della patologia: " & ex.Message)
         End Try
@@ -440,7 +450,7 @@ Public Class UC_AnamnesiFamiliare
         End If
     End Sub
 
-    Private Async Sub SfButtonAggiungiPatologie_Clickù(sender As Object, e As EventArgs) Handles SfButtonAggiungiPatologie.Click
+    Private Async Sub SfButtonAggiungiPatologie_Click(sender As Object, e As EventArgs) Handles SfButtonAggiungiPatologie.Click
         ' Creo la form
         Dim frm As New FormSelezione()
 
@@ -454,14 +464,14 @@ Public Class UC_AnamnesiFamiliare
         Dim queryAnamnesiFamiliarePatologie As String = "SELECT ID_Patologia FROM AnamnesiFamiliarePatologie
                                                   WHERE ID_AnamnesiFamiliare = @idAnamnesi"
         Dim paramAnamnesiFamiliarePatologie As New List(Of SqlParameter) From {
-            New SqlParameter("@idAnamnesi", idAnamnesi)
+            New SqlParameter("@idAnamnesi", idAnamnesiFamiliareSelezionata)
         }
         Dim dtAnamnesiFamiliarePatologie As DataTable = Await ConnessioneDB.EseguiQueryAsync(queryAnamnesiFamiliarePatologie, paramAnamnesiFamiliarePatologie)
 
         Dim selezionatiOld As New List(Of Integer)
 
         For Each row As DataRow In dtAnamnesiFamiliarePatologie.Rows
-            If row("ID_Malattia") IsNot DBNull.Value Then
+            If row("ID_Patologia") IsNot DBNull.Value Then
                 selezionatiOld.Add(Convert.ToInt32(row("ID_Patologia")))
             End If
         Next
@@ -496,33 +506,7 @@ Public Class UC_AnamnesiFamiliare
                                                           Await AggiungiPatologiaAsync(f.ID, f.Nome)
                                                       End If
                                                   Next
-
-                                                  checkPatologiePresenti()
-
-                                                  If patologiePresenti <> patologiePresenti_old Then
-                                                      Try
-                                                          Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
-
-                                                          Dim queryAnamnesiFamiliare As String = "UPDATE AnamnesiFamiliare
-                                                                                                SET PresenzaPatologie = @presenzaPatologie
-                                                                                                WHERE ID_Anagrafica = @idAnagrafica;"
-
-                                                          Dim parametriAnamnesiFamiliare As New List(Of SqlParameter) From {
-                                                                New SqlParameter("@idAnagrafica", idPaziente),
-                                                                New SqlParameter("@presenzaPatologie", patologiePresenti)
-                                                          }
-
-                                                          If Await ConnessioneDB.EseguiNonQueryAsync(queryAnamnesiFamiliare, parametriAnamnesiFamiliare) > 0 Then
-                                                              main.MostraToast("Patologie aggiornate correttamente")
-                                                          End If
-
-                                                          patologiePresenti_old = patologiePresenti
-                                                      Catch ex As Exception
-                                                          MessageBox.Show("Errore imprevisto: " & ex.Message)
-                                                      End Try
-                                                  End If
                                               End Sub
-
         ' Mostro la form come dialog
         frm.ShowDialog()
 
@@ -530,7 +514,7 @@ Public Class UC_AnamnesiFamiliare
         Me.ActiveControl = Nothing
     End Sub
 
-    Public Async Sub checkPatologiePresenti()
+    Public Async Function CheckPatologiePresenti() As Task
         ' Controllo se ci sono malattie autoimmuni associate
         Dim malattie As List(Of (ID As Integer, Nome As String)) = Await CercaPatologieAsync()
         If malattie Is Nothing OrElse malattie.Count = 0 Then
@@ -538,7 +522,34 @@ Public Class UC_AnamnesiFamiliare
         Else
             patologiePresenti = True
         End If
-    End Sub
+    End Function
+
+    Public Async Function UpdatePatologiePresenti() As Task
+        Await CheckPatologiePresenti()
+
+        If patologiePresenti <> patologiePresenti_old Then
+            Try
+                Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
+
+                Dim queryAnamnesiFamiliare As String = "UPDATE AnamnesiFamiliare
+                                                        SET PresenzaPatologie = @presenzaPatologie
+                                                        WHERE ID = @idAnamnesiSelezionata;"
+
+                Dim parametriAnamnesiFamiliare As New List(Of SqlParameter) From {
+                      New SqlParameter("@idAnamnesiSelezionata", idAnamnesiFamiliareSelezionata),
+                      New SqlParameter("@presenzaPatologie", patologiePresenti)
+                }
+
+                If Await ConnessioneDB.EseguiNonQueryAsync(queryAnamnesiFamiliare, parametriAnamnesiFamiliare) > 0 Then
+                    main.MostraToast("Patologie aggiornate correttamente")
+                End If
+
+                patologiePresenti_old = patologiePresenti
+            Catch ex As Exception
+                MessageBox.Show("Errore imprevisto: " & ex.Message)
+            End Try
+        End If
+    End Function
 
     ' 🔹 Salva anamnesi
     Private Async Function SalvaDatiAsync() As Task(Of Boolean)
@@ -547,7 +558,7 @@ Public Class UC_AnamnesiFamiliare
 
         'If selezioneOK Then
         'aggiorno la presenza di malattie autoimmuni
-        checkPatologiePresenti()
+        Await CheckPatologiePresenti()
 
         Dim main As MainForm = DirectCast(Me.ParentForm, MainForm)
         idPaziente = main.IDPazienteSelezionato
@@ -557,26 +568,14 @@ Public Class UC_AnamnesiFamiliare
         Try
             Dim queryAnamnesiFamiliare As String = ""
 
-            If esiste Then
-                queryAnamnesiFamiliare = "UPDATE AnamnesiFamiliare SET 
-                                                          PresenzaPatologie = @presenzaPatologie
-                                                          WHERE ID_Anagrafica = @idAnagrafica
-                                                          AND ID_Parente = @idParente"
-            Else
-                queryAnamnesiFamiliare = "INSERT INTO AnamnesiFamiliare (
-                                                        ID_Anagrafica,
-                                                        ID_Parente,
-                                                        PresenzaPatologie
-                                                        ) VALUES (
-                                                        @idAnagrafica,
-                                                        @idParente,
-                                                        @presenzaPatologie)"
-            End If
+            queryAnamnesiFamiliare = "UPDATE AnamnesiFamiliare SET 
+                                      PresenzaPatologie = @presenzaPatologie
+                                      WHERE ID = @idAnamnesiSelezionata"
+
 
             Dim parametriAnamnesiFamiliare As New List(Of SqlParameter) From {
-                    New SqlParameter("@idAnagrafica", idPaziente),
-                    New SqlParameter("@endometriosi", idParente),
-                    New SqlParameter("@fibromialgie", patologiePresenti)
+                    New SqlParameter("@idAnamnesiSelezionata", idAnamnesiFamiliareSelezionata),
+                    New SqlParameter("@presenzaPatologie", patologiePresenti)
                 }
 
             If Await ConnessioneDB.EseguiNonQueryAsync(queryAnamnesiFamiliare, parametriAnamnesiFamiliare) > 0 Then
@@ -584,11 +583,8 @@ Public Class UC_AnamnesiFamiliare
             End If
 
             If successo Then
-                If esiste Then
-                    main.MostraToast("Anamnesi familiare aggiornata correttamente.")
-                Else
-                    main.MostraToast("Anamnesi familiare salvata correttamente.")
-                End If
+
+                main.MostraToast("Anamnesi familiare aggiornata correttamente.")
             Else
                 main.MostraToast("Errore imprevisto durante il salvataggio dei dati.")
                 esito = False

@@ -39,6 +39,7 @@ Partial Class MainForm
         Me.IntegratoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MalattiaAutoimmuneToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TerapiaRiabilitativaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PatologiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InserisciToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnamnesiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FamiliareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -64,7 +65,6 @@ Partial Class MainForm
         Me.SQLConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanelMain = New System.Windows.Forms.TableLayoutPanel()
         Me.PanelTitleBar = New System.Windows.Forms.TableLayoutPanel()
-        Me.PatologiaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.MenuStrip1.SuspendLayout()
         Me.PanelTitleBar.SuspendLayout()
@@ -80,7 +80,7 @@ Partial Class MainForm
         Me.MenuStrip1.Location = New System.Drawing.Point(48, 6)
         Me.MenuStrip1.Margin = New System.Windows.Forms.Padding(8, 0, 0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(478, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(358, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -105,7 +105,7 @@ Partial Class MainForm
         '
         'NuovoToolStripMenuItem1
         '
-        Me.NuovoToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PazienteToolStripMenuItem1, Me.VisitaToolStripMenuItem2, Me.FarmacoToolStripMenuItem1, Me.ContraccettivoToolStripMenuItem1, Me.IntegratoreToolStripMenuItem, Me.MalattiaAutoimmuneToolStripMenuItem, Me.TerapiaRiabilitativaToolStripMenuItem, Me.PatologiaToolStripMenuItem})
+        Me.NuovoToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PazienteToolStripMenuItem1, Me.VisitaToolStripMenuItem2, Me.ContraccettivoToolStripMenuItem1, Me.FarmacoToolStripMenuItem1, Me.IntegratoreToolStripMenuItem, Me.MalattiaAutoimmuneToolStripMenuItem, Me.PatologiaToolStripMenuItem, Me.TerapiaRiabilitativaToolStripMenuItem})
         Me.NuovoToolStripMenuItem1.Name = "NuovoToolStripMenuItem1"
         Me.NuovoToolStripMenuItem1.Size = New System.Drawing.Size(55, 20)
         Me.NuovoToolStripMenuItem1.Text = "Nuovo"
@@ -178,6 +178,12 @@ Partial Class MainForm
         Me.TerapiaRiabilitativaToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
         Me.TerapiaRiabilitativaToolStripMenuItem.Text = "Terapia riabilitativa"
         '
+        'PatologiaToolStripMenuItem
+        '
+        Me.PatologiaToolStripMenuItem.Name = "PatologiaToolStripMenuItem"
+        Me.PatologiaToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.PatologiaToolStripMenuItem.Text = "Patologia"
+        '
         'InserisciToolStripMenuItem
         '
         Me.InserisciToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnamnesiToolStripMenuItem, Me.VisitaToolStripMenuItem})
@@ -189,7 +195,7 @@ Partial Class MainForm
         '
         Me.AnamnesiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FamiliareToolStripMenuItem, Me.FisiologicaToolStripMenuItem, Me.PatologicaRemotaToolStripMenuItem})
         Me.AnamnesiToolStripMenuItem.Name = "AnamnesiToolStripMenuItem"
-        Me.AnamnesiToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.AnamnesiToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AnamnesiToolStripMenuItem.Text = "Anamnesi"
         '
         'FamiliareToolStripMenuItem
@@ -214,7 +220,7 @@ Partial Class MainForm
         '
         Me.VisitaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EsamiToolStripMenuItem, Me.SintomiToolStripMenuItem, Me.StoriaOstetricoginecologicaToolStripMenuItem, Me.TerapiaToolStripMenuItem, Me.UroGinecologicaToolStripMenuItem})
         Me.VisitaToolStripMenuItem.Name = "VisitaToolStripMenuItem"
-        Me.VisitaToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.VisitaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.VisitaToolStripMenuItem.Text = "Visita"
         '
         'EsamiToolStripMenuItem
@@ -320,7 +326,7 @@ Partial Class MainForm
         'SQLConnectionToolStripMenuItem
         '
         Me.SQLConnectionToolStripMenuItem.Name = "SQLConnectionToolStripMenuItem"
-        Me.SQLConnectionToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.SQLConnectionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SQLConnectionToolStripMenuItem.Text = "SQL Connection"
         '
         'TableLayoutPanelMain
@@ -356,12 +362,6 @@ Partial Class MainForm
         Me.PanelTitleBar.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.PanelTitleBar.Size = New System.Drawing.Size(1280, 30)
         Me.PanelTitleBar.TabIndex = 0
-        '
-        'PatologiaToolStripMenuItem
-        '
-        Me.PatologiaToolStripMenuItem.Name = "PatologiaToolStripMenuItem"
-        Me.PatologiaToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
-        Me.PatologiaToolStripMenuItem.Text = "Patologia"
         '
         'PictureBox1
         '
